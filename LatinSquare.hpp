@@ -1,5 +1,6 @@
 #pragma once
 
+#include <set>
 #include <vector>
 
 #include "LatinSquareCell.hpp"
@@ -36,11 +37,11 @@ namespace LatinSquareGenerator {
             void setCellEntropy(int row, int column, int entropy);
             void resetCellEntropy(int row, int column);
 
-            std::vector<int> getCellRemainingNumbers(int row, int column);
-            void setCellRemainingNumbers(int row, int column, std::vector<int> remainingNumbers);
+            std::set<int> getCellRemainingNumbers(int row, int column);
+            void setCellRemainingNumbers(int row, int column, std::set<int> remainingNumbers);
             void resetCellRemainingNumbers(int row, int column);
 
-            void setCellData(int row, int column, int number, int entropy, std::vector<int> remainingNumbers);
+            void setCellData(int row, int column, int number, int entropy, std::set<int> remainingNumbers);
             void resetCellData(int row, int column);
 
             // void fillCell(int row, int column, int number);

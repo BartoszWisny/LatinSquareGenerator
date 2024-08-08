@@ -89,11 +89,11 @@ namespace LatinSquareGenerator {
         getCell(row, column).resetEntropy();
     }
 
-    std::vector<int> LatinSquare::getCellRemainingNumbers(int row, int column) {
+    std::set<int> LatinSquare::getCellRemainingNumbers(int row, int column) {
         getCell(row, column).getRemainingNumbers();
     }
 
-    void LatinSquare::setCellRemainingNumbers(int row, int column, std::vector<int> remainingNumbers) {
+    void LatinSquare::setCellRemainingNumbers(int row, int column, std::set<int> remainingNumbers) {
         getCell(row, column).setRemainingNumbers(remainingNumbers);
     }
 
@@ -101,7 +101,7 @@ namespace LatinSquareGenerator {
         getCell(row, column).resetRemainingNumbers();
     }
 
-    void LatinSquare::setCellData(int row, int column, int number, int entropy, std::vector<int> remainingNumbers) {
+    void LatinSquare::setCellData(int row, int column, int number, int entropy, std::set<int> remainingNumbers) {
         getCell(row, column).setData(number, entropy, remainingNumbers);
     }
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <set>
 
 namespace LatinSquareGenerator {
     class LatinSquareCell {
@@ -15,6 +15,9 @@ namespace LatinSquareGenerator {
 
             void setPosition(int row, int column);
 
+            int getMaxEntropy();
+            void setMaxEntropy(int maxEntropy);
+
             int getNumber();
             void setNumber(int number);
             void resetNumber();
@@ -22,26 +25,48 @@ namespace LatinSquareGenerator {
             int getEntropy();
             void setEntropy(int entropy);
             void resetEntropy();
+            void clearEntropy();
 
-            std::vector<int> getRemainingNumbers();
-            void setRemainingNumbers(std::vector<int> remainingNumbers);
+            std::set<int> getRemainingNumbers();
+            void setRemainingNumbers(std::set<int> remainingNumbers);
             void resetRemainingNumbers();
+            void clearRemainingNumbers();
 
-            void setData(int number, int entropy, std::vector<int> remainingNumbers);
+            void setData(int number, int entropy, std::set<int> remainingNumbers);
             void resetData();
 
-            int getLatinSquareSize();
-            void setLatinSquareSize(int latinSquareSize);
+            void clearEntropyData();
 
-            // void fill(int number);
+            int getPreviousEntropy();
+            void setPreviousEntropy(int previousEntropy);
+            void resetPreviousEntropy();
+
+            std::set<int> getPreviousRemainingNumbers();
+            void setPreviousRemainingNumbers(std::set<int> previousRemainingNumbers);
+            void resetPreviousRemainingNumbers();
+
+            void setPreviousEntropyData(int previousEntropy, std::set<int> previousRemainingNumbers);
+            void resetPreviousEntropyData();
+
+            void rememberPreviousEntropyData();
+            void restorePreviousEntropyData();
+
+            void fill(int number);
+            void clear();
+
             // void removeRemainingNumber(int number);
+            // void restoreRemainingNumber(int number);
 
         private:
             int row;
             int column;
+            int maxEntropy;
+
             int number;
             int entropy;
-            std::vector<int> remainingNumbers;
-            int latinSquareSize;
+            std::set<int> remainingNumbers;
+
+            int previousEntropy;
+            std::set<int> previousRemainingNumbers;
     };
 }
