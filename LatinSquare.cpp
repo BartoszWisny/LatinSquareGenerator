@@ -1,119 +1,94 @@
 #include "LatinSquare.hpp"
 
+#include <algorithm>
+
 namespace LatinSquareGenerator {
     LatinSquare::LatinSquare(int size) {
         setSize(size);
-        resetGrid();
-    }
-
-    int LatinSquare::getSize() {
-        return size;
+        reset();
     }
 
     void LatinSquare::setSize(int size) {
         size = size;
+        gridSize = size * size;
     }
 
-    std::vector<LatinSquareCell> LatinSquare::getGrid() {
+    std::vector<Cell> LatinSquare::getGrid() {
         return grid;
     }
 
-    void LatinSquare::setGrid(std::vector<LatinSquareCell> grid) {
-        grid = grid;
+    int LatinSquare::calculateCellRow(int index) {
+        return index / size;
     }
 
-    void LatinSquare::resetGrid() {
-        setGrid(std::vector<LatinSquareCell>(size * size, LatinSquareCell(size)));
+    int LatinSquare::calculateCellColumn(int index) {
+        return index % size;
+    }
 
-        for (int gridIndex = 0; gridIndex < grid.size(); gridIndex++) {
-            setCellPosition(gridIndex);
+    void LatinSquare::reset() {
+        grid = std::vector<Cell>();
+
+        for (int index = 0; index < gridSize; index++) {
+            grid.push_back(Cell(calculateCellRow(index), calculateCellColumn(index), size));
         }
     }
 
-    int LatinSquare::getGridIndex(int row, int column) {
-        return row * getSize() + column;
+    bool LatinSquare::checkCellRow(Cell cell, int row) {
+        return cell.getRow() == row;
     }
 
-    LatinSquareCell LatinSquare::getCell(int row, int column) {
-        return grid.at(getGridIndex(row, column));
+    bool LatinSquare::checkCellColumn(Cell cell, int column) {
+        return cell.getColumn() == column;
     }
 
-    int LatinSquare::getCellRow(int gridIndex) {
-        return gridIndex / getSize();
+    bool LatinSquare::checkAllCellsFilled() {
+        return std::all_of(grid.begin(), grid.end(), [](Cell cell) { return cell.getNumber() != 0; });
     }
 
-    void LatinSquare::setCellRow(int gridIndex) {
-        int row = getCellRow(gridIndex);
+    std::optional<Cell> LatinSquare::getCellWithMinimumEntropy() {
+        std::sort(grid.begin(), grid.end(),
+                  [](Cell firstCell, Cell secondCell) { return firstCell.getEntropy() < secondCell.getEntropy(); });
 
-        getCell(row, getCellColumn(gridIndex)).setRow(row);
+        std::vector<Cell> cellsWithNonZeroEntropy;
+        std::copy_if(grid.begin(), grid.end(), std::back_inserter(cellsWithNonZeroEntropy),
+                     [](Cell cell) { return cell.getEntropy() != 0; });
+
+        std::optional<Cell> maybeCellWithNonZeroEntropy;
+
+        if (!cellsWithNonZeroEntropy.empty()) {
+            maybeCellWithNonZeroEntropy = cellsWithNonZeroEntropy.front();
+        }
+
+        return maybeCellWithNonZeroEntropy;
     }
 
-    int LatinSquare::getCellColumn(int gridIndex) {
-        return gridIndex % getSize();
+    // This function must be used before filling cell because previous entropy data are needed for update history in case of reverting filling this cell.
+    FilledCellData LatinSquare::getFilledCellData(Position position, int number, EntropyData previousEntropyData) {
+        return FilledCellData(position, number, previousEntropyData);
     }
 
-    void LatinSquare::setCellColumn(int gridIndex) {
-        int column = getCellColumn(gridIndex);
+    std::set<Position> LatinSquare::getUpdatedCells(Position position, int number) {
+        int row = position.getRow();
+        int column = position.getColumn();
 
-        getCell(getCellRow(gridIndex), column).setColumn(column);
+        std::vector<Cell> relatedCells;
+        std::copy_if(grid.begin(), grid.end(), std::back_inserter(relatedCells),
+                     [this, row, column](Cell cell) {
+                         return checkCellRow(cell, row) != checkCellColumn(cell, column);
+                     });
+
+        std::set<Position> updatedCells;
+
+        for (Cell cell : relatedCells) {
+            if (cell.removeRemainingNumber(number)) {
+                updatedCells.insert(cell.getPosition());
+            }
+        }
+
+        return updatedCells;
     }
 
-    void LatinSquare::setCellPosition(int gridIndex) {
-        int row = getCellRow(gridIndex);
-        int column = getCellColumn(gridIndex);
-
-        getCell(row, column).setPosition(row, column);
+    UpdateData LatinSquare::getUpdateData(Position position, int number, EntropyData previousEntropyData) {
+        return UpdateData(getFilledCellData(position, number, previousEntropyData), getUpdatedCells(position, number));
     }
-
-    int LatinSquare::getCellNumber(int row, int column) {
-        return getCell(row, column).getNumber();
-    }
-
-    void LatinSquare::setCellNumber(int row, int column, int number) {
-        getCell(row, column).setNumber(number);
-    }
-
-    void LatinSquare::resetCellNumber(int row, int column) {
-        getCell(row, column).resetNumber();
-    }
-
-    int LatinSquare::getCellEntropy(int row, int column) {
-        return getCell(row, column).getEntropy();
-    }
-
-    void LatinSquare::setCellEntropy(int row, int column, int entropy) {
-        getCell(row, column).setEntropy(entropy);
-    }
-
-    void LatinSquare::resetCellEntropy(int row, int column) {
-        getCell(row, column).resetEntropy();
-    }
-
-    std::set<int> LatinSquare::getCellRemainingNumbers(int row, int column) {
-        getCell(row, column).getRemainingNumbers();
-    }
-
-    void LatinSquare::setCellRemainingNumbers(int row, int column, std::set<int> remainingNumbers) {
-        getCell(row, column).setRemainingNumbers(remainingNumbers);
-    }
-
-    void LatinSquare::resetCellRemainingNumbers(int row, int column) {
-        getCell(row, column).resetRemainingNumbers();
-    }
-
-    void LatinSquare::setCellData(int row, int column, int number, int entropy, std::set<int> remainingNumbers) {
-        getCell(row, column).setData(number, entropy, remainingNumbers);
-    }
-
-    void LatinSquare::resetCellData(int row, int column) {
-        getCell(row, column).resetData();
-    }
-
-    // void LatinSquare::fillCell(int row, int column, int number) {
-    //     getCell(row, column).fill(number);
-    // }
-
-    // void LatinSquare::removeCellRemainingNumber(int row, int column, int number) {
-    //     getCell(row, column).removeRemainingNumber(number);
-    // }
 }

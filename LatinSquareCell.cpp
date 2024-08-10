@@ -1,180 +1,86 @@
 #include "LatinSquareCell.hpp"
 
-#include <numeric>
-#include <vector>
-
 namespace LatinSquareGenerator {
-    LatinSquareCell::LatinSquareCell(int latinSquareSize) {
-        resetData();
-        setMaxEntropy(latinSquareSize);
-        resetPreviousEntropyData();
+    Cell::Cell(int row, int column, int maxEntropy) {
+        setPosition(row, column);
+        reset();
+        setMaxEntropy(maxEntropy);
     }
 
-    int LatinSquareCell::getRow() {
-        return row;
+    Position Cell::getPosition() {
+        return position;
     }
 
-    void LatinSquareCell::setRow(int row) {
-        row = row;
+    void Cell::setPosition(int row, int column) {
+        position = Position(row, column);
     }
 
-    int LatinSquareCell::getColumn() {
-        return column;
+    int Cell::getRow() {
+        return position.getRow();
     }
 
-    void LatinSquareCell::setColumn(int column) {
-        column = column;
+    int Cell::getColumn() {
+        return position.getColumn();
     }
 
-    void LatinSquareCell::setPosition(int row, int column) {
-        setRow(row);
-        setColumn(column);
-    }
-
-    int LatinSquareCell::getMaxEntropy() {
-        return maxEntropy;
-    }
-
-    void LatinSquareCell::setMaxEntropy(int maxEntropy) {
-        maxEntropy = maxEntropy;
-    }
-
-    int LatinSquareCell::getNumber() {
+    int Cell::getNumber() {
         return number;
     }
 
-    void LatinSquareCell::setNumber(int number) {
+    void Cell::setNumber(int number) {
         number = number;
     }
 
-    void LatinSquareCell::resetNumber() {
+    void Cell::resetNumber() {
         setNumber(0);
     }
 
-    int LatinSquareCell::getEntropy() {
-        return entropy;
+    EntropyData Cell::getEntropyData() {
+        return entropyData;
     }
 
-    void LatinSquareCell::setEntropy(int entropy) {
-        entropy = entropy;
+    void Cell::setEntropyData(int entropy, std::set<int> remainingNumbers) {
+        entropyData = EntropyData(entropy, remainingNumbers);
     }
 
-    void LatinSquareCell::resetEntropy() {
-        setEntropy(getMaxEntropy());
+    void Cell::resetEntropyData() {
+        entropyData.resetEntropy();
+        entropyData.resetRemainingNumbers();
     }
 
-    void LatinSquareCell::clearEntropy() {
-        setEntropy(0);
+    void Cell::clearEntropyData() {
+        entropyData.clearEntropy();
+        entropyData.clearRemainingNumbers();
     }
 
-    std::set<int> LatinSquareCell::getRemainingNumbers() {
-        return remainingNumbers;
+    int Cell::getEntropy() {
+        return entropyData.getEntropy();
     }
 
-    void LatinSquareCell::setRemainingNumbers(std::set<int> remainingNumbers) {
-        remainingNumbers = remainingNumbers;
+    void Cell::setMaxEntropy(int maxEntropy) {
+        entropyData.setMaxEntropy(maxEntropy);
     }
 
-    void LatinSquareCell::resetRemainingNumbers() {
-        std::vector<int> remainingNumbersVector;
-        std::iota(remainingNumbersVector.begin(), remainingNumbersVector.end(), 1);
-        std::set<int> remainingNumbers(remainingNumbersVector.begin(), remainingNumbersVector.end());
-
-        setRemainingNumbers(remainingNumbers);
-    }
-
-    void LatinSquareCell::clearRemainingNumbers() {
-        setRemainingNumbers(std::set<int>());
-    }
-
-    void LatinSquareCell::setData(int number, int entropy, std::set<int> remainingNumbers) {
-        setNumber(number);
-        setEntropy(entropy);
-        setRemainingNumbers(remainingNumbers);
-    }
-
-    void LatinSquareCell::resetData() {
+    void Cell::reset() {
         resetNumber();
-        resetEntropy();
-        resetRemainingNumbers();
+        resetEntropyData();
     }
 
-    void LatinSquareCell::clearEntropyData() {
-        clearEntropy();
-        clearRemainingNumbers();
-    }
-
-    int LatinSquareCell::getPreviousEntropy() {
-        return previousEntropy;
-    }
-
-    void LatinSquareCell::setPreviousEntropy(int previousEntropy) {
-        previousEntropy = previousEntropy;
-    }
-
-    void LatinSquareCell::resetPreviousEntropy() {
-        setPreviousEntropy(getMaxEntropy());
-    }
-
-    std::set<int> LatinSquareCell::getPreviousRemainingNumbers() { // maybe won't be enough
-        return previousRemainingNumbers;
-    }
-
-    void LatinSquareCell::setPreviousRemainingNumbers(std::set<int> previousRemainingNumbers) {
-        previousRemainingNumbers = previousRemainingNumbers;
-    }
-
-    void LatinSquareCell::resetPreviousRemainingNumbers() {
-        std::vector<int> previousRemainingNumbersVector;
-        std::iota(previousRemainingNumbersVector.begin(), previousRemainingNumbersVector.end(), 1);
-        std::set<int> previousRemainingNumbers(previousRemainingNumbersVector.begin(),
-                                               previousRemainingNumbersVector.end());
-
-        setPreviousRemainingNumbers(previousRemainingNumbers);
-    }
-
-    void LatinSquareCell::setPreviousEntropyData(int previousEntropy, std::set<int> previousRemainingNumbers) {
-        setPreviousEntropy(previousEntropy);
-        setPreviousRemainingNumbers(previousRemainingNumbers);
-    }
-
-    void LatinSquareCell::resetPreviousEntropyData() {
-        resetPreviousEntropy();
-        resetPreviousRemainingNumbers();
-    }
-
-    void LatinSquareCell::rememberPreviousEntropyData() {
-        setPreviousEntropy(getEntropy());
-        setPreviousRemainingNumbers(getRemainingNumbers());
-    }
-
-    void LatinSquareCell::restorePreviousEntropyData() {
-        setEntropy(getPreviousEntropy());
-        setRemainingNumbers(getPreviousRemainingNumbers());
-    }
-
-    void LatinSquareCell::fill(int number) {
+    void Cell::fill(int number) {
         setNumber(number);
-        rememberPreviousEntropyData();
         clearEntropyData();
     }
 
-    void LatinSquareCell::clear() {
+    void Cell::clear(int entropy, std::set<int> remainingNumbers) {
         resetNumber();
-        restorePreviousEntropyData();
+        setEntropyData(entropy, remainingNumbers);
     }
 
-    // void LatinSquareCell::removeRemainingNumber(int number) {
-    //     std::set<int> remainingNumbers = getRemainingNumbers();
-    //     remainingNumbers.erase(number);
+    bool Cell::removeRemainingNumber(int number) {
+        return entropyData.removeRemainingNumber(number);
+    }
 
-    //     setRemainingNumbers(remainingNumbers);
-    // }
-
-    // void LatinSquareCell::restoreRemainingNumber(int number) {
-    //     std::set<int> remainingNumbers = getRemainingNumbers();
-    //     remainingNumbers.insert(number);
-
-    //     setRemainingNumbers(remainingNumbers);
-    // }
+    void Cell::restoreRemainingNumber(int number) {
+        entropyData.restoreRemainingNumber(number);
+    }
 }

@@ -1,54 +1,42 @@
 #pragma once
 
+#include <optional>
 #include <set>
 #include <vector>
 
 #include "LatinSquareCell.hpp"
+#include "LatinSquareUtils.hpp"
 
 namespace LatinSquareGenerator {
     class LatinSquare {
         public:
             LatinSquare(int size);
 
-            int getSize();
             void setSize(int size);
 
-            std::vector<LatinSquareCell> getGrid();
-            void setGrid(std::vector<LatinSquareCell> grid);
-            void resetGrid();
+            std::vector<Cell> getGrid();
 
-            int getGridIndex(int row, int column);
+            int calculateCellRow(int index);
+            int calculateCellColumn(int index);
 
-            LatinSquareCell getCell(int row, int column);
+            void reset();
 
-            int getCellRow(int gridIndex);
-            void setCellRow(int gridIndex);
+            bool checkCellRow(Cell cell, int row);
+            bool checkCellColumn(Cell cell, int column);
 
-            int getCellColumn(int gridIndex);
-            void setCellColumn(int gridIndex);
+            bool checkAllCellsFilled();
+            // TODO: Goal is to have function that finds not filled cell with zero entropy.
+            std::optional<Cell> getCellWithMinimumEntropy(); // This function will not find not filled cell with zero entropy.
+            // So also add new function for this case.
 
-            void setCellPosition(int gridIndex);
-
-            int getCellNumber(int row, int column);
-            void setCellNumber(int row, int column, int number);
-            void resetCellNumber(int row, int column);
-
-            int getCellEntropy(int row, int column);
-            void setCellEntropy(int row, int column, int entropy);
-            void resetCellEntropy(int row, int column);
-
-            std::set<int> getCellRemainingNumbers(int row, int column);
-            void setCellRemainingNumbers(int row, int column, std::set<int> remainingNumbers);
-            void resetCellRemainingNumbers(int row, int column);
-
-            void setCellData(int row, int column, int number, int entropy, std::set<int> remainingNumbers);
-            void resetCellData(int row, int column);
-
-            // void fillCell(int row, int column, int number);
-            // void removeCellRemainingNumber(int row, int column, int number);
+            FilledCellData getFilledCellData(Position position, int number, EntropyData previousEntropyData);
+            std::set<Position> getUpdatedCells(Position position, int number);
+            UpdateData getUpdateData(Position position, int number, EntropyData previousEntropyData);
 
         private:
             int size;
-            std::vector<LatinSquareCell> grid;
+            std::vector<Cell> grid;
+
+            int gridSize;
     };
 }

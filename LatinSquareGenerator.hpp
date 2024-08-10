@@ -1,7 +1,16 @@
 #pragma once
 
+#include <stack>
+
 #include "LatinSquare.hpp"
+#include "LatinSquareUtils.hpp"
 
 namespace LatinSquareGenerator {
-    LatinSquare generateRandomLatinSquare(int size);
+    class LatinSquareGenerator {
+        public:
+            LatinSquare generateRandomLatinSquare(int size);
+
+        private:
+            std::stack<UpdateData> updateHistory;
+    };
 }
