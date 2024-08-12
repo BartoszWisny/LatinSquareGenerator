@@ -17,6 +17,25 @@ namespace LatinSquareGenerator {
         return grid;
     }
 
+    bool LatinSquare::checkCellRow(Cell cell, int row) {
+        return cell.getRow() == row;
+    }
+
+    bool LatinSquare::checkCellColumn(Cell cell, int column) {
+        return cell.getColumn() == column;
+    }
+
+    Cell LatinSquare::getCell(Position position) {
+        int row = position.getRow();
+        int column = position.getColumn();
+
+        std::vector<Cell>::iterator iterator = std::find_if(
+            grid.begin(), grid.end(),
+            [this, row, column](Cell cell) { return checkCellRow(cell, row) && checkCellColumn(cell, column); });
+
+        return *iterator;
+    }
+
     int LatinSquare::calculateCellRow(int index) {
         return index / size;
     }
@@ -33,33 +52,18 @@ namespace LatinSquareGenerator {
         }
     }
 
-    bool LatinSquare::checkCellRow(Cell cell, int row) {
-        return cell.getRow() == row;
+    bool LatinSquare::checkIfNotFilledCellExists() {
+        return std::any_of(grid.begin(), grid.end(), [](Cell cell) { return cell.getNumber() == 0; });
     }
 
-    bool LatinSquare::checkCellColumn(Cell cell, int column) {
-        return cell.getColumn() == column;
-    }
+    Cell LatinSquare::getNotFilledCellWithMinimumEntropy() {
+        std::sort(
+            grid.begin(), grid.end(),
+            [](Cell firstCell, Cell secondCell) { return firstCell.getEntropy() < secondCell.getEntropy(); });
+        std::vector<Cell>::iterator iterator = std::find_if(
+            grid.begin(), grid.end(), [](Cell cell) { return cell.getNumber() == 0; });
 
-    bool LatinSquare::checkAllCellsFilled() {
-        return std::all_of(grid.begin(), grid.end(), [](Cell cell) { return cell.getNumber() != 0; });
-    }
-
-    std::optional<Cell> LatinSquare::getCellWithMinimumEntropy() {
-        std::sort(grid.begin(), grid.end(),
-                  [](Cell firstCell, Cell secondCell) { return firstCell.getEntropy() < secondCell.getEntropy(); });
-
-        std::vector<Cell> cellsWithNonZeroEntropy;
-        std::copy_if(grid.begin(), grid.end(), std::back_inserter(cellsWithNonZeroEntropy),
-                     [](Cell cell) { return cell.getEntropy() != 0; });
-
-        std::optional<Cell> maybeCellWithNonZeroEntropy;
-
-        if (!cellsWithNonZeroEntropy.empty()) {
-            maybeCellWithNonZeroEntropy = cellsWithNonZeroEntropy.front();
-        }
-
-        return maybeCellWithNonZeroEntropy;
+        return *iterator;
     }
 
     // This function must be used before filling cell because previous entropy data are needed for update history in case of reverting filling this cell.
@@ -67,21 +71,20 @@ namespace LatinSquareGenerator {
         return FilledCellData(position, number, previousEntropyData);
     }
 
-    std::set<Position> LatinSquare::getUpdatedCells(Position position, int number) {
+    std::vector<Position> LatinSquare::getUpdatedCells(Position position, int number) {
         int row = position.getRow();
         int column = position.getColumn();
 
         std::vector<Cell> relatedCells;
-        std::copy_if(grid.begin(), grid.end(), std::back_inserter(relatedCells),
-                     [this, row, column](Cell cell) {
-                         return checkCellRow(cell, row) != checkCellColumn(cell, column);
-                     });
+        std::copy_if(
+            grid.begin(), grid.end(), std::back_inserter(relatedCells),
+            [this, row, column](Cell cell) { return checkCellRow(cell, row) != checkCellColumn(cell, column); });
 
-        std::set<Position> updatedCells;
+        std::vector<Position> updatedCells;
 
         for (Cell cell : relatedCells) {
             if (cell.removeRemainingNumber(number)) {
-                updatedCells.insert(cell.getPosition());
+                updatedCells.push_back(cell.getPosition());
             }
         }
 
@@ -91,4 +94,8 @@ namespace LatinSquareGenerator {
     UpdateData LatinSquare::getUpdateData(Position position, int number, EntropyData previousEntropyData) {
         return UpdateData(getFilledCellData(position, number, previousEntropyData), getUpdatedCells(position, number));
     }
+
+    // std::vector<Cell> getPreviousUpdatedCells(std::vector<Position> previousUpdatedCells) {
+
+    // }
 }

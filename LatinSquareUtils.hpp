@@ -1,6 +1,7 @@
 #pragma once
 
 #include <set>
+#include <vector>
 
 namespace LatinSquareGenerator {
     class Position {
@@ -29,6 +30,7 @@ namespace LatinSquareGenerator {
             void resetEntropy();
             void clearEntropy();
 
+            std::set<int> getRemainingNumbers();
             void setRemainingNumbers(std::set<int> remainingNumbers);
             void resetRemainingNumbers();
             void clearRemainingNumbers();
@@ -50,8 +52,13 @@ namespace LatinSquareGenerator {
             FilledCellData();
             FilledCellData(Position position, int number, EntropyData previousEntropyData);
 
+            Position getPosition();
             void setPosition(Position position);
+
+            int getNumber();
             void setNumber(int number);
+
+            EntropyData getPreviousEntropyData();
             void setPreviousEntropyData(EntropyData previousEntropyData);
 
         private:
@@ -63,13 +70,17 @@ namespace LatinSquareGenerator {
     class UpdateData {
         public:
             UpdateData();
-            UpdateData(FilledCellData filledCellData, std::set<Position> updatedCells);
+            // TODO: check if using vector of refs to cells will be better idea
+            UpdateData(FilledCellData filledCellData, std::vector<Position> updatedCells);
 
+            FilledCellData getFilledCellData();
             void setFilledCellData(FilledCellData filledCellData);
-            void setUpdatedCells(std::set<Position> updatedCells);
+
+            std::vector<Position> getUpdatedCells();
+            void setUpdatedCells(std::vector<Position> updatedCells);
 
         private:
             FilledCellData filledCellData;
-            std::set<Position> updatedCells;
+            std::vector<Position> updatedCells;
     };
 }

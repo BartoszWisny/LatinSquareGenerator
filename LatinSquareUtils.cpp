@@ -50,6 +50,10 @@ namespace LatinSquareGenerator {
         setEntropy(0);
     }
 
+    std::set<int> EntropyData::getRemainingNumbers() {
+        return remainingNumbers;
+    }
+
     void EntropyData::setRemainingNumbers(std::set<int> remainingNumbers) {
         remainingNumbers = remainingNumbers;
     }
@@ -71,10 +75,17 @@ namespace LatinSquareGenerator {
     }
 
     bool EntropyData::removeRemainingNumber(int number) {
-        return remainingNumbers.erase(number);
+        bool result = remainingNumbers.erase(number);
+
+        if (result) {
+            entropy--;
+        }
+
+        return result;
     }
 
     void EntropyData::restoreRemainingNumber(int number) {
+        entropy++;
         remainingNumbers.insert(number);
     }
 
@@ -86,12 +97,24 @@ namespace LatinSquareGenerator {
         setPreviousEntropyData(previousEntropyData);
     }
 
+    Position FilledCellData::getPosition() {
+        return position;
+    }
+
     void FilledCellData::setPosition(Position position) {
         position = position;
     }
 
+    int FilledCellData::getNumber() {
+        return number;
+    }
+
     void FilledCellData::setNumber(int number) {
         number = number;
+    }
+
+    EntropyData FilledCellData::getPreviousEntropyData() {
+        return previousEntropyData;
     }
 
     void FilledCellData::setPreviousEntropyData(EntropyData previousEntropyData) {
@@ -100,16 +123,24 @@ namespace LatinSquareGenerator {
 
     UpdateData::UpdateData() {}
 
-    UpdateData::UpdateData(FilledCellData filledCellData, std::set<Position> updatedCells) {
+    UpdateData::UpdateData(FilledCellData filledCellData, std::vector<Position> updatedCells) {
         setFilledCellData(filledCellData);
         setUpdatedCells(updatedCells);
+    }
+
+    FilledCellData UpdateData::getFilledCellData() {
+        return filledCellData;
     }
 
     void UpdateData::setFilledCellData(FilledCellData filledCellData) {
         filledCellData = filledCellData;
     }
 
-    void UpdateData::setUpdatedCells(std::set<Position> updatedCells) {
+    std::vector<Position> UpdateData::getUpdatedCells() {
+        return updatedCells;
+    }
+
+    void UpdateData::setUpdatedCells(std::vector<Position> updatedCells) {
         updatedCells = updatedCells;
     }
 }

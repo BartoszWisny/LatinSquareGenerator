@@ -39,8 +39,8 @@ namespace LatinSquareGenerator {
         return entropyData;
     }
 
-    void Cell::setEntropyData(int entropy, std::set<int> remainingNumbers) {
-        entropyData = EntropyData(entropy, remainingNumbers);
+    void Cell::setEntropyData(EntropyData entropyData) {
+        entropyData = entropyData;
     }
 
     void Cell::resetEntropyData() {
@@ -57,6 +57,10 @@ namespace LatinSquareGenerator {
         return entropyData.getEntropy();
     }
 
+    std::set<int> Cell::getRemainingNumbers() {
+        return entropyData.getRemainingNumbers();
+    }
+
     void Cell::setMaxEntropy(int maxEntropy) {
         entropyData.setMaxEntropy(maxEntropy);
     }
@@ -71,9 +75,10 @@ namespace LatinSquareGenerator {
         clearEntropyData();
     }
 
-    void Cell::clear(int entropy, std::set<int> remainingNumbers) {
+    void Cell::clear(EntropyData previousEntropyData) {
+        previousEntropyData.removeRemainingNumber(number);
         resetNumber();
-        setEntropyData(entropy, remainingNumbers);
+        setEntropyData(previousEntropyData);
     }
 
     bool Cell::removeRemainingNumber(int number) {

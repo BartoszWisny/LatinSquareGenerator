@@ -16,22 +16,24 @@ namespace LatinSquareGenerator {
 
             std::vector<Cell> getGrid();
 
+            bool checkCellRow(Cell cell, int row);
+            bool checkCellColumn(Cell cell, int column);
+
+            Cell getCell(Position position);
+
             int calculateCellRow(int index);
             int calculateCellColumn(int index);
 
             void reset();
 
-            bool checkCellRow(Cell cell, int row);
-            bool checkCellColumn(Cell cell, int column);
-
-            bool checkAllCellsFilled();
-            // TODO: Goal is to have function that finds not filled cell with zero entropy.
-            std::optional<Cell> getCellWithMinimumEntropy(); // This function will not find not filled cell with zero entropy.
-            // So also add new function for this case.
+            bool checkIfNotFilledCellExists();
+            Cell getNotFilledCellWithMinimumEntropy();
 
             FilledCellData getFilledCellData(Position position, int number, EntropyData previousEntropyData);
-            std::set<Position> getUpdatedCells(Position position, int number);
+            std::vector<Position> getUpdatedCells(Position position, int number);
             UpdateData getUpdateData(Position position, int number, EntropyData previousEntropyData);
+
+            // std::vector<Cell> getPreviousUpdatedCells();
 
         private:
             int size;

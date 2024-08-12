@@ -20,17 +20,18 @@ namespace LatinSquareGenerator {
             void resetNumber();
 
             EntropyData getEntropyData();
-            void setEntropyData(int entropy, std::set<int> remainingNumbers);
+            void setEntropyData(EntropyData entropyData);
             void resetEntropyData();
             void clearEntropyData();
 
             int getEntropy();
+            std::set<int> getRemainingNumbers();
 
             void setMaxEntropy(int maxEntropy);
 
             void reset();
             void fill(int number);
-            void clear(int entropy, std::set<int> remainingNumbers);
+            void clear(EntropyData previousEntropyData);
 
             bool removeRemainingNumber(int number);
             void restoreRemainingNumber(int number);
