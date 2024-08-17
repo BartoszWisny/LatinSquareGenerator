@@ -1,0 +1,3 @@
+C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles/LatinSquareGenerator.dir
+C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles/edit_cache.dir
+C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles/rebuild_cache.dir
