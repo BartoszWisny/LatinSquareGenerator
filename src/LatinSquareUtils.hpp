@@ -12,19 +12,19 @@ namespace LatinSquareGenerator {
             void resetEntropy();
             void clearEntropy();
 
-            std::set<int> getRemainingNumbers();
+            const std::set<int>& getRemainingNumbers() const;
             void resetRemainingNumbers();
             void clearRemainingNumbers();
 
-            void setMaxEntropy(int maxEntropy);
+            void setMaxEntropy(const int maxEntropy);
 
-            bool removeRemainingNumber(int number);
-            void restoreRemainingNumber(int number);
+            bool removeRemainingNumber(const int number);
+            void restoreRemainingNumber(const int number);
 
         private:
-            void setEntropy(int entropy);
+            void setEntropy(const int entropy);
 
-            void setRemainingNumbers(std::set<int> remainingNumbers);
+            void setRemainingNumbers(const std::set<int>& remainingNumbers);
 
             int entropy_;
             std::set<int> remainingNumbers_;
@@ -37,18 +37,18 @@ namespace LatinSquareGenerator {
             FilledCellData();
             FilledCellData(const std::string& id, const int number, const EntropyData& previousEntropyData);
 
-            std::string getId();
+            const std::string& getId() const;
 
-            int getNumber();
+            int getNumber() const;
 
-            EntropyData getPreviousEntropyData();
+            const EntropyData& getPreviousEntropyData() const;
 
         private:
-            void setId(std::string id);
+            void setId(const std::string& id);
 
-            void setNumber(int number);
+            void setNumber(const int number);
 
-            void setPreviousEntropyData(EntropyData previousEntropyData);
+            void setPreviousEntropyData(const EntropyData& previousEntropyData);
 
             std::string id_;
             int number_;
@@ -57,17 +57,17 @@ namespace LatinSquareGenerator {
 
     class UpdateData {
         public:
-            UpdateData(); // maybe ref to filled cell + refs to updated cells?
-            UpdateData(FilledCellData filledCellData, std::set<std::string> updatedCellsIds);
+            UpdateData(); // maybe ref to filled cell + refs to updated cells? finally it can be done!!!
+            UpdateData(const FilledCellData& filledCellData, const std::set<std::string>& updatedCellsIds);
 
-            FilledCellData getFilledCellData();
+            const FilledCellData& getFilledCellData() const;
 
-            std::set<std::string> getUpdatedCellsIds();
+            const std::set<std::string>& getUpdatedCellsIds() const;
 
         private:
-            void setFilledCellData(FilledCellData filledCellData);
+            void setFilledCellData(const FilledCellData& filledCellData);
 
-            void setUpdatedCellsIds(std::set<std::string> updatedCellsIds);
+            void setUpdatedCellsIds(const std::set<std::string>& updatedCellsIds);
 
             FilledCellData filledCellData_;
             std::set<std::string> updatedCellsIds_;

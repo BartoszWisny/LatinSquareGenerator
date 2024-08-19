@@ -15,5 +15,4 @@ int main() {
 // TODO:
 // - add refs where possible
 // - add const where possible (mainly after function names)
-// - latin square generator: function like copy_if, find_if, etc. should return ref to cell
 // ...

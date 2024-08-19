@@ -10,7 +10,7 @@ namespace LatinSquareGenerator {
         return entropy_;
     }
 
-    void EntropyData::setEntropy(int entropy) {
+    void EntropyData::setEntropy(const int entropy) {
         entropy_ = entropy;
     }
 
@@ -22,18 +22,18 @@ namespace LatinSquareGenerator {
         setEntropy(0);
     }
 
-    std::set<int> EntropyData::getRemainingNumbers() {
+    const std::set<int>& EntropyData::getRemainingNumbers() const {
         return remainingNumbers_;
     }
 
-    void EntropyData::setRemainingNumbers(std::set<int> remainingNumbers) {
+    void EntropyData::setRemainingNumbers(const std::set<int>& remainingNumbers) {
         remainingNumbers_ = remainingNumbers;
     }
 
     void EntropyData::resetRemainingNumbers() {
         std::vector<int> remainingNumbersVector(maxEntropy_);
         std::iota(std::begin(remainingNumbersVector), std::end(remainingNumbersVector), 1);
-        std::set<int> remainingNumbers(remainingNumbersVector.begin(), remainingNumbersVector.end());
+        const std::set<int> remainingNumbers(remainingNumbersVector.begin(), remainingNumbersVector.end());
 
         setRemainingNumbers(remainingNumbers);
     }
@@ -42,12 +42,12 @@ namespace LatinSquareGenerator {
         remainingNumbers_.clear();
     }
 
-    void EntropyData::setMaxEntropy(int maxEntropy) {
+    void EntropyData::setMaxEntropy(const int maxEntropy) {
         maxEntropy_ = maxEntropy;
     }
 
-    bool EntropyData::removeRemainingNumber(int number) {
-        auto result = remainingNumbers_.erase(number);
+    bool EntropyData::removeRemainingNumber(const int number) {
+        const auto result = remainingNumbers_.erase(number);
 
         if (result) {
             entropy_--;
@@ -56,7 +56,7 @@ namespace LatinSquareGenerator {
         return result;
     }
 
-    void EntropyData::restoreRemainingNumber(int number) {
+    void EntropyData::restoreRemainingNumber(const int number) {
         entropy_++;
         remainingNumbers_.insert(number);
     }
@@ -69,50 +69,50 @@ namespace LatinSquareGenerator {
         setPreviousEntropyData(previousEntropyData);
     }
 
-    std::string FilledCellData::getId() {
+    const std::string& FilledCellData::getId() const {
         return id_;
     }
 
-    void FilledCellData::setId(std::string id) {
+    void FilledCellData::setId(const std::string& id) {
         id_ = id;
     }
 
-    int FilledCellData::getNumber() {
+    int FilledCellData::getNumber() const {
         return number_;
     }
 
-    void FilledCellData::setNumber(int number) {
+    void FilledCellData::setNumber(const int number) {
         number_ = number;
     }
 
-    EntropyData FilledCellData::getPreviousEntropyData() {
+    const EntropyData& FilledCellData::getPreviousEntropyData() const {
         return previousEntropyData_;
     }
 
-    void FilledCellData::setPreviousEntropyData(EntropyData previousEntropyData) {
+    void FilledCellData::setPreviousEntropyData(const EntropyData& previousEntropyData) {
         previousEntropyData_ = previousEntropyData;
     }
 
     UpdateData::UpdateData() {}
 
-    UpdateData::UpdateData(FilledCellData filledCellData, std::set<std::string> updatedCellsIds) {
+    UpdateData::UpdateData(const FilledCellData& filledCellData, const std::set<std::string>& updatedCellsIds) {
         setFilledCellData(filledCellData);
         setUpdatedCellsIds(updatedCellsIds);
     }
 
-    FilledCellData UpdateData::getFilledCellData() {
+    const FilledCellData& UpdateData::getFilledCellData() const {
         return filledCellData_;
     }
 
-    void UpdateData::setFilledCellData(FilledCellData filledCellData) {
+    void UpdateData::setFilledCellData(const FilledCellData& filledCellData) {
         filledCellData_ = filledCellData;
     }
 
-    std::set<std::string> UpdateData::getUpdatedCellsIds() {
+    const std::set<std::string>& UpdateData::getUpdatedCellsIds() const {
         return updatedCellsIds_;
     }
 
-    void UpdateData::setUpdatedCellsIds(std::set<std::string> updatedCellsIds) {
+    void UpdateData::setUpdatedCellsIds(const std::set<std::string>& updatedCellsIds) {
         updatedCellsIds_ = updatedCellsIds;
     }
 }

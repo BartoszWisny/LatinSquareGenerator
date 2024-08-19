@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+#include <random>
 #include <set>
 #include <string>
 #include <vector>
@@ -10,7 +12,7 @@
 namespace LatinSquareGenerator {
     class LatinSquare {
         public:
-            LatinSquare(const int size);
+            LatinSquare(const int size, const std::mt19937& mersenneTwister);
 
             const std::vector<Cell>& getGrid();
 
@@ -23,15 +25,18 @@ namespace LatinSquareGenerator {
 
             const FilledCellData getFilledCellData(
                 const std::string& id, const int number, const EntropyData& previousEntropyData) const;
-            const std::set<std::string> getUpdatedCellsIds(const int row, const int column, const int number) const;
+            const std::set<std::string> getUpdatedCellsIds(const int row, const int column, const int number);
             const UpdateData getUpdateData(
                 const std::string& id, const int row, const int column, const int number,
-                const EntropyData& previousEntropyData) const;
+                const EntropyData& previousEntropyData);
 
-            const std::vector<Cell> getPreviousUpdatedCells(const std::set<std::string>& updatedCellsIds) const;
+            const std::vector<std::reference_wrapper<Cell>> getPreviousUpdatedCells(
+                const std::set<std::string>& updatedCellsIds);
 
         private:
             void setSize(const int size);
+
+            void setMersenneTwister(const std::mt19937& mersenneTwister);
 
             int calculateCellRow(const int index) const;
             int calculateCellColumn(const int index) const;
@@ -43,5 +48,6 @@ namespace LatinSquareGenerator {
             std::vector<Cell> grid_;
 
             int gridSize_;
+            std::mt19937 mersenneTwister_;
     };
 }

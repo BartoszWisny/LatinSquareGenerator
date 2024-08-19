@@ -3,14 +3,19 @@
 #include <algorithm>
 
 namespace LatinSquareGenerator {
-    LatinSquare::LatinSquare(const int size) {
+    LatinSquare::LatinSquare(const int size, const std::mt19937& mersenneTwister) {
         setSize(size);
+        setMersenneTwister(mersenneTwister);
         reset();
     }
 
     void LatinSquare::setSize(const int size) {
         size_ = size;
         gridSize_ = size * size;
+    }
+
+    void LatinSquare::setMersenneTwister(const std::mt19937& mersenneTwister) {
+        mersenneTwister_ = mersenneTwister;
     }
 
     const std::vector<Cell>& LatinSquare::getGrid() {
@@ -26,7 +31,7 @@ namespace LatinSquareGenerator {
         return grid_;
     }
 
-    Cell& LatinSquare::getCell(const std::string& id) { // TODO: should return ref to cell from grid
+    Cell& LatinSquare::getCell(const std::string& id) {
         const auto& iterator = std::find_if(
             grid_.begin(), grid_.end(), [&id](const auto& cell) { return cell.getId() == id; });
 
@@ -47,13 +52,15 @@ namespace LatinSquareGenerator {
         for (int index = 0; index < gridSize_; index++) {
             grid_.push_back(Cell(calculateCellRow(index), calculateCellColumn(index), size_));
         }
+
+        std::shuffle(grid_.begin(), grid_.end(), mersenneTwister_);
     }
 
     bool LatinSquare::checkIfNotFilledCellExists() const {
         return std::any_of(grid_.begin(), grid_.end(), [](const auto& cell) { return cell.getNumber() == 0; });
     }
 
-    Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() { // TODO: should return ref to cell from grid
+    Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() { // TODO: consider adding shuffling in this function
         std::sort(grid_.begin(), grid_.end(),
             [](const auto& firstCell, const auto& secondCell) {
                 return firstCell.getEntropy() < secondCell.getEntropy();
@@ -78,15 +85,17 @@ namespace LatinSquareGenerator {
     }
 
     const std::set<std::string> LatinSquare::getUpdatedCellsIds(
-        const int row, const int column, const int number) const { // TODO: investigate if function works correctly
-        std::vector<Cell> relatedCells;
+        const int row, const int column, const int number) {
+        std::vector<std::reference_wrapper<Cell>> relatedCells;
         std::copy_if(
             grid_.begin(), grid_.end(), std::back_inserter(relatedCells),
             [this, row, column](const auto& cell) { return checkCellRow(cell, row) != checkCellColumn(cell, column); });
 
         std::set<std::string> updatedCellsIds;
 
-        for (auto& cell : relatedCells) {
+        for (const auto& cellRef : relatedCells) {
+            auto& cell = cellRef.get();
+
             if (cell.removeRemainingNumber(number)) {
                 updatedCellsIds.insert(cell.getId());
             }
@@ -97,12 +106,13 @@ namespace LatinSquareGenerator {
 
     const UpdateData LatinSquare::getUpdateData(
         const std::string& id, const int row, const int column, const int number,
-        const EntropyData& previousEntropyData) const {
+        const EntropyData& previousEntropyData) {
         return UpdateData(getFilledCellData(id, number, previousEntropyData), getUpdatedCellsIds(row, column, number));
     }
 
-    const std::vector<Cell> LatinSquare::getPreviousUpdatedCells(const std::set<std::string>& updatedCellsIds) const { // TODO: should return vector of refs to cells from grid
-        std::vector<Cell> previousUpdatedCells;
+    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getPreviousUpdatedCells(
+        const std::set<std::string>& updatedCellsIds) {
+        std::vector<std::reference_wrapper<Cell>> previousUpdatedCells;
         std::copy_if(
             grid_.begin(), grid_.end(), std::back_inserter(previousUpdatedCells),
             [this, &updatedCellsIds](const auto& cell) { return updatedCellsIds.contains(cell.getId()); });

@@ -1,7 +1,7 @@
 #include "LatinSquareCell.hpp"
 
 namespace LatinSquareGenerator {
-    Cell::Cell(int row, int column, int maxEntropy) {
+    Cell::Cell(const int row, const int column, const int maxEntropy) {
         setRow(row);
         setColumn(column);
         setId();
@@ -14,7 +14,7 @@ namespace LatinSquareGenerator {
         return row_;
     }
 
-    void Cell::setRow(int row) {
+    void Cell::setRow(const int row) {
         row_ = row;
     }
 
@@ -22,11 +22,11 @@ namespace LatinSquareGenerator {
         return column_;
     }
 
-    void Cell::setColumn(int column) {
+    void Cell::setColumn(const int column) {
         column_ = column;
     }
 
-    std::string Cell::getId() const {
+    const std::string& Cell::getId() const {
         return id_;
     }
 
@@ -38,7 +38,7 @@ namespace LatinSquareGenerator {
         return number_;
     }
 
-    void Cell::setNumber(int number) {
+    void Cell::setNumber(const int number) {
         number_ = number;
     }
 
@@ -46,7 +46,7 @@ namespace LatinSquareGenerator {
         setNumber(0);
     }
 
-    std::string Cell::getFullId() const {
+    const std::string& Cell::getFullId() const {
         return fullId_;
     }
 
@@ -54,15 +54,11 @@ namespace LatinSquareGenerator {
         fullId_ = id_ + "#" + std::to_string(number_);
     }
 
-    void Cell::resetFullId() {
-        fullId_ = id_ + "#0";
-    }
-
-    EntropyData Cell::getEntropyData() {
+    const EntropyData& Cell::getEntropyData() const {
         return entropyData_;
     }
 
-    void Cell::setEntropyData(EntropyData entropyData) {
+    void Cell::setEntropyData(const EntropyData& entropyData) {
         entropyData_ = entropyData;
     }
 
@@ -80,21 +76,21 @@ namespace LatinSquareGenerator {
         return entropyData_.getEntropy();
     }
 
-    std::set<int> Cell::getRemainingNumbers() {
+    const std::set<int>& Cell::getRemainingNumbers() const {
         return entropyData_.getRemainingNumbers();
     }
 
-    void Cell::setMaxEntropy(int maxEntropy) {
+    void Cell::setMaxEntropy(const int maxEntropy) {
         entropyData_.setMaxEntropy(maxEntropy);
     }
 
     void Cell::reset() {
         resetNumber();
-        resetFullId();
+        setFullId();
         resetEntropyData();
     }
 
-    void Cell::fill(int number) {
+    void Cell::fill(const int number) {
         setNumber(number);
         setFullId();
         clearEntropyData();
@@ -103,15 +99,15 @@ namespace LatinSquareGenerator {
     void Cell::clear(EntropyData previousEntropyData) {
         previousEntropyData.removeRemainingNumber(number_);
         resetNumber();
-        resetFullId();
+        setFullId();
         setEntropyData(previousEntropyData);
     }
 
-    bool Cell::removeRemainingNumber(int number) {
+    bool Cell::removeRemainingNumber(const int number) {
         return entropyData_.removeRemainingNumber(number);
     }
 
-    void Cell::restoreRemainingNumber(int number) {
+    void Cell::restoreRemainingNumber(const int number) {
         entropyData_.restoreRemainingNumber(number);
     }
 }

@@ -9,42 +9,60 @@
 namespace LatinSquareGenerator {
     LatinSquareGenerator::LatinSquareGenerator() {}
 
-    LatinSquare LatinSquareGenerator::generateRandomLatinSquare(const int size) {
-        auto latinSquare = LatinSquare(size);
+    const LatinSquare LatinSquareGenerator::generateRandomLatinSquare(const int size) {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
+        auto latinSquare = LatinSquare(size, mersenneTwister);
+        // int it = 0;
 
         while (latinSquare.checkIfNotFilledCellExists()) {
+            // it++;
             auto& cell = latinSquare.getNotFilledCellWithMinimumEntropy();
 
             if (cell.getEntropy() > 0) {
-                auto remainingNumbers = cell.getRemainingNumbers();
+                const auto& remainingNumbers = cell.getRemainingNumbers();
                 std::vector<int> numbers;
                 std::sample(
                     remainingNumbers.begin(), remainingNumbers.end(), std::back_inserter(numbers), 1, mersenneTwister);
-                auto number = numbers.front();
+                const auto& number = numbers.front();
 
-                auto updateData = latinSquare.getUpdateData(
+                const auto updateData = latinSquare.getUpdateData(
                     cell.getId(), cell.getRow(), cell.getColumn(), number, cell.getEntropyData());
                 updateHistory_.push(updateData);
                 cell.fill(number);
-            } else {
+
+                // std::cout << it << ". iteration" << std::endl;
+                // std::cout << "Filled cell: " << cell.getId() << " with number: " << number << std::endl;
+
+                // for (const auto& cell : latinSquare.getGrid()) {
+                //     std::cout << cell.getId() << ": number: " << cell.getNumber() << ", entropy: " << cell.getEntropy()
+                //               << ", remaining numbers: ";
+
+                //     for (const int number : cell.getRemainingNumbers()) {
+                //         std::cout << number << " ";
+                //     }
+
+                //     std::cout << std::endl;
+                // }
+
+                // std::cout << std::endl;
+            } else { // TODO: check if this case works correctly
                 if (updateHistory_.empty()) {
                     latinSquare.reset();
                 }
 
-                auto updateData = updateHistory_.top();
-                auto filledCellData = updateData.getFilledCellData();
-                auto updatedCellsIds = updateData.getUpdatedCellsIds();
+                const auto updateData = updateHistory_.top();
+                const auto& filledCellData = updateData.getFilledCellData();
+                const auto& updatedCellsIds = updateData.getUpdatedCellsIds();
                 updateHistory_.pop();
 
                 auto& previousCell = latinSquare.getCell(filledCellData.getId());
                 previousCell.clear(filledCellData.getPreviousEntropyData());
-                auto previousUpdatedCells = latinSquare.getPreviousUpdatedCells(updatedCellsIds);
-                auto number = filledCellData.getNumber();
+                const auto previousUpdatedCells = latinSquare.getPreviousUpdatedCells(updatedCellsIds);
+                const auto number = filledCellData.getNumber();
 
-                for (auto previousUpdatedCell : previousUpdatedCells) {
-                    previousUpdatedCell.restoreRemainingNumber(number);
+                for (const auto& previousUpdatedCellRef : previousUpdatedCells) {
+                    previousUpdatedCellRef.get().restoreRemainingNumber(number);
                 }
             }
         }

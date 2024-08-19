@@ -8,48 +8,47 @@
 namespace LatinSquareGenerator {
     class Cell {
         public:
-            Cell(int row, int column, int maxEntropy);
+            Cell(const int row, const int column, const int maxEntropy);
 
             int getRow() const;
 
             int getColumn() const;
 
-            std::string getId() const;
+            const std::string& getId() const;
 
             int getNumber() const;
 
-            std::string getFullId() const;
+            const std::string& getFullId() const;
 
-            EntropyData getEntropyData();
+            const EntropyData& getEntropyData() const;
 
             int getEntropy() const;
 
-            std::set<int> getRemainingNumbers();
+            const std::set<int>& getRemainingNumbers() const;
 
-            void fill(int number);
+            void fill(const int number);
             void clear(EntropyData previousEntropyData);
 
-            bool removeRemainingNumber(int number);
-            void restoreRemainingNumber(int number);
+            bool removeRemainingNumber(const int number);
+            void restoreRemainingNumber(const int number);
 
         private:
-            void setRow(int row);
+            void setRow(const int row);
 
-            void setColumn(int column);
+            void setColumn(const int column);
 
             void setId();
 
-            void setNumber(int number);
+            void setNumber(const int number);
             void resetNumber();
 
             void setFullId();
-            void resetFullId();
 
-            void setEntropyData(EntropyData entropyData);
+            void setEntropyData(const EntropyData& entropyData);
             void resetEntropyData();
             void clearEntropyData();
 
-            void setMaxEntropy(int maxEntropy);
+            void setMaxEntropy(const int maxEntropy);
 
             void reset();
 

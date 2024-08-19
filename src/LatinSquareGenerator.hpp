@@ -9,7 +9,7 @@ namespace LatinSquareGenerator {
     class LatinSquareGenerator {
         public:
             LatinSquareGenerator();
-            LatinSquare generateRandomLatinSquare(const int size);
+            const LatinSquare generateRandomLatinSquare(const int size);
 
         private:
             std::stack<UpdateData> updateHistory_;
