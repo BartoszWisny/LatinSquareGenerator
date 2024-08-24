@@ -10,10 +10,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareCell.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareCell.cpp.obj.d"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj.d"
-  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.obj.d"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj.d"
   )
 

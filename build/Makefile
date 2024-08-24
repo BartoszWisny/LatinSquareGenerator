@@ -178,6 +178,30 @@ src/LatinSquareCell.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareCell.cpp.s
 .PHONY : src/LatinSquareCell.cpp.s
 
+src/LatinSquareEntropyData.obj: src/LatinSquareEntropyData.cpp.obj
+.PHONY : src/LatinSquareEntropyData.obj
+
+# target to build an object file
+src/LatinSquareEntropyData.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj
+.PHONY : src/LatinSquareEntropyData.cpp.obj
+
+src/LatinSquareEntropyData.i: src/LatinSquareEntropyData.cpp.i
+.PHONY : src/LatinSquareEntropyData.i
+
+# target to preprocess a source file
+src/LatinSquareEntropyData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.i
+.PHONY : src/LatinSquareEntropyData.cpp.i
+
+src/LatinSquareEntropyData.s: src/LatinSquareEntropyData.cpp.s
+.PHONY : src/LatinSquareEntropyData.s
+
+# target to generate assembly for a file
+src/LatinSquareEntropyData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.s
+.PHONY : src/LatinSquareEntropyData.cpp.s
+
 src/LatinSquareGenerator.obj: src/LatinSquareGenerator.cpp.obj
 .PHONY : src/LatinSquareGenerator.obj
 
@@ -250,29 +274,29 @@ src/LatinSquarePrintingUtils.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.s
 .PHONY : src/LatinSquarePrintingUtils.cpp.s
 
-src/LatinSquareUtils.obj: src/LatinSquareUtils.cpp.obj
-.PHONY : src/LatinSquareUtils.obj
+src/LatinSquareUpdateData.obj: src/LatinSquareUpdateData.cpp.obj
+.PHONY : src/LatinSquareUpdateData.obj
 
 # target to build an object file
-src/LatinSquareUtils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.obj
-.PHONY : src/LatinSquareUtils.cpp.obj
+src/LatinSquareUpdateData.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj
+.PHONY : src/LatinSquareUpdateData.cpp.obj
 
-src/LatinSquareUtils.i: src/LatinSquareUtils.cpp.i
-.PHONY : src/LatinSquareUtils.i
+src/LatinSquareUpdateData.i: src/LatinSquareUpdateData.cpp.i
+.PHONY : src/LatinSquareUpdateData.i
 
 # target to preprocess a source file
-src/LatinSquareUtils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.i
-.PHONY : src/LatinSquareUtils.cpp.i
+src/LatinSquareUpdateData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.i
+.PHONY : src/LatinSquareUpdateData.cpp.i
 
-src/LatinSquareUtils.s: src/LatinSquareUtils.cpp.s
-.PHONY : src/LatinSquareUtils.s
+src/LatinSquareUpdateData.s: src/LatinSquareUpdateData.cpp.s
+.PHONY : src/LatinSquareUpdateData.s
 
 # target to generate assembly for a file
-src/LatinSquareUtils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.s
-.PHONY : src/LatinSquareUtils.cpp.s
+src/LatinSquareUpdateData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.s
+.PHONY : src/LatinSquareUpdateData.cpp.s
 
 src/Main.obj: src/Main.cpp.obj
 .PHONY : src/Main.obj
@@ -313,6 +337,9 @@ help:
 	@echo "... src/LatinSquareCell.obj"
 	@echo "... src/LatinSquareCell.i"
 	@echo "... src/LatinSquareCell.s"
+	@echo "... src/LatinSquareEntropyData.obj"
+	@echo "... src/LatinSquareEntropyData.i"
+	@echo "... src/LatinSquareEntropyData.s"
 	@echo "... src/LatinSquareGenerator.obj"
 	@echo "... src/LatinSquareGenerator.i"
 	@echo "... src/LatinSquareGenerator.s"
@@ -322,9 +349,9 @@ help:
 	@echo "... src/LatinSquarePrintingUtils.obj"
 	@echo "... src/LatinSquarePrintingUtils.i"
 	@echo "... src/LatinSquarePrintingUtils.s"
-	@echo "... src/LatinSquareUtils.obj"
-	@echo "... src/LatinSquareUtils.i"
-	@echo "... src/LatinSquareUtils.s"
+	@echo "... src/LatinSquareUpdateData.obj"
+	@echo "... src/LatinSquareUpdateData.i"
+	@echo "... src/LatinSquareUpdateData.s"
 	@echo "... src/Main.obj"
 	@echo "... src/Main.i"
 	@echo "... src/Main.s"

@@ -7,7 +7,8 @@
 #include <vector>
 
 #include "LatinSquareCell.hpp"
-#include "LatinSquareUtils.hpp"
+#include "LatinSquareEntropyData.hpp"
+#include "LatinSquareUpdateData.hpp"
 
 namespace LatinSquareGenerator {
     class LatinSquare {
@@ -16,20 +17,13 @@ namespace LatinSquareGenerator {
 
             const std::vector<Cell>& getGrid();
 
-            Cell& getCell(const std::string& id);
-
             void reset();
+
+            Cell& getCell(const std::string& id);
 
             bool checkIfNotFilledCellExists() const;
             Cell& getNotFilledCellWithMinimumEntropy();
-
-            const FilledCellData getFilledCellData(
-                const std::string& id, const int number, const EntropyData& previousEntropyData) const;
-            const std::set<std::string> getUpdatedCellsIds(const int row, const int column, const int number);
-            const UpdateData getUpdateData(
-                const std::string& id, const int row, const int column, const int number,
-                const EntropyData& previousEntropyData);
-
+            const UpdateData getUpdateData(const Cell& filledCell, const EntropyData& previousEntropyData);
             const std::vector<std::reference_wrapper<Cell>> getPreviousUpdatedCells(
                 const std::set<std::string>& updatedCellsIds);
 
@@ -38,11 +32,8 @@ namespace LatinSquareGenerator {
 
             void setMersenneTwister(const std::mt19937& mersenneTwister);
 
-            int calculateCellRow(const int index) const;
-            int calculateCellColumn(const int index) const;
-
-            bool checkCellRow(const Cell& cell, const int row) const;
-            bool checkCellColumn(const Cell& cell, const int column) const;
+            bool checkIfRelatedCell(const Cell& filledCell, const Cell& cell) const;
+            const std::set<std::string> getUpdatedCellsIds(const Cell& filledCell);
 
             int size_;
             std::vector<Cell> grid_;

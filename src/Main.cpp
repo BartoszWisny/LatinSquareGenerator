@@ -1,6 +1,5 @@
 #include "Main.hpp"
 
-#include "LatinSquare.hpp"
 #include "LatinSquareGenerator.hpp"
 #include "LatinSquarePrintingUtils.hpp"
 
@@ -13,6 +12,4 @@ int main() {
 }
 
 // TODO:
-// - add refs where possible
-// - add const where possible (mainly after function names)
-// ...
+// - add function to measure time of generating random latin square

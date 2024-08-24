@@ -13,6 +13,12 @@
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
+  "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp\"",
+  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp",
+  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj"
+},
+{
+  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
   "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj"
@@ -31,9 +37,9 @@
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUtils.cpp.obj"
+  "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp\"",
+  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp",
+  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",

@@ -160,7 +160,8 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.hpp \
+ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
+ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/iostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ios \

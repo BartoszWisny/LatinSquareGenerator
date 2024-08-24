@@ -3,12 +3,11 @@
 #include <stack>
 
 #include "LatinSquare.hpp"
-#include "LatinSquareUtils.hpp"
+#include "LatinSquareUpdateData.hpp"
 
 namespace LatinSquareGenerator {
     class LatinSquareGenerator {
         public:
-            LatinSquareGenerator();
             const LatinSquare generateRandomLatinSquare(const int size);
 
         private:

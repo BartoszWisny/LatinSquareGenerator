@@ -54,6 +54,9 @@
     "text_encoding": "cpp",
     "variant": "cpp",
     "iostream": "cpp",
-    "ranges": "cpp"
+    "ranges": "cpp",
+    "chrono": "cpp",
+    "ratio": "cpp",
+    "iomanip": "cpp"
   }
 }

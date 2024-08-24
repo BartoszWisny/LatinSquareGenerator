@@ -7,10 +7,11 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/User/Desktop/PRACA M
 set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.cpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp"
-  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.cpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
@@ -23,10 +24,11 @@ file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/User/Desktop/PRACA M
 set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.hpp"
-  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUtils.hpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
