@@ -19,6 +19,9 @@ namespace LatinSquareGenerator {
             const std::set<int>& getRemainingNumbers() const;
             const EntropyData& getEntropyData() const;
 
+            bool isAvailable() const;
+            void setAvailable(const bool available);
+
             void reset();
             void fill(const int number);
             void clear(EntropyData previousEntropyData);
@@ -42,5 +45,7 @@ namespace LatinSquareGenerator {
             std::string id_;
             std::string fullId_;
             EntropyData entropyData_;
+
+            bool available_;
     };
 }

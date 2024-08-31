@@ -4,6 +4,8 @@
 #include <iterator>
 
 namespace LatinSquareGenerator {
+    LatinSquare::LatinSquare() {}
+
     LatinSquare::LatinSquare(const int size, const std::mt19937& mersenneTwister) {
         setSize(size);
         setMersenneTwister(mersenneTwister);
@@ -19,7 +21,7 @@ namespace LatinSquareGenerator {
         gridSize_ = size * size;
     }
 
-    const std::vector<Cell>& LatinSquare::getGrid() {
+    void LatinSquare::sortGridByRows() {
         std::sort(grid_.begin(), grid_.end(),
                   [](const auto& firstCell, const auto& secondCell) {
                       if (firstCell.getRow() == secondCell.getRow()) {
@@ -28,7 +30,27 @@ namespace LatinSquareGenerator {
                           return firstCell.getRow() < secondCell.getRow();
                       }
                   });
+    }
 
+    void LatinSquare::sortGridByColumns() {
+        std::sort(grid_.begin(), grid_.end(),
+                  [](const auto& firstCell, const auto& secondCell) {
+                      if (firstCell.getColumn() == secondCell.getColumn()) {
+                          return firstCell.getRow() < secondCell.getRow();
+                      } else {
+                          return firstCell.getColumn() < secondCell.getColumn();
+                      }
+                  });
+    }
+
+    void LatinSquare::sortGridByNumbers() {
+        std::sort(grid_.begin(), grid_.end(),
+                  [](const auto& firstCell, const auto& secondCell) {
+                      return firstCell.getNumber() < secondCell.getNumber();
+                  });
+    }
+
+    const std::vector<Cell>& LatinSquare::getGrid() {
         return grid_;
     }
 

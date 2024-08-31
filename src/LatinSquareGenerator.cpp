@@ -14,11 +14,11 @@ namespace LatinSquareGenerator {
 
             if (cell.getEntropy() > 0) {
                 const auto& remainingNumbers = cell.getRemainingNumbers();
-                auto numberIterator = remainingNumbers.cbegin();
-                std::advance(numberIterator, mersenneTwister() % remainingNumbers.size());
+                auto iterator = remainingNumbers.cbegin();
+                std::advance(iterator, mersenneTwister() % remainingNumbers.size());
                 const auto previousEntropyData = cell.getEntropyData();
 
-                cell.fill(*numberIterator);
+                cell.fill(*iterator);
                 updateHistory_.push(latinSquare.getUpdateData(cell, previousEntropyData));
             } else {
                 if (updateHistory_.empty()) {

@@ -274,29 +274,77 @@ src/LatinSquarePrintingUtils.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.s
 .PHONY : src/LatinSquarePrintingUtils.cpp.s
 
-src/LatinSquareTransversalSearcher.obj: src/LatinSquareTransversalSearcher.cpp.obj
-.PHONY : src/LatinSquareTransversalSearcher.obj
+src/LatinSquareRegion.obj: src/LatinSquareRegion.cpp.obj
+.PHONY : src/LatinSquareRegion.obj
 
 # target to build an object file
-src/LatinSquareTransversalSearcher.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.obj
-.PHONY : src/LatinSquareTransversalSearcher.cpp.obj
+src/LatinSquareRegion.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj
+.PHONY : src/LatinSquareRegion.cpp.obj
 
-src/LatinSquareTransversalSearcher.i: src/LatinSquareTransversalSearcher.cpp.i
-.PHONY : src/LatinSquareTransversalSearcher.i
+src/LatinSquareRegion.i: src/LatinSquareRegion.cpp.i
+.PHONY : src/LatinSquareRegion.i
 
 # target to preprocess a source file
-src/LatinSquareTransversalSearcher.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.i
-.PHONY : src/LatinSquareTransversalSearcher.cpp.i
+src/LatinSquareRegion.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.i
+.PHONY : src/LatinSquareRegion.cpp.i
 
-src/LatinSquareTransversalSearcher.s: src/LatinSquareTransversalSearcher.cpp.s
-.PHONY : src/LatinSquareTransversalSearcher.s
+src/LatinSquareRegion.s: src/LatinSquareRegion.cpp.s
+.PHONY : src/LatinSquareRegion.s
 
 # target to generate assembly for a file
-src/LatinSquareTransversalSearcher.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.s
-.PHONY : src/LatinSquareTransversalSearcher.cpp.s
+src/LatinSquareRegion.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s
+.PHONY : src/LatinSquareRegion.cpp.s
+
+src/LatinSquareRegions.obj: src/LatinSquareRegions.cpp.obj
+.PHONY : src/LatinSquareRegions.obj
+
+# target to build an object file
+src/LatinSquareRegions.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj
+.PHONY : src/LatinSquareRegions.cpp.obj
+
+src/LatinSquareRegions.i: src/LatinSquareRegions.cpp.i
+.PHONY : src/LatinSquareRegions.i
+
+# target to preprocess a source file
+src/LatinSquareRegions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.i
+.PHONY : src/LatinSquareRegions.cpp.i
+
+src/LatinSquareRegions.s: src/LatinSquareRegions.cpp.s
+.PHONY : src/LatinSquareRegions.s
+
+# target to generate assembly for a file
+src/LatinSquareRegions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.s
+.PHONY : src/LatinSquareRegions.cpp.s
+
+src/LatinSquareTransversalGenerator.obj: src/LatinSquareTransversalGenerator.cpp.obj
+.PHONY : src/LatinSquareTransversalGenerator.obj
+
+# target to build an object file
+src/LatinSquareTransversalGenerator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj
+.PHONY : src/LatinSquareTransversalGenerator.cpp.obj
+
+src/LatinSquareTransversalGenerator.i: src/LatinSquareTransversalGenerator.cpp.i
+.PHONY : src/LatinSquareTransversalGenerator.i
+
+# target to preprocess a source file
+src/LatinSquareTransversalGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.i
+.PHONY : src/LatinSquareTransversalGenerator.cpp.i
+
+src/LatinSquareTransversalGenerator.s: src/LatinSquareTransversalGenerator.cpp.s
+.PHONY : src/LatinSquareTransversalGenerator.s
+
+# target to generate assembly for a file
+src/LatinSquareTransversalGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.s
+.PHONY : src/LatinSquareTransversalGenerator.cpp.s
 
 src/LatinSquareUpdateData.obj: src/LatinSquareUpdateData.cpp.obj
 .PHONY : src/LatinSquareUpdateData.obj
@@ -373,9 +421,15 @@ help:
 	@echo "... src/LatinSquarePrintingUtils.obj"
 	@echo "... src/LatinSquarePrintingUtils.i"
 	@echo "... src/LatinSquarePrintingUtils.s"
-	@echo "... src/LatinSquareTransversalSearcher.obj"
-	@echo "... src/LatinSquareTransversalSearcher.i"
-	@echo "... src/LatinSquareTransversalSearcher.s"
+	@echo "... src/LatinSquareRegion.obj"
+	@echo "... src/LatinSquareRegion.i"
+	@echo "... src/LatinSquareRegion.s"
+	@echo "... src/LatinSquareRegions.obj"
+	@echo "... src/LatinSquareRegions.i"
+	@echo "... src/LatinSquareRegions.s"
+	@echo "... src/LatinSquareTransversalGenerator.obj"
+	@echo "... src/LatinSquareTransversalGenerator.i"
+	@echo "... src/LatinSquareTransversalGenerator.s"
 	@echo "... src/LatinSquareUpdateData.obj"
 	@echo "... src/LatinSquareUpdateData.i"
 	@echo "... src/LatinSquareUpdateData.s"

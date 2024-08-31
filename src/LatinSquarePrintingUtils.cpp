@@ -6,6 +6,7 @@
 
 namespace LatinSquareGenerator {
     void printLatinSquare(LatinSquare& latinSquare) {
+        latinSquare.sortGridByRows();
         const auto& grid = latinSquare.getGrid();
 
         for (const auto& cell : grid) {

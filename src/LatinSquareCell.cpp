@@ -8,6 +8,7 @@ namespace LatinSquareGenerator {
         setColumn(column);
         setId();
         setMaxEntropy(maxEntropy);
+        setAvailable(true);
         reset();
     }
 
@@ -69,6 +70,14 @@ namespace LatinSquareGenerator {
 
     void Cell::setMaxEntropy(const int maxEntropy) {
         entropyData_.setMaxEntropy(maxEntropy);
+    }
+
+    bool Cell::isAvailable() const {
+        return available_;
+    }
+
+    void Cell::setAvailable(const bool available) {
+        available_ = available;
     }
 
     void Cell::reset() {

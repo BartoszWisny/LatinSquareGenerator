@@ -13,9 +13,15 @@
 namespace LatinSquareGenerator {
     class LatinSquare {
         public:
+            LatinSquare();
             LatinSquare(const int size, const std::mt19937& mersenneTwister);
 
             int getSize() const;
+
+            void sortGridByRows();
+            void sortGridByColumns();
+            void sortGridByNumbers();
+
             const std::vector<Cell>& getGrid();
 
             int getGridSize() const;
