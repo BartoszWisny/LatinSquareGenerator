@@ -15,7 +15,10 @@ namespace LatinSquareGenerator {
         public:
             LatinSquare(const int size, const std::mt19937& mersenneTwister);
 
+            int getSize() const;
             const std::vector<Cell>& getGrid();
+
+            int getGridSize() const;
 
             void reset();
 

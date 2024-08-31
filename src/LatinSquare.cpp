@@ -10,6 +10,10 @@ namespace LatinSquareGenerator {
         reset();
     }
 
+    int LatinSquare::getSize() const {
+        return size_;
+    }
+
     void LatinSquare::setSize(const int size) {
         size_ = size;
         gridSize_ = size * size;
@@ -28,6 +32,10 @@ namespace LatinSquareGenerator {
         return grid_;
     }
 
+    int LatinSquare::getGridSize() const {
+        return gridSize_;
+    }
+
     void LatinSquare::setMersenneTwister(const std::mt19937& mersenneTwister) {
         mersenneTwister_ = mersenneTwister;
     }
@@ -35,7 +43,7 @@ namespace LatinSquareGenerator {
     void LatinSquare::reset() {
         if (grid_.empty()) {
             for (int index = 0; index < gridSize_; index++) {
-                grid_.push_back(Cell(index / size_ + 1, index % size_ + 1, size_));
+                grid_.emplace_back(Cell(index / size_ + 1, index % size_ + 1, size_));
             }
         } else {
             std::for_each(grid_.begin(), grid_.end(), [](auto& cell) { cell.reset(); });

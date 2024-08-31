@@ -14,6 +14,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj.d"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalSearcher.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj.d"
   )

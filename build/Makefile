@@ -274,6 +274,30 @@ src/LatinSquarePrintingUtils.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.s
 .PHONY : src/LatinSquarePrintingUtils.cpp.s
 
+src/LatinSquareTransversalSearcher.obj: src/LatinSquareTransversalSearcher.cpp.obj
+.PHONY : src/LatinSquareTransversalSearcher.obj
+
+# target to build an object file
+src/LatinSquareTransversalSearcher.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.obj
+.PHONY : src/LatinSquareTransversalSearcher.cpp.obj
+
+src/LatinSquareTransversalSearcher.i: src/LatinSquareTransversalSearcher.cpp.i
+.PHONY : src/LatinSquareTransversalSearcher.i
+
+# target to preprocess a source file
+src/LatinSquareTransversalSearcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.i
+.PHONY : src/LatinSquareTransversalSearcher.cpp.i
+
+src/LatinSquareTransversalSearcher.s: src/LatinSquareTransversalSearcher.cpp.s
+.PHONY : src/LatinSquareTransversalSearcher.s
+
+# target to generate assembly for a file
+src/LatinSquareTransversalSearcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalSearcher.cpp.s
+.PHONY : src/LatinSquareTransversalSearcher.cpp.s
+
 src/LatinSquareUpdateData.obj: src/LatinSquareUpdateData.cpp.obj
 .PHONY : src/LatinSquareUpdateData.obj
 
@@ -349,6 +373,9 @@ help:
 	@echo "... src/LatinSquarePrintingUtils.obj"
 	@echo "... src/LatinSquarePrintingUtils.i"
 	@echo "... src/LatinSquarePrintingUtils.s"
+	@echo "... src/LatinSquareTransversalSearcher.obj"
+	@echo "... src/LatinSquareTransversalSearcher.i"
+	@echo "... src/LatinSquareTransversalSearcher.s"
 	@echo "... src/LatinSquareUpdateData.obj"
 	@echo "... src/LatinSquareUpdateData.i"
 	@echo "... src/LatinSquareUpdateData.s"
