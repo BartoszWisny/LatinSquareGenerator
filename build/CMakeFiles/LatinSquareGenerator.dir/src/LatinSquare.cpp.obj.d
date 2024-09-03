@@ -160,6 +160,8 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp \
  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
+ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.hpp \
+ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegion.hpp \
  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/algorithm \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algo.h \
@@ -198,4 +200,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/exception_ptr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_init_exception.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/nested_exception.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/map \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_map.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multimap.h

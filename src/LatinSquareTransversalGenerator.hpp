@@ -15,6 +15,6 @@ namespace LatinSquareGenerator {
 
 
             // bool checkIfRelatedCell(const Cell& filledCell, const Cell& cell) const;
-            // std::stack<> updateHistory_;
+        std::stack<> updateHistory_;
     };
 }

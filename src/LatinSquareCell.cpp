@@ -6,10 +6,10 @@ namespace LatinSquareGenerator {
     Cell::Cell(const int row, const int column, const int maxEntropy) {
         setRow(row);
         setColumn(column);
-        setId();
+        setIds();
         setMaxEntropy(maxEntropy);
-        setAvailable(true);
         reset();
+        enable();
     }
 
     int Cell::getRow() const {
@@ -36,12 +36,27 @@ namespace LatinSquareGenerator {
         number_ = number;
     }
 
+    const std::string& Cell::getRowId() const {
+        return rowId_;
+    }
+
+    const std::string& Cell::getColumnId() const {
+        return columnId_;
+    }
+
     const std::string& Cell::getId() const {
         return id_;
     }
 
-    void Cell::setId() {
-        id_ = std::format("R{}C{}", row_, column_);
+    void Cell::setIds() {
+        rowId_ = std::format("R{}", row_);
+        columnId_ = std::format("C{}", column_);
+        id_ += rowId_;
+        id_ += columnId_;
+    }
+
+    const std::string& Cell::getNumberId() const {
+        return numberId_;
     }
 
     const std::string& Cell::getFullId() const {
@@ -49,7 +64,9 @@ namespace LatinSquareGenerator {
     }
 
     void Cell::setFullId() {
-        fullId_ = std::format("{}#{}", id_, number_);
+        numberId_ = std::format("#{}", number_);
+        fullId_ = id_;
+        fullId_ += numberId_;
     }
 
     int Cell::getEntropy() const {
@@ -72,12 +89,16 @@ namespace LatinSquareGenerator {
         entropyData_.setMaxEntropy(maxEntropy);
     }
 
-    bool Cell::isAvailable() const {
-        return available_;
+    bool Cell::isEnabled() const {
+        return enabled_;
     }
 
-    void Cell::setAvailable(const bool available) {
-        available_ = available;
+    void Cell::enable() {
+        enabled_ = true;
+    }
+
+    void Cell::disable() {
+        enabled_ = false;
     }
 
     void Cell::reset() {

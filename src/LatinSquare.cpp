@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <map>
 
 namespace LatinSquareGenerator {
     LatinSquare::LatinSquare() {}
@@ -96,14 +97,14 @@ namespace LatinSquareGenerator {
         return *iterator;
     }
 
-    bool LatinSquare::checkIfRelatedCell(const Cell& filledCell, const Cell& cell) const {
+    bool LatinSquare::checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const {
         return (filledCell.getRow() == cell.getRow()) != (filledCell.getColumn() == cell.getColumn());
     }
 
     const std::set<std::string> LatinSquare::getUpdatedCellsIds(const Cell& filledCell) {
         std::vector<std::reference_wrapper<Cell>> updatedCells;
         std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(updatedCells),
-                     [this, &filledCell](const auto& cell) { return checkIfRelatedCell(filledCell, cell); });
+                     [this, &filledCell](const auto& cell) { return checkIfRelatedToFilledCell(filledCell, cell); });
         std::erase_if(updatedCells,
                       [&filledCell](const auto& cellRef) {
                           return !cellRef.get().removeRemainingNumber(filledCell.getNumber());
@@ -127,5 +128,82 @@ namespace LatinSquareGenerator {
                      [this, &updatedCellsIds](const auto& cell) { return updatedCellsIds.contains(cell.getId()); });
 
         return previousUpdatedCells;
+    }
+
+    // here chosen cell is also included (maybe it should be changed?)
+    bool LatinSquare::checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const {
+        return chosenCell.isEnabled() && (chosenCell.getRow() == cell.getRow()
+               || chosenCell.getColumn() == cell.getColumn() || chosenCell.getNumber() == cell.getNumber());
+    }
+
+    // can be done better:
+    // 1) regions as part of LatinSquare
+    // 2) maybe for chosen cell disable 3 regions and set entropy to 0, then analyze rest of the related cells
+    const std::set<std::string> LatinSquare::disableRelatedCells(
+        const Cell& chosenCell, LatinSquareRegions& regions) {
+        std::vector<std::reference_wrapper<Cell>> relatedCells;
+        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(relatedCells),
+                     [this, &chosenCell](const auto& cell) { return checkIfRelatedToChosenCell(chosenCell, cell); });
+        std::map<std::string, int> entropyUpdates;
+
+        for (const auto& cellRef : relatedCells) {
+            auto& cell = cellRef.get();
+            cell.disable();
+
+            // 3 options - check which one is the fastest:
+            // 1) only disable related regions
+            // ++relatedRegions[cell.getRowId()];
+            // ++relatedRegions[cell.getColumnId()];
+            // ++relatedRegions[cell.getNumberId()];
+
+            // 2) disable related regions and set entropy to 0 - 1st option
+            // if (chosenCell.getRow() == cell.getRow()) {
+            //     ++relatedRegions[cell.getColumnId()];
+            //     ++relatedRegions[cell.getNumberId()];
+            // }
+            // if (chosenCell.getColumn() == cell.getColumn()) {
+            //     ++relatedRegions[cell.getRowId()];
+            //     ++relatedRegions[cell.getNumberId()];
+            // }
+            // if (chosenCell.getNumber() == cell.getNumber()) {
+            //     ++relatedRegions[cell.getRowId()];
+            //     ++relatedRegions[cell.getColumnId()];
+            // }
+
+            // 3) disable related regions and set entropy to 0 - 2nd option
+            // if (chosenCell.getRow() != cell.getRow()) {
+            //     ++relatedRegions[cell.getRowId()];
+            // }
+            // if (chosenCell.getColumn() != cell.getColumn()) {
+            //     ++relatedRegions[cell.getColumnId()];
+            // }
+            // if (chosenCell.getNumber() != cell.getNumber()) {
+            //     ++relatedRegions[cell.getNumberId()];
+            // }
+
+            ++entropyUpdates.at(cell.getRowId());
+            ++entropyUpdates.at(cell.getColumnId());
+            ++entropyUpdates.at(cell.getNumberId());
+        }
+
+        std::set<std::string> regionsIds;
+
+        for (const auto& entropyUpdate : entropyUpdates) {
+            regionsIds.insert(entropyUpdate.first);
+        }
+
+        const auto relatedRegions = regions.getRelatedRegions(regionsIds);
+
+        for (const auto& regionRef : relatedRegions) {
+            auto& region = regionRef.get();
+            region.decreaseEntropyBy(entropyUpdates.at(region.getId()));
+        }
+
+        std::set<std::string> relatedCellsIds;
+        std::transform(relatedCells.cbegin(), relatedCells.cend(),
+                       std::inserter(relatedCellsIds, relatedCellsIds.cend()),
+                       [](const auto& cellRef) { return cellRef.get().getId(); });
+
+        return relatedCellsIds;
     }
 }

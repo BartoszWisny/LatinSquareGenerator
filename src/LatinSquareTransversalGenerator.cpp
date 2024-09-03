@@ -19,7 +19,7 @@ namespace LatinSquareGenerator {
         std::vector<std::reference_wrapper<Cell>> transversal;
 
         while (transversal.size() < size) {
-            auto& region = regions.getAvailableRegionWithMinimumEntropy();
+            auto& region = regions.getEnabledRegionWithMinimumEntropy();
 
             if (region.getEntropy() > 0) {
                 const auto& cells = region.getCells();
@@ -27,7 +27,12 @@ namespace LatinSquareGenerator {
                 std::advance(iterator, mersenneTwister() % cells.size());
                 auto& cell = (*iterator).get();
 
-                // transversal.emplace_back(*iterator);
+                transversal.emplace_back(*iterator);
+                cell.disable();
+                regions.disableRelatedRegions(cell);
+                const auto relatedCellsIds = latinSquare.disableRelatedCells(cell, regions);
+                updateHistory_.push(cell.getId(), relatedCellsIds); // this is only concept, it will not work right now
+
 
                 // TODO
                 // 1. add chosen cell to transversal

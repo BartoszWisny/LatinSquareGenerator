@@ -5,7 +5,7 @@ namespace LatinSquareGenerator {
         setId(id);
         setEntropy(entropy);
         setCells(cells);
-        setAvailable(true);
+        enable();
     }
 
     const std::string& Region::getId() const {
@@ -24,6 +24,14 @@ namespace LatinSquareGenerator {
         entropy_ = entropy;
     }
 
+    void Region::decreaseEntropyBy(int number) {
+        entropy_ -= number;
+    }
+
+    void Region::increaseEntropyBy(int number) {
+        entropy_ += number;
+    }
+
     const std::vector<std::reference_wrapper<Cell>>& Region::getCells() const {
         return cells_;
     }
@@ -32,11 +40,16 @@ namespace LatinSquareGenerator {
         cells_ = cells;
     }
 
-    bool Region::isAvailable() const {
-        return available_;
+    bool Region::isEnabled() const {
+        return enabled_;
     }
 
-    void Region::setAvailable(const bool available) {
-        available_ = available;
+    void Region::enable() {
+        enabled_ = true;
+    }
+
+    void Region::disable() {
+        // entropy_ = 0;
+        enabled_ = false;
     }
 }

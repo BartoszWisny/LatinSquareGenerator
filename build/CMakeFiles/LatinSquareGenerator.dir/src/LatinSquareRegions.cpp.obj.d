@@ -220,4 +220,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/variant \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/parse_numbers.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode-data.h
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode-data.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/iterator \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stream_iterator.h

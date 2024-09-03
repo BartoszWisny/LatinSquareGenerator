@@ -13,14 +13,17 @@ namespace LatinSquareGenerator {
             int getRow() const;
             int getColumn() const;
             int getNumber() const;
+            const std::string& getRowId() const;
+            const std::string& getColumnId() const;
             const std::string& getId() const;
+            const std::string& getNumberId() const;
             const std::string& getFullId() const;
             int getEntropy() const;
             const std::set<int>& getRemainingNumbers() const;
             const EntropyData& getEntropyData() const;
-
-            bool isAvailable() const;
-            void setAvailable(const bool available);
+            bool isEnabled() const;
+            void enable();
+            void disable();
 
             void reset();
             void fill(const int number);
@@ -33,7 +36,7 @@ namespace LatinSquareGenerator {
             void setRow(const int row);
             void setColumn(const int column);
             void setNumber(const int number);
-            void setId();
+            void setIds();
             void setFullId();
             void setEntropyData(const EntropyData& entropyData);
 
@@ -42,10 +45,12 @@ namespace LatinSquareGenerator {
             int row_;
             int column_;
             int number_;
+            std::string rowId_;
+            std::string columnId_;
             std::string id_;
+            std::string numberId_;
             std::string fullId_;
             EntropyData entropyData_;
-
-            bool available_;
+            bool enabled_;
     };
 }

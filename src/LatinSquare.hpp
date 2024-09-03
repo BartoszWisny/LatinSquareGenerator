@@ -8,6 +8,7 @@
 
 #include "LatinSquareCell.hpp"
 #include "LatinSquareEntropyData.hpp"
+#include "LatinSquareRegions.hpp"
 #include "LatinSquareUpdateData.hpp"
 
 namespace LatinSquareGenerator {
@@ -36,13 +37,17 @@ namespace LatinSquareGenerator {
             const std::vector<std::reference_wrapper<Cell>> getPreviousUpdatedCells(
                 const std::set<std::string>& updatedCellsIds);
 
+            const std::set<std::string> disableRelatedCells(const Cell& chosenCell, LatinSquareRegions& regions);
+
         private:
             void setSize(const int size);
 
             void setMersenneTwister(const std::mt19937& mersenneTwister);
 
-            bool checkIfRelatedCell(const Cell& filledCell, const Cell& cell) const;
+            bool checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
             const std::set<std::string> getUpdatedCellsIds(const Cell& filledCell);
+
+            bool checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
 
             int size_;
             std::vector<Cell> grid_;
