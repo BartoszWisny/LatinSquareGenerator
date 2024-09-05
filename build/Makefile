@@ -298,30 +298,6 @@ src/LatinSquareRegion.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s
 .PHONY : src/LatinSquareRegion.cpp.s
 
-src/LatinSquareRegions.obj: src/LatinSquareRegions.cpp.obj
-.PHONY : src/LatinSquareRegions.obj
-
-# target to build an object file
-src/LatinSquareRegions.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj
-.PHONY : src/LatinSquareRegions.cpp.obj
-
-src/LatinSquareRegions.i: src/LatinSquareRegions.cpp.i
-.PHONY : src/LatinSquareRegions.i
-
-# target to preprocess a source file
-src/LatinSquareRegions.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.i
-.PHONY : src/LatinSquareRegions.cpp.i
-
-src/LatinSquareRegions.s: src/LatinSquareRegions.cpp.s
-.PHONY : src/LatinSquareRegions.s
-
-# target to generate assembly for a file
-src/LatinSquareRegions.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/LatinSquareGenerator.dir/build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.s
-.PHONY : src/LatinSquareRegions.cpp.s
-
 src/LatinSquareTransversalGenerator.obj: src/LatinSquareTransversalGenerator.cpp.obj
 .PHONY : src/LatinSquareTransversalGenerator.obj
 
@@ -424,9 +400,6 @@ help:
 	@echo "... src/LatinSquareRegion.obj"
 	@echo "... src/LatinSquareRegion.i"
 	@echo "... src/LatinSquareRegion.s"
-	@echo "... src/LatinSquareRegions.obj"
-	@echo "... src/LatinSquareRegions.i"
-	@echo "... src/LatinSquareRegions.s"
 	@echo "... src/LatinSquareTransversalGenerator.obj"
 	@echo "... src/LatinSquareTransversalGenerator.i"
 	@echo "... src/LatinSquareTransversalGenerator.s"

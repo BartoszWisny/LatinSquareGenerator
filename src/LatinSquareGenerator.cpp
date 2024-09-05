@@ -30,11 +30,11 @@ namespace LatinSquareGenerator {
                 updateHistory_.pop();
 
                 latinSquare.getCell(updateData.getFilledCellId()).clear(updateData.getPreviousEntropyData());
-                const auto previousUpdatedCells = latinSquare.getPreviousUpdatedCells(updateData.getUpdatedCellsIds());
+                const auto cells = latinSquare.getCells(updateData.getUpdatedCellsIds());
                 const auto number = updateData.getFilledCellNumber();
 
-                for (const auto& previousUpdatedCellRef : previousUpdatedCells) {
-                    previousUpdatedCellRef.get().restoreRemainingNumber(number);
+                for (const auto& cellRef : cells) {
+                    cellRef.get().restoreRemainingNumber(number);
                 }
             }
         }

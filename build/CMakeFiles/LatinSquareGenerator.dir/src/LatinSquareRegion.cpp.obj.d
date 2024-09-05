@@ -126,4 +126,14 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/cerrno \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp
+ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/algorithm \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algo.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/algorithmfwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_heap.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/uniform_int_dist.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tempbuf.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algo.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algobase.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_algorithm_defs.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h

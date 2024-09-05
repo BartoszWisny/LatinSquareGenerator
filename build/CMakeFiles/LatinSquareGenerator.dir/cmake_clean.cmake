@@ -13,8 +13,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj.d"
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj"
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj.d"
-  "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj"
-  "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj.d"
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj"
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj.d"
   "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj"

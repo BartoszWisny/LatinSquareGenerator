@@ -174,26 +174,11 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s"
 	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegion.cpp" -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s
 
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/flags.make
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj"
-	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj -MF CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj.d -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj -c "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp"
-
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.i"
-	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp" > CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.i
-
-CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.s"
-	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp" -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.s
-
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/flags.make
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.cpp
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj"
 	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj -MF CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj.d -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj -c "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.cpp"
 
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.i: cmake_force
@@ -208,7 +193,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: CMakeFile
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj"
 	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj -MF CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj.d -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj -c "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp"
 
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.i: cmake_force
@@ -223,7 +208,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: CMakeFiles/LatinSquareGene
 CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp
 CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/Main.cpp
 CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: CMakeFiles/LatinSquareGenerator.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj"
 	C:/msys64/ucrt64/bin/c++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj -MF CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj.d -o CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj -c "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp"
 
 CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.i: cmake_force
@@ -243,7 +228,6 @@ LatinSquareGenerator_OBJECTS = \
 "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj" \
 "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj" \
 "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj" \
-"CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj" \
 "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj" \
 "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj" \
 "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj"
@@ -258,14 +242,13 @@ LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGen
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.obj
-LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/build.make
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/linkLibs.rsp
 LatinSquareGenerator.exe: CMakeFiles/LatinSquareGenerator.dir/objects1.rsp
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable LatinSquareGenerator.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable LatinSquareGenerator.exe"
 	"C:/Program Files/CMake/bin/cmake.exe" -E rm -f CMakeFiles/LatinSquareGenerator.dir/objects.a
 	C:/msys64/ucrt64/bin/ar.exe qc CMakeFiles/LatinSquareGenerator.dir/objects.a @CMakeFiles/LatinSquareGenerator.dir/objects1.rsp
 	C:/msys64/ucrt64/bin/c++.exe -Wall -Wextra -g -Wl,--whole-archive CMakeFiles/LatinSquareGenerator.dir/objects.a -Wl,--no-whole-archive -o LatinSquareGenerator.exe -Wl,--out-implib,libLatinSquareGenerator.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/LatinSquareGenerator.dir/linkLibs.rsp

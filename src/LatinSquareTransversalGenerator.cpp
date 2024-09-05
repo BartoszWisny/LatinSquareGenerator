@@ -5,33 +5,28 @@
 #include "LatinSquareRegions.hpp"
 
 namespace LatinSquareGenerator {
-    // bool LatinSquareTransversalSearcher::checkIfRelatedCell(const Cell& chosenCell, const Cell& cell) const {
-    //     return chosenCell.getRow() == cell.getRow() || chosenCell.getColumn() == cell.getColumn()
-    //            || chosenCell.getNumber() == cell.getNumber();
-    // }
-
     const std::vector<std::reference_wrapper<Cell>> LatinSquareTransversalGenerator::findRandomTransversal(
         LatinSquare& latinSquare) {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
-        auto regions = LatinSquareRegions(latinSquare);
-        const auto size = latinSquare.getSize();
         std::vector<std::reference_wrapper<Cell>> transversal;
+        const auto size = latinSquare.getSize();
 
         while (transversal.size() < size) {
-            auto& region = regions.getEnabledRegionWithMinimumEntropy();
+            auto& region = latinSquare.getEnabledRegionWithMinimumEntropy();
 
             if (region.getEntropy() > 0) {
-                const auto& cells = region.getCells();
+                const auto& cells = region.getEnabledCells();
                 auto iterator = cells.cbegin();
                 std::advance(iterator, mersenneTwister() % cells.size());
                 auto& cell = (*iterator).get();
 
-                transversal.emplace_back(*iterator);
-                cell.disable();
-                regions.disableRelatedRegions(cell);
-                const auto relatedCellsIds = latinSquare.disableRelatedCells(cell, regions);
-                updateHistory_.push(cell.getId(), relatedCellsIds); // this is only concept, it will not work right now
+                transversal.emplace_back(*iterator); // S1)
+                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(cell); // S2), S3), S4)
+                latinSquare.disableRelatedRegions(cell); // S5)
+
+                // TODO: implement TransversalUpdateData structure
+                updateHistory_.push(cell.getId(), relatedCellsIds); // S6) this is only concept
 
 
                 // TODO

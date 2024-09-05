@@ -43,12 +43,6 @@
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegions.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
   "command": "C:/msys64/ucrt64/bin/c++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -g -std=c++20 -o CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj -c \"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj"

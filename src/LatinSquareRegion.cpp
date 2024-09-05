@@ -1,5 +1,7 @@
 #include "LatinSquareRegion.hpp"
 
+#include <algorithm>
+
 namespace LatinSquareGenerator {
     Region::Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>>& cells) {
         setId(id);
@@ -36,6 +38,14 @@ namespace LatinSquareGenerator {
         return cells_;
     }
 
+    const std::vector<std::reference_wrapper<Cell>>& Region::getEnabledCells() {
+        std::vector<std::reference_wrapper<Cell>> enabledCells;
+        std::copy_if(cells_.begin(), cells_.end(), std::back_inserter(enabledCells),
+                     [](const auto& cell) { return cell.get().isEnabled(); });
+
+        return enabledCells;
+    }
+
     void Region::setCells(const std::vector<std::reference_wrapper<Cell>>& cells) {
         cells_ = cells;
     }
@@ -49,7 +59,6 @@ namespace LatinSquareGenerator {
     }
 
     void Region::disable() {
-        // entropy_ = 0;
         enabled_ = false;
     }
 }
