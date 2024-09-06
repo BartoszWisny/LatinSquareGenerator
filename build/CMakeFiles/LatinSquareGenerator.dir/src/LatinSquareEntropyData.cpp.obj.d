@@ -1,6 +1,6 @@
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj: \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareEntropyData.cpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareEntropyData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/set \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \

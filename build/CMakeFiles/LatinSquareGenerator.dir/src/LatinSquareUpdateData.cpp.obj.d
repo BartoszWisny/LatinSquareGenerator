@@ -1,6 +1,6 @@
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.cpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/set \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -111,5 +111,5 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareUpdateData.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/cerrno \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareCell.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareEntropyData.hpp

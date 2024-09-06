@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <format>
 #include <iterator>
-#include <map>
-#include <string_view>
 
 namespace LatinSquareGenerator {
     LatinSquare::LatinSquare() {}
@@ -13,7 +11,6 @@ namespace LatinSquareGenerator {
         setSize(size);
         setMersenneTwister(mersenneTwister);
         reset();
-        setRegions();
         shuffleGrid();
     }
 
@@ -55,7 +52,7 @@ namespace LatinSquareGenerator {
                   });
     }
 
-    const std::vector<Cell>& LatinSquare::getGrid() {
+    const std::vector<Cell>& LatinSquare::getGrid() const {
         return grid_;
     }
 
@@ -64,22 +61,19 @@ namespace LatinSquareGenerator {
     }
 
     void LatinSquare::setRegions() {
-        std::vector<std::function<void(void)>> sortingTypes =
-            {[this]() { sortGridByRows(); }, [this]() { sortGridByColumns(); }, [this]() { sortGridByNumbers(); }};
-        std::vector<std::string> indexFormats = {"R{}", "C{}", "#{}"};
-
-        for (int type = 0; type < 3; type++) {
-            sortingTypes.at(type);
-            auto iterator = grid_.cbegin();
-            int index = 0;
-
-            while (iterator != grid_.cend()) {
-                std::vector<std::reference_wrapper<Cell>> cells;
-                std::copy(iterator, iterator + size_, cells.begin());
-                regions_.emplace_back(
-                    Region(std::vformat(indexFormats.at(type), std::make_format_args(++index)), size_, cells));
-                std::advance(iterator, size_);
-            }
+        for (int index = 1; index <= size_; ++index) {
+            std::vector<std::reference_wrapper<Cell>> cells;
+            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
+                         [index](const auto& cell) { return cell.getRow() == index; });
+            regions_.emplace_back(Region(std::format("R{}", index), size_, cells));
+            cells.clear();
+            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
+                         [index](const auto& cell) { return cell.getColumn() == index; });
+            regions_.emplace_back(Region(std::format("C{}", index), size_, cells));
+            cells.clear();
+            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
+                         [index](const auto& cell) { return cell.getNumber() == index; });
+            regions_.emplace_back(Region(std::format("#{}", index), size_, cells));
         }
     }
 
@@ -164,8 +158,6 @@ namespace LatinSquareGenerator {
         return UpdateData(filledCell, previousEntropyData, getUpdatedCellsIds(filledCell));
     }
 
-    // check these functions
-
     Region& LatinSquare::getEnabledRegionWithMinimumEntropy() {
         std::sort(regions_.begin(), regions_.end(),
                   [](const auto& firstRegion, const auto& secondRegion) {
@@ -178,7 +170,7 @@ namespace LatinSquareGenerator {
     }
 
     bool LatinSquare::checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const {
-        return chosenCell.isEnabled() && (chosenCell.getRow() == cell.getRow()
+        return cell.isEnabled() && (chosenCell.getRow() == cell.getRow()
                || chosenCell.getColumn() == cell.getColumn() || chosenCell.getNumber() == cell.getNumber());
     }
 
@@ -193,30 +185,30 @@ namespace LatinSquareGenerator {
     }
 
     const std::set<std::string> LatinSquare::getDisabledCellsIds(const Cell& chosenCell) {
-        std::vector<std::reference_wrapper<Cell>> relatedCells;
-        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(relatedCells),
+        std::vector<std::reference_wrapper<Cell>> disabledCells;
+        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(disabledCells),
                      [this, &chosenCell](const auto& cell) { return checkIfRelatedToChosenCell(chosenCell, cell); });
         std::set<std::string> relatedRegionsIds;
         std::map<std::string, int> entropyUpdates;
 
-        for (const auto& cellRef : relatedCells) {
+        for (const auto& cellRef : disabledCells) {
             auto& cell = cellRef.get();
             cell.disable();
 
             relatedRegionsIds.insert({cell.getRowId(), cell.getColumnId(), cell.getNumberId()});
-            ++entropyUpdates.at(cell.getRowId());
-            ++entropyUpdates.at(cell.getColumnId());
-            ++entropyUpdates.at(cell.getNumberId());
+            ++entropyUpdates[cell.getRowId()];
+            ++entropyUpdates[cell.getColumnId()];
+            ++entropyUpdates[cell.getNumberId()];
         }
 
         decreaseRelatedRegionsEntropy(relatedRegionsIds, entropyUpdates);
 
-        std::set<std::string> relatedCellsIds;
-        std::transform(relatedCells.cbegin(), relatedCells.cend(),
-                       std::inserter(relatedCellsIds, relatedCellsIds.cend()),
-                       [](const auto& cellRef) { return cellRef.get().getId(); });
+        std::set<std::string> disabledCellsIds;
+        std::transform(disabledCells.cbegin(), disabledCells.cend(),
+                       std::inserter(disabledCellsIds, disabledCellsIds.cend()),
+                       [](const auto& cellRef) { return cellRef.get().getFullId(); });
 
-        return relatedCellsIds;
+        return disabledCellsIds;
     }
 
     bool LatinSquare::checkIfRelatedRegion(const Cell& cell, const Region& region) const {
@@ -224,10 +216,10 @@ namespace LatinSquareGenerator {
                || cell.getNumberId() == region.getId();
     }
 
-    void LatinSquare::disableRelatedRegions(const Cell& cell) {
+    void LatinSquare::disableRelatedRegions(const Cell& chosenCell) {
         std::vector<std::reference_wrapper<Region>> relatedRegions;
         std::copy_if(regions_.begin(), regions_.end(), std::back_inserter(relatedRegions),
-                     [this, &cell](const auto& region) { return checkIfRelatedRegion(cell, region); });
+                     [this, &chosenCell](const auto& region) { return checkIfRelatedRegion(chosenCell, region); });
 
         for (const auto& relatedRegionRef : relatedRegions) {
             relatedRegionRef.get().disable();

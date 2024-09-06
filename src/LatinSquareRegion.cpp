@@ -26,11 +26,11 @@ namespace LatinSquareGenerator {
         entropy_ = entropy;
     }
 
-    void Region::decreaseEntropyBy(int number) {
+    void Region::decreaseEntropyBy(const int number) {
         entropy_ -= number;
     }
 
-    void Region::increaseEntropyBy(int number) {
+    void Region::increaseEntropyBy(const int number) {
         entropy_ += number;
     }
 
@@ -38,9 +38,9 @@ namespace LatinSquareGenerator {
         return cells_;
     }
 
-    const std::vector<std::reference_wrapper<Cell>>& Region::getEnabledCells() {
+    const std::vector<std::reference_wrapper<Cell>> Region::getEnabledCells() const {
         std::vector<std::reference_wrapper<Cell>> enabledCells;
-        std::copy_if(cells_.begin(), cells_.end(), std::back_inserter(enabledCells),
+        std::copy_if(cells_.cbegin(), cells_.cend(), std::back_inserter(enabledCells),
                      [](const auto& cell) { return cell.get().isEnabled(); });
 
         return enabledCells;

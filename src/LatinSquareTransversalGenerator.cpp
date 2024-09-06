@@ -1,54 +1,73 @@
 #include "LatinSquareTransversalGenerator.hpp"
 
+#include <iterator>
 #include <random>
 
-#include "LatinSquareRegions.hpp"
+// #include <iostream>
+// #include <algorithm>
 
 namespace LatinSquareGenerator {
     const std::vector<std::reference_wrapper<Cell>> LatinSquareTransversalGenerator::findRandomTransversal(
         LatinSquare& latinSquare) {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
+        latinSquare.setRegions(); // TODO: consider if this is good place for this function call
         std::vector<std::reference_wrapper<Cell>> transversal;
         const auto size = latinSquare.getSize();
 
-        while (transversal.size() < size) {
+        // for (auto region : latinSquare.getRegions()) {
+        //     std::cout << region.getId() << ": entropy: " << region.getEntropy() << ", cells: ";
+        //     for (auto cell : region.getCells()) {
+        //         std::cout << cell.get().getFullId() << " ";
+        //     }
+        //     std::cout << ", enabled: " << region.isEnabled() << std::endl;
+        // }
+
+        // std::cout << std::endl;
+
+        while (transversal.size() < (unsigned) size) {
             auto& region = latinSquare.getEnabledRegionWithMinimumEntropy();
 
             if (region.getEntropy() > 0) {
-                const auto& cells = region.getEnabledCells();
+                const auto cells = region.getEnabledCells();
                 auto iterator = cells.cbegin();
                 std::advance(iterator, mersenneTwister() % cells.size());
                 auto& cell = (*iterator).get();
 
-                transversal.emplace_back(*iterator); // S1)
-                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(cell); // S2), S3), S4)
-                latinSquare.disableRelatedRegions(cell); // S5)
+                transversal.emplace_back(*iterator);
+                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(cell);
+                latinSquare.disableRelatedRegions(cell);
+                updateHistory_.push(TransversalUpdateData(cell, disabledCellsIds));
 
-                // TODO: implement TransversalUpdateData structure
-                updateHistory_.push(cell.getId(), relatedCellsIds); // S6) this is only concept
+                // std::cout << transversal.size() << ". iteration" << std::endl;
+                // std::cout << "Chosen cell: " << cell.getFullId() << std::endl;
+                // std::cout << "Disabled cells: ";
 
+                // for (const auto& disabledCellId : updateHistory_.top().getDisabledCellsIds()) {
+                //     std::cout << disabledCellId << " ";
+                // }
 
-                // TODO
-                // 1. add chosen cell to transversal
-                // 2. deactivate chosen cell
-                // 3. decrement entropy in row, column and 'numbers' region where chosen cell is located
-                // (make use of id of chosen cell and ids of regions - maybe split id of chosen cell and then match?)
-                // 4. get related available cells (available == true and same row, column or number)
-                // 5. deactivate all these cells
-                // 6. for every cell from these cells decrement entropy in row, column and 'numbers' region
-                // 7. deactivate row, column and 'numbers' region where chosen cell is located
-                // 8. save id of chosen cell and ids of other updated cells to update history
-                // (must be separate to activate back row, column and 'numbers' region where chosen cell is located;
-                //  create new structure for this case: std::string chosenCellId, std::set<std::string> updatedCellsIds)
-                // probably can be done simpler:
-                // 1. add chosen cell to transversal
-                // 2. get all available related cells including chosen cell (available == true and same row, column or number)
-                // 3. deactivate all these cells
-                // 4. for every cell from these cells decrement entropy in row, column and 'numbers' region
-                // 5. deactivate row, column and 'numbers' region where chosen cell is located
-                // 6. save id of chosen cell and ids of other updated cells to update history
+                // std::cout << std::endl;
+
+                // for (auto region : latinSquare.getRegions()) {
+                //     std::cout << region.getId() << ": entropy: " << region.getEntropy() << ", enabled cells: ";
+                //     const auto enabledCells = region.getEnabledCells();
+                //     std::set<std::string> enabledCellsIds;
+                //     std::transform(enabledCells.cbegin(), enabledCells.cend(),
+                //                    std::inserter(enabledCellsIds, enabledCellsIds.cend()),
+                //                    [](const auto& cellRef) { return cellRef.get().getFullId(); });
+
+                //     for (auto cellId : enabledCellsIds) {
+                //         std::cout << cellId << " ";
+                //     }
+
+                //     std::cout << ", enabled: " << region.isEnabled() << std::endl;
+                // }
+
+                // std::cout << std::endl;
             } else { // backtracking
+                break; // to be implemented
+
                 // TODO
                 // 1. remove last added cell from transversal (use pop_back)
                 // 2. get ids of cells from update history

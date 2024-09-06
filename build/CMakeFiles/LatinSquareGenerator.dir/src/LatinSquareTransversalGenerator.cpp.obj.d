@@ -1,6 +1,6 @@
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj: \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.cpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalGenerator.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalGenerator.cpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalGenerator.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/functional \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/os_defines.h \
@@ -80,7 +80,16 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj:
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/array \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/stack \
+ C:/msys64/ucrt64/include/c++/14.1.0/deque \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_deque.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/deque.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_stack.h \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/map \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_map.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multimap.h \
  C:/msys64/ucrt64/include/c++/14.1.0/random \
  C:/msys64/ucrt64/include/c++/14.1.0/cmath \
  C:/msys64/ucrt64/include/math.h \
@@ -156,11 +165,40 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj:
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/set \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegions.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegion.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareCell.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareEntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareRegion.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalUpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/iterator \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stream_iterator.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf_iterator.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/streambuf \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/ext/atomicity.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr-default.h \
+ C:/msys64/ucrt64/include/pthread.h C:/msys64/ucrt64/include/sys/types.h \
+ C:/msys64/ucrt64/include/process.h \
+ C:/msys64/ucrt64/include/corecrt_startup.h \
+ C:/msys64/ucrt64/include/signal.h \
+ C:/msys64/ucrt64/include/pthread_signal.h \
+ C:/msys64/ucrt64/include/time.h C:/msys64/ucrt64/include/sys/timeb.h \
+ C:/msys64/ucrt64/include/sec_api/sys/timeb_s.h \
+ C:/msys64/ucrt64/include/_timeval.h \
+ C:/msys64/ucrt64/include/pthread_time.h \
+ C:/msys64/ucrt64/include/pthread_compat.h \
+ C:/msys64/ucrt64/include/pthread_unistd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/atomic_word.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/system_error \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/stdexcept \
+ C:/msys64/ucrt64/include/c++/14.1.0/exception \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/exception_ptr.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_init_exception.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/nested_exception.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc

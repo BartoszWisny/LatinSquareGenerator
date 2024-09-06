@@ -20,7 +20,7 @@ namespace LatinSquareGenerator {
 
                 cell.fill(*iterator);
                 updateHistory_.push(latinSquare.getUpdateData(cell, previousEntropyData));
-            } else {
+            } else { // check if works correctly (in case of multiple time backtracking)
                 if (updateHistory_.empty()) {
                     latinSquare.reset();
                     continue;

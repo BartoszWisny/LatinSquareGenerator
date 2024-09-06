@@ -1,10 +1,12 @@
 #pragma once
 
 #include <functional>
+#include <stack>
 #include <vector>
 
 #include "LatinSquare.hpp"
 #include "LatinSquareRegion.hpp"
+#include "LatinSquareTransversalUpdateData.hpp"
 
 namespace LatinSquareGenerator {
     class LatinSquareTransversalGenerator {
@@ -12,9 +14,6 @@ namespace LatinSquareGenerator {
             const std::vector<std::reference_wrapper<Cell>> findRandomTransversal(LatinSquare& latinSquare);
 
         private:
-
-
-            // bool checkIfRelatedCell(const Cell& filledCell, const Cell& cell) const;
-        std::stack<> updateHistory_;
+            std::stack<TransversalUpdateData> updateHistory_;
     };
 }

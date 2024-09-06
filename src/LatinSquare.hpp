@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <map>
 #include <random>
 #include <set>
 #include <string>
@@ -9,6 +10,7 @@
 #include "LatinSquareCell.hpp"
 #include "LatinSquareEntropyData.hpp"
 #include "LatinSquareRegion.hpp"
+#include "LatinSquareTransversalUpdateData.hpp"
 #include "LatinSquareUpdateData.hpp"
 
 namespace LatinSquareGenerator {
@@ -23,8 +25,9 @@ namespace LatinSquareGenerator {
             void sortGridByColumns();
             void sortGridByNumbers();
 
-            const std::vector<Cell>& getGrid();
+            const std::vector<Cell>& getGrid() const;
             const std::vector<Region>& getRegions() const;
+            void setRegions();
 
             void reset();
 
@@ -38,21 +41,18 @@ namespace LatinSquareGenerator {
             Cell& getNotFilledCellWithMinimumEntropy();
             const UpdateData getUpdateData(const Cell& filledCell, const EntropyData& previousEntropyData);
 
-            // check these functions
             Region& getEnabledRegionWithMinimumEntropy();
             const std::set<std::string> getDisabledCellsIds(const Cell& chosenCell);
-            void disableRelatedRegions(const Cell& cell);
+            void disableRelatedRegions(const Cell& chosenCell);
 
         private:
             void setSize(const int size);
-            void setRegions();
 
             void setMersenneTwister(const std::mt19937& mersenneTwister);
 
             bool checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
             const std::set<std::string> getUpdatedCellsIds(const Cell& filledCell);
 
-            // check these functions
             bool checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
             void decreaseRelatedRegionsEntropy(
                 const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates);

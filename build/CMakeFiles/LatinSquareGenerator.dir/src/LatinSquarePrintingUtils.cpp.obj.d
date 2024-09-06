@@ -1,7 +1,7 @@
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquarePrintingUtils.cpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquarePrintingUtils.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/functional \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/os_defines.h \
@@ -81,6 +81,10 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/array \
+ C:/msys64/ucrt64/include/c++/14.1.0/map \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_map.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multimap.h \
  C:/msys64/ucrt64/include/c++/14.1.0/random \
  C:/msys64/ucrt64/include/c++/14.1.0/cmath \
  C:/msys64/ucrt64/include/math.h \
@@ -156,13 +160,13 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/set \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareRegion.hpp \
- C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareCell.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareEntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareRegion.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalUpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/iostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ios \

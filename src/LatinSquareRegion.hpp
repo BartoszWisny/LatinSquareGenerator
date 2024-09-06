@@ -12,10 +12,10 @@ namespace LatinSquareGenerator {
 
             const std::string& getId() const;
             int getEntropy() const;
-            void decreaseEntropyBy(int number);
-            void increaseEntropyBy(int number);
+            void decreaseEntropyBy(const int number);
+            void increaseEntropyBy(const int number);
             const std::vector<std::reference_wrapper<Cell>>& getCells() const;
-            const std::vector<std::reference_wrapper<Cell>>& getEnabledCells();
+            const std::vector<std::reference_wrapper<Cell>> getEnabledCells() const;
             void setCells(const std::vector<std::reference_wrapper<Cell>>& cells);
             bool isEnabled() const;
             void enable();
