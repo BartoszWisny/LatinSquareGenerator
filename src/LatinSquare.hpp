@@ -44,6 +44,8 @@ namespace LatinSquareGenerator {
             Region& getEnabledRegionWithMinimumEntropy();
             const std::set<std::string> getDisabledCellsIds(const Cell& chosenCell);
             void disableRelatedRegions(const Cell& chosenCell);
+            void enableCells(const std::set<std::string>& disabledCellsIds);
+            void enableRelatedRegions(const Cell& chosenCell);
 
         private:
             void setSize(const int size);
@@ -57,6 +59,8 @@ namespace LatinSquareGenerator {
             void decreaseRelatedRegionsEntropy(
                 const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates);
             bool checkIfRelatedRegion(const Cell& cell, const Region& region) const;
+            void increaseRelatedRegionsEntropy(
+                const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates);
 
             int size_;
             std::vector<Cell> grid_;

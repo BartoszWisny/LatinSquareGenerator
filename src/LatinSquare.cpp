@@ -176,7 +176,7 @@ namespace LatinSquareGenerator {
 
     void LatinSquare::decreaseRelatedRegionsEntropy(
         const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates) {
-        auto relatedRegions = getRegions(relatedRegionsIds);
+        const auto relatedRegions = getRegions(relatedRegionsIds);
 
         for (const auto& regionRef : relatedRegions) {
             auto& region = regionRef.get();
@@ -206,7 +206,8 @@ namespace LatinSquareGenerator {
         std::set<std::string> disabledCellsIds;
         std::transform(disabledCells.cbegin(), disabledCells.cend(),
                        std::inserter(disabledCellsIds, disabledCellsIds.cend()),
-                       [](const auto& cellRef) { return cellRef.get().getFullId(); });
+                       [](const auto& cellRef) { return cellRef.get().getId(); });
+        disabledCellsIds.erase(chosenCell.getId());
 
         return disabledCellsIds;
     }
@@ -223,6 +224,44 @@ namespace LatinSquareGenerator {
 
         for (const auto& relatedRegionRef : relatedRegions) {
             relatedRegionRef.get().disable();
+        }
+    }
+
+    void LatinSquare::increaseRelatedRegionsEntropy(
+        const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates) {
+        const auto relatedRegions = getRegions(relatedRegionsIds);
+
+        for (const auto& regionRef : relatedRegions) {
+            auto& region = regionRef.get();
+            regionRef.get().increaseEntropyBy(entropyUpdates.at(region.getId()));
+        }
+    }
+
+    void LatinSquare::enableCells(const std::set<std::string>& disabledCellsIds) {
+        const auto disabledCells = getCells(disabledCellsIds);
+        std::set<std::string> relatedRegionsIds;
+        std::map<std::string, int> entropyUpdates;
+
+        for (const auto& cellRef : disabledCells) {
+            auto& cell = cellRef.get();
+            cell.enable();
+
+            relatedRegionsIds.insert({cell.getRowId(), cell.getColumnId(), cell.getNumberId()});
+            ++entropyUpdates[cell.getRowId()];
+            ++entropyUpdates[cell.getColumnId()];
+            ++entropyUpdates[cell.getNumberId()];
+        }
+
+        increaseRelatedRegionsEntropy(relatedRegionsIds, entropyUpdates);
+    }
+
+    void LatinSquare::enableRelatedRegions(const Cell& chosenCell) {
+        std::vector<std::reference_wrapper<Region>> relatedRegions;
+        std::copy_if(regions_.begin(), regions_.end(), std::back_inserter(relatedRegions),
+                     [this, &chosenCell](const auto& region) { return checkIfRelatedRegion(chosenCell, region); });
+
+        for (const auto& relatedRegionRef : relatedRegions) {
+            relatedRegionRef.get().enable();
         }
     }
 }

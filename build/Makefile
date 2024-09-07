@@ -321,6 +321,30 @@ src/LatinSquareRegion.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareRegion.cpp.s
 .PHONY : src/LatinSquareRegion.cpp.s
 
+src/LatinSquareTransversalBacktrackingData.obj: src/LatinSquareTransversalBacktrackingData.cpp.obj
+.PHONY : src/LatinSquareTransversalBacktrackingData.obj
+
+# target to build an object file
+src/LatinSquareTransversalBacktrackingData.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalBacktrackingData.cpp.obj
+.PHONY : src/LatinSquareTransversalBacktrackingData.cpp.obj
+
+src/LatinSquareTransversalBacktrackingData.i: src/LatinSquareTransversalBacktrackingData.cpp.i
+.PHONY : src/LatinSquareTransversalBacktrackingData.i
+
+# target to preprocess a source file
+src/LatinSquareTransversalBacktrackingData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalBacktrackingData.cpp.i
+.PHONY : src/LatinSquareTransversalBacktrackingData.cpp.i
+
+src/LatinSquareTransversalBacktrackingData.s: src/LatinSquareTransversalBacktrackingData.cpp.s
+.PHONY : src/LatinSquareTransversalBacktrackingData.s
+
+# target to generate assembly for a file
+src/LatinSquareTransversalBacktrackingData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalBacktrackingData.cpp.s
+.PHONY : src/LatinSquareTransversalBacktrackingData.cpp.s
+
 src/LatinSquareTransversalGenerator.obj: src/LatinSquareTransversalGenerator.cpp.obj
 .PHONY : src/LatinSquareTransversalGenerator.obj
 
@@ -450,6 +474,9 @@ help:
 	@echo ... src/LatinSquareRegion.obj
 	@echo ... src/LatinSquareRegion.i
 	@echo ... src/LatinSquareRegion.s
+	@echo ... src/LatinSquareTransversalBacktrackingData.obj
+	@echo ... src/LatinSquareTransversalBacktrackingData.i
+	@echo ... src/LatinSquareTransversalBacktrackingData.s
 	@echo ... src/LatinSquareTransversalGenerator.obj
 	@echo ... src/LatinSquareTransversalGenerator.i
 	@echo ... src/LatinSquareTransversalGenerator.s

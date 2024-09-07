@@ -172,6 +172,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareTransversalGenerator.cpp.obj:
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareRegion.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalUpdateData.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalBacktrackingData.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/iterator \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stream_iterator.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf_iterator.h \

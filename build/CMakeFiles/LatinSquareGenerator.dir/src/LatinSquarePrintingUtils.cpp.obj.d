@@ -1,7 +1,6 @@
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquarePrintingUtils.cpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquarePrintingUtils.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/functional \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/os_defines.h \
@@ -81,6 +80,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/array \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/map \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_map.h \
@@ -167,6 +167,14 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareRegion.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareTransversalUpdateData.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquareUpdateData.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/algorithm \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algo.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/algorithmfwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_heap.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tempbuf.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algo.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algobase.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_algorithm_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/iostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ios \
