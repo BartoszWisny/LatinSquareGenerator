@@ -21,7 +21,7 @@ namespace LatinSquareGenerator {
 
 // 1)
 // std::cout << it << ". iteration" << std::endl;
-// std::cout << "Filled cell: " << cell.getId() << " with number: " << *numberIterator << std::endl;
+// std::cout << "Filled cell: " << cell.getId() << " with number: " << *iterator << std::endl;
 // std::cout << "Updated cells: ";
 
 // for (const std::string& updatedCellId : updateHistory_.top().getUpdatedCellsIds()) {

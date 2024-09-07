@@ -153,6 +153,30 @@ src/LatinSquare.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.s
 .PHONY : src/LatinSquare.cpp.s
 
+src/LatinSquareBacktrackingData.obj: src/LatinSquareBacktrackingData.cpp.obj
+.PHONY : src/LatinSquareBacktrackingData.obj
+
+# target to build an object file
+src/LatinSquareBacktrackingData.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareBacktrackingData.cpp.obj
+.PHONY : src/LatinSquareBacktrackingData.cpp.obj
+
+src/LatinSquareBacktrackingData.i: src/LatinSquareBacktrackingData.cpp.i
+.PHONY : src/LatinSquareBacktrackingData.i
+
+# target to preprocess a source file
+src/LatinSquareBacktrackingData.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareBacktrackingData.cpp.i
+.PHONY : src/LatinSquareBacktrackingData.cpp.i
+
+src/LatinSquareBacktrackingData.s: src/LatinSquareBacktrackingData.cpp.s
+.PHONY : src/LatinSquareBacktrackingData.s
+
+# target to generate assembly for a file
+src/LatinSquareBacktrackingData.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareBacktrackingData.cpp.s
+.PHONY : src/LatinSquareBacktrackingData.cpp.s
+
 src/LatinSquareCell.obj: src/LatinSquareCell.cpp.obj
 .PHONY : src/LatinSquareCell.obj
 
@@ -405,6 +429,9 @@ help:
 	@echo ... src/LatinSquare.obj
 	@echo ... src/LatinSquare.i
 	@echo ... src/LatinSquare.s
+	@echo ... src/LatinSquareBacktrackingData.obj
+	@echo ... src/LatinSquareBacktrackingData.i
+	@echo ... src/LatinSquareBacktrackingData.s
 	@echo ... src/LatinSquareCell.obj
 	@echo ... src/LatinSquareCell.i
 	@echo ... src/LatinSquareCell.s

@@ -6,6 +6,7 @@ cmake_policy(SET CMP0009 NEW)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/*.cpp")
 set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.cpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareBacktrackingData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp"
@@ -26,6 +27,7 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/*.hpp")
 set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.hpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareBacktrackingData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.hpp"

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare.cpp.obj.d"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareBacktrackingData.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareBacktrackingData.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareBacktrackingData.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCell.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareCell.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareCell.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareEntropyData.cpp.obj.d"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.cpp" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj" "gcc" "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj.d"

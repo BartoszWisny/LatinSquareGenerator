@@ -4,7 +4,6 @@
 #include <string>
 
 #include "LatinSquareCell.hpp"
-#include "LatinSquareEntropyData.hpp"
 
 namespace LatinSquareGenerator {
     class TransversalUpdateData {

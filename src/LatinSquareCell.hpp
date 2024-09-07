@@ -21,6 +21,7 @@ namespace LatinSquareGenerator {
             int getEntropy() const;
             const std::set<int>& getRemainingNumbers() const;
             const EntropyData& getEntropyData() const;
+            void setEntropyData(const EntropyData& entropyData);
             bool isEnabled() const;
             void enable();
             void disable();
@@ -38,7 +39,6 @@ namespace LatinSquareGenerator {
             void setNumber(const int number);
             void setIds();
             void setFullId();
-            void setEntropyData(const EntropyData& entropyData);
 
             void setMaxEntropy(const int maxEntropy);
 
