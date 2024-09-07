@@ -705,8 +705,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/bit \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/alloc_traits.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/allocator.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/char_traits.h \
@@ -728,12 +726,9 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/bits/hashtable_policy.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/invoke.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/iterator_concepts.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.tcc \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets.tcc \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/localefwd.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/max_size_type.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/memory_resource.h \
@@ -742,7 +737,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/bits/nested_exception.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/new_allocator.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/node_handle.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream_insert.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/postypes.h \
   C:/msys64/ucrt64/include/c++/14.1.0/bits/predefined_ops.h \
@@ -799,7 +793,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/cstdio \
   C:/msys64/ucrt64/include/c++/14.1.0/cstdlib \
   C:/msys64/ucrt64/include/c++/14.1.0/cwchar \
-  C:/msys64/ucrt64/include/c++/14.1.0/cwctype \
   C:/msys64/ucrt64/include/c++/14.1.0/debug/assertions.h \
   C:/msys64/ucrt64/include/c++/14.1.0/debug/debug.h \
   C:/msys64/ucrt64/include/c++/14.1.0/deque \
@@ -812,17 +805,13 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/ext/type_traits.h \
   C:/msys64/ucrt64/include/c++/14.1.0/functional \
   C:/msys64/ucrt64/include/c++/14.1.0/initializer_list \
-  C:/msys64/ucrt64/include/c++/14.1.0/ios \
   C:/msys64/ucrt64/include/c++/14.1.0/iosfwd \
-  C:/msys64/ucrt64/include/c++/14.1.0/iostream \
-  C:/msys64/ucrt64/include/c++/14.1.0/istream \
   C:/msys64/ucrt64/include/c++/14.1.0/iterator \
   C:/msys64/ucrt64/include/c++/14.1.0/limits \
   C:/msys64/ucrt64/include/c++/14.1.0/map \
   C:/msys64/ucrt64/include/c++/14.1.0/new \
   C:/msys64/ucrt64/include/c++/14.1.0/numbers \
   C:/msys64/ucrt64/include/c++/14.1.0/numeric \
-  C:/msys64/ucrt64/include/c++/14.1.0/ostream \
   C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
   C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
   C:/msys64/ucrt64/include/c++/14.1.0/pstl/pstl_config.h \
@@ -857,8 +846,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++locale.h \
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/ctype_base.h \
-  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/ctype_inline.h \
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr-default.h \
   C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr.h \
@@ -897,7 +884,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
   C:/msys64/ucrt64/include/time.h \
   C:/msys64/ucrt64/include/vadefs.h \
   C:/msys64/ucrt64/include/wchar.h \
-  C:/msys64/ucrt64/include/wctype.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/emmintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/limits.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h \
@@ -2392,15 +2378,19 @@ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareCel
 
 C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareEntropyData.cpp:
 
-C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h:
-
-C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc:
-
 C:/msys64/ucrt64/include/c++/14.1.0/bits/deque.tcc:
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_deque.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/deque:
+
+C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.hpp:
+
+C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp:
+
+C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h:
+
+C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc:
 
 C:/msys64/ucrt64/include/c++/14.1.0/ios:
 
@@ -2409,10 +2399,6 @@ C:/msys64/ucrt64/include/c++/14.1.0/iostream:
 C:/msys64/ucrt64/include/c++/14.1.0/istream:
 
 C:/msys64/ucrt64/include/c++/14.1.0/ostream:
-
-C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGenerator.hpp:
-
-C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp:
 
 C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.hpp:
 
