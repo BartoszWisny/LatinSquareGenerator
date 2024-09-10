@@ -8,7 +8,7 @@
 namespace LatinSquareGenerator {
     class Cell {
         public:
-            Cell(const int row, const int column, const int maxEntropy);
+            Cell(const int row, const int column, const bool reduced, const int maxEntropy);
 
             int getRow() const;
             int getColumn() const;
@@ -26,7 +26,7 @@ namespace LatinSquareGenerator {
             void enable();
             void disable();
 
-            void reset();
+            void reset(const bool reduced);
             void fill(const int number);
             void clear(EntropyData previousEntropyData);
 

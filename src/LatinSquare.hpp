@@ -17,7 +17,7 @@ namespace LatinSquareGenerator {
     class LatinSquare {
         public:
             LatinSquare();
-            LatinSquare(const int size, const std::mt19937& mersenneTwister);
+            LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister);
 
             int getSize() const;
 
@@ -26,10 +26,9 @@ namespace LatinSquareGenerator {
             void sortGridByNumbers();
 
             const std::vector<Cell>& getGrid() const;
+            void setGrid(const bool reduced);
             const std::vector<Region>& getRegions() const;
             void setRegions();
-
-            void reset();
 
             void shuffleGrid();
 

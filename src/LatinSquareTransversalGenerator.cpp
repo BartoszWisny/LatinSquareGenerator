@@ -17,10 +17,10 @@ namespace LatinSquareGenerator {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
         std::vector<std::reference_wrapper<Cell>> transversal;
-        const auto size = latinSquare.getSize();
+        const unsigned size = latinSquare.getSize();
         int counter = 0;
 
-        while (transversal.size() < (unsigned) size) {
+        while (transversal.size() < size) {
             auto& region = latinSquare.getEnabledRegionWithMinimumEntropy();
 
             if (region.getEntropy() > 0) {

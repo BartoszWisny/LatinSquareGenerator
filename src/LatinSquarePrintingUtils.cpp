@@ -1,12 +1,15 @@
 #include "LatinSquarePrintingUtils.hpp"
 
 #include <algorithm>
+#include <cmath>
+#include <format>
 #include <iostream>
+#include <iterator>
 
 #include "LatinSquare.hpp"
 
 namespace LatinSquareGenerator {
-    void printLatinSquare(LatinSquare& latinSquare) {
+    void printLatinSquareFullIds(LatinSquare& latinSquare) {
         latinSquare.sortGridByRows();
         const auto& grid = latinSquare.getGrid();
 
@@ -17,6 +20,36 @@ namespace LatinSquareGenerator {
         std::cout << std::endl;
     }
 
+    void printLatinSquareBoard(LatinSquare& latinSquare) {
+        latinSquare.sortGridByRows();
+        const auto& grid = latinSquare.getGrid();
+        const auto size = latinSquare.getSize();
+        const int gridSize = grid.size();
+        const auto horizontalBar = std::format("+{}", std::string(int(log10(size) + 1) + 2, '-'));
+        auto number = 0;
+        std::string spaces = "";
+
+        for (int index = 0; index < gridSize; ++index) {
+            if (index % size == 0) {
+                std::fill_n(std::ostream_iterator<std::string>(std::cout), size, horizontalBar);
+                std::cout << "+" << std::endl;
+            }
+
+            number = grid.at(index).getNumber();
+            spaces = std::string(int(log10(size)) - int(log10(number)) + 1, ' ');
+
+            std::cout << "|" << spaces << grid.at(index).getNumber() << " ";
+
+            if (index % size == size - 1) {
+                std::cout << "|" << std::endl;
+            }
+        }
+
+        std::fill_n(std::ostream_iterator<std::string>(std::cout), size, horizontalBar);
+        std::cout << "+" << std::endl;
+        std::cout << std::endl;
+    }
+
     void sortTransversal(std::vector<std::reference_wrapper<Cell>>& transversal) {
         std::sort(transversal.begin(), transversal.end(),
                   [](const auto& firstCellRef, const auto& secondCellRef) {
@@ -24,7 +57,7 @@ namespace LatinSquareGenerator {
                   });
     }
 
-    void printTransversal(std::vector<std::reference_wrapper<Cell>>& transversal) {
+    void printTransversalFullIds(std::vector<std::reference_wrapper<Cell>>& transversal) {
         if (transversal.empty()) {
             std::cout << "Transversal was not found" << std::endl;
         }
@@ -38,7 +71,7 @@ namespace LatinSquareGenerator {
         std::cout << std::endl;
     }
 
-    // TODO: add more functions for printing latin squares like: print "board", etc.
+    // TODO: add function for printing transversal visually
 }
 
 // Might be helpful:

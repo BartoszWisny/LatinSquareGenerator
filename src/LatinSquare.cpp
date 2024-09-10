@@ -7,10 +7,10 @@
 namespace LatinSquareGenerator {
     LatinSquare::LatinSquare() {}
 
-    LatinSquare::LatinSquare(const int size, const std::mt19937& mersenneTwister) {
+    LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister) {
         setSize(size);
         setMersenneTwister(mersenneTwister);
-        reset();
+        setGrid(reduced);
         shuffleGrid();
     }
 
@@ -56,6 +56,12 @@ namespace LatinSquareGenerator {
         return grid_;
     }
 
+    void LatinSquare::setGrid(const bool reduced) {
+        for (int index = 0; index < gridSize_; ++index) {
+            grid_.emplace_back(Cell(index / size_ + 1, index % size_ + 1, reduced, size_));
+        }
+    }
+
     const std::vector<Region>& LatinSquare::getRegions() const {
         return regions_;
     }
@@ -79,16 +85,6 @@ namespace LatinSquareGenerator {
 
     void LatinSquare::setMersenneTwister(const std::mt19937& mersenneTwister) {
         mersenneTwister_ = mersenneTwister;
-    }
-
-    void LatinSquare::reset() {
-        if (grid_.empty()) {
-            for (int index = 0; index < gridSize_; index++) {
-                grid_.emplace_back(Cell(index / size_ + 1, index % size_ + 1, size_));
-            }
-        } else {
-            std::for_each(grid_.begin(), grid_.end(), [](auto& cell) { cell.reset(); });
-        }
     }
 
     void LatinSquare::shuffleGrid() {

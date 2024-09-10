@@ -8,10 +8,10 @@ namespace LatinSquareGenerator {
         return backtrackingHistory_.empty() || cell.getId() != backtrackingHistory_.top().getFilledCellId();
     }
 
-    const LatinSquare LatinSquareGenerator::generateRandomLatinSquare(const int size) {
+    const LatinSquare LatinSquareGenerator::generateRandomLatinSquare(const int size, const bool reduced) {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
-        auto latinSquare = LatinSquare(size, mersenneTwister);
+        auto latinSquare = LatinSquare(size, reduced, mersenneTwister);
         int counter = 0;
 
         while (latinSquare.checkIfNotFilledCellExists()) {

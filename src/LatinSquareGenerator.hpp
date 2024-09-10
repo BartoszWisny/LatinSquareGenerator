@@ -9,7 +9,7 @@
 namespace LatinSquareGenerator {
     class LatinSquareGenerator {
         public:
-            const LatinSquare generateRandomLatinSquare(const int size);
+            const LatinSquare generateRandomLatinSquare(const int size, const bool reduced);
 
         private:
             bool checkIfAddToBacktrackingHistory(const Cell& cell) const;
