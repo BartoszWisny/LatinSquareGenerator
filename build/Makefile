@@ -441,6 +441,30 @@ src/Main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
+src/cpp_utils.obj: src/cpp_utils.cpp.obj
+.PHONY : src/cpp_utils.obj
+
+# target to build an object file
+src/cpp_utils.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj
+.PHONY : src/cpp_utils.cpp.obj
+
+src/cpp_utils.i: src/cpp_utils.cpp.i
+.PHONY : src/cpp_utils.i
+
+# target to preprocess a source file
+src/cpp_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.i
+.PHONY : src/cpp_utils.cpp.i
+
+src/cpp_utils.s: src/cpp_utils.cpp.s
+.PHONY : src/cpp_utils.s
+
+# target to generate assembly for a file
+src/cpp_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.s
+.PHONY : src/cpp_utils.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -489,6 +513,9 @@ help:
 	@echo ... src/Main.obj
 	@echo ... src/Main.i
 	@echo ... src/Main.s
+	@echo ... src/cpp_utils.obj
+	@echo ... src/cpp_utils.i
+	@echo ... src/cpp_utils.s
 .PHONY : help
 
 

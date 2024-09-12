@@ -6,14 +6,16 @@
 
 int main() {
     auto latinSquareGenerator = LatinSquareGenerator::LatinSquareGenerator();
-    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(5, true);
-    printLatinSquareFullIds(latinSquare);
-    printLatinSquareBoard(latinSquare);
+    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(9, true);
+    latinSquare.sortGridByRows();
+    // printLatinSquareFullIds(latinSquare);
+    // printLatinSquareBoard(latinSquare);
 
     latinSquare.setRegions();
     auto transversalGenerator = LatinSquareGenerator::LatinSquareTransversalGenerator();
     auto transversal = transversalGenerator.findRandomTransversal(latinSquare);
-    printTransversalFullIds(transversal);
+    // printTransversalFullIds(transversal);
+    printTransversalBoard(latinSquare, transversal);
 
     return 0;
 }

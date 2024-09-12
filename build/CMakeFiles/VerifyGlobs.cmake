@@ -18,6 +18,7 @@ set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalUpdateData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.cpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
@@ -40,6 +41,7 @@ set(OLD_GLOB
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTransversalUpdateData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp"
   "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.hpp"
+  "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
