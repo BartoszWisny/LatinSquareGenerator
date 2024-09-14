@@ -913,7 +913,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj
 
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj
  C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp
- C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp
+ C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.hpp
  C:/msys64/ucrt64/include/_mingw.h
  C:/msys64/ucrt64/include/_mingw_mac.h
  C:/msys64/ucrt64/include/_mingw_off_t.h
@@ -2064,9 +2064,9 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj
  C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp
  C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.hpp
 
-CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj
- C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.cpp
- C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp
+CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.obj
+ C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.cpp
+ C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.hpp
  C:/msys64/ucrt64/include/_mingw.h
  C:/msys64/ucrt64/include/_mingw_mac.h
  C:/msys64/ucrt64/include/_mingw_off_t.h
@@ -2218,4 +2218,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj
  C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h
  C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stddef.h
  C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h
+
+CMakeFiles/LatinSquareGenerator.dir/src/cpp/iterator.cpp.obj
+ C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/iterator.cpp
 

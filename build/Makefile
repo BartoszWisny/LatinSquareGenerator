@@ -441,29 +441,53 @@ src/Main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
-src/cpp_utils.obj: src/cpp_utils.cpp.obj
-.PHONY : src/cpp_utils.obj
+src/cpp/iostream.obj: src/cpp/iostream.cpp.obj
+.PHONY : src/cpp/iostream.obj
 
 # target to build an object file
-src/cpp_utils.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj
-.PHONY : src/cpp_utils.cpp.obj
+src/cpp/iostream.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.obj
+.PHONY : src/cpp/iostream.cpp.obj
 
-src/cpp_utils.i: src/cpp_utils.cpp.i
-.PHONY : src/cpp_utils.i
+src/cpp/iostream.i: src/cpp/iostream.cpp.i
+.PHONY : src/cpp/iostream.i
 
 # target to preprocess a source file
-src/cpp_utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.i
-.PHONY : src/cpp_utils.cpp.i
+src/cpp/iostream.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.i
+.PHONY : src/cpp/iostream.cpp.i
 
-src/cpp_utils.s: src/cpp_utils.cpp.s
-.PHONY : src/cpp_utils.s
+src/cpp/iostream.s: src/cpp/iostream.cpp.s
+.PHONY : src/cpp/iostream.s
 
 # target to generate assembly for a file
-src/cpp_utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.s
-.PHONY : src/cpp_utils.cpp.s
+src/cpp/iostream.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.s
+.PHONY : src/cpp/iostream.cpp.s
+
+src/cpp/iterator.obj: src/cpp/iterator.cpp.obj
+.PHONY : src/cpp/iterator.obj
+
+# target to build an object file
+src/cpp/iterator.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iterator.cpp.obj
+.PHONY : src/cpp/iterator.cpp.obj
+
+src/cpp/iterator.i: src/cpp/iterator.cpp.i
+.PHONY : src/cpp/iterator.i
+
+# target to preprocess a source file
+src/cpp/iterator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iterator.cpp.i
+.PHONY : src/cpp/iterator.cpp.i
+
+src/cpp/iterator.s: src/cpp/iterator.cpp.s
+.PHONY : src/cpp/iterator.s
+
+# target to generate assembly for a file
+src/cpp/iterator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/cpp/iterator.cpp.s
+.PHONY : src/cpp/iterator.cpp.s
 
 # Help Target
 help:
@@ -513,9 +537,12 @@ help:
 	@echo ... src/Main.obj
 	@echo ... src/Main.i
 	@echo ... src/Main.s
-	@echo ... src/cpp_utils.obj
-	@echo ... src/cpp_utils.i
-	@echo ... src/cpp_utils.s
+	@echo ... src/cpp/iostream.obj
+	@echo ... src/cpp/iostream.i
+	@echo ... src/cpp/iostream.s
+	@echo ... src/cpp/iterator.obj
+	@echo ... src/cpp/iterator.i
+	@echo ... src/cpp/iterator.s
 .PHONY : help
 
 

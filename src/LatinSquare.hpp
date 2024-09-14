@@ -20,16 +20,12 @@ namespace LatinSquareGenerator {
             LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister);
 
             int getSize() const;
-
-            void sortGridByRows();
-            void sortGridByColumns();
-            void sortGridByNumbers();
-
             const std::vector<Cell>& getGrid() const;
             void setGrid(const bool reduced);
             const std::vector<Region>& getRegions() const;
             void setRegions();
 
+            void sortGrid();
             void shuffleGrid();
 
             Cell& getCell(const std::string& id);
@@ -38,13 +34,22 @@ namespace LatinSquareGenerator {
 
             bool checkIfNotFilledCellExists() const;
             Cell& getNotFilledCellWithMinimumEntropy();
-            const UpdateData getUpdateData(const Cell& filledCell, const EntropyData& previousEntropyData);
+            const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToFilledCell(const Cell& filledCell);
+            void updateRelatedCells(std::vector<std::reference_wrapper<Cell>>& cells, const int number);
+            const std::set<std::string> getUpdatedCellsIds(const std::vector<std::reference_wrapper<Cell>>& cells);
+            void restoreUpdatedCells(const std::vector<std::reference_wrapper<Cell>>& cells, const int number);
 
             Region& getEnabledRegionWithMinimumEntropy();
-            const std::set<std::string> getDisabledCellsIds(const Cell& chosenCell);
-            void disableRelatedRegions(const Cell& chosenCell);
-            void enableCells(const std::set<std::string>& disabledCellsIds);
-            void enableRelatedRegions(const Cell& chosenCell);
+            const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToChosenCell(const Cell& chosenCell);
+            void disableRelatedCells(const std::vector<std::reference_wrapper<Cell>>& cells);
+            void decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);
+            const std::set<std::string> getDisabledCellsIds(
+                const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& cell);
+            const std::vector<std::reference_wrapper<Region>> getRelatedRegions(const Cell& cell);
+            void disableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
+            void enableDisabledCells(const std::vector<std::reference_wrapper<Cell>>& cells);
+            void increaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);
+            void enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
 
         private:
             void setSize(const int size);
@@ -52,20 +57,14 @@ namespace LatinSquareGenerator {
             void setMersenneTwister(const std::mt19937& mersenneTwister);
 
             bool checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
-            const std::set<std::string> getUpdatedCellsIds(const Cell& filledCell);
 
             bool checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
-            void decreaseRelatedRegionsEntropy(
-                const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates);
             bool checkIfRelatedRegion(const Cell& cell, const Region& region) const;
-            void increaseRelatedRegionsEntropy(
-                const std::set<std::string>& relatedRegionsIds, const std::map<std::string, int>& entropyUpdates);
 
             int size_;
             std::vector<Cell> grid_;
             std::vector<Region> regions_;
 
-            int gridSize_;
             std::mt19937 mersenneTwister_;
     };
 }

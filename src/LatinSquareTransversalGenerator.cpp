@@ -32,8 +32,13 @@ namespace LatinSquareGenerator {
                 auto& cell = (*iterator).get();
 
                 transversal.emplace_back(*iterator);
-                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(cell);
-                latinSquare.disableRelatedRegions(cell);
+                const auto relatedCells = latinSquare.getCellsRelatedToChosenCell(cell);
+                latinSquare.disableRelatedCells(relatedCells);
+                latinSquare.decreaseRelatedRegionsEntropy(relatedCells);
+                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(relatedCells, cell);
+                const auto relatedRegions = latinSquare.getRelatedRegions(cell);
+                latinSquare.disableRelatedRegions(relatedRegions);
+
                 updateHistory_.push(TransversalUpdateData(cell, disabledCellsIds));
 
                 if (checkIfAddToBacktrackingHistory(cell)) {
@@ -45,16 +50,20 @@ namespace LatinSquareGenerator {
                 if (counter > 1) {
                     auto backtrackingData = backtrackingHistory_.top();
                     backtrackingHistory_.pop();
+
                     std::set<std::string> disabledCellsIds = {backtrackingData.getChosenCellId()};
                     const std::string regionId = backtrackingData.getRegionId();
 
                     while (checkIfRemoveFromBacktrackingHistory(regionId)) {
                         backtrackingData = backtrackingHistory_.top();
                         backtrackingHistory_.pop();
+
                         disabledCellsIds.insert(backtrackingData.getChosenCellId());
                     }
 
-                    latinSquare.enableCells(disabledCellsIds);
+                    const auto disabledCells = latinSquare.getCells(disabledCellsIds);
+                    latinSquare.enableDisabledCells(disabledCells);
+                    latinSquare.increaseRelatedRegionsEntropy(disabledCells);
 
                     if (updateHistory_.empty()) {
                         break;
@@ -65,8 +74,12 @@ namespace LatinSquareGenerator {
                 const auto updateData = updateHistory_.top();
                 updateHistory_.pop();
 
-                latinSquare.enableCells(updateData.getDisabledCellsIds());
-                latinSquare.enableRelatedRegions(latinSquare.getCell(updateData.getChosenCellId()));
+                const auto disabledCells = latinSquare.getCells(updateData.getDisabledCellsIds());
+                latinSquare.enableDisabledCells(disabledCells);
+                latinSquare.increaseRelatedRegionsEntropy(disabledCells);
+                const auto relatedRegions = latinSquare.getRelatedRegions(
+                    latinSquare.getCell(updateData.getChosenCellId()));
+                latinSquare.enableRelatedRegions(relatedRegions);
             }
         }
 

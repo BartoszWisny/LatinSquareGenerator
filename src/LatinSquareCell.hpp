@@ -28,7 +28,7 @@ namespace LatinSquareGenerator {
 
             void reset(const bool reduced);
             void fill(const int number);
-            void clear(EntropyData previousEntropyData);
+            void clear(EntropyData entropyData);
 
             bool removeRemainingNumber(const int number);
             void restoreRemainingNumber(const int number);

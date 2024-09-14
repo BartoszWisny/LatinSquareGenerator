@@ -1,10 +1,9 @@
 #include "LatinSquareTransversalUpdateData.hpp"
 
 namespace LatinSquareGenerator {
-    TransversalUpdateData::TransversalUpdateData(
-        const Cell& chosenCell, const std::set<std::string>& disabledCellsIds) {
-        setChosenCellId(chosenCell.getId());
-        setDisabledCellsIds(disabledCellsIds);
+    TransversalUpdateData::TransversalUpdateData(const Cell& cell, const std::set<std::string>& ids) {
+        setChosenCellId(cell.getId());
+        setDisabledCellsIds(ids);
     }
 
 
@@ -12,15 +11,15 @@ namespace LatinSquareGenerator {
         return chosenCellId_;
     }
 
-    void TransversalUpdateData::setChosenCellId(const std::string& chosenCellId) {
-        chosenCellId_ = chosenCellId;
+    void TransversalUpdateData::setChosenCellId(const std::string& id) {
+        chosenCellId_ = id;
     }
 
     const std::set<std::string>& TransversalUpdateData::getDisabledCellsIds() const {
         return disabledCellsIds_;
     }
 
-    void TransversalUpdateData::setDisabledCellsIds(const std::set<std::string>& disabledCellsIds) {
-        disabledCellsIds_ = disabledCellsIds;
+    void TransversalUpdateData::setDisabledCellsIds(const std::set<std::string>& ids) {
+        disabledCellsIds_ = ids;
     }
 }

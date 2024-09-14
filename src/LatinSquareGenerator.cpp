@@ -23,10 +23,15 @@ namespace LatinSquareGenerator {
                 const auto& remainingNumbers = cell.getRemainingNumbers();
                 auto iterator = remainingNumbers.cbegin();
                 std::advance(iterator, mersenneTwister() % remainingNumbers.size());
+                const auto number = *iterator;
                 const auto previousEntropyData = cell.getEntropyData();
 
-                cell.fill(*iterator);
-                updateHistory_.push(latinSquare.getUpdateData(cell, previousEntropyData));
+                cell.fill(number);
+                auto relatedCells = latinSquare.getCellsRelatedToFilledCell(cell);
+                latinSquare.updateRelatedCells(relatedCells, number);
+                const auto updatedCellsIds = latinSquare.getUpdatedCellsIds(relatedCells);
+
+                updateHistory_.push(UpdateData(cell, previousEntropyData, updatedCellsIds));
 
                 if (checkIfAddToBacktrackingHistory(cell)) {
                     backtrackingHistory_.push(BacktrackingData(cell, previousEntropyData));
@@ -50,12 +55,9 @@ namespace LatinSquareGenerator {
                 updateHistory_.pop();
 
                 latinSquare.getCell(updateData.getFilledCellId()).clear(updateData.getPreviousEntropyData());
-                const auto cells = latinSquare.getCells(updateData.getUpdatedCellsIds());
+                const auto updatedCells = latinSquare.getCells(updateData.getUpdatedCellsIds());
                 const auto number = updateData.getFilledCellNumber();
-
-                for (const auto& cellRef : cells) {
-                    cellRef.get().restoreRemainingNumber(number);
-                }
+                latinSquare.restoreUpdatedCells(updatedCells, number);
             }
         }
 

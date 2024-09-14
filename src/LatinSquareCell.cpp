@@ -125,11 +125,11 @@ namespace LatinSquareGenerator {
         entropyData_.clearEntropyData();
     }
 
-    void Cell::clear(EntropyData previousEntropyData) {
-        previousEntropyData.removeRemainingNumber(number_);
+    void Cell::clear(EntropyData entropyData) {
+        entropyData.removeRemainingNumber(number_);
 
         setNumber(0);
-        setEntropyData(previousEntropyData);
+        setEntropyData(entropyData);
     }
 
     bool Cell::removeRemainingNumber(const int number) {

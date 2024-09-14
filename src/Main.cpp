@@ -6,8 +6,8 @@
 
 int main() {
     auto latinSquareGenerator = LatinSquareGenerator::LatinSquareGenerator();
-    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(9, true);
-    latinSquare.sortGridByRows();
+    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(5, true);
+    latinSquare.sortGrid();
     // printLatinSquareFullIds(latinSquare);
     // printLatinSquareBoard(latinSquare);
 
@@ -23,4 +23,6 @@ int main() {
 // TODO:
 // - add function to measure time of generating random latin square and random transversal
 // - consider moving files to correct folders (latin_square, transversal, etc.) and functions to correct files
-// - check naming convension - idea: shorter names of variables if possible
+// - consider using back_emplacer instead of back_iterator
+// - optimize code where possible
+// - make functions inline if possible

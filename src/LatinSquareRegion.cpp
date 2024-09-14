@@ -39,11 +39,11 @@ namespace LatinSquareGenerator {
     }
 
     const std::vector<std::reference_wrapper<Cell>> Region::getEnabledCells() const {
-        std::vector<std::reference_wrapper<Cell>> enabledCells;
-        std::copy_if(cells_.cbegin(), cells_.cend(), std::back_inserter(enabledCells),
+        std::vector<std::reference_wrapper<Cell>> cells;
+        std::copy_if(cells_.cbegin(), cells_.cend(), std::back_inserter(cells),
                      [](const auto& cell) { return cell.get().isEnabled(); });
 
-        return enabledCells;
+        return cells;
     }
 
     void Region::setCells(const std::vector<std::reference_wrapper<Cell>>& cells) {

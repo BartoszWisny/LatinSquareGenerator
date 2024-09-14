@@ -9,8 +9,7 @@
 namespace LatinSquareGenerator {
     class UpdateData {
         public:
-            UpdateData(const Cell& filledCell, const EntropyData& previousEntropyData,
-                       const std::set<std::string>& updatedCellsIds);
+            UpdateData(const Cell& cell, const EntropyData& entropyData, const std::set<std::string>& ids);
 
             const std::string& getFilledCellId() const;
             int getFilledCellNumber() const;
@@ -18,10 +17,10 @@ namespace LatinSquareGenerator {
             const std::set<std::string>& getUpdatedCellsIds() const;
 
         private:
-            void setFilledCellId(const std::string& filledCellId);
+            void setFilledCellId(const std::string& id);
             void setFilledCellNumber(const int number);
-            void setPreviousEntropyData(const EntropyData& previousEntropyData);
-            void setUpdatedCellsIds(const std::set<std::string>& updatedCellsIds);
+            void setPreviousEntropyData(const EntropyData& entropyData);
+            void setUpdatedCellsIds(const std::set<std::string>& ids);
 
             std::string filledCellId_;
             int filledCellNumber_;

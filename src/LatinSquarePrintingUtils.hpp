@@ -13,6 +13,6 @@ namespace LatinSquareGenerator {
 
     void sortTransversal(std::vector<std::reference_wrapper<Cell>>& transversal);
     void printTransversalFullIds(std::vector<std::reference_wrapper<Cell>>& transversal);
-    bool checkIfTransversalCell(const Cell& cell, const std::set<std::string>& transversalFullIds);
+    bool checkIfTransversalCell(const Cell& cell, const std::set<std::string>& ids);
     void printTransversalBoard(LatinSquare& latinSquare, std::vector<std::reference_wrapper<Cell>>& transversal);
 }

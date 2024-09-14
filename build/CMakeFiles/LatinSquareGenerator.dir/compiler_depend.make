@@ -906,7 +906,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareGenerator.cpp.obj: C:/Users/U
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquareLogger.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp
 
 CMakeFiles/LatinSquareGenerator.dir/src/LatinSquarePrintingUtils.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquarePrintingUtils.cpp \
-  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp \
+  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
   C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -2051,8 +2051,8 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: C:/Users/User/Desktop/PRAC
   C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareUpdateData.hpp \
   C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/Main.hpp
 
-CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.cpp \
-  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp \
+CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.cpp \
+  C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.hpp \
   C:/msys64/ucrt64/include/_mingw.h \
   C:/msys64/ucrt64/include/_mingw_mac.h \
   C:/msys64/ucrt64/include/_mingw_off_t.h \
@@ -2205,6 +2205,8 @@ CMakeFiles/LatinSquareGenerator.dir/src/cpp_utils.cpp.obj: C:/Users/User/Desktop
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stddef.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h
 
+CMakeFiles/LatinSquareGenerator.dir/src/cpp/iterator.cpp.obj: C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iterator.cpp
+
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/parse_numbers.h:
 
@@ -2276,6 +2278,8 @@ C:/msys64/ucrt64/include/c++/14.1.0/bits/version.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc:
 
+C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.hpp:
+
 C:/msys64/ucrt64/include/c++/14.1.0/bits/char_traits.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/format:
@@ -2337,8 +2341,6 @@ C:/msys64/ucrt64/include/c++/14.1.0/bits/functional_hash.h:
 C:/msys64/ucrt64/include/c++/14.1.0/bits/memoryfwd.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/hash_bytes.h:
-
-C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.cpp:
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/invoke.h:
 
@@ -2542,6 +2544,8 @@ C:/msys64/ucrt64/include/c++/14.1.0/random:
 
 C:/msys64/ucrt64/include/c++/14.1.0/set:
 
+C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.cpp:
+
 C:/msys64/ucrt64/include/time.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/span:
@@ -2706,8 +2710,6 @@ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareGen
 
 C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareLogger.cpp:
 
-C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp_utils.hpp:
-
 C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.h:
 
 C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc:
@@ -2735,3 +2737,5 @@ C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/LatinSquareTra
 C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/Main.cpp:
 
 C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/Main.hpp:
+
+C:/Users/User/Desktop/PRACA\ MAGISTERSKA/LatinSquareGenerator/src/cpp/iterator.cpp:

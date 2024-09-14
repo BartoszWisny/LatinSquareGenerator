@@ -6,13 +6,14 @@
 #include <iostream>
 #include <iterator>
 
-#include <cpp_utils.hpp>
+#include <cpp/iostream.hpp>
 
 #include "LatinSquare.hpp"
 
 namespace LatinSquareGenerator {
     void printLatinSquareFullIds(LatinSquare& latinSquare) {
-        latinSquare.sortGridByRows();
+        latinSquare.sortGrid();
+
         const auto& grid = latinSquare.getGrid();
 
         std::cout << std::endl;
@@ -25,12 +26,12 @@ namespace LatinSquareGenerator {
     }
 
     void printLatinSquareBoard(LatinSquare& latinSquare) {
-        latinSquare.sortGridByRows();
+        latinSquare.sortGrid();
 
         const auto& grid = latinSquare.getGrid();
         const auto size = latinSquare.getSize();
 
-        const auto leftHorizontalBar = std::format("+{}", std::string(int(log10(size) + 1) + 2, '-'));
+        const auto leftBar = std::format("+{}", std::string(int(log10(size) + 1) + 2, '-'));
         auto number = 0;
         std::string spaces = "";
 
@@ -38,7 +39,7 @@ namespace LatinSquareGenerator {
 
         for (const auto& cell : grid) {
             if (cell.getColumn() == 1) {
-                std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftHorizontalBar);
+                std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftBar);
                 std::cout << "+" << std::endl;
             }
 
@@ -52,7 +53,7 @@ namespace LatinSquareGenerator {
             }
         }
 
-        std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftHorizontalBar);
+        std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftBar);
         std::cout << "+" << std::endl;
         std::cout << std::endl;
     }
@@ -80,82 +81,75 @@ namespace LatinSquareGenerator {
         }
     }
 
-    bool checkIfTransversalCell(const Cell& cell, const std::set<std::string>& transversalFullIds) {
-        return transversalFullIds.contains(cell.getFullId());
+    bool checkIfTransversalCell(const Cell& cell, const std::set<std::string>& ids) {
+        return ids.contains(cell.getFullId());
     }
 
     void printTransversalBoard(LatinSquare& latinSquare, std::vector<std::reference_wrapper<Cell>>& transversal) {
         if (transversal.empty()) {
             std::cout << "Transversal was not found" << std::endl << std::endl;
         } else {
-            latinSquare.sortGridByRows();
+            latinSquare.sortGrid();
             sortTransversal(transversal);
 
             const auto& grid = latinSquare.getGrid();
             const auto size = latinSquare.getSize();
-            std::set<std::string> transversalFullIds;
-            std::transform(transversal.cbegin(), transversal.cend(),
-                           std::inserter(transversalFullIds, transversalFullIds.cend()),
+            std::set<std::string> ids;
+            std::transform(transversal.cbegin(), transversal.cend(), std::inserter(ids, ids.cend()),
                            [](const auto& cellRef) { return cellRef.get().getFullId(); });
 
             const auto barLength = int(log10(size) + 1) + 2;
-            const auto longHorizontalBar = std::format("+{}+", std::string(barLength, '-'));
-            const auto leftHorizontalBar = std::format("+{}", std::string(barLength, '-'));
-            const auto rightHorizontalBar = std::format("{}+", std::string(barLength, '-'));
-            const auto shortHorizontalBar = std::format("{}", std::string(barLength, '-'));
+            const auto longBar = std::format("+{}+", std::string(barLength, '-'));
+            const auto leftBar = std::format("+{}", std::string(barLength, '-'));
+            const auto rightBar = std::format("{}+", std::string(barLength, '-'));
+            const auto shortBar = std::format("{}", std::string(barLength, '-'));
             auto isTransversalCell = false;
             auto isTransversalPreviousCell = false;
-            auto transversalIndex = 0;
-            auto transversalCellColumn = 0;
-            auto transversalPreviousCellColumn = 0;
-            auto columnsDifference = 0;
+            auto index = 0;
+            auto column = 0;
+            auto previousColumn = 0;
+            auto difference = 0;
             auto number = 0;
             std::string spaces = "";
 
             std::cout << std::endl;
 
             for (const auto& cell : grid) {
-                isTransversalCell = checkIfTransversalCell(cell, transversalFullIds);
+                isTransversalCell = checkIfTransversalCell(cell, ids);
 
                 if (cell.getColumn() == 1) {
-                    transversalCellColumn = transversal.at(transversalIndex).get().getColumn();
+                    column = transversal.at(index).get().getColumn();
 
                     if (cell.getRow() == 1) {
-                        std::fill_n(std::ostream_iterator<std::string>(std::cout), transversalCellColumn - 1,
-                                    leftHorizontalBar);
-                        std::cout << cpp_utils::bold_on << cpp_utils::green_on << longHorizontalBar << cpp_utils::reset;
+                        std::fill_n(std::ostream_iterator<std::string>(std::cout), column - 1, leftBar);
+                        std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
 
-                        if (transversalCellColumn != size) {
-                            std::cout << shortHorizontalBar;
-                            std::fill_n(std::ostream_iterator<std::string>(std::cout), size - transversalCellColumn - 1,
-                                        leftHorizontalBar);
+                        if (column != size) {
+                            std::cout << shortBar;
+                            std::fill_n(std::ostream_iterator<std::string>(std::cout), size - column - 1, leftBar);
                             std::cout << "+";
                         }
 
                         std::cout << std::endl;
                     } else {
-                        const auto [firstColumn, secondColumn] = std::minmax(
-                            transversalPreviousCellColumn, transversalCellColumn);
-                        columnsDifference = secondColumn - firstColumn - 1;
+                        const auto [firstColumn, secondColumn] = std::minmax(previousColumn, column);
+                        difference = secondColumn - firstColumn - 1;
 
-                        std::fill_n(std::ostream_iterator<std::string>(std::cout), firstColumn - 1, leftHorizontalBar);
-                        std::cout << cpp_utils::bold_on << cpp_utils::green_on << longHorizontalBar << cpp_utils::reset;
+                        std::fill_n(std::ostream_iterator<std::string>(std::cout), firstColumn - 1, leftBar);
+                        std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
 
-                        if (columnsDifference == 0) {
-                            std::cout << cpp_utils::bold_on << cpp_utils::green_on << rightHorizontalBar
-                                      << cpp_utils::reset;
+                        if (difference == 0) {
+                            std::cout << cpp::bold_on << cpp::green_on << rightBar << cpp::reset;
                         } else {
-                            std::cout << shortHorizontalBar;
-                            std::fill_n(std::ostream_iterator<std::string>(std::cout), columnsDifference - 1,
-                                        leftHorizontalBar);
-                            std::cout << cpp_utils::bold_on << cpp_utils::green_on << longHorizontalBar
-                                      << cpp_utils::reset;
+                            std::cout << shortBar;
+                            std::fill_n(std::ostream_iterator<std::string>(std::cout), difference - 1, leftBar);
+                            std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
                         }
 
                         if (secondColumn != size) {
-                            std::cout << shortHorizontalBar;
+                            std::cout << shortBar;
                             std::fill_n(std::ostream_iterator<std::string>(std::cout), size - secondColumn - 1,
-                                        leftHorizontalBar);
+                                        leftBar);
                             std::cout << "+";
                         }
 
@@ -167,8 +161,7 @@ namespace LatinSquareGenerator {
                 spaces = std::string(int(log10(size)) - int(log10(number)) + 1, ' ');
 
                 if (isTransversalCell) {
-                    std::cout << cpp_utils::bold_on << cpp_utils::green_on << "|" << spaces << number << " |"
-                              << cpp_utils::reset;
+                    std::cout << cpp::bold_on << cpp::green_on << "|" << spaces << number << " |" << cpp::reset;
                 } else {
                     if (!isTransversalPreviousCell) {
                         std::cout << "|";
@@ -185,20 +178,20 @@ namespace LatinSquareGenerator {
                     std::cout << std::endl;
 
                     isTransversalPreviousCell = false;
-                    transversalPreviousCellColumn = transversalCellColumn;
-                    ++transversalIndex;
+                    previousColumn = column;
+                    ++index;
                 } else {
                     isTransversalPreviousCell = isTransversalCell;
                 }
             }
 
-            std::fill_n(std::ostream_iterator<std::string>(std::cout), transversalCellColumn - 1, leftHorizontalBar);
-            std::cout << cpp_utils::bold_on << cpp_utils::green_on << longHorizontalBar << cpp_utils::reset;
+            std::fill_n(std::ostream_iterator<std::string>(std::cout), column - 1, leftBar);
+            std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
 
-            if (transversalCellColumn != size) {
-                std::cout << shortHorizontalBar;
-                std::fill_n(std::ostream_iterator<std::string>(std::cout), size - transversalCellColumn - 1,
-                            leftHorizontalBar);
+            if (column != size) {
+                std::cout << shortBar;
+                std::fill_n(std::ostream_iterator<std::string>(std::cout), size - column - 1,
+                            leftBar);
                 std::cout << "+";
             }
 
