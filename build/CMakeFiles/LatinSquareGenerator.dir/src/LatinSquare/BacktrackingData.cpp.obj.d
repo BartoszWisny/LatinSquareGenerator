@@ -105,11 +105,9 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/BacktrackingData.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/tuple \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_util.h \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Cell.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/set \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
- C:/msys64/ucrt64/include/c++/14.1.0/ext/aligned_buffer.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/node_handle.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/erase_if.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/vector \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_uninitialized.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_vector.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp

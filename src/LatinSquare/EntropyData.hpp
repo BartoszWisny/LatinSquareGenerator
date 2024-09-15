@@ -1,12 +1,12 @@
 #pragma once
 
-#include <set>
+#include <vector>
 
 namespace LatinSquare {
     class EntropyData {
         public:
             int getEntropy() const;
-            const std::set<int>& getRemainingNumbers() const;
+            const std::vector<int>& getRemainingNumbers() const;
 
             void setMaxEntropy(const int maxEntropy);
 
@@ -18,10 +18,10 @@ namespace LatinSquare {
 
         private:
             void setEntropy(const int entropy);
-            void setRemainingNumbers(const std::set<int>& remainingNumbers);
+            void setRemainingNumbers(const std::vector<int>& remainingNumbers);
 
             int entropy_;
-            std::set<int> remainingNumbers_;
+            std::vector<int> remainingNumbers_;
 
             int maxEntropy_;
     };

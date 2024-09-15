@@ -59,6 +59,10 @@
     "ratio": "cpp",
     "iomanip": "cpp",
     "map": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "unordered_set": "cpp",
+    "semaphore": "cpp",
+    "stop_token": "cpp",
+    "thread": "cpp"
   }
 }

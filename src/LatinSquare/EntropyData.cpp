@@ -1,22 +1,21 @@
 #include "EntropyData.hpp"
 
 #include <algorithm>
-#include <iterator>
 
 namespace LatinSquare {
     int EntropyData::getEntropy() const {
         return entropy_;
     }
 
-    void EntropyData::setEntropy(const int entropy) {
+    inline void EntropyData::setEntropy(const int entropy) {
         entropy_ = entropy;
     }
 
-    const std::set<int>& EntropyData::getRemainingNumbers() const {
+    const std::vector<int>& EntropyData::getRemainingNumbers() const {
         return remainingNumbers_;
     }
 
-    void EntropyData::setRemainingNumbers(const std::set<int>& remainingNumbers) {
+    inline void EntropyData::setRemainingNumbers(const std::vector<int>& remainingNumbers) {
         remainingNumbers_ = remainingNumbers;
     }
 
@@ -25,9 +24,12 @@ namespace LatinSquare {
     }
 
     void EntropyData::resetEntropyData() {
-        std::set<int> remainingNumbers;
-        std::generate_n(std::inserter(remainingNumbers, remainingNumbers.cend()), maxEntropy_,
-                        [number = 0]() mutable { return ++number; });
+        std::vector<int> remainingNumbers;
+        remainingNumbers.reserve(maxEntropy_);
+
+        for (int number = 1; number <= maxEntropy_; ++number) {
+            remainingNumbers.emplace_back(number);
+        }
 
         setEntropy(maxEntropy_);
         setRemainingNumbers(remainingNumbers);
@@ -39,17 +41,20 @@ namespace LatinSquare {
     }
 
     bool EntropyData::removeRemainingNumber(const int number) {
-        const auto result = remainingNumbers_.erase(number);
+        auto iterator = std::find(remainingNumbers_.cbegin(), remainingNumbers_.cend(), number);
 
-        if (result) {
+        if (iterator != remainingNumbers_.cend()) {
+            remainingNumbers_.erase(iterator);
             --entropy_;
+
+            return true;
         }
 
-        return result;
+        return false;
     }
 
     void EntropyData::restoreRemainingNumber(const int number) {
+        remainingNumbers_.emplace_back(number);
         ++entropy_;
-        remainingNumbers_.insert(number);
     }
 }

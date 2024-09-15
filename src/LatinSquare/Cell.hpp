@@ -1,7 +1,7 @@
 #pragma once
 
-#include <set>
 #include <string>
+#include <vector>
 
 #include "EntropyData.hpp"
 
@@ -19,7 +19,7 @@ namespace LatinSquare {
             const std::string& getNumberId() const;
             const std::string& getFullId() const;
             int getEntropy() const;
-            const std::set<int>& getRemainingNumbers() const;
+            const std::vector<int>& getRemainingNumbers() const;
             const EntropyData& getEntropyData() const;
             void setEntropyData(const EntropyData& entropyData);
             bool isEnabled() const;

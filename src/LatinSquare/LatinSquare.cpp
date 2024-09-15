@@ -5,14 +5,30 @@
 #include <iterator>
 #include <map>
 
+// --- TESTING ---
+// #include <chrono>
+// #include <iostream>
+// --- TESTING ---
+
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
     LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister) {
         setSize(size);
-        setGrid(reduced);
+        setGrid(reduced); // check if can be done faster
         setMersenneTwister(mersenneTwister);
-        shuffleGrid();
+
+        // ---
+        // auto start = std::chrono::high_resolution_clock::now();
+        // ---
+
+        shuffleGrid(); // still needs to be checked
+
+        // ---
+        // auto stop = std::chrono::high_resolution_clock::now();
+        // const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+        // std::cout << "Time: " << duration << std::endl;
+        // ---
     }
 
     int LatinSquare::getSize() const {
@@ -29,6 +45,7 @@ namespace LatinSquare {
 
     void LatinSquare::setGrid(const bool reduced) {
         const auto gridSize = size_ * size_;
+        grid_.reserve(gridSize);
 
         for (int index = 0; index < gridSize; ++index) {
             grid_.emplace_back(Cell(index / size_ + 1, index % size_ + 1, reduced, size_));

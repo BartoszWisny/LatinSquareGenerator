@@ -1,7 +1,5 @@
 #include "Cell.hpp"
 
-#include <format>
-
 namespace LatinSquare {
     Cell::Cell(const int row, const int column, const bool reduced, const int maxEntropy) {
         setRow(row);
@@ -50,10 +48,12 @@ namespace LatinSquare {
     }
 
     void Cell::setIds() {
-        rowId_ = std::format("R{}", row_);
-        columnId_ = std::format("C{}", column_);
-        id_ += rowId_;
-        id_ += columnId_;
+        rowId_ = 'R';
+        rowId_.append(std::to_string(row_));
+        columnId_ = 'C';
+        columnId_.append(std::to_string(column_));
+        id_ = rowId_;
+        id_.append(columnId_);
     }
 
     const std::string& Cell::getNumberId() const {
@@ -65,16 +65,17 @@ namespace LatinSquare {
     }
 
     void Cell::setFullId() {
-        numberId_ = std::format("#{}", number_);
+        numberId_ = '#';
+        numberId_.append(std::to_string(number_));
         fullId_ = id_;
-        fullId_ += numberId_;
+        fullId_.append(numberId_);
     }
 
     int Cell::getEntropy() const {
         return entropyData_.getEntropy();
     }
 
-    const std::set<int>& Cell::getRemainingNumbers() const {
+    const std::vector<int>& Cell::getRemainingNumbers() const {
         return entropyData_.getRemainingNumbers();
     }
 
