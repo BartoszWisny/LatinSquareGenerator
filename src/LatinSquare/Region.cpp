@@ -4,7 +4,7 @@
 #include <iterator>
 
 namespace LatinSquare {
-    Region::Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>>& cells) {
+    Region::Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>> cells) {
         setId(id);
         setEntropy(entropy);
         setCells(cells);

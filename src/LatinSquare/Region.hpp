@@ -9,7 +9,7 @@
 namespace LatinSquare {
     class Region {
         public:
-            Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>>& cells);
+            Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>> cells);
 
             const std::string& getId() const;
             int getEntropy() const;

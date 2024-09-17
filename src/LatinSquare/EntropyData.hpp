@@ -20,9 +20,7 @@ namespace LatinSquare {
             void setEntropy(const int entropy);
             void setRemainingNumbers(const std::vector<int>& remainingNumbers);
 
-            int entropy_;
+            int entropy_, maxEntropy_;
             std::vector<int> remainingNumbers_;
-
-            int maxEntropy_;
     };
 }

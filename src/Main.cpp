@@ -7,7 +7,8 @@
 
 // --- TESTING ---
 // #include "LatinSquare/LatinSquare.hpp"
-// #include <random>
+// #include <chrono>
+// #include <iostream>
 // --- TESTING ---
 
 int main() {
@@ -29,7 +30,46 @@ int main() {
 
     // std::random_device randomDevice;
     // std::mt19937 mersenneTwister(randomDevice());
-    // auto latinSquare = LatinSquare::LatinSquare(10, true, mersenneTwister);
+    // auto latinSquareGenerator = LatinSquare::Generator();
+    // auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(10, true);
+    // latinSquare.sortGrid();
+
+    // // ---
+    // auto start = std::chrono::high_resolution_clock::now();
+    // // ---
+
+    // latinSquare.setRegions();
+
+    // // ---
+    // auto stop = std::chrono::high_resolution_clock::now();
+    // const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+    // std::cout << "Time: " << duration << std::endl;
+    // // ---
+
+    // // auto transversalGenerator = Transversal::Generator();
+    // // auto transversal = transversalGenerator.findRandomTransversal(latinSquare);
+    // // // Transversal::printTransversalFullIds(transversal);
+    // // Transversal::printTransversalBoard(latinSquare, transversal);
+
+
+    // for (auto region : latinSquare.getRegions()) {
+    //     std::cout << region.getId() << ": entropy: " << region.getEntropy() << ", enabled cells: ";
+    //     const auto enabledCells = region.getEnabledCells();
+    //     std::set<std::string> enabledCellsIds;
+    //     std::transform(enabledCells.cbegin(), enabledCells.cend(),
+    //                     std::inserter(enabledCellsIds, enabledCellsIds.cend()),
+    //                     [](const auto& cellRef) { return cellRef.get().getFullId(); });
+
+    //     for (auto cellId : enabledCellsIds) {
+    //         std::cout << cellId << " ";
+    //     }
+
+    //     std::cout << ", enabled: " << region.isEnabled() << std::endl;
+    // }
+
+
+
+    // LatinSquare::printLatinSquareFullIds(latinSquare);
 
     // return 0;
 

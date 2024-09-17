@@ -1,6 +1,9 @@
 #include "Cell.hpp"
 
 namespace LatinSquare {
+    Cell::Cell() {}
+
+    // consider using indexes and numbers starting from 0, not 1
     Cell::Cell(const int row, const int column, const bool reduced, const int maxEntropy) {
         setRow(row);
         setColumn(column);

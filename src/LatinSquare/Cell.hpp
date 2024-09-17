@@ -8,6 +8,7 @@
 namespace LatinSquare {
     class Cell {
         public:
+            Cell();
             Cell(const int row, const int column, const bool reduced, const int maxEntropy);
 
             int getRow() const;
@@ -42,14 +43,8 @@ namespace LatinSquare {
 
             void setMaxEntropy(const int maxEntropy);
 
-            int row_;
-            int column_;
-            int number_;
-            std::string rowId_;
-            std::string columnId_;
-            std::string id_;
-            std::string numberId_;
-            std::string fullId_;
+            int row_, column_, number_;
+            std::string rowId_, columnId_, id_, numberId_, fullId_;
             EntropyData entropyData_;
             bool enabled_;
     };

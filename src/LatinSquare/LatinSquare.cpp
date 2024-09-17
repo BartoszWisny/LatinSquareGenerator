@@ -1,34 +1,17 @@
 #include "LatinSquare.hpp"
 
 #include <algorithm>
-#include <format>
 #include <iterator>
 #include <map>
-
-// --- TESTING ---
-// #include <chrono>
-// #include <iostream>
-// --- TESTING ---
 
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
     LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister) {
         setSize(size);
-        setGrid(reduced); // check if can be done faster
+        setGrid(reduced);
         setMersenneTwister(mersenneTwister);
-
-        // ---
-        // auto start = std::chrono::high_resolution_clock::now();
-        // ---
-
-        shuffleGrid(); // still needs to be checked
-
-        // ---
-        // auto stop = std::chrono::high_resolution_clock::now();
-        // const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-        // std::cout << "Time: " << duration << std::endl;
-        // ---
+        shuffleGrid();
     }
 
     int LatinSquare::getSize() const {
@@ -56,22 +39,42 @@ namespace LatinSquare {
         return regions_;
     }
 
+    // consider using maps instead of vectors for cells for relevant regions
     void LatinSquare::setRegions() {
+        regions_.reserve(3 * size_);
+
+        std::vector<std::reference_wrapper<Cell>> rowCells, columnCells, numberCells;
+        rowCells.reserve(size_);
+        columnCells.reserve(size_);
+        numberCells.reserve(size_);
+
+        auto rowRegion = std::string("R"), columnRegion = std::string("C"), numberRegion = std::string("#");
+
         for (int index = 1; index <= size_; ++index) {
-            std::vector<std::reference_wrapper<Cell>> cells;
-            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
-                         [index](const auto& cell) { return cell.getRow() == index; });
-            regions_.emplace_back(Region(std::format("R{}", index), size_, cells));
+            rowCells.clear();
+            columnCells.clear();
+            numberCells.clear();
 
-            cells.clear();
-            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
-                         [index](const auto& cell) { return cell.getColumn() == index; });
-            regions_.emplace_back(Region(std::format("C{}", index), size_, cells));
+            for (auto& cell : grid_) {
+                if (cell.getRow() == index) {
+                    rowCells.emplace_back(std::ref(cell));
+                }
 
-            cells.clear();
-            std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
-                         [index](const auto& cell) { return cell.getNumber() == index; });
-            regions_.emplace_back(Region(std::format("#{}", index), size_, cells));
+                if (cell.getColumn() == index) {
+                    columnCells.emplace_back(std::ref(cell));
+                }
+
+                if (cell.getNumber() == index) {
+                    numberCells.emplace_back(std::ref(cell));
+                }
+            }
+
+            const auto indexString = std::to_string(index);
+
+            // check if string concatenation using + operator can be replaced
+            regions_.emplace_back(Region(rowRegion + indexString, size_, rowCells));
+            regions_.emplace_back(Region(columnRegion + indexString, size_, columnCells));
+            regions_.emplace_back(Region(numberRegion + indexString, size_, numberCells));
         }
     }
 
