@@ -1,32 +1,19 @@
 #include "Cell.hpp"
 
 namespace LatinSquare {
-    Cell::Cell() {}
-
     // consider using indexes and numbers starting from 0, not 1
-    Cell::Cell(const int row, const int column, const bool reduced, const int maxEntropy) {
-        setRow(row);
-        setColumn(column);
+    Cell::Cell(const int row, const int column, const bool reduced, const int maxEntropy)
+        : row_(row), column_(column), number_(0), entropyData_(EntropyData(maxEntropy)), enabled_(true) {
         setIds();
-        setMaxEntropy(maxEntropy);
         reset(reduced);
-        enable();
     }
 
     int Cell::getRow() const {
         return row_;
     }
 
-    void Cell::setRow(const int row) {
-        row_ = row;
-    }
-
     int Cell::getColumn() const {
         return column_;
-    }
-
-    void Cell::setColumn(const int column) {
-        column_ = column;
     }
 
     int Cell::getNumber() const {
@@ -50,6 +37,14 @@ namespace LatinSquare {
         return id_;
     }
 
+    const std::string& Cell::getNumberId() const {
+        return numberId_;
+    }
+
+    const std::string& Cell::getFullId() const {
+        return fullId_;
+    }
+
     void Cell::setIds() {
         rowId_ = 'R';
         rowId_.append(std::to_string(row_));
@@ -57,14 +52,7 @@ namespace LatinSquare {
         columnId_.append(std::to_string(column_));
         id_ = rowId_;
         id_.append(columnId_);
-    }
-
-    const std::string& Cell::getNumberId() const {
-        return numberId_;
-    }
-
-    const std::string& Cell::getFullId() const {
-        return fullId_;
+        setFullId();
     }
 
     void Cell::setFullId() {
@@ -88,10 +76,6 @@ namespace LatinSquare {
 
     void Cell::setEntropyData(const EntropyData& entropyData) {
         entropyData_ = entropyData;
-    }
-
-    void Cell::setMaxEntropy(const int maxEntropy) {
-        entropyData_.setMaxEntropy(maxEntropy);
     }
 
     bool Cell::isEnabled() const {

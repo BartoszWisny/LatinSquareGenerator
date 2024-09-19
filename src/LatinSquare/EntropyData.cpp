@@ -3,11 +3,16 @@
 #include <algorithm>
 
 namespace LatinSquare {
+    EntropyData::EntropyData() {}
+
+    EntropyData::EntropyData(const int maxEntropy)
+        : maxEntropy_(maxEntropy) {}
+
     int EntropyData::getEntropy() const {
         return entropy_;
     }
 
-    inline void EntropyData::setEntropy(const int entropy) {
+    void EntropyData::setEntropy(const int entropy) {
         entropy_ = entropy;
     }
 
@@ -15,12 +20,8 @@ namespace LatinSquare {
         return remainingNumbers_;
     }
 
-    inline void EntropyData::setRemainingNumbers(const std::vector<int>& remainingNumbers) {
+    void EntropyData::setRemainingNumbers(const std::vector<int>& remainingNumbers) {
         remainingNumbers_ = remainingNumbers;
-    }
-
-    void EntropyData::setMaxEntropy(const int maxEntropy) {
-        maxEntropy_ = maxEntropy;
     }
 
     void EntropyData::resetEntropyData() {

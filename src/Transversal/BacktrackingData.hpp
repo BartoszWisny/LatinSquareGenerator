@@ -14,9 +14,6 @@ namespace Transversal {
             const std::string& getChosenCellId() const;
 
         private:
-            void setRegionId(const std::string& id);
-            void setChosenCellId(const std::string& id);
-
             std::string regionId_, chosenCellId_;
     };
 }

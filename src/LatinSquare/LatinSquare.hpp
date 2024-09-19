@@ -48,19 +48,15 @@ namespace LatinSquare {
             void enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
 
         private:
-            void setSize(const int size);
-
-            void setMersenneTwister(const std::mt19937& mersenneTwister);
-
             bool checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
 
             bool checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
             bool checkIfRelatedRegion(const Cell& cell, const Region& region) const;
 
             int size_;
+            // consider using std::unique_ptr for Cell and Region
             std::vector<Cell> grid_;
             std::vector<Region> regions_;
-
             std::mt19937 mersenneTwister_;
     };
 }

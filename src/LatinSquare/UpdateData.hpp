@@ -17,11 +17,6 @@ namespace LatinSquare {
             const std::set<std::string>& getUpdatedCellsIds() const;
 
         private:
-            void setFilledCellId(const std::string& id);
-            void setFilledCellNumber(const int number);
-            void setPreviousEntropyData(const EntropyData& entropyData);
-            void setUpdatedCellsIds(const std::set<std::string>& ids);
-
             std::string filledCellId_;
             int filledCellNumber_;
             EntropyData previousEntropyData_;

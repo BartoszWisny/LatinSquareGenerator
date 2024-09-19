@@ -2,24 +2,20 @@
 
 #include <algorithm>
 #include <iterator>
+#include <limits>
 #include <map>
 
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
-    LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister) {
-        setSize(size);
+    LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister)
+        : size_(size), mersenneTwister_(mersenneTwister) {
         setGrid(reduced);
-        setMersenneTwister(mersenneTwister);
         shuffleGrid();
     }
 
     int LatinSquare::getSize() const {
         return size_;
-    }
-
-    void LatinSquare::setSize(const int size) {
-        size_ = size;
     }
 
     const std::vector<Cell>& LatinSquare::getGrid() const {
@@ -39,7 +35,6 @@ namespace LatinSquare {
         return regions_;
     }
 
-    // consider using maps instead of vectors for cells for relevant regions
     void LatinSquare::setRegions() {
         regions_.reserve(3 * size_);
 
@@ -48,7 +43,7 @@ namespace LatinSquare {
         columnCells.reserve(size_);
         numberCells.reserve(size_);
 
-        auto rowRegion = std::string("R"), columnRegion = std::string("C"), numberRegion = std::string("#");
+        const auto rowRegion = "R", columnRegion = "C", numberRegion = "#";
 
         for (int index = 1; index <= size_; ++index) {
             rowCells.clear();
@@ -70,16 +65,17 @@ namespace LatinSquare {
             }
 
             const auto indexString = std::to_string(index);
+            std::string rowId = rowRegion;
+            rowId += indexString;
+            std::string columnId = columnRegion;
+            columnId += indexString;
+            std::string numberId = numberRegion;
+            numberId += indexString;
 
-            // check if string concatenation using + operator can be replaced
-            regions_.emplace_back(Region(rowRegion + indexString, size_, rowCells));
-            regions_.emplace_back(Region(columnRegion + indexString, size_, columnCells));
-            regions_.emplace_back(Region(numberRegion + indexString, size_, numberCells));
+            regions_.emplace_back(Region(rowId, size_, rowCells));
+            regions_.emplace_back(Region(columnId, size_, columnCells));
+            regions_.emplace_back(Region(numberId, size_, numberCells));
         }
-    }
-
-    void LatinSquare::setMersenneTwister(const std::mt19937& mersenneTwister) {
-        mersenneTwister_ = mersenneTwister;
     }
 
     void LatinSquare::sortGrid() {
@@ -102,16 +98,22 @@ namespace LatinSquare {
         return *iterator;
     }
 
+    // consider using map for cells - key should be cell id
     const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCells(const std::set<std::string>& ids) {
         std::vector<std::reference_wrapper<Cell>> cells;
+        cells.reserve(ids.size());
+
         std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
                      [&ids](const auto& cell) { return ids.contains(cell.getId()); });
 
         return cells;
     }
 
+    // consider using map for regions - key should be region id
     const std::vector<std::reference_wrapper<Region>> LatinSquare::getRegions(const std::set<std::string>& ids) {
         std::vector<std::reference_wrapper<Region>> regions;
+        regions.reserve(ids.size());
+
         std::copy_if(regions_.begin(), regions_.end(), std::back_inserter(regions),
                      [&ids](const auto& region) { return ids.contains(region.getId()); });
 
@@ -123,22 +125,32 @@ namespace LatinSquare {
     }
 
     Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() {
-        std::sort(grid_.begin(), grid_.end(),
-                  [](const auto& firstCell, const auto& secondCell) {
-                      return firstCell.getEntropy() < secondCell.getEntropy();
-                  });
-        const auto& iterator = std::find_if(
-            grid_.begin(), grid_.end(), [](const auto& cell) { return cell.getNumber() == 0; });
+        Cell* iterator = nullptr;
+        auto minEntropy = std::numeric_limits<int>::max();
+
+        for (auto& cell : grid_) {
+            if (cell.getNumber() == 0) {
+                const auto entropy = cell.getEntropy();
+
+                if (entropy < minEntropy) {
+                    minEntropy = entropy;
+                    iterator = &cell;
+                }
+            }
+        }
 
         return *iterator;
     }
 
+    // consider adding check: cell.getNumber() == 0
     bool LatinSquare::checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const {
         return (filledCell.getRow() == cell.getRow()) ^ (filledCell.getColumn() == cell.getColumn());
     }
 
     const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCellsRelatedToFilledCell(const Cell& filledCell) {
         std::vector<std::reference_wrapper<Cell>> cells;
+        cells.reserve(2 * size_ - 1);
+
         std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
                      [this, &filledCell](const auto& cell) { return checkIfRelatedToFilledCell(filledCell, cell); });
 

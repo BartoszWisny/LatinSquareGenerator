@@ -34,11 +34,13 @@ int main() {
     // auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(10, true);
     // latinSquare.sortGrid();
 
+    // const auto& cell = latinSquare.getCell("R2C9");
+
     // // ---
     // auto start = std::chrono::high_resolution_clock::now();
     // // ---
 
-    // latinSquare.setRegions();
+    // latinSquare.getCellsRelatedToFilledCell(cell);
 
     // // ---
     // auto stop = std::chrono::high_resolution_clock::now();
@@ -71,13 +73,14 @@ int main() {
 
     // LatinSquare::printLatinSquareFullIds(latinSquare);
 
-    // return 0;
+    return 0;
 
     // --- TESTING ---
 }
 
-// Improved classes: LatinSquare::BacktrackingData, LatinSquare::Cell, LatinSquare::EntropyData, LatinSquare::UpdateData
-
+// Improved classes:
+// LatinSquare::BacktrackingData, LatinSquare::Cell, LatinSquare::EntropyData, LatinSquare::UpdateData
+// Transversal::BacktrackingData, Transversal::UpdateData
 
 // TODO:
 // - add function to measure time of generating random latin square and random transversal
@@ -86,6 +89,7 @@ int main() {
 // - optimize code where possible
 // - consider using inline (if possible)
 // - consider using std::move
+// - consider implementing move for Cell, Region, etc.
 
 // --- TESTING ---
 // #include <chrono>

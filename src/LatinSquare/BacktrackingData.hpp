@@ -14,9 +14,6 @@ namespace LatinSquare {
             const EntropyData& getPreviousEntropyData() const;
 
         private:
-            void setFilledCellId(const std::string& id);
-            void setPreviousEntropyData(const EntropyData& entropyData);
-
             std::string filledCellId_;
             EntropyData previousEntropyData_;
     };

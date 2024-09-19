@@ -5,10 +5,11 @@
 namespace LatinSquare {
     class EntropyData {
         public:
+            EntropyData();
+            EntropyData(const int maxEntropy);
+
             int getEntropy() const;
             const std::vector<int>& getRemainingNumbers() const;
-
-            void setMaxEntropy(const int maxEntropy);
 
             void resetEntropyData();
             void clearEntropyData();

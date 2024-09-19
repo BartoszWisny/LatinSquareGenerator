@@ -14,9 +14,6 @@ namespace Transversal {
             const std::set<std::string>& getDisabledCellsIds() const;
 
         private:
-            void setChosenCellId(const std::string& id);
-            void setDisabledCellsIds(const std::set<std::string>& ids);
-
             std::string chosenCellId_;
             std::set<std::string> disabledCellsIds_;
     };

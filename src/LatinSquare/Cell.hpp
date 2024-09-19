@@ -8,7 +8,6 @@
 namespace LatinSquare {
     class Cell {
         public:
-            Cell();
             Cell(const int row, const int column, const bool reduced, const int maxEntropy);
 
             int getRow() const;
@@ -35,13 +34,9 @@ namespace LatinSquare {
             void restoreRemainingNumber(const int number);
 
         private:
-            void setRow(const int row);
-            void setColumn(const int column);
             void setNumber(const int number);
             void setIds();
             void setFullId();
-
-            void setMaxEntropy(const int maxEntropy);
 
             int row_, column_, number_;
             std::string rowId_, columnId_, id_, numberId_, fullId_;
