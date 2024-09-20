@@ -17,8 +17,6 @@ namespace LatinSquare {
 
             int getSize() const;
             const std::vector<Cell>& getGrid() const;
-            void setGrid(const bool reduced);
-            const std::vector<Region>& getRegions() const;
             void setRegions();
 
             void sortGrid();
@@ -40,7 +38,7 @@ namespace LatinSquare {
             void disableRelatedCells(const std::vector<std::reference_wrapper<Cell>>& cells);
             void decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);
             const std::set<std::string> getDisabledCellsIds(
-                const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& cell);
+                const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& chosenCell);
             const std::vector<std::reference_wrapper<Region>> getRelatedRegions(const Cell& cell);
             void disableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
             void enableDisabledCells(const std::vector<std::reference_wrapper<Cell>>& cells);
@@ -48,9 +46,11 @@ namespace LatinSquare {
             void enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
 
         private:
-            bool checkIfRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
+            void setGrid(const bool reduced);
 
-            bool checkIfRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
+            bool checkIfNotFilledAndRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
+
+            bool checkIfEnabledAndRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
             bool checkIfRelatedRegion(const Cell& cell, const Region& region) const;
 
             int size_;

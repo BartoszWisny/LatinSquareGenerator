@@ -70,7 +70,7 @@ namespace Transversal {
                 isTransversalCell = checkIfTransversalCell(cell, ids);
 
                 if (cell.getColumn() == 1) {
-                    column = transversal.at(index).get().getColumn();
+                    column = transversal[index].get().getColumn();
 
                     if (cell.getRow() == 1) {
                         std::fill_n(std::ostream_iterator<std::string>(std::cout), column - 1, leftBar);

@@ -12,6 +12,7 @@ namespace LatinSquare {
         std::random_device randomDevice;
         std::mt19937 mersenneTwister(randomDevice());
         auto latinSquare = LatinSquare(size, reduced, mersenneTwister);
+        latinSquare.shuffleGrid();
         int counter = 0;
 
         while (latinSquare.checkIfNotFilledCellExists()) {

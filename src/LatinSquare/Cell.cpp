@@ -2,9 +2,12 @@
 
 namespace LatinSquare {
     // consider using indexes and numbers starting from 0, not 1
-    Cell::Cell(const int row, const int column, const bool reduced, const int maxEntropy)
-        : row_(row), column_(column), number_(0), entropyData_(EntropyData(maxEntropy)), enabled_(true) {
+    Cell::Cell(const int row, const int column, const bool reduced, const int latinSquareSize)
+        : row_(row), column_(column), number_(0), latinSquareSize_(latinSquareSize), rowIdAsInt_(row_),
+          columnIdAsInt_(latinSquareSize_ + column_), numberIdAsInt_(2 * latinSquareSize_ + number_),
+          entropyData_(EntropyData(latinSquareSize_)), enabled_(true) {
         setIds();
+        setFullId();
         reset(reduced);
     }
 
@@ -23,6 +26,7 @@ namespace LatinSquare {
     void Cell::setNumber(const int number) {
         number_ = number;
         setFullId();
+        setNumberIdAsInt();
     }
 
     const std::string& Cell::getRowId() const {
@@ -45,6 +49,24 @@ namespace LatinSquare {
         return fullId_;
     }
 
+    int Cell::getRowIdAsInt() const {
+        return rowIdAsInt_;
+    }
+
+    int Cell::getColumnIdAsInt() const {
+        return columnIdAsInt_;
+    }
+
+    int Cell::getNumberIdAsInt() const {
+        return numberIdAsInt_;
+    }
+
+    void Cell::setNumberIdAsInt() {
+        numberIdAsInt_ = latinSquareSize_;
+        numberIdAsInt_ <<= 1;
+        numberIdAsInt_ += number_;
+    }
+
     void Cell::setIds() {
         rowId_ = 'R';
         rowId_.append(std::to_string(row_));
@@ -52,7 +74,6 @@ namespace LatinSquare {
         columnId_.append(std::to_string(column_));
         id_ = rowId_;
         id_.append(columnId_);
-        setFullId();
     }
 
     void Cell::setFullId() {

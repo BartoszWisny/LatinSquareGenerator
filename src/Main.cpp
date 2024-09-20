@@ -32,15 +32,12 @@ int main() {
     // std::mt19937 mersenneTwister(randomDevice());
     // auto latinSquareGenerator = LatinSquare::Generator();
     // auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(10, true);
-    // latinSquare.sortGrid();
-
-    // const auto& cell = latinSquare.getCell("R2C9");
 
     // // ---
     // auto start = std::chrono::high_resolution_clock::now();
     // // ---
 
-    // latinSquare.getCellsRelatedToFilledCell(cell);
+    // LatinSquare::printLatinSquareBoard(latinSquare);
 
     // // ---
     // auto stop = std::chrono::high_resolution_clock::now();
@@ -48,38 +45,14 @@ int main() {
     // std::cout << "Time: " << duration << std::endl;
     // // ---
 
-    // // auto transversalGenerator = Transversal::Generator();
-    // // auto transversal = transversalGenerator.findRandomTransversal(latinSquare);
-    // // // Transversal::printTransversalFullIds(transversal);
-    // // Transversal::printTransversalBoard(latinSquare, transversal);
-
-
-    // for (auto region : latinSquare.getRegions()) {
-    //     std::cout << region.getId() << ": entropy: " << region.getEntropy() << ", enabled cells: ";
-    //     const auto enabledCells = region.getEnabledCells();
-    //     std::set<std::string> enabledCellsIds;
-    //     std::transform(enabledCells.cbegin(), enabledCells.cend(),
-    //                     std::inserter(enabledCellsIds, enabledCellsIds.cend()),
-    //                     [](const auto& cellRef) { return cellRef.get().getFullId(); });
-
-    //     for (auto cellId : enabledCellsIds) {
-    //         std::cout << cellId << " ";
-    //     }
-
-    //     std::cout << ", enabled: " << region.isEnabled() << std::endl;
-    // }
-
-
-
-    // LatinSquare::printLatinSquareFullIds(latinSquare);
-
     return 0;
 
     // --- TESTING ---
 }
 
 // Improved classes:
-// LatinSquare::BacktrackingData, LatinSquare::Cell, LatinSquare::EntropyData, LatinSquare::UpdateData
+// LatinSquare::BacktrackingData, LatinSquare::Cell, LatinSquare::EntropyData, LatinSquare::LatinSquare,
+//     LatinSquare::Region, LatinSquare::UpdateData, LatinSquare::Utils
 // Transversal::BacktrackingData, Transversal::UpdateData
 
 // TODO:
@@ -90,6 +63,7 @@ int main() {
 // - consider using inline (if possible)
 // - consider using std::move
 // - consider implementing move for Cell, Region, etc.
+// - replace set with vector where possible
 
 // --- TESTING ---
 // #include <chrono>

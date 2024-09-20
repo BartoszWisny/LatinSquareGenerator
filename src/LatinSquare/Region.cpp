@@ -3,28 +3,33 @@
 #include <algorithm>
 #include <iterator>
 
+
+
+#include <iostream>
+
 namespace LatinSquare {
-    Region::Region(const std::string& id, const int entropy, const std::vector<std::reference_wrapper<Cell>> cells) {
-        setId(id);
-        setEntropy(entropy);
-        setCells(cells);
-        enable();
+    Region::Region(
+        const std::string& id, const int latinSquareSize, const std::vector<std::reference_wrapper<Cell>> cells)
+        : id_(id), latinSquareSize_(latinSquareSize), entropy_(latinSquareSize_), cells_(cells), enabled_(true) {
+        setIdAsInt(id);
     }
 
     const std::string& Region::getId() const {
         return id_;
     }
 
-    void Region::setId(const std::string& id) {
-        id_ = id;
+    int Region::getIdAsInt() const {
+        return idAsInt_;
+    }
+
+    void Region::setIdAsInt(const std::string& id) {
+        idAsInt_ = id[0] == 'R' ? 0 : latinSquareSize_;
+        idAsInt_ <<= (id[0] == '#');
+        idAsInt_ += std::atoi(id.c_str() + 1);
     }
 
     int Region::getEntropy() const {
         return entropy_;
-    }
-
-    void Region::setEntropy(const int entropy) {
-        entropy_ = entropy;
     }
 
     void Region::decreaseEntropyBy(const int number) {
@@ -35,20 +40,12 @@ namespace LatinSquare {
         entropy_ += number;
     }
 
-    const std::vector<std::reference_wrapper<Cell>>& Region::getCells() const {
-        return cells_;
-    }
-
     const std::vector<std::reference_wrapper<Cell>> Region::getEnabledCells() const {
         std::vector<std::reference_wrapper<Cell>> cells;
         std::copy_if(cells_.cbegin(), cells_.cend(), std::back_inserter(cells),
                      [](const auto& cell) { return cell.get().isEnabled(); });
 
         return cells;
-    }
-
-    void Region::setCells(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        cells_ = cells;
     }
 
     bool Region::isEnabled() const {

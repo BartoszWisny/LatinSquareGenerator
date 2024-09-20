@@ -1,58 +1,58 @@
 #include "Utils.hpp"
 
-#include <algorithm>
 #include <cmath>
-#include <format>
 #include <iostream>
-#include <iterator>
 #include <string>
+#include <sstream>
+
+#include <cpp/string.hpp>
 
 namespace LatinSquare {
     void printLatinSquareFullIds(LatinSquare& latinSquare) {
         latinSquare.sortGrid();
-
         const auto& grid = latinSquare.getGrid();
 
-        std::cout << std::endl;
+        std::ostringstream ostringstream;
+        ostringstream << '\n';
 
         for (const auto& cell : grid) {
-            std::cout << cell.getFullId() << std::endl;
+            ostringstream << cell.getFullId() << '\n';
         }
 
-        std::cout << std::endl;
+        ostringstream << '\n';
+        std::cout << ostringstream.str();
     }
 
     void printLatinSquareBoard(LatinSquare& latinSquare) {
         latinSquare.sortGrid();
-
         const auto& grid = latinSquare.getGrid();
         const auto size = latinSquare.getSize();
 
-        const auto leftBar = std::format("+{}", std::string(int(log10(size) + 1) + 2, '-'));
+        std::string leftBar = "+";
+        leftBar.append(std::string(static_cast<int>(std::log10(size) + 1) + 2, '-'));
         auto number = 0;
         std::string spaces = "";
 
-        std::cout << std::endl;
+        std::ostringstream ostringstream;
+        ostringstream << '\n';
 
         for (const auto& cell : grid) {
             if (cell.getColumn() == 1) {
-                std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftBar);
-                std::cout << "+" << std::endl;
+                ostringstream << cpp::repeat(leftBar, size) << "+\n";
             }
 
             number = cell.getNumber();
-            spaces = std::string(int(log10(size)) - int(log10(number)) + 1, ' ');
+            spaces = std::string(static_cast<int>(std::log10(size)) - static_cast<int>(std::log10(number)) + 1, ' ');
 
-            std::cout << "|" << spaces << number << " ";
+            ostringstream << '|' << spaces << number << ' ';
 
             if (cell.getColumn() == size) {
-                std::cout << "|" << std::endl;
+                ostringstream << "|\n";
             }
         }
 
-        std::fill_n(std::ostream_iterator<std::string>(std::cout), size, leftBar);
-        std::cout << "+" << std::endl;
-        std::cout << std::endl;
+        ostringstream << cpp::repeat(leftBar, size) << "+\n\n";
+        std::cout << ostringstream.str();
     }
 }
 
