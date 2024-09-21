@@ -1,9 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 
 namespace cpp {
-    std::ostream& bold_on(std::ostream& ostream);
-    std::ostream& green_on(std::ostream& ostream);
-    std::ostream& reset(std::ostream& ostream);
+    const std::string bold_on();
+    const std::string green_on();
+    const std::string reset();
 }

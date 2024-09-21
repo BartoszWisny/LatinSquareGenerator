@@ -1,11 +1,8 @@
 #include "Region.hpp"
 
 #include <algorithm>
-#include <iterator>
 
-
-
-#include <iostream>
+#include <cpp/iterator.hpp>
 
 namespace LatinSquare {
     Region::Region(
@@ -42,8 +39,10 @@ namespace LatinSquare {
 
     const std::vector<std::reference_wrapper<Cell>> Region::getEnabledCells() const {
         std::vector<std::reference_wrapper<Cell>> cells;
-        std::copy_if(cells_.cbegin(), cells_.cend(), std::back_inserter(cells),
-                     [](const auto& cell) { return cell.get().isEnabled(); });
+        cells.reserve(latinSquareSize_);
+
+        std::copy_if(cells_.cbegin(), cells_.cend(), cpp::back_emplacer(cells),
+                     [](const auto& cellRef) { return cellRef.get().isEnabled(); });
 
         return cells;
     }

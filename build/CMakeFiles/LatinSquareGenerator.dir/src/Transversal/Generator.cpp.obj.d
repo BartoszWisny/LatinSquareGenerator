@@ -80,11 +80,38 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/array \
- C:/msys64/ucrt64/include/c++/14.1.0/stack \
- C:/msys64/ucrt64/include/c++/14.1.0/deque \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_deque.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/deque.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_stack.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/random \
+ C:/msys64/ucrt64/include/c++/14.1.0/cmath \
+ C:/msys64/ucrt64/include/math.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/std_abs.h \
+ C:/msys64/ucrt64/include/stdlib.h \
+ C:/msys64/ucrt64/include/corecrt_wstdlib.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/limits.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h \
+ C:/msys64/ucrt64/include/limits.h \
+ C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/stdlib.h \
+ C:/msys64/ucrt64/include/malloc.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h \
+ C:/msys64/ucrt64/include/errno.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/specfun.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/limits \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/gamma.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/special_function_util.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/bessel_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/beta_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/ell_integral.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/exp_integral.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/hypergeometric.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/legendre_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/modified_bessel_func.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_hermite.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_laguerre.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/riemann_zeta.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdint.h \
+ C:/msys64/ucrt64/include/stdint.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdlib \
  C:/msys64/ucrt64/include/c++/14.1.0/string \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stringfwd.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/char_traits.h \
@@ -92,7 +119,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/cwchar \
  C:/msys64/ucrt64/include/wchar.h \
  C:/msys64/ucrt64/include/corecrt_stdio_config.h \
- C:/msys64/ucrt64/include/corecrt_wstdlib.h \
  C:/msys64/ucrt64/include/_mingw_off_t.h \
  C:/msys64/ucrt64/include/_mingw_stat64.h \
  C:/msys64/ucrt64/include/swprintf.inl \
@@ -111,46 +137,10 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/string_view \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/string_view.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/ext/string_conversions.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdlib \
- C:/msys64/ucrt64/include/stdlib.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/limits.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h \
- C:/msys64/ucrt64/include/limits.h \
- C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
- C:/msys64/ucrt64/include/c++/14.1.0/stdlib.h \
- C:/msys64/ucrt64/include/malloc.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h \
- C:/msys64/ucrt64/include/errno.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/std_abs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/cstdio \
  C:/msys64/ucrt64/include/c++/14.1.0/cerrno \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\BacktrackingData.hpp \
- C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Cell.hpp \
- C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/EntropyData.hpp \
- C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Region.hpp \
- C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/LatinSquare.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/random \
- C:/msys64/ucrt64/include/c++/14.1.0/cmath \
- C:/msys64/ucrt64/include/math.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/specfun.h \
- C:/msys64/ucrt64/include/c++/14.1.0/limits \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/gamma.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/special_function_util.h \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/bessel_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/beta_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/ell_integral.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/exp_integral.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/hypergeometric.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/legendre_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/modified_bessel_func.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_hermite.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_laguerre.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/riemann_zeta.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdint.h \
- C:/msys64/ucrt64/include/stdint.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/random.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/uniform_int_dist.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/opt_random.h \
@@ -164,38 +154,14 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_numeric.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
- C:/msys64/ucrt64/include/c++/14.1.0/set \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\UpdateData.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/iterator \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stream_iterator.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf_iterator.h \
- C:/msys64/ucrt64/include/c++/14.1.0/streambuf \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
- C:/msys64/ucrt64/include/c++/14.1.0/ext/atomicity.h \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr.h \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr-default.h \
- C:/msys64/ucrt64/include/pthread.h C:/msys64/ucrt64/include/sys/types.h \
- C:/msys64/ucrt64/include/process.h \
- C:/msys64/ucrt64/include/corecrt_startup.h \
- C:/msys64/ucrt64/include/signal.h \
- C:/msys64/ucrt64/include/pthread_signal.h \
- C:/msys64/ucrt64/include/time.h C:/msys64/ucrt64/include/sys/timeb.h \
- C:/msys64/ucrt64/include/sec_api/sys/timeb_s.h \
- C:/msys64/ucrt64/include/_timeval.h \
- C:/msys64/ucrt64/include/pthread_time.h \
- C:/msys64/ucrt64/include/pthread_compat.h \
- C:/msys64/ucrt64/include/pthread_unistd.h \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/atomic_word.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/system_error \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
- C:/msys64/ucrt64/include/c++/14.1.0/stdexcept \
- C:/msys64/ucrt64/include/c++/14.1.0/exception \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/exception_ptr.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_init_exception.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/nested_exception.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/streambuf.tcc
+ C:/msys64/ucrt64/include/c++/14.1.0/stack \
+ C:/msys64/ucrt64/include/c++/14.1.0/deque \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_deque.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/deque.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_stack.h \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\BacktrackingData.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Cell.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/EntropyData.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Region.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/LatinSquare.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\UpdateData.hpp

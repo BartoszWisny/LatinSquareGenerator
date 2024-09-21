@@ -155,10 +155,6 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Utils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_numeric.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
- C:/msys64/ucrt64/include/c++/14.1.0/set \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tree.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_set.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_multiset.h \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Cell.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Region.hpp \
@@ -204,6 +200,4 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Utils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/istream \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/sstream \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/sstream.tcc \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/cpp/string.hpp

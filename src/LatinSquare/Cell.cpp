@@ -1,7 +1,6 @@
 #include "Cell.hpp"
 
 namespace LatinSquare {
-    // consider using indexes and numbers starting from 0, not 1
     Cell::Cell(const int row, const int column, const bool reduced, const int latinSquareSize)
         : row_(row), column_(column), number_(0), latinSquareSize_(latinSquareSize), rowIdAsInt_(row_),
           columnIdAsInt_(latinSquareSize_ + column_), numberIdAsInt_(2 * latinSquareSize_ + number_),

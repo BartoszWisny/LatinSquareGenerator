@@ -1,6 +1,7 @@
 #pragma once
 
 #include <functional>
+#include <random>
 #include <stack>
 #include <string>
 #include <vector>
@@ -14,7 +15,7 @@ namespace Transversal {
     class Generator {
         public:
             const std::vector<std::reference_wrapper<LatinSquare::Cell>> findRandomTransversal(
-                LatinSquare::LatinSquare& latinSquare);
+                LatinSquare::LatinSquare& latinSquare, std::mt19937& mersenneTwister);
 
         private:
             bool checkIfAddToBacktrackingHistory(const LatinSquare::Cell& cell) const;

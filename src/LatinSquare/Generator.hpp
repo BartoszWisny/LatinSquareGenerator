@@ -1,5 +1,6 @@
 #pragma once
 
+#include <random>
 #include <stack>
 
 #include "BacktrackingData.hpp"
@@ -10,7 +11,8 @@
 namespace LatinSquare {
     class Generator {
         public:
-            const LatinSquare generateRandomLatinSquare(const int size, const bool reduced);
+            const LatinSquare generateRandomLatinSquare(
+                const int size, const bool reduced, std::mt19937& mersenneTwister);
 
         private:
             bool checkIfAddToBacktrackingHistory(const Cell& cell) const;

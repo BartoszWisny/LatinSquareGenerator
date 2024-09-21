@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp
 
-CXX_FLAGS = -Wall -Wextra -pthread -g -std=c++20
+CXX_FLAGS = -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20
 

@@ -1,9 +1,5 @@
 #include "Generator.hpp"
 
-#include <iterator>
-#include <random>
-#include <set>
-
 namespace Transversal {
     bool Generator::checkIfAddToBacktrackingHistory(const LatinSquare::Cell& cell) const {
         return backtrackingHistory_.empty() || cell.getId() != backtrackingHistory_.top().getChosenCellId();
@@ -14,11 +10,10 @@ namespace Transversal {
     }
 
     const std::vector<std::reference_wrapper<LatinSquare::Cell>> Generator::findRandomTransversal(
-        LatinSquare::LatinSquare& latinSquare) {
-        std::random_device randomDevice;
-        std::mt19937 mersenneTwister(randomDevice());
-        std::vector<std::reference_wrapper<LatinSquare::Cell>> transversal;
+        LatinSquare::LatinSquare& latinSquare, std::mt19937& mersenneTwister) {
         const unsigned size = latinSquare.getSize();
+        std::vector<std::reference_wrapper<LatinSquare::Cell>> transversal;
+        transversal.reserve(size);
         int counter = 0;
 
         while (transversal.size() < size) {
@@ -28,11 +23,9 @@ namespace Transversal {
                 counter = 0;
 
                 const auto cells = region.getEnabledCells();
-                auto iterator = cells.cbegin();
-                std::advance(iterator, mersenneTwister() % cells.size());
-                auto& cell = (*iterator).get();
+                auto& cell = cells[mersenneTwister() % cells.size()].get();
 
-                transversal.emplace_back(*iterator);
+                transversal.emplace_back(cell);
                 const auto relatedCells = latinSquare.getCellsRelatedToChosenCell(cell);
                 latinSquare.disableRelatedCells(relatedCells);
                 latinSquare.decreaseRelatedRegionsEntropy(relatedCells);
@@ -40,10 +33,10 @@ namespace Transversal {
                 const auto relatedRegions = latinSquare.getRelatedRegions(cell);
                 latinSquare.disableRelatedRegions(relatedRegions);
 
-                updateHistory_.push(UpdateData(cell, disabledCellsIds));
+                updateHistory_.emplace(cell, disabledCellsIds);
 
                 if (checkIfAddToBacktrackingHistory(cell)) {
-                    backtrackingHistory_.push(BacktrackingData(region, cell));
+                    backtrackingHistory_.emplace(region, cell);
                 }
             } else {
                 ++counter;
@@ -52,14 +45,17 @@ namespace Transversal {
                     auto backtrackingData = backtrackingHistory_.top();
                     backtrackingHistory_.pop();
 
-                    std::set<std::string> disabledCellsIds = {backtrackingData.getChosenCellId()};
+                    std::vector<std::string> disabledCellsIds;
+                    disabledCellsIds.reserve(size);
+                    disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
+
                     const auto& regionId = backtrackingData.getRegionId();
 
                     while (checkIfRemoveFromBacktrackingHistory(regionId)) {
                         backtrackingData = backtrackingHistory_.top();
                         backtrackingHistory_.pop();
 
-                        disabledCellsIds.insert(backtrackingData.getChosenCellId());
+                        disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
                     }
 
                     const auto disabledCells = latinSquare.getCells(disabledCellsIds);

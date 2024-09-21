@@ -1,9 +1,9 @@
 #include "Utils.hpp"
 
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 #include <string>
-#include <sstream>
 
 #include <cpp/string.hpp>
 
@@ -12,15 +12,18 @@ namespace LatinSquare {
         latinSquare.sortGrid();
         const auto& grid = latinSquare.getGrid();
 
-        std::ostringstream ostringstream;
-        ostringstream << '\n';
+        std::string fullId;
+
+        std::cout.put('\n');
 
         for (const auto& cell : grid) {
-            ostringstream << cell.getFullId() << '\n';
+            fullId = cell.getFullId();
+
+            std::cout.write(fullId.c_str(), fullId.size());
+            std::cout.put('\n');
         }
 
-        ostringstream << '\n';
-        std::cout << ostringstream.str();
+        std::cout.put('\n');
     }
 
     void printLatinSquareBoard(LatinSquare& latinSquare) {
@@ -28,31 +31,39 @@ namespace LatinSquare {
         const auto& grid = latinSquare.getGrid();
         const auto size = latinSquare.getSize();
 
-        std::string leftBar = "+";
-        leftBar.append(std::string(static_cast<int>(std::log10(size) + 1) + 2, '-'));
+        std::string leftBar = "+", repeatedLeftBar, spaces, numberString;
         auto number = 0;
-        std::string spaces = "";
+        leftBar.append(std::string(static_cast<int>(std::log10(size) + 1) + 2, '-'));
+        repeatedLeftBar = cpp::repeat(leftBar, size);
 
-        std::ostringstream ostringstream;
-        ostringstream << '\n';
+        std::cout.put('\n');
 
         for (const auto& cell : grid) {
             if (cell.getColumn() == 1) {
-                ostringstream << cpp::repeat(leftBar, size) << "+\n";
+                std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                std::cout.put('+');
+                std::cout.put('\n');
             }
 
             number = cell.getNumber();
             spaces = std::string(static_cast<int>(std::log10(size)) - static_cast<int>(std::log10(number)) + 1, ' ');
+            numberString = std::to_string(number);
 
-            ostringstream << '|' << spaces << number << ' ';
+            std::cout.put('|');
+            std::cout.write(spaces.c_str(), spaces.size());
+            std::cout.write(numberString.c_str(), numberString.size());
+            std::cout.put(' ');
 
             if (cell.getColumn() == size) {
-                ostringstream << "|\n";
+                std::cout.put('|');
+                std::cout.put('\n');
             }
         }
 
-        ostringstream << cpp::repeat(leftBar, size) << "+\n\n";
-        std::cout << ostringstream.str();
+        std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+        std::cout.put('+');
+        std::cout.put('\n');
+        std::cout.put('\n');
     }
 }
 

@@ -2,11 +2,11 @@
 
 #include <algorithm>
 #include <cmath>
-#include <format>
+#include <cstddef>
 #include <iostream>
-#include <iterator>
 
 #include <cpp/iostream.hpp>
+#include <cpp/string.hpp>
 
 namespace Transversal {
     void sortTransversal(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal) {
@@ -18,53 +18,65 @@ namespace Transversal {
 
     void printTransversalFullIds(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal) {
         if (transversal.empty()) {
-            std::cout << "Transversal was not found" << std::endl << std::endl;
+            const std::string info = "Transversal was not found";
+
+            std::cout.write(info.c_str(), info.size());
+            std::cout.put('\n');
+            std::cout.put('\n');
         } else {
             sortTransversal(transversal);
 
-            std::cout << std::endl;
+            std::string fullId;
+
+            std::cout.put('\n');
 
             for (const auto& cellRef : transversal) {
-                std::cout << cellRef.get().getFullId() << std::endl;
+                fullId = cellRef.get().getFullId();
+
+                std::cout.write(fullId.c_str(), fullId.size());
+                std::cout.put('\n');
             }
 
-            std::cout << std::endl;
+            std::cout.put('\n');
         }
     }
 
-    bool checkIfTransversalCell(const LatinSquare::Cell& cell, const std::set<std::string>& ids) {
-        return ids.contains(cell.getFullId());
+    bool checkIfTransversalCell(const LatinSquare::Cell& cell, const std::vector<std::string>& ids) {
+        return std::find(ids.cbegin(), ids.cend(), cell.getFullId()) != ids.cend();
     }
 
     void printTransversalBoard(
         LatinSquare::LatinSquare& latinSquare, std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal) {
         if (transversal.empty()) {
-            std::cout << "Transversal was not found" << std::endl << std::endl;
+            const std::string info = "Transversal was not found";
+
+            std::cout.write(info.c_str(), info.size());
+            std::cout.put('\n');
+            std::cout.put('\n');
         } else {
             latinSquare.sortGrid();
             sortTransversal(transversal);
 
             const auto& grid = latinSquare.getGrid();
             const auto size = latinSquare.getSize();
-            std::set<std::string> ids;
-            std::transform(transversal.cbegin(), transversal.cend(), std::inserter(ids, ids.cend()),
-                           [](const auto& cellRef) { return cellRef.get().getFullId(); });
+            std::vector<std::string> ids;
+            ids.reserve(transversal.size());
 
-            const auto barLength = int(log10(size) + 1) + 2;
-            const auto longBar = std::format("+{}+", std::string(barLength, '-'));
-            const auto leftBar = std::format("+{}", std::string(barLength, '-'));
-            const auto rightBar = std::format("{}+", std::string(barLength, '-'));
-            const auto shortBar = std::format("{}", std::string(barLength, '-'));
-            auto isTransversalCell = false;
-            auto isTransversalPreviousCell = false;
-            auto index = 0;
-            auto column = 0;
-            auto previousColumn = 0;
-            auto difference = 0;
-            auto number = 0;
-            std::string spaces = "";
+            for (const auto& cellRef : transversal) {
+                ids.emplace_back(cellRef.get().getFullId());
+            }
 
-            std::cout << std::endl;
+            const auto barLength = static_cast<int>(std::log10(size) + 1) + 2;
+            std::string shortBar = std::string(barLength, '-'), longBar = "+", leftBar = "+", rightBar = shortBar,
+                repeatedLeftBar, spaces, numberString;
+            auto isTransversalCell = false, isTransversalPreviousCell = false;
+            auto index = 0, column = 0, previousColumn = 0, difference = 0, number = 0;
+            longBar.append(shortBar);
+            longBar.append("+");
+            leftBar.append(shortBar);
+            rightBar.append("+");
+
+            std::cout.put('\n');
 
             for (const auto& cell : grid) {
                 isTransversalCell = checkIfTransversalCell(cell, ids);
@@ -73,61 +85,91 @@ namespace Transversal {
                     column = transversal[index].get().getColumn();
 
                     if (cell.getRow() == 1) {
-                        std::fill_n(std::ostream_iterator<std::string>(std::cout), column - 1, leftBar);
-                        std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
+                        repeatedLeftBar = cpp::repeat(leftBar, column - 1);
+                        std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                        std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+                        std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+                        std::cout.write(longBar.c_str(), longBar.size());
+                        std::cout.write(cpp::reset().c_str(), cpp::reset().size());
 
                         if (column != size) {
-                            std::cout << shortBar;
-                            std::fill_n(std::ostream_iterator<std::string>(std::cout), size - column - 1, leftBar);
-                            std::cout << "+";
+                            repeatedLeftBar = cpp::repeat(leftBar, size - column - 1);
+
+                            std::cout.write(shortBar.c_str(), shortBar.size());
+                            std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                            std::cout.put('+');
                         }
 
-                        std::cout << std::endl;
+                        std::cout.put('\n');
                     } else {
                         const auto [firstColumn, secondColumn] = std::minmax(previousColumn, column);
                         difference = secondColumn - firstColumn - 1;
+                        repeatedLeftBar = cpp::repeat(leftBar, firstColumn - 1);
 
-                        std::fill_n(std::ostream_iterator<std::string>(std::cout), firstColumn - 1, leftBar);
-                        std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
+                        std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                        std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+                        std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+                        std::cout.write(longBar.c_str(), longBar.size());
+                        std::cout.write(cpp::reset().c_str(), cpp::reset().size());
 
                         if (difference == 0) {
-                            std::cout << cpp::bold_on << cpp::green_on << rightBar << cpp::reset;
+                            std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+                            std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+                            std::cout.write(rightBar.c_str(), rightBar.size());
+                            std::cout.write(cpp::reset().c_str(), cpp::reset().size());
                         } else {
-                            std::cout << shortBar;
-                            std::fill_n(std::ostream_iterator<std::string>(std::cout), difference - 1, leftBar);
-                            std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
+                            repeatedLeftBar = cpp::repeat(leftBar, difference - 1);
+
+                            std::cout.write(shortBar.c_str(), shortBar.size());
+                            std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                            std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+                            std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+                            std::cout.write(longBar.c_str(), longBar.size());
+                            std::cout.write(cpp::reset().c_str(), cpp::reset().size());
                         }
 
                         if (secondColumn != size) {
-                            std::cout << shortBar;
-                            std::fill_n(std::ostream_iterator<std::string>(std::cout), size - secondColumn - 1,
-                                        leftBar);
-                            std::cout << "+";
+                            repeatedLeftBar = cpp::repeat(leftBar, size - secondColumn - 1);
+
+                            std::cout.write(shortBar.c_str(), shortBar.size());
+                            std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                            std::cout.put('+');
                         }
 
-                        std::cout << std::endl;
+                        std::cout.put('\n');
                     }
                 }
 
                 number = cell.getNumber();
-                spaces = std::string(int(log10(size)) - int(log10(number)) + 1, ' ');
+                spaces =
+                    std::string(static_cast<int>(std::log10(size)) - static_cast<int>(std::log10(number)) + 1, ' ');
+                numberString = std::to_string(number);
 
                 if (isTransversalCell) {
-                    std::cout << cpp::bold_on << cpp::green_on << "|" << spaces << number << " |" << cpp::reset;
+                    std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+                    std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+                    std::cout.put('|');
+                    std::cout.write(spaces.c_str(), spaces.size());
+                    std::cout.write(numberString.c_str(), numberString.size());
+                    std::cout.put(' ');
+                    std::cout.put('|');
+                    std::cout.write(cpp::reset().c_str(), cpp::reset().size());
                 } else {
                     if (!isTransversalPreviousCell) {
-                        std::cout << "|";
+                        std::cout.put('|');
                     }
 
-                    std::cout << spaces << number << " ";
+                    std::cout.write(spaces.c_str(), spaces.size());
+                    std::cout.write(numberString.c_str(), numberString.size());
+                    std::cout.put(' ');
                 }
 
                 if (cell.getColumn() == size) {
                     if (!isTransversalCell) {
-                        std::cout << "|";
+                        std::cout.put('|');
                     }
 
-                    std::cout << std::endl;
+                    std::cout.put('\n');
 
                     isTransversalPreviousCell = false;
                     previousColumn = column;
@@ -137,17 +179,23 @@ namespace Transversal {
                 }
             }
 
-            std::fill_n(std::ostream_iterator<std::string>(std::cout), column - 1, leftBar);
-            std::cout << cpp::bold_on << cpp::green_on << longBar << cpp::reset;
+            repeatedLeftBar = cpp::repeat(leftBar, column - 1);
+
+            std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+            std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
+            std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
+            std::cout.write(longBar.c_str(), longBar.size());
+            std::cout.write(cpp::reset().c_str(), cpp::reset().size());
 
             if (column != size) {
-                std::cout << shortBar;
-                std::fill_n(std::ostream_iterator<std::string>(std::cout), size - column - 1,
-                            leftBar);
-                std::cout << "+";
+                repeatedLeftBar = cpp::repeat(leftBar, size - column - 1);
+
+                std::cout.write(shortBar.c_str(), shortBar.size());
+                std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+                std::cout.put('+');
             }
 
-            std::cout << std::endl;
+            std::cout.put('\n');
         }
     }
 }

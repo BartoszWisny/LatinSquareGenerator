@@ -6,7 +6,7 @@ namespace cpp {
         repeated.reserve(repeats * string.size());
 
         while (repeats--) {
-            repeated += string;
+            repeated.append(string);
         }
 
         return repeated;

@@ -1,7 +1,7 @@
 #include "UpdateData.hpp"
 
 namespace LatinSquare {
-    UpdateData::UpdateData(const Cell& cell, const EntropyData& entropyData, const std::set<std::string>& ids)
+    UpdateData::UpdateData(const Cell& cell, const EntropyData& entropyData, const std::vector<std::string>& ids)
         : filledCellId_(cell.getId()), filledCellNumber_(cell.getNumber()), previousEntropyData_(entropyData),
           updatedCellsIds_(ids) {}
 
@@ -17,7 +17,7 @@ namespace LatinSquare {
         return previousEntropyData_;
     }
 
-    const std::set<std::string>& UpdateData::getUpdatedCellsIds() const {
+    const std::vector<std::string>& UpdateData::getUpdatedCellsIds() const {
         return updatedCellsIds_;
     }
 }

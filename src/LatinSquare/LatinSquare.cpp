@@ -1,14 +1,14 @@
 #include "LatinSquare.hpp"
 
 #include <algorithm>
-#include <iterator>
 #include <limits>
-#include <map>
+
+#include <cpp/iterator.hpp>
 
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
-    LatinSquare::LatinSquare(const int size, const bool reduced, const std::mt19937& mersenneTwister)
+    LatinSquare::LatinSquare(const int size, const bool reduced, std::mt19937& mersenneTwister)
         : size_(size), mersenneTwister_(mersenneTwister) {
         setGrid(reduced);
     }
@@ -26,7 +26,7 @@ namespace LatinSquare {
         grid_.reserve(gridSize);
 
         for (int index = 0; index < gridSize; ++index) {
-            grid_.emplace_back(Cell(index / size_ + 1, index % size_ + 1, reduced, size_));
+            grid_.emplace_back(index / size_ + 1, index % size_ + 1, reduced, size_);
         }
     }
 
@@ -38,7 +38,8 @@ namespace LatinSquare {
         columnCells.reserve(size_);
         numberCells.reserve(size_);
 
-        const auto rowRegion = "R", columnRegion = "C", numberRegion = "#";
+        const auto rowRegion = 'R', columnRegion = 'C', numberRegion = '#';
+        std::string indexString, rowId, columnId, numberId;
 
         for (int index = 1; index <= size_; ++index) {
             rowCells.clear();
@@ -47,29 +48,29 @@ namespace LatinSquare {
 
             for (auto& cell : grid_) {
                 if (cell.getRow() == index) {
-                    rowCells.emplace_back(std::ref(cell));
+                    rowCells.emplace_back(cell);
                 }
 
                 if (cell.getColumn() == index) {
-                    columnCells.emplace_back(std::ref(cell));
+                    columnCells.emplace_back(cell);
                 }
 
                 if (cell.getNumber() == index) {
-                    numberCells.emplace_back(std::ref(cell));
+                    numberCells.emplace_back(cell);
                 }
             }
 
-            const auto indexString = std::to_string(index);
-            std::string rowId = rowRegion;
+            indexString = std::to_string(index);
+            rowId = rowRegion;
             rowId += indexString;
-            std::string columnId = columnRegion;
+            columnId = columnRegion;
             columnId += indexString;
-            std::string numberId = numberRegion;
+            numberId = numberRegion;
             numberId += indexString;
 
-            regions_.emplace_back(Region(rowId, size_, rowCells));
-            regions_.emplace_back(Region(columnId, size_, columnCells));
-            regions_.emplace_back(Region(numberId, size_, numberCells));
+            regions_.emplace_back(rowId, size_, rowCells);
+            regions_.emplace_back(columnId, size_, columnCells);
+            regions_.emplace_back(numberId, size_, numberCells);
         }
     }
 
@@ -81,11 +82,6 @@ namespace LatinSquare {
                   });
     }
 
-    void LatinSquare::shuffleGrid() {
-        std::shuffle(grid_.begin(), grid_.end(), mersenneTwister_);
-    }
-
-    // consider using map for cells - key should be cell id
     Cell& LatinSquare::getCell(const std::string& id) {
         const auto& iterator = std::find_if(
             grid_.begin(), grid_.end(), [&id](const auto& cell) { return cell.getId() == id; });
@@ -93,24 +89,28 @@ namespace LatinSquare {
         return *iterator;
     }
 
-    // consider using map for cells - key should be cell id
-    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCells(const std::set<std::string>& ids) {
+    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCells(const std::vector<std::string>& ids) {
         std::vector<std::reference_wrapper<Cell>> cells;
         cells.reserve(ids.size());
 
-        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
-                     [&ids](const auto& cell) { return ids.contains(cell.getId()); });
+        for (auto& cell : grid_) {
+            if (std::find(ids.cbegin(), ids.cend(), cell.getId()) != ids.cend()) {
+                cells.emplace_back(cell);
+            }
+        }
 
         return cells;
     }
 
-    // consider using map for regions - key should be region id
-    const std::vector<std::reference_wrapper<Region>> LatinSquare::getRegions(const std::set<std::string>& ids) {
+    const std::vector<std::reference_wrapper<Region>> LatinSquare::getRegions(const std::vector<std::string>& ids) {
         std::vector<std::reference_wrapper<Region>> regions;
         regions.reserve(ids.size());
 
-        std::copy_if(regions_.begin(), regions_.end(), std::back_inserter(regions),
-                     [&ids](const auto& region) { return ids.contains(region.getId()); });
+        for (auto& region : regions_) {
+            if (std::find(ids.cbegin(), ids.cend(), region.getId()) != ids.cend()) {
+                regions.emplace_back(region);
+            }
+        }
 
         return regions;
     }
@@ -122,14 +122,19 @@ namespace LatinSquare {
     Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() {
         Cell* iterator = nullptr;
         auto minEntropy = std::numeric_limits<int>::max();
+        int entropy;
 
         for (auto& cell : grid_) {
             if (cell.getNumber() == 0) {
-                const auto entropy = cell.getEntropy();
+                entropy = cell.getEntropy();
 
                 if (entropy < minEntropy) {
                     minEntropy = entropy;
                     iterator = &cell;
+                } else if (entropy == minEntropy) {
+                    if (mersenneTwister_() & 1) {
+                        iterator = &cell;
+                    }
                 }
             }
         }
@@ -146,7 +151,7 @@ namespace LatinSquare {
         std::vector<std::reference_wrapper<Cell>> cells;
         cells.reserve(2 * size_ - 2);
 
-        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
+        std::copy_if(grid_.begin(), grid_.end(), cpp::back_emplacer(cells),
                      [this, &filledCell](const auto& cell) {
                          return checkIfNotFilledAndRelatedToFilledCell(filledCell, cell);
                      });
@@ -161,11 +166,14 @@ namespace LatinSquare {
                                    }), cells.end());
     }
 
-    const std::set<std::string> LatinSquare::getUpdatedCellsIds(
+    const std::vector<std::string> LatinSquare::getUpdatedCellsIds(
         const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::set<std::string> ids;
-        std::transform(cells.cbegin(), cells.cend(), std::inserter(ids, ids.cend()),
-                       [](const auto& cellRef) { return cellRef.get().getId(); });
+        std::vector<std::string> ids;
+        ids.reserve(cells.size());
+
+        for (const auto& cellRef : cells) {
+            ids.emplace_back(cellRef.get().getId());
+        }
 
         return ids;
     }
@@ -178,14 +186,19 @@ namespace LatinSquare {
     Region& LatinSquare::getEnabledRegionWithMinimumEntropy() {
         Region* iterator = nullptr;
         auto minEntropy = std::numeric_limits<int>::max();
+        int entropy;
 
         for (auto& region : regions_) {
             if (region.isEnabled()) {
-                const auto entropy = region.getEntropy();
+                entropy = region.getEntropy();
 
                 if (entropy < minEntropy) {
                     minEntropy = entropy;
                     iterator = &region;
+                } else if (entropy == minEntropy) {
+                    if (mersenneTwister_() & 1) {
+                        iterator = &region;
+                    }
                 }
             }
         }
@@ -202,7 +215,7 @@ namespace LatinSquare {
         std::vector<std::reference_wrapper<Cell>> cells;
         cells.reserve(3 * size_ - 2);
 
-        std::copy_if(grid_.begin(), grid_.end(), std::back_inserter(cells),
+        std::copy_if(grid_.begin(), grid_.end(), cpp::back_emplacer(cells),
                      [this, &chosenCell](const auto& cell) {
                          return checkIfEnabledAndRelatedToChosenCell(chosenCell, cell);
                      });
@@ -215,38 +228,55 @@ namespace LatinSquare {
     }
 
     void LatinSquare::decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::set<std::string> regionsIds;
+        std::vector<std::string> regionsIds;
+        regionsIds.reserve(3 * size_);
+        std::vector<bool> usedIds(3 * size_ + 1, false);
         std::vector<int> entropyUpdates(3 * size_ + 1, 0);
+        int rowIdAsInt, columnIdAsInt, numberIdAsInt;
+        Cell* cell = nullptr;
+        Region* region = nullptr;
+
+        auto addToRegionsIds = [&regionsIds, &usedIds](const auto& id, const auto idAsInt) {
+                                   if (!usedIds[idAsInt]) {
+                                       regionsIds.emplace_back(id);
+                                       usedIds[idAsInt] = true;
+                                   }
+                               };
 
         for (const auto& cellRef : cells) {
-            const auto& cell = cellRef.get();
+            cell = &cellRef.get();
+            rowIdAsInt = (*cell).getRowIdAsInt();
+            columnIdAsInt = (*cell).getColumnIdAsInt();
+            numberIdAsInt = (*cell).getNumberIdAsInt();
 
-            regionsIds.insert(cell.getRowId());
-            regionsIds.insert(cell.getColumnId());
-            regionsIds.insert(cell.getNumberId());
-            ++entropyUpdates[cell.getRowIdAsInt()];
-            ++entropyUpdates[cell.getColumnIdAsInt()];
-            ++entropyUpdates[cell.getNumberIdAsInt()];
+            addToRegionsIds((*cell).getRowId(), rowIdAsInt);
+            addToRegionsIds((*cell).getColumnId(), columnIdAsInt);
+            addToRegionsIds((*cell).getNumberId(), numberIdAsInt);
+            ++entropyUpdates[rowIdAsInt];
+            ++entropyUpdates[columnIdAsInt];
+            ++entropyUpdates[numberIdAsInt];
         }
 
         const auto regions = getRegions(regionsIds);
 
         for (const auto& regionRef : regions) {
-            auto& region = regionRef.get();
+            region = &regionRef.get();
 
-            region.decreaseEntropyBy(entropyUpdates[region.getIdAsInt()]);
+            (*region).decreaseEntropyBy(entropyUpdates[(*region).getIdAsInt()]);
         }
     }
 
-    const std::set<std::string> LatinSquare::getDisabledCellsIds(
+    const std::vector<std::string> LatinSquare::getDisabledCellsIds(
         const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& chosenCell) {
-        std::set<std::string> ids;
+        std::vector<std::string> ids;
+        ids.reserve(cells.size() - 1);
+        Cell* cell = nullptr;
 
         for (const auto& cellRef : cells) {
-            const auto& cell = cellRef.get();
+            cell = &cellRef.get();
 
-            if (cell.getId() != chosenCell.getId()) {
-                ids.insert(cell.getId());
+            if ((*cell).getId() != chosenCell.getId()) {
+                ids.emplace_back((*cell).getId());
             }
         }
 
@@ -262,7 +292,7 @@ namespace LatinSquare {
         std::vector<std::reference_wrapper<Region>> regions;
         regions.reserve(3);
 
-        std::copy_if(regions_.begin(), regions_.end(), std::back_inserter(regions),
+        std::copy_if(regions_.begin(), regions_.end(), cpp::back_emplacer(regions),
                      [this, &cell](const auto& region) { return checkIfRelatedRegion(cell, region); });
 
         return regions;
@@ -277,26 +307,41 @@ namespace LatinSquare {
     }
 
     void LatinSquare::increaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::set<std::string> regionsIds;
+        std::vector<std::string> regionsIds;
+        regionsIds.reserve(3 * size_);
+        std::vector<bool> usedIds(3 * size_ + 1, false);
         std::vector<int> entropyUpdates(3 * size_ + 1, 0);
+        int rowIdAsInt, columnIdAsInt, numberIdAsInt;
+        Cell* cell = nullptr;
+        Region* region = nullptr;
+
+        auto addToRegionsIds = [&regionsIds, &usedIds](const std::string& id, int idAsInt) {
+                                   if (!usedIds[idAsInt]) {
+                                       regionsIds.emplace_back(id);
+                                       usedIds[idAsInt] = true;
+                                   }
+                               };
 
         for (const auto& cellRef : cells) {
-            const auto& cell = cellRef.get();
+            cell = &cellRef.get();
+            rowIdAsInt = (*cell).getRowIdAsInt();
+            columnIdAsInt = (*cell).getColumnIdAsInt();
+            numberIdAsInt = (*cell).getNumberIdAsInt();
 
-            regionsIds.insert(cell.getRowId());
-            regionsIds.insert(cell.getColumnId());
-            regionsIds.insert(cell.getNumberId());
-            ++entropyUpdates[cell.getRowIdAsInt()];
-            ++entropyUpdates[cell.getColumnIdAsInt()];
-            ++entropyUpdates[cell.getNumberIdAsInt()];
+            addToRegionsIds((*cell).getRowId(), rowIdAsInt);
+            addToRegionsIds((*cell).getColumnId(), columnIdAsInt);
+            addToRegionsIds((*cell).getNumberId(), numberIdAsInt);
+            ++entropyUpdates[rowIdAsInt];
+            ++entropyUpdates[columnIdAsInt];
+            ++entropyUpdates[numberIdAsInt];
         }
 
         const auto regions = getRegions(regionsIds);
 
         for (const auto& regionRef : regions) {
-            auto& region = regionRef.get();
+            region = &regionRef.get();
 
-            region.increaseEntropyBy(entropyUpdates[region.getIdAsInt()]);
+            (*region).increaseEntropyBy(entropyUpdates[(*region).getIdAsInt()]);
         }
     }
 

@@ -5,15 +5,15 @@ namespace cpp {
     const auto GREEEN_ON = "\x1b[38;5;46m";
     const auto RESET = "\x1b[0;0m";
 
-    std::ostream& bold_on(std::ostream& ostream) {
-        return ostream << BOLD_ON;
+    const std::string bold_on() {
+        return BOLD_ON;
     }
 
-    std::ostream& green_on(std::ostream& ostream) {
-        return ostream << GREEEN_ON;
+    const std::string green_on() {
+        return GREEEN_ON;
     }
 
-    std::ostream& reset(std::ostream& ostream) {
-        return ostream << RESET;
+    const std::string reset() {
+        return RESET;
     }
 }

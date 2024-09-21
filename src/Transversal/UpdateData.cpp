@@ -1,7 +1,7 @@
 #include "UpdateData.hpp"
 
 namespace Transversal {
-    UpdateData::UpdateData(const LatinSquare::Cell& cell, const std::set<std::string>& ids)
+    UpdateData::UpdateData(const LatinSquare::Cell& cell, const std::vector<std::string>& ids)
         : chosenCellId_(cell.getId()), disabledCellsIds_(ids) {}
 
 
@@ -9,7 +9,7 @@ namespace Transversal {
         return chosenCellId_;
     }
 
-    const std::set<std::string>& UpdateData::getDisabledCellsIds() const {
+    const std::vector<std::string>& UpdateData::getDisabledCellsIds() const {
         return disabledCellsIds_;
     }
 }
