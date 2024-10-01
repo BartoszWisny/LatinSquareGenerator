@@ -81,19 +81,19 @@ namespace Transversal {
             for (const auto& cell : grid) {
                 isTransversalCell = checkIfTransversalCell(cell, ids);
 
-                if (cell.getColumn() == 1) {
+                if (cell.getColumn() == 0) {
                     column = transversal[index].get().getColumn();
 
-                    if (cell.getRow() == 1) {
-                        repeatedLeftBar = cpp::repeat(leftBar, column - 1);
+                    if (cell.getRow() == 0) {
+                        repeatedLeftBar = cpp::repeat(leftBar, column);
                         std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
                         std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
                         std::cout.write(cpp::green_on().c_str(), cpp::green_on().size());
                         std::cout.write(longBar.c_str(), longBar.size());
                         std::cout.write(cpp::reset().c_str(), cpp::reset().size());
 
-                        if (column != size) {
-                            repeatedLeftBar = cpp::repeat(leftBar, size - column - 1);
+                        if (column != size - 1) {
+                            repeatedLeftBar = cpp::repeat(leftBar, size - column - 2);
 
                             std::cout.write(shortBar.c_str(), shortBar.size());
                             std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
@@ -104,7 +104,7 @@ namespace Transversal {
                     } else {
                         const auto [firstColumn, secondColumn] = std::minmax(previousColumn, column);
                         difference = secondColumn - firstColumn - 1;
-                        repeatedLeftBar = cpp::repeat(leftBar, firstColumn - 1);
+                        repeatedLeftBar = cpp::repeat(leftBar, firstColumn);
 
                         std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
                         std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
@@ -128,8 +128,8 @@ namespace Transversal {
                             std::cout.write(cpp::reset().c_str(), cpp::reset().size());
                         }
 
-                        if (secondColumn != size) {
-                            repeatedLeftBar = cpp::repeat(leftBar, size - secondColumn - 1);
+                        if (secondColumn != size - 1) {
+                            repeatedLeftBar = cpp::repeat(leftBar, size - secondColumn - 2);
 
                             std::cout.write(shortBar.c_str(), shortBar.size());
                             std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
@@ -141,6 +141,7 @@ namespace Transversal {
                 }
 
                 number = cell.getNumber();
+                ++number;
                 spaces =
                     std::string(static_cast<int>(std::log10(size)) - static_cast<int>(std::log10(number)) + 1, ' ');
                 numberString = std::to_string(number);
@@ -164,7 +165,7 @@ namespace Transversal {
                     std::cout.put(' ');
                 }
 
-                if (cell.getColumn() == size) {
+                if (cell.getColumn() == size - 1) {
                     if (!isTransversalCell) {
                         std::cout.put('|');
                     }
@@ -179,7 +180,7 @@ namespace Transversal {
                 }
             }
 
-            repeatedLeftBar = cpp::repeat(leftBar, column - 1);
+            repeatedLeftBar = cpp::repeat(leftBar, column);
 
             std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
             std::cout.write(cpp::bold_on().c_str(), cpp::bold_on().size());
@@ -187,8 +188,8 @@ namespace Transversal {
             std::cout.write(longBar.c_str(), longBar.size());
             std::cout.write(cpp::reset().c_str(), cpp::reset().size());
 
-            if (column != size) {
-                repeatedLeftBar = cpp::repeat(leftBar, size - column - 1);
+            if (column != size - 1) {
+                repeatedLeftBar = cpp::repeat(leftBar, size - column - 2);
 
                 std::cout.write(shortBar.c_str(), shortBar.size());
                 std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());

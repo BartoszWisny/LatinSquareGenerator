@@ -25,6 +25,9 @@ namespace LatinSquare {
             const std::vector<int>& getRemainingNumbers() const;
             const EntropyData& getEntropyData() const;
             void setEntropyData(const EntropyData& entropyData);
+            bool isFilled() const;
+            void setFilled();
+            void setNotFilled();
             bool isEnabled() const;
             void enable();
             void disable();
@@ -45,6 +48,6 @@ namespace LatinSquare {
             int row_, column_, number_, latinSquareSize_, rowIdAsInt_, columnIdAsInt_, numberIdAsInt_;
             std::string rowId_, columnId_, id_, numberId_, fullId_;
             EntropyData entropyData_;
-            bool enabled_;
+            bool filled_, enabled_;
     };
 }

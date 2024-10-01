@@ -2,9 +2,9 @@
 
 namespace LatinSquare {
     Cell::Cell(const int row, const int column, const bool reduced, const int latinSquareSize)
-        : row_(row), column_(column), number_(0), latinSquareSize_(latinSquareSize), rowIdAsInt_(row_),
+        : row_(row), column_(column), number_(-1), latinSquareSize_(latinSquareSize), rowIdAsInt_(row_),
           columnIdAsInt_(latinSquareSize_ + column_), numberIdAsInt_(2 * latinSquareSize_ + number_),
-          entropyData_(EntropyData(latinSquareSize_)), enabled_(true) {
+          entropyData_(EntropyData(latinSquareSize_)), filled_(false), enabled_(true) {
         setIds();
         setFullId();
         reset(reduced);
@@ -98,6 +98,18 @@ namespace LatinSquare {
         entropyData_ = entropyData;
     }
 
+    bool Cell::isFilled() const {
+        return filled_;
+    }
+
+    void Cell::setFilled() {
+        filled_ = true;
+    }
+
+    void Cell::setNotFilled() {
+        filled_ = false;
+    }
+
     bool Cell::isEnabled() const {
         return enabled_;
     }
@@ -112,31 +124,31 @@ namespace LatinSquare {
 
     void Cell::reset(const bool reduced) {
         if (reduced) {
-            if (row_ == 1) {
+            if (row_ == 0) {
                 fill(column_);
-            } else if (column_ == 1) {
+            } else if (column_ == 0) {
                 fill(row_);
             } else {
-                setNumber(0);
                 entropyData_.resetEntropyData();
                 entropyData_.removeRemainingNumber(row_);
                 entropyData_.removeRemainingNumber(column_);
             }
         } else {
-            setNumber(0);
             entropyData_.resetEntropyData();
         }
     }
 
     void Cell::fill(const int number) {
         setNumber(number);
+        setFilled();
         entropyData_.clearEntropyData();
     }
 
     void Cell::clear(EntropyData entropyData) {
         entropyData.removeRemainingNumber(number_);
 
-        setNumber(0);
+        setNumber(-1);
+        setNotFilled();
         setEntropyData(entropyData);
     }
 

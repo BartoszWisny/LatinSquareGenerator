@@ -26,7 +26,7 @@ namespace LatinSquare {
         grid_.reserve(gridSize);
 
         for (int index = 0; index < gridSize; ++index) {
-            grid_.emplace_back(index / size_ + 1, index % size_ + 1, reduced, size_);
+            grid_.emplace_back(index / size_, index % size_, reduced, size_);
         }
     }
 
@@ -41,7 +41,7 @@ namespace LatinSquare {
         const auto rowRegion = 'R', columnRegion = 'C', numberRegion = '#';
         std::string indexString, rowId, columnId, numberId;
 
-        for (int index = 1; index <= size_; ++index) {
+        for (int index = 0; index < size_; ++index) {
             rowCells.clear();
             columnCells.clear();
             numberCells.clear();
@@ -116,7 +116,7 @@ namespace LatinSquare {
     }
 
     bool LatinSquare::checkIfNotFilledCellExists() const {
-        return std::any_of(grid_.cbegin(), grid_.cend(), [](const auto& cell) { return cell.getNumber() == 0; });
+        return std::any_of(grid_.cbegin(), grid_.cend(), [](const auto& cell) { return !cell.isFilled(); });
     }
 
     Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() {
@@ -125,7 +125,7 @@ namespace LatinSquare {
         int entropy;
 
         for (auto& cell : grid_) {
-            if (cell.getNumber() == 0) {
+            if (!cell.isFilled()) {
                 entropy = cell.getEntropy();
 
                 if (entropy < minEntropy) {
@@ -143,7 +143,7 @@ namespace LatinSquare {
     }
 
     bool LatinSquare::checkIfNotFilledAndRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const {
-        return cell.getNumber() == 0
+        return !cell.isFilled()
                && ((filledCell.getRow() == cell.getRow()) ^ (filledCell.getColumn() == cell.getColumn()));
     }
 
@@ -230,8 +230,8 @@ namespace LatinSquare {
     void LatinSquare::decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
         std::vector<std::string> regionsIds;
         regionsIds.reserve(3 * size_);
-        std::vector<bool> usedIds(3 * size_ + 1, false);
-        std::vector<int> entropyUpdates(3 * size_ + 1, 0);
+        std::vector<bool> usedIds(3 * size_, false); // consider using bitset here
+        std::vector<int> entropyUpdates(3 * size_, 0);
         int rowIdAsInt, columnIdAsInt, numberIdAsInt;
         Cell* cell = nullptr;
         Region* region = nullptr;
@@ -309,8 +309,8 @@ namespace LatinSquare {
     void LatinSquare::increaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
         std::vector<std::string> regionsIds;
         regionsIds.reserve(3 * size_);
-        std::vector<bool> usedIds(3 * size_ + 1, false);
-        std::vector<int> entropyUpdates(3 * size_ + 1, 0);
+        std::vector<bool> usedIds(3 * size_, false); // consider using bitset here
+        std::vector<int> entropyUpdates(3 * size_, 0);
         int rowIdAsInt, columnIdAsInt, numberIdAsInt;
         Cell* cell = nullptr;
         Region* region = nullptr;

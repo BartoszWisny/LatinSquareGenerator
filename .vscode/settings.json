@@ -64,6 +64,24 @@
     "semaphore": "cpp",
     "stop_token": "cpp",
     "thread": "cpp",
-    "execution": "cpp"
+    "execution": "cpp",
+    "bitset": "cpp",
+    "cinttypes": "cpp",
+    "codecvt": "cpp",
+    "complex": "cpp",
+    "condition_variable": "cpp",
+    "coroutine": "cpp",
+    "csignal": "cpp",
+    "cstring": "cpp",
+    "list": "cpp",
+    "source_location": "cpp",
+    "slist": "cpp",
+    "future": "cpp",
+    "mutex": "cpp",
+    "scoped_allocator": "cpp",
+    "stdfloat": "cpp",
+    "cfenv": "cpp",
+    "typeindex": "cpp",
+    "valarray": "cpp"
   }
 }

@@ -39,13 +39,14 @@ namespace LatinSquare {
         std::cout.put('\n');
 
         for (const auto& cell : grid) {
-            if (cell.getColumn() == 1) {
+            if (cell.getColumn() == 0) {
                 std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
                 std::cout.put('+');
                 std::cout.put('\n');
             }
 
             number = cell.getNumber();
+            ++number;
             spaces = std::string(static_cast<int>(std::log10(size)) - static_cast<int>(std::log10(number)) + 1, ' ');
             numberString = std::to_string(number);
 
@@ -54,7 +55,7 @@ namespace LatinSquare {
             std::cout.write(numberString.c_str(), numberString.size());
             std::cout.put(' ');
 
-            if (cell.getColumn() == size) {
+            if (cell.getColumn() == size - 1) {
                 std::cout.put('|');
                 std::cout.put('\n');
             }

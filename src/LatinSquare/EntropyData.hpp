@@ -2,6 +2,8 @@
 
 #include <vector>
 
+// #include <boost/dynamic_bitset.hpp>
+
 namespace LatinSquare {
     class EntropyData {
         public:
@@ -9,6 +11,7 @@ namespace LatinSquare {
             EntropyData(const int maxEntropy);
 
             int getEntropy() const;
+            // const boost::dynamic_bitset<>& getRemainingNumbers() const;
             const std::vector<int>& getRemainingNumbers() const;
 
             void resetEntropyData();
@@ -19,9 +22,10 @@ namespace LatinSquare {
 
         private:
             void setEntropy(const int entropy);
-            void setRemainingNumbers(const std::vector<int>& remainingNumbers);
 
             int entropy_, maxEntropy_;
+
+            // boost::dynamic_bitset<> remainingNumbers_;
             std::vector<int> remainingNumbers_;
     };
 }
