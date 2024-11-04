@@ -8,9 +8,9 @@
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
-    LatinSquare::LatinSquare(const int size, const bool reduced, std::mt19937& mersenneTwister)
+    LatinSquare::LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister)
         : size_(size), mersenneTwister_(mersenneTwister) {
-        setGrid(reduced);
+        setGrid(type);
     }
 
     int LatinSquare::getSize() const {
@@ -21,12 +21,12 @@ namespace LatinSquare {
         return grid_;
     }
 
-    void LatinSquare::setGrid(const bool reduced) {
+    void LatinSquare::setGrid(const Type type) {
         const auto gridSize = size_ * size_;
         grid_.reserve(gridSize);
 
         for (int index = 0; index < gridSize; ++index) {
-            grid_.emplace_back(index / size_, index % size_, reduced, size_);
+            grid_.emplace_back(index / size_, index % size_, type, size_);
         }
     }
 

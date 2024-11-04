@@ -109,4 +109,10 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Cell.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_vector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Types.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/numeric \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_numeric.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/limits \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h

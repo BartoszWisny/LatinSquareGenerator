@@ -123,6 +123,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Utils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Cell.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/EntropyData.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Types.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/LatinSquare.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/random \
  C:/msys64/ucrt64/include/c++/14.1.0/cmath \

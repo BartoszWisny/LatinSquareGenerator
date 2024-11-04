@@ -157,6 +157,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Utils.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Cell.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Types.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Region.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/iostream \
  C:/msys64/ucrt64/include/c++/14.1.0/ostream \

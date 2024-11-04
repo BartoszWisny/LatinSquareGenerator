@@ -14,7 +14,6 @@
 		"commands" : 
 		[
 			"add_executable",
-			"include_directories",
 			"target_include_directories"
 		],
 		"files" : 
@@ -35,12 +34,6 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 17,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
 				"line" : 36,
 				"parent" : 0
 			}
@@ -59,22 +52,18 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "C:/boost"
-				},
-				{
-					"backtrace" : 3,
 					"path" : "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"path" : "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"path" : "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal"
 				},
 				{
-					"backtrace" : 3,
+					"backtrace" : 2,
 					"path" : "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp"
 				}
 			],

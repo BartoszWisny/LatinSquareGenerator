@@ -1,13 +1,16 @@
 #include "Cell.hpp"
 
+#include <numeric>
+
 namespace LatinSquare {
-    Cell::Cell(const int row, const int column, const bool reduced, const int latinSquareSize)
-        : row_(row), column_(column), number_(-1), latinSquareSize_(latinSquareSize), rowIdAsInt_(row_),
-          columnIdAsInt_(latinSquareSize_ + column_), numberIdAsInt_(2 * latinSquareSize_ + number_),
-          entropyData_(EntropyData(latinSquareSize_)), filled_(false), enabled_(true) {
+    Cell::Cell(const int row, const int column, const Type type, const int latinSquareSize)
+        : row_(row), column_(column), number_(-1), latinSquareSize_(latinSquareSize), maxNumber_(latinSquareSize_ - 1),
+          rowColumnSum_(row_ + column_), rowIdAsInt_(row_), columnIdAsInt_(latinSquareSize_ + column_),
+          numberIdAsInt_(2 * latinSquareSize_ + number_), entropyData_(EntropyData(latinSquareSize_)), filled_(false),
+          enabled_(true) {
         setIds();
         setFullId();
-        reset(reduced);
+        reset(type);
     }
 
     int Cell::getRow() const {
@@ -122,8 +125,8 @@ namespace LatinSquare {
         enabled_ = false;
     }
 
-    void Cell::reset(const bool reduced) {
-        if (reduced) {
+    void Cell::reset(const Type type) {
+        if (type == Type::Reduced) {
             if (row_ == 0) {
                 fill(column_);
             } else if (column_ == 0) {
@@ -132,6 +135,24 @@ namespace LatinSquare {
                 entropyData_.resetEntropyData();
                 entropyData_.removeRemainingNumber(row_);
                 entropyData_.removeRemainingNumber(column_);
+            }
+        } else if (type == Type::ReducedCyclic) {
+            fill(std::modulus<int>{}(rowColumnSum_, latinSquareSize_));
+        } else if (type == Type::ReducedDiagonal) {
+            if (row_ == 0) {
+                fill(column_);
+            } else if (column_ == 0) {
+                fill(row_);
+            } else if (row_ == column_) {
+                fill(0);
+            } else if (rowColumnSum_ == maxNumber_) {
+                fill(maxNumber_);
+            } else {
+                entropyData_.resetEntropyData();
+                entropyData_.removeRemainingNumber(row_);
+                entropyData_.removeRemainingNumber(column_);
+                entropyData_.removeRemainingNumber(0);
+                entropyData_.removeRemainingNumber(maxNumber_);
             }
         } else {
             entropyData_.resetEntropyData();

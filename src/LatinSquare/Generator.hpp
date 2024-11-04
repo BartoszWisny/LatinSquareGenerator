@@ -7,12 +7,12 @@
 #include "Cell.hpp"
 #include "LatinSquare.hpp"
 #include "UpdateData.hpp"
+#include "Types.hpp"
 
 namespace LatinSquare {
     class Generator {
         public:
-            const LatinSquare generateRandomLatinSquare(
-                const int size, const bool reduced, std::mt19937& mersenneTwister);
+            const LatinSquare generateRandomLatinSquare(const int size, const Type type, std::mt19937& mersenneTwister);
 
         private:
             bool checkIfAddToBacktrackingHistory(const Cell& cell) const;

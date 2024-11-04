@@ -2,38 +2,6 @@
 	"entries" : 
 	[
 		{
-			"name" : "Boost_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for Boost."
-				}
-			],
-			"type" : "PATH",
-			"value" : "Boost_DIR-NOTFOUND"
-		},
-		{
-			"name" : "Boost_INCLUDE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to a file."
-				}
-			],
-			"type" : "PATH",
-			"value" : "C:/boost"
-		},
-		{
 			"name" : "CMAKE_ADDR2LINE",
 			"properties" : 
 			[
@@ -187,10 +155,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "C:/msys64/ucrt64/bin/g++.exe"
 		},
 		{
@@ -1246,42 +1214,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Boost",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Details about finding Boost"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "[C:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfig.cmake][c ][v1.86.0()]"
-		},
-		{
-			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenMP",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Details about finding OpenMP"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "[TRUE][c ][v4.5()]"
-		},
-		{
-			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenMP_CXX",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Details about finding OpenMP_CXX"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "[-fopenmp][C:/msys64/ucrt64/lib/libgomp.dll.a][C:/msys64/ucrt64/lib/libmingwthrd.a][C:/msys64/ucrt64/lib/libmingwthrd.a][v4.5()]"
-		},
-		{
 			"name" : "LatinSquareGenerator_BINARY_DIR",
 			"properties" : 
 			[
@@ -1318,166 +1250,6 @@
 			"value" : "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator"
 		},
 		{
-			"name" : "OpenMP_COMPILE_RESULT_CXX_fopenmp",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Result of TRY_COMPILE"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
-		},
-		{
-			"name" : "OpenMP_CXX_FLAGS",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "CXX compiler flags for OpenMP parallelization"
-				}
-			],
-			"type" : "STRING",
-			"value" : "-fopenmp"
-		},
-		{
-			"name" : "OpenMP_CXX_LIB_NAMES",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "CXX compiler libraries for OpenMP parallelization"
-				}
-			],
-			"type" : "STRING",
-			"value" : "gomp;mingwthrd;mingwthrd"
-		},
-		{
-			"name" : "OpenMP_CXX_SPEC_DATE",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "CXX compiler's OpenMP specification date"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "201511"
-		},
-		{
-			"name" : "OpenMP_SPECTEST_CXX_",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Result of TRY_COMPILE"
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
-		},
-		{
-			"name" : "OpenMP_gomp_LIBRARY",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to the gomp library for OpenMP"
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/ucrt64/lib/libgomp.dll.a"
-		},
-		{
-			"name" : "OpenMP_mingwthrd_LIBRARY",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "Path to the mingwthrd library for OpenMP"
-				}
-			],
-			"type" : "FILEPATH",
-			"value" : "C:/msys64/ucrt64/lib/libmingwthrd.a"
-		},
-		{
-			"name" : "_BOOST_ROOT_LAST",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Last used BOOST_ROOT value."
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "C:/boost"
-		},
-		{
-			"name" : "_Boost_COMPONENTS_SEARCHED",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Components requested for this build tree."
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : ""
-		},
-		{
-			"name" : "_Boost_INCLUDE_DIR_LAST",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Last used Boost_INCLUDE_DIR value."
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "C:/boost"
-		},
-		{
-			"name" : "_Boost_NAMESPACE_LAST",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Last used Boost_NAMESPACE value."
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "boost"
-		},
-		{
-			"name" : "_Boost_USE_MULTITHREADED_LAST",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Last used Boost_USE_MULTITHREADED value."
-				}
-			],
-			"type" : "INTERNAL",
-			"value" : "TRUE"
-		},
-		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
 			"properties" : 
 			[
@@ -1488,34 +1260,6 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
-		},
-		{
-			"name" : "boost_dynamic_bitset_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for boost_dynamic_bitset."
-				}
-			],
-			"type" : "PATH",
-			"value" : "boost_dynamic_bitset_DIR-NOTFOUND"
-		},
-		{
-			"name" : "boost_headers_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "ADVANCED",
-					"value" : "1"
-				},
-				{
-					"name" : "HELPSTRING",
-					"value" : "The directory containing a CMake configuration file for boost_headers."
-				}
-			],
-			"type" : "PATH",
-			"value" : "C:/boost/stage/lib/cmake/boost_headers-1.86.0"
 		}
 	],
 	"kind" : "cache",

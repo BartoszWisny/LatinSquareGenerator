@@ -4,11 +4,12 @@
 #include <vector>
 
 #include "EntropyData.hpp"
+#include "Types.hpp"
 
 namespace LatinSquare {
     class Cell {
         public:
-            Cell(const int row, const int column, const bool reduced, const int latinSquareSize);
+            Cell(const int row, const int column, const Type type, const int latinSquareSize);
 
             int getRow() const;
             int getColumn() const;
@@ -32,7 +33,7 @@ namespace LatinSquare {
             void enable();
             void disable();
 
-            void reset(const bool reduced);
+            void reset(const Type type);
             void fill(const int number);
             void clear(EntropyData entropyData);
 
@@ -45,7 +46,8 @@ namespace LatinSquare {
             void setFullId();
             void setNumberIdAsInt();
 
-            int row_, column_, number_, latinSquareSize_, rowIdAsInt_, columnIdAsInt_, numberIdAsInt_;
+            int row_, column_, number_, latinSquareSize_, maxNumber_, rowColumnSum_, rowIdAsInt_, columnIdAsInt_,
+                numberIdAsInt_;
             std::string rowId_, columnId_, id_, numberId_, fullId_;
             EntropyData entropyData_;
             bool filled_, enabled_;

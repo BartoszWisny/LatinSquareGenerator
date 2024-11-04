@@ -123,6 +123,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Region.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Cell.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Types.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/algorithm \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algo.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/algorithmfwd.h \

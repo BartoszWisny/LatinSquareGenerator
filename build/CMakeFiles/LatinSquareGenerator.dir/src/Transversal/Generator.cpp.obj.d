@@ -162,6 +162,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj: \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\BacktrackingData.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Cell.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/EntropyData.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Types.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/Region.hpp \
  C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/LatinSquare/LatinSquare.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal\UpdateData.hpp

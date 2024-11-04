@@ -6,8 +6,8 @@ namespace LatinSquare {
     }
 
     const LatinSquare Generator::generateRandomLatinSquare(
-        const int size, const bool reduced, std::mt19937& mersenneTwister) {
-        LatinSquare latinSquare(size, reduced, mersenneTwister);
+        const int size, const Type type, std::mt19937& mersenneTwister) {
+        LatinSquare latinSquare(size, type, mersenneTwister);
         int counter = 0;
 
         while (latinSquare.checkIfNotFilledCellExists()) {

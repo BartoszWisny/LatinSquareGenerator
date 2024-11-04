@@ -9,13 +9,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Ofast -flto=auto -march=native")
 
-set(Boost_DIR "C:/boost/stage/lib/cmake/Boost-1.86.0")
+# set(Boost_DIR "D:/boost/stage/lib/cmake/Boost-1.86.0")
 
-find_package(Boost REQUIRED)
+# find_package(Boost REQUIRED)
 
-if (Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
-endif()
+# if (Boost_FOUND)
+#     include_directories(${Boost_INCLUDE_DIRS})
+# endif()
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -35,5 +35,5 @@ add_executable(LatinSquareGenerator ${LatinSquareGenerator_SOURCES})
 
 target_include_directories(LatinSquareGenerator PRIVATE ${LatinSquareGenerator_INCLUDE_DIRS})
 
-include_directories(${Boost_INCLUDE_DIRS})
-target_link_libraries(LatinSquareGenerator PRIVATE ${Boost_LIBRARIES})
+# include_directories(${Boost_INCLUDE_DIRS})
+# target_link_libraries(LatinSquareGenerator PRIVATE ${Boost_LIBRARIES})

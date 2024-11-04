@@ -150,6 +150,7 @@ CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Generator.cpp.obj: \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\BacktrackingData.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Cell.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\EntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\Types.hpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare\LatinSquare.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/functional \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/std_function.h \

@@ -36,6 +36,7 @@
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/LatinSquare.hpp",
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Logger.hpp",
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Region.hpp",
+				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Types.hpp",
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/UpdateData.hpp",
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Utils.hpp",
 				"C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.hpp",
@@ -157,22 +158,6 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfigVersion.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfig.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config-version.cmake"
-		},
-		{
-			"isExternal" : true,
-			"path" : "C:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",

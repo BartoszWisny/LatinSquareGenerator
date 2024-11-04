@@ -1,12 +1,17 @@
 #include "Main.hpp"
 
-#include <iostream>
 #include <random>
 
 #include "LatinSquare/Generator.hpp"
 #include "LatinSquare/Utils.hpp"
 #include "Transversal/Generator.hpp"
 #include "Transversal/Utils.hpp"
+
+
+
+#include <chrono>
+#include <iostream>
+
 
 void setup() {
     std::ios::sync_with_stdio(false);
@@ -18,7 +23,20 @@ int main() {
     std::random_device randomDevice;
     std::mt19937 mersenneTwister(randomDevice());
     auto latinSquareGenerator = LatinSquare::Generator();
-    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(10, true, mersenneTwister);
+
+    // ---
+    auto start = std::chrono::high_resolution_clock::now();
+    // ---
+
+    auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(
+        10, LatinSquare::Type::Reduced /* 9, LatinSquare::Type::ReducedCyclic */ /* 10, LatinSquare::Type::ReducedDiagonal */, mersenneTwister);
+
+    // ---
+    auto stop = std::chrono::high_resolution_clock::now();
+    const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+    // std::cout << "Time: " << duration << std::endl;
+    // ---
+
     latinSquare.sortGrid();
     // LatinSquare::printLatinSquareFullIds(latinSquare);
     // LatinSquare::printLatinSquareBoard(latinSquare);
@@ -28,6 +46,10 @@ int main() {
     auto transversal = transversalGenerator.findRandomTransversal(latinSquare, mersenneTwister);
     // Transversal::printTransversalFullIds(transversal);
     Transversal::printTransversalBoard(latinSquare, transversal);
+
+    // ---
+    std::cout << "Time: " << duration << std::endl;
+    // ---
 
     return 0;
 }

@@ -7,12 +7,13 @@
 
 #include "Cell.hpp"
 #include "Region.hpp"
+#include "Types.hpp"
 
 namespace LatinSquare {
     class LatinSquare {
         public:
             LatinSquare();
-            LatinSquare(const int size, const bool reduced, std::mt19937& mersenneTwister);
+            LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister);
 
             int getSize() const;
             const std::vector<Cell>& getGrid() const;
@@ -44,7 +45,7 @@ namespace LatinSquare {
             void enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
 
         private:
-            void setGrid(const bool reduced);
+            void setGrid(const Type type);
 
             bool checkIfNotFilledAndRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
 
