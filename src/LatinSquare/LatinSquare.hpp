@@ -13,6 +13,7 @@ namespace LatinSquare {
     class LatinSquare {
         public:
             LatinSquare();
+            LatinSquare(const int size, const Type type);
             LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister);
 
             int getSize() const;
@@ -27,12 +28,14 @@ namespace LatinSquare {
 
             bool checkIfNotFilledCellExists() const;
             Cell& getNotFilledCellWithMinimumEntropy();
+            Cell& getRandomNotFilledCellWithMinimumEntropy();
             const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToFilledCell(const Cell& filledCell);
             void updateRelatedCells(std::vector<std::reference_wrapper<Cell>>& cells, const int number);
             const std::vector<std::string> getUpdatedCellsIds(const std::vector<std::reference_wrapper<Cell>>& cells);
             void restoreUpdatedCells(const std::vector<std::reference_wrapper<Cell>>& cells, const int number);
 
             Region& getEnabledRegionWithMinimumEntropy();
+            Region& getRandomEnabledRegionWithMinimumEntropy();
             const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToChosenCell(const Cell& chosenCell);
             void disableRelatedCells(const std::vector<std::reference_wrapper<Cell>>& cells);
             void decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);

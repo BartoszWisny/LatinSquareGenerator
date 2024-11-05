@@ -8,6 +8,11 @@
 namespace LatinSquare {
     LatinSquare::LatinSquare() {}
 
+    LatinSquare::LatinSquare(const int size, const Type type)
+        : size_(size) {
+        setGrid(type);
+    }
+
     LatinSquare::LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister)
         : size_(size), mersenneTwister_(mersenneTwister) {
         setGrid(type);
@@ -131,6 +136,25 @@ namespace LatinSquare {
                 if (entropy < minEntropy) {
                     minEntropy = entropy;
                     iterator = &cell;
+                }
+            }
+        }
+
+        return *iterator;
+    }
+
+    Cell& LatinSquare::getRandomNotFilledCellWithMinimumEntropy() {
+        Cell* iterator = nullptr;
+        auto minEntropy = std::numeric_limits<int>::max();
+        int entropy;
+
+        for (auto& cell : grid_) {
+            if (!cell.isFilled()) {
+                entropy = cell.getEntropy();
+
+                if (entropy < minEntropy) {
+                    minEntropy = entropy;
+                    iterator = &cell;
                 } else if (entropy == minEntropy) {
                     if (mersenneTwister_() & 1) {
                         iterator = &cell;
@@ -184,6 +208,25 @@ namespace LatinSquare {
     }
 
     Region& LatinSquare::getEnabledRegionWithMinimumEntropy() {
+        Region* iterator = nullptr;
+        auto minEntropy = std::numeric_limits<int>::max();
+        int entropy;
+
+        for (auto& region : regions_) {
+            if (region.isEnabled()) {
+                entropy = region.getEntropy();
+
+                if (entropy < minEntropy) {
+                    minEntropy = entropy;
+                    iterator = &region;
+                }
+            }
+        }
+
+        return *iterator;
+    }
+
+    Region& LatinSquare::getRandomEnabledRegionWithMinimumEntropy() {
         Region* iterator = nullptr;
         auto minEntropy = std::numeric_limits<int>::max();
         int entropy;

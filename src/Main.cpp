@@ -25,15 +25,15 @@ int main() {
     auto latinSquareGenerator = LatinSquare::Generator();
 
     // ---
-    auto start = std::chrono::high_resolution_clock::now();
+    // auto start = std::chrono::high_resolution_clock::now();
     // ---
 
     auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(
         10, LatinSquare::Type::Reduced /* 9, LatinSquare::Type::ReducedCyclic */ /* 10, LatinSquare::Type::ReducedDiagonal */, mersenneTwister);
 
     // ---
-    auto stop = std::chrono::high_resolution_clock::now();
-    const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+    // auto stop = std::chrono::high_resolution_clock::now();
+    // const auto duration = std::chrono::duration<double, std::micro>(stop - start);
     // std::cout << "Time: " << duration << std::endl;
     // ---
 
@@ -48,8 +48,22 @@ int main() {
     Transversal::printTransversalBoard(latinSquare, transversal);
 
     // ---
-    std::cout << "Time: " << duration << std::endl;
+    // std::cout << "Time: " << duration << std::endl;
     // ---
+
+    // std::cout << latinSquareGenerator.countAllLatinSquares(2) << std::endl;
+    // std::cout << latinSquareGenerator.countAllLatinSquares(3) << std::endl;
+    // std::cout << latinSquareGenerator.countAllLatinSquares(4) << std::endl;
+    // std::cout << latinSquareGenerator.countAllLatinSquares(5) << std::endl;
+    // std::cout << latinSquareGenerator.countAllLatinSquares(6) << std::endl;
+    // std::cout << latinSquareGenerator.countAllLatinSquares(7) << std::endl;
+
+    // auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(
+    //     13, LatinSquare::Type::ReducedCyclic, mersenneTwister);
+    // latinSquare.sortGrid();
+    // latinSquare.setRegions();
+    // auto transversalGenerator = Transversal::Generator();
+    // std::cout << transversalGenerator.countAllTransversals(latinSquare) << std::endl;
 
     return 0;
 }
@@ -57,6 +71,9 @@ int main() {
 // TODO:
 // - add function to measure time of generating random latin square and random transversal
 // - consider using std::move and implementing move for Cell, Region, etc.
+// - use CUDA (highly recommended)
+// - compare to constraint programming solvers
+
 
 // --- TESTING ---
 // #include <chrono>

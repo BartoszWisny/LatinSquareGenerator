@@ -31,6 +31,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.30.2/CMakeSystem.cmake"
   "CMakeFiles/VerifyGlobs.cmake"
   "CMakeFiles/cmake.verify_globs"
+  "D:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfig.cmake"
+  "D:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfigVersion.cmake"
+  "D:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config-version.cmake"
+  "D:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config.cmake"
   )
 
 # The corresponding makefile is:

@@ -158,6 +158,22 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "C:/Program Files/CMake/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/boost/stage/lib/cmake/Boost-1.86.0/BoostConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "D:/boost/stage/lib/cmake/boost_headers-1.86.0/boost_headers-config.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
