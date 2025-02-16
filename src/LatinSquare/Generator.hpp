@@ -1,28 +1,28 @@
 #pragma once
 
-// #include <cstdint>
-#include <random>
-#include <stack>
+#include <cstdint>
+#include <vector>
 
-#include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/gmp.hpp>
 
 #include "BacktrackingData.hpp"
-#include "Cell.hpp"
+#include "Constants.hpp"
 #include "LatinSquare.hpp"
 #include "UpdateData.hpp"
-#include "Types.hpp"
 
 namespace LatinSquare {
     class Generator {
         public:
-            const LatinSquare generateRandomLatinSquare(const int size, const Type type, std::mt19937& mersenneTwister);
+            [[nodiscard]] const LatinSquare random(const uint_fast8_t size, const Type type) noexcept;
 
-            const boost::multiprecision::uint512_t /* uint64_t */ countAllLatinSquares(const int size);
+            [[nodiscard]] const boost::multiprecision::mpz_int count(const uint_fast8_t size);
 
         private:
-            bool checkIfAddToBacktrackingHistory(const Cell& cell) const;
+            [[nodiscard]] inline constexpr bool checkBacktrackingHistory(const uint_fast16_t index) const noexcept {
+                return backtrackingHistory_.empty() || index != backtrackingHistory_.back().index();
+            }
 
-            std::stack<UpdateData> updateHistory_;
-            std::stack<BacktrackingData> backtrackingHistory_;
+            std::vector<UpdateData> updateHistory_;
+            std::vector<BacktrackingData> backtrackingHistory_;
     };
 }

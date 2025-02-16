@@ -1,19 +1,24 @@
 #pragma once
 
-#include <string>
-
-#include "LatinSquare/Cell.hpp"
-#include "LatinSquare/Region.hpp"
+#include <cstdint>
 
 namespace Transversal {
     class BacktrackingData {
         public:
-            BacktrackingData(const LatinSquare::Region& region, const LatinSquare::Cell& cell);
+            inline constexpr explicit BacktrackingData(
+                const uint_fast8_t regionIndex, const uint_fast16_t cellIndex) noexcept
+                : regionIndex_(regionIndex), cellIndex_(cellIndex) {}
 
-            const std::string& getRegionId() const;
-            const std::string& getChosenCellId() const;
+            [[nodiscard]] inline constexpr uint_fast8_t regionIndex() const noexcept {
+                return regionIndex_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast16_t cellIndex() const noexcept {
+                return cellIndex_;
+            }
 
         private:
-            std::string regionId_, chosenCellId_;
+            uint_fast8_t regionIndex_;
+            uint_fast16_t cellIndex_;
     };
 }

@@ -1,31 +1,40 @@
 #pragma once
 
+#include <bit>
+#include <cstdint>
 #include <vector>
-
-// #include <boost/dynamic_bitset.hpp>
 
 namespace LatinSquare {
     class EntropyData {
         public:
-            EntropyData();
-            EntropyData(const int maxEntropy);
+            EntropyData() = default;
 
-            int getEntropy() const;
-            // const boost::dynamic_bitset<>& getRemainingNumbers() const;
-            const std::vector<int>& getRemainingNumbers() const;
+            inline constexpr explicit EntropyData(const uint_fast8_t maxEntropy) noexcept
+                : maxEntropy_(maxEntropy), numbers_((1ULL << maxEntropy_) - 1) {}
 
-            void resetEntropyData();
-            void clearEntropyData();
+            [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept{
+                return std::popcount(numbers_);
+            }
 
-            bool removeRemainingNumber(const int number);
-            void restoreRemainingNumber(const int number);
+            inline constexpr void clear() noexcept {
+                numbers_ = 0;
+            }
+
+            inline constexpr bool remove(const uint_fast8_t number) noexcept {
+                const auto bit = 1ULL << number;
+                const auto set = (numbers_ & bit) != 0;
+                numbers_ &= ~bit;
+                return set;
+            }
+
+            inline constexpr void restore(const uint_fast8_t number) noexcept {
+                numbers_ |= (1ULL << number);
+            }
+
+            [[nodiscard]] const std::vector<uint_fast8_t> numbers() const noexcept;
 
         private:
-            void setEntropy(const int entropy);
-
-            int entropy_, maxEntropy_;
-
-            // boost::dynamic_bitset<> remainingNumbers_;
-            std::vector<int> remainingNumbers_;
+            uint_fast8_t maxEntropy_;
+            uint_fast64_t numbers_;
     };
 }

@@ -1,20 +1,25 @@
 #pragma once
 
-#include <string>
+#include <cstdint>
 #include <vector>
-
-#include "LatinSquare/Cell.hpp"
 
 namespace Transversal {
     class UpdateData {
         public:
-            UpdateData(const LatinSquare::Cell& cell, const std::vector<std::string>& ids);
+            inline constexpr explicit UpdateData(
+                const uint_fast16_t index, const std::vector<uint_fast16_t>& indexes) noexcept
+                : index_(index), indexes_(indexes) {}
 
-            const std::string& getChosenCellId() const;
-            const std::vector<std::string>& getDisabledCellsIds() const;
+            [[nodiscard]] inline constexpr uint_fast16_t index() const noexcept{
+                return index_;
+            }
+
+            [[nodiscard]] inline const std::vector<uint_fast16_t>& indexes() const noexcept {
+                return indexes_;
+            }
 
         private:
-            std::string chosenCellId_;
-            std::vector<std::string> disabledCellsIds_;
+            uint_fast16_t index_;
+            std::vector<uint_fast16_t> indexes_;
     };
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <functional>
 #include <string>
 #include <vector>
 
@@ -8,9 +7,9 @@
 #include "LatinSquare/LatinSquare.hpp"
 
 namespace Transversal {
-    void sortTransversal(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
-    void printTransversalFullIds(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
-    bool checkIfTransversalCell(const LatinSquare::Cell& cell, const std::vector<std::string>& ids);
-    void printTransversalBoard(
-        LatinSquare::LatinSquare& latinSquare, std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
+    // void sortTransversal(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
+    // void printTransversalFullIds(std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
+    // bool checkIfTransversalCell(const LatinSquare::Cell& cell, const std::vector<std::string>& ids);
+    // void printTransversalBoard(
+    //     LatinSquare::LatinSquare& latinSquare, std::vector<std::reference_wrapper<LatinSquare::Cell>>& transversal);
 }

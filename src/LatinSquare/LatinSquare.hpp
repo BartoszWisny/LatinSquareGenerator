@@ -1,64 +1,91 @@
 #pragma once
 
-#include <functional>
-#include <random>
-#include <string>
+#include <algorithm>
+#include <cstdint>
 #include <vector>
 
+#include <cpp/random.hpp>
+
 #include "Cell.hpp"
+#include "Constants.hpp"
 #include "Region.hpp"
-#include "Types.hpp"
 
 namespace LatinSquare {
     class LatinSquare {
         public:
-            LatinSquare();
-            LatinSquare(const int size, const Type type);
-            LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister);
+            explicit LatinSquare(const uint_fast8_t size, const Type type) noexcept;
+            explicit LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept;
 
-            int getSize() const;
-            const std::vector<Cell>& getGrid() const;
-            void setRegions();
+            [[nodiscard]] inline constexpr uint_fast8_t size() const noexcept {
+                return size_;
+            }
 
-            void sortGrid();
+            [[nodiscard]] inline const std::vector<std::shared_ptr<Cell>>& grid() const noexcept {
+                return grid_;
+            }
 
-            Cell& getCell(const std::string& id);
-            const std::vector<std::reference_wrapper<Cell>> getCells(const std::vector<std::string>& ids);
-            const std::vector<std::reference_wrapper<Region>> getRegions(const std::vector<std::string>& ids);
+            [[nodiscard]] inline constexpr uint_fast16_t notFilled() const noexcept {
+                return notFilled_;
+            }
 
-            bool checkIfNotFilledCellExists() const;
-            Cell& getNotFilledCellWithMinimumEntropy();
-            Cell& getRandomNotFilledCellWithMinimumEntropy();
-            const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToFilledCell(const Cell& filledCell);
-            void updateRelatedCells(std::vector<std::reference_wrapper<Cell>>& cells, const int number);
-            const std::vector<std::string> getUpdatedCellsIds(const std::vector<std::reference_wrapper<Cell>>& cells);
-            void restoreUpdatedCells(const std::vector<std::reference_wrapper<Cell>>& cells, const int number);
+            inline void fill(const uint_fast16_t index, const uint_fast8_t number) noexcept {
+                grid_[index]->fill(number);
+                --notFilled_;
+            }
 
-            Region& getEnabledRegionWithMinimumEntropy();
-            Region& getRandomEnabledRegionWithMinimumEntropy();
-            const std::vector<std::reference_wrapper<Cell>> getCellsRelatedToChosenCell(const Cell& chosenCell);
-            void disableRelatedCells(const std::vector<std::reference_wrapper<Cell>>& cells);
-            void decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);
-            const std::vector<std::string> getDisabledCellsIds(
-                const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& chosenCell);
-            const std::vector<std::reference_wrapper<Region>> getRelatedRegions(const Cell& cell);
-            void disableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
-            void enableDisabledCells(const std::vector<std::reference_wrapper<Cell>>& cells);
-            void increaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells);
-            void enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions);
+            inline void set(const uint_fast16_t index, const EntropyData& entropyData) noexcept {
+                grid_[index]->set(entropyData);
+            }
+
+            inline void clear(const uint_fast16_t index, const EntropyData& entropyData) noexcept {
+                grid_[index]->clear(entropyData);
+                ++notFilled_;
+            }
+
+            inline constexpr void restore(
+                const std::vector<uint_fast16_t>& indexes, const uint_fast8_t number) noexcept {
+                for (const auto index : indexes) {
+                    grid_[index]->restore(number);
+                }
+            }
+
+            inline constexpr void disable(const std::vector<uint_fast16_t>& indexes) noexcept {
+                for (const auto index : indexes) {
+                    grid_[index]->disable();
+                }
+            }
+
+            inline constexpr void enable(const std::vector<uint_fast16_t>& indexes) noexcept {
+                for (const auto index : indexes) {
+                    grid_[index]->enable();
+                }
+            }
+
+            void setRegions() noexcept;
+
+            [[nodiscard]] std::shared_ptr<Cell> minEntropyCell() noexcept;
+            [[nodiscard]] std::shared_ptr<Cell> randomMinEntropyCell() noexcept;
+            [[nodiscard]] const std::vector<uint_fast16_t> relatedToFilledCellIndexes(
+                const std::shared_ptr<Cell>  filledCell) const noexcept;
+            void update(std::vector<uint_fast16_t>& indexes, const uint_fast8_t number) noexcept;
+
+            [[nodiscard]] Region& minEntropyRegion() noexcept;
+            [[nodiscard]] Region& randomMinEntropyRegion() noexcept;
+
+            [[nodiscard]] const std::vector<uint_fast16_t> relatedToChosenCellIndexes(
+                const std::shared_ptr<Cell> chosenCell) const noexcept;
+            void decrease(std::vector<uint_fast16_t>& indexes, const uint_fast16_t chosenIndex) noexcept;
+            void disable(const uint_fast16_t index) noexcept;
+            void increase(const std::vector<uint_fast16_t>& indexes) noexcept;
+            void enable(const uint_fast16_t index) noexcept;
 
         private:
-            void setGrid(const Type type);
+            void reset(const Type type) noexcept;
 
-            bool checkIfNotFilledAndRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const;
-
-            bool checkIfEnabledAndRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const;
-            bool checkIfRelatedRegion(const Cell& cell, const Region& region) const;
-
-            int size_;
-            // consider using std::unique_ptr for Cell and Region
-            std::vector<Cell> grid_;
+            uint_fast8_t size_;
+            std::vector<std::shared_ptr<Cell>> grid_;
             std::vector<Region> regions_;
-            std::mt19937 mersenneTwister_;
+            cpp::splitmix64 splitmix64_;
+            uint_fast16_t notFilled_;
     };
 }

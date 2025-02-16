@@ -129,30 +129,6 @@ LatinSquareGenerator/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/build
 .PHONY : LatinSquareGenerator/fast
 
-src/LatinSquare/BacktrackingData.obj: src/LatinSquare/BacktrackingData.cpp.obj
-.PHONY : src/LatinSquare/BacktrackingData.obj
-
-# target to build an object file
-src/LatinSquare/BacktrackingData.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/BacktrackingData.cpp.obj
-.PHONY : src/LatinSquare/BacktrackingData.cpp.obj
-
-src/LatinSquare/BacktrackingData.i: src/LatinSquare/BacktrackingData.cpp.i
-.PHONY : src/LatinSquare/BacktrackingData.i
-
-# target to preprocess a source file
-src/LatinSquare/BacktrackingData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/BacktrackingData.cpp.i
-.PHONY : src/LatinSquare/BacktrackingData.cpp.i
-
-src/LatinSquare/BacktrackingData.s: src/LatinSquare/BacktrackingData.cpp.s
-.PHONY : src/LatinSquare/BacktrackingData.s
-
-# target to generate assembly for a file
-src/LatinSquare/BacktrackingData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/BacktrackingData.cpp.s
-.PHONY : src/LatinSquare/BacktrackingData.cpp.s
-
 src/LatinSquare/Cell.obj: src/LatinSquare/Cell.cpp.obj
 .PHONY : src/LatinSquare/Cell.obj
 
@@ -249,30 +225,6 @@ src/LatinSquare/LatinSquare.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/LatinSquare.cpp.s
 .PHONY : src/LatinSquare/LatinSquare.cpp.s
 
-src/LatinSquare/Logger.obj: src/LatinSquare/Logger.cpp.obj
-.PHONY : src/LatinSquare/Logger.obj
-
-# target to build an object file
-src/LatinSquare/Logger.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Logger.cpp.obj
-.PHONY : src/LatinSquare/Logger.cpp.obj
-
-src/LatinSquare/Logger.i: src/LatinSquare/Logger.cpp.i
-.PHONY : src/LatinSquare/Logger.i
-
-# target to preprocess a source file
-src/LatinSquare/Logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Logger.cpp.i
-.PHONY : src/LatinSquare/Logger.cpp.i
-
-src/LatinSquare/Logger.s: src/LatinSquare/Logger.cpp.s
-.PHONY : src/LatinSquare/Logger.s
-
-# target to generate assembly for a file
-src/LatinSquare/Logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Logger.cpp.s
-.PHONY : src/LatinSquare/Logger.cpp.s
-
 src/LatinSquare/Region.obj: src/LatinSquare/Region.cpp.obj
 .PHONY : src/LatinSquare/Region.obj
 
@@ -296,30 +248,6 @@ src/LatinSquare/Region.s: src/LatinSquare/Region.cpp.s
 src/LatinSquare/Region.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Region.cpp.s
 .PHONY : src/LatinSquare/Region.cpp.s
-
-src/LatinSquare/UpdateData.obj: src/LatinSquare/UpdateData.cpp.obj
-.PHONY : src/LatinSquare/UpdateData.obj
-
-# target to build an object file
-src/LatinSquare/UpdateData.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/UpdateData.cpp.obj
-.PHONY : src/LatinSquare/UpdateData.cpp.obj
-
-src/LatinSquare/UpdateData.i: src/LatinSquare/UpdateData.cpp.i
-.PHONY : src/LatinSquare/UpdateData.i
-
-# target to preprocess a source file
-src/LatinSquare/UpdateData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/UpdateData.cpp.i
-.PHONY : src/LatinSquare/UpdateData.cpp.i
-
-src/LatinSquare/UpdateData.s: src/LatinSquare/UpdateData.cpp.s
-.PHONY : src/LatinSquare/UpdateData.s
-
-# target to generate assembly for a file
-src/LatinSquare/UpdateData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/UpdateData.cpp.s
-.PHONY : src/LatinSquare/UpdateData.cpp.s
 
 src/LatinSquare/Utils.obj: src/LatinSquare/Utils.cpp.obj
 .PHONY : src/LatinSquare/Utils.obj
@@ -369,30 +297,6 @@ src/Main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
-src/Transversal/BacktrackingData.obj: src/Transversal/BacktrackingData.cpp.obj
-.PHONY : src/Transversal/BacktrackingData.obj
-
-# target to build an object file
-src/Transversal/BacktrackingData.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/BacktrackingData.cpp.obj
-.PHONY : src/Transversal/BacktrackingData.cpp.obj
-
-src/Transversal/BacktrackingData.i: src/Transversal/BacktrackingData.cpp.i
-.PHONY : src/Transversal/BacktrackingData.i
-
-# target to preprocess a source file
-src/Transversal/BacktrackingData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/BacktrackingData.cpp.i
-.PHONY : src/Transversal/BacktrackingData.cpp.i
-
-src/Transversal/BacktrackingData.s: src/Transversal/BacktrackingData.cpp.s
-.PHONY : src/Transversal/BacktrackingData.s
-
-# target to generate assembly for a file
-src/Transversal/BacktrackingData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/BacktrackingData.cpp.s
-.PHONY : src/Transversal/BacktrackingData.cpp.s
-
 src/Transversal/Generator.obj: src/Transversal/Generator.cpp.obj
 .PHONY : src/Transversal/Generator.obj
 
@@ -416,54 +320,6 @@ src/Transversal/Generator.s: src/Transversal/Generator.cpp.s
 src/Transversal/Generator.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.s
 .PHONY : src/Transversal/Generator.cpp.s
-
-src/Transversal/Logger.obj: src/Transversal/Logger.cpp.obj
-.PHONY : src/Transversal/Logger.obj
-
-# target to build an object file
-src/Transversal/Logger.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Logger.cpp.obj
-.PHONY : src/Transversal/Logger.cpp.obj
-
-src/Transversal/Logger.i: src/Transversal/Logger.cpp.i
-.PHONY : src/Transversal/Logger.i
-
-# target to preprocess a source file
-src/Transversal/Logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Logger.cpp.i
-.PHONY : src/Transversal/Logger.cpp.i
-
-src/Transversal/Logger.s: src/Transversal/Logger.cpp.s
-.PHONY : src/Transversal/Logger.s
-
-# target to generate assembly for a file
-src/Transversal/Logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Logger.cpp.s
-.PHONY : src/Transversal/Logger.cpp.s
-
-src/Transversal/UpdateData.obj: src/Transversal/UpdateData.cpp.obj
-.PHONY : src/Transversal/UpdateData.obj
-
-# target to build an object file
-src/Transversal/UpdateData.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/UpdateData.cpp.obj
-.PHONY : src/Transversal/UpdateData.cpp.obj
-
-src/Transversal/UpdateData.i: src/Transversal/UpdateData.cpp.i
-.PHONY : src/Transversal/UpdateData.i
-
-# target to preprocess a source file
-src/Transversal/UpdateData.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/UpdateData.cpp.i
-.PHONY : src/Transversal/UpdateData.cpp.i
-
-src/Transversal/UpdateData.s: src/Transversal/UpdateData.cpp.s
-.PHONY : src/Transversal/UpdateData.s
-
-# target to generate assembly for a file
-src/Transversal/UpdateData.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\LatinSquareGenerator.dir\build.make CMakeFiles/LatinSquareGenerator.dir/src/Transversal/UpdateData.cpp.s
-.PHONY : src/Transversal/UpdateData.cpp.s
 
 src/Transversal/Utils.obj: src/Transversal/Utils.cpp.obj
 .PHONY : src/Transversal/Utils.obj
@@ -546,9 +402,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... LatinSquareGenerator
-	@echo ... src/LatinSquare/BacktrackingData.obj
-	@echo ... src/LatinSquare/BacktrackingData.i
-	@echo ... src/LatinSquare/BacktrackingData.s
 	@echo ... src/LatinSquare/Cell.obj
 	@echo ... src/LatinSquare/Cell.i
 	@echo ... src/LatinSquare/Cell.s
@@ -561,33 +414,18 @@ help:
 	@echo ... src/LatinSquare/LatinSquare.obj
 	@echo ... src/LatinSquare/LatinSquare.i
 	@echo ... src/LatinSquare/LatinSquare.s
-	@echo ... src/LatinSquare/Logger.obj
-	@echo ... src/LatinSquare/Logger.i
-	@echo ... src/LatinSquare/Logger.s
 	@echo ... src/LatinSquare/Region.obj
 	@echo ... src/LatinSquare/Region.i
 	@echo ... src/LatinSquare/Region.s
-	@echo ... src/LatinSquare/UpdateData.obj
-	@echo ... src/LatinSquare/UpdateData.i
-	@echo ... src/LatinSquare/UpdateData.s
 	@echo ... src/LatinSquare/Utils.obj
 	@echo ... src/LatinSquare/Utils.i
 	@echo ... src/LatinSquare/Utils.s
 	@echo ... src/Main.obj
 	@echo ... src/Main.i
 	@echo ... src/Main.s
-	@echo ... src/Transversal/BacktrackingData.obj
-	@echo ... src/Transversal/BacktrackingData.i
-	@echo ... src/Transversal/BacktrackingData.s
 	@echo ... src/Transversal/Generator.obj
 	@echo ... src/Transversal/Generator.i
 	@echo ... src/Transversal/Generator.s
-	@echo ... src/Transversal/Logger.obj
-	@echo ... src/Transversal/Logger.i
-	@echo ... src/Transversal/Logger.s
-	@echo ... src/Transversal/UpdateData.obj
-	@echo ... src/Transversal/UpdateData.i
-	@echo ... src/Transversal/UpdateData.s
 	@echo ... src/Transversal/Utils.obj
 	@echo ... src/Transversal/Utils.i
 	@echo ... src/Transversal/Utils.s

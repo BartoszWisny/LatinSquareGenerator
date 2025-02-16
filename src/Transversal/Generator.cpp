@@ -1,66 +1,54 @@
 #include "Generator.hpp"
 
 namespace Transversal {
-    bool Generator::checkIfAddToBacktrackingHistory(const LatinSquare::Cell& cell) const {
-        return backtrackingHistory_.empty() || cell.getId() != backtrackingHistory_.top().getChosenCellId();
-    }
-
-    bool Generator::checkIfRemoveFromBacktrackingHistory(const std::string& regionId) const {
-        return !backtrackingHistory_.empty() && backtrackingHistory_.top().getRegionId() == regionId;
-    }
-
-    const std::vector<std::reference_wrapper<LatinSquare::Cell>> Generator::findRandomTransversal(
-        LatinSquare::LatinSquare& latinSquare, std::mt19937& mersenneTwister) {
-        const unsigned size = latinSquare.getSize();
-        std::vector<std::reference_wrapper<LatinSquare::Cell>> transversal;
+    const std::vector<uint_fast16_t> Generator::random(LatinSquare::LatinSquare& latinSquare) {
+        cpp::splitmix64 splitmix64;
+        const auto size = latinSquare.size();
+        std::vector<uint_fast16_t> transversal;
         transversal.reserve(size);
-        int counter = 0;
+
+        uint_fast8_t counter = 0;
 
         while (transversal.size() < size) {
-            auto& region = latinSquare.getRandomEnabledRegionWithMinimumEntropy();
+            auto& region = latinSquare.randomMinEntropyRegion();
 
-            if (region.getEntropy() > 0) {
+            if (region.entropy() > 0) {
                 counter = 0;
 
-                const auto cells = region.getEnabledCells();
-                auto& cell = cells[mersenneTwister() % cells.size()].get();
+                const auto regionIndex = region.index();
+                const auto cells = region.enabledCells();
+                auto cell = cells[splitmix64.next() % cells.size()];
+                const auto cellIndex = cell->index();
+                transversal.emplace_back(cellIndex);
+                auto indexes = latinSquare.relatedToChosenCellIndexes(cell);
+                latinSquare.disable(indexes);
+                latinSquare.decrease(indexes, cellIndex);
+                latinSquare.disable(cellIndex);
 
-                transversal.emplace_back(cell);
-                const auto relatedCells = latinSquare.getCellsRelatedToChosenCell(cell);
-                latinSquare.disableRelatedCells(relatedCells);
-                latinSquare.decreaseRelatedRegionsEntropy(relatedCells);
-                const auto disabledCellsIds = latinSquare.getDisabledCellsIds(relatedCells, cell);
-                const auto relatedRegions = latinSquare.getRelatedRegions(cell);
-                latinSquare.disableRelatedRegions(relatedRegions);
+                updateHistory_.emplace_back(cellIndex, indexes);
 
-                updateHistory_.emplace(cell, disabledCellsIds);
-
-                if (checkIfAddToBacktrackingHistory(cell)) {
-                    backtrackingHistory_.emplace(region, cell);
+                if (checkAddToBacktrackingHistory(cellIndex)) {
+                    backtrackingHistory_.emplace_back(regionIndex, cellIndex);
                 }
             } else {
-                ++counter;
+                if (++counter > 1) {
+                    auto backtrackingData = backtrackingHistory_.back();
+                    backtrackingHistory_.pop_back();
 
-                if (counter > 1) {
-                    auto backtrackingData = backtrackingHistory_.top();
-                    backtrackingHistory_.pop();
+                    std::vector<uint_fast16_t> indexes;
+                    indexes.reserve(size);
+                    indexes.emplace_back(backtrackingData.cellIndex());
+                    const auto regionIndex = backtrackingData.regionIndex();
 
-                    std::vector<std::string> disabledCellsIds;
-                    disabledCellsIds.reserve(size);
-                    disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
+                    while (checkRemoveFromBacktrackingHistory(regionIndex)) {
+                        backtrackingData = backtrackingHistory_.back();
+                        backtrackingHistory_.pop_back();
 
-                    const auto& regionId = backtrackingData.getRegionId();
-
-                    while (checkIfRemoveFromBacktrackingHistory(regionId)) {
-                        backtrackingData = backtrackingHistory_.top();
-                        backtrackingHistory_.pop();
-
-                        disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
+                        indexes.emplace_back(backtrackingData.cellIndex());
                     }
 
-                    const auto disabledCells = latinSquare.getCells(disabledCellsIds);
-                    latinSquare.enableDisabledCells(disabledCells);
-                    latinSquare.increaseRelatedRegionsEntropy(disabledCells);
+                    latinSquare.enable(indexes);
+                    latinSquare.increase(indexes);
 
                     if (updateHistory_.empty()) {
                         break;
@@ -68,74 +56,68 @@ namespace Transversal {
                 }
 
                 transversal.pop_back();
-                const auto updateData = updateHistory_.top();
-                updateHistory_.pop();
 
-                const auto disabledCells = latinSquare.getCells(updateData.getDisabledCellsIds());
-                latinSquare.enableDisabledCells(disabledCells);
-                latinSquare.increaseRelatedRegionsEntropy(disabledCells);
-                const auto relatedRegions = latinSquare.getRelatedRegions(
-                    latinSquare.getCell(updateData.getChosenCellId()));
-                latinSquare.enableRelatedRegions(relatedRegions);
+                const auto updateData = updateHistory_.back();
+                updateHistory_.pop_back();
+
+                const auto indexes = updateData.indexes();
+                latinSquare.enable(indexes);
+                latinSquare.increase(indexes);
+                latinSquare.enable(updateData.index());
             }
         }
 
         return transversal;
     }
 
-    const boost::multiprecision::uint512_t /* uint64_t */ Generator::countAllTransversals(
-        LatinSquare::LatinSquare& latinSquare) {
-        const unsigned size = latinSquare.getSize();
-        std::vector<std::reference_wrapper<LatinSquare::Cell>> transversal;
+    const boost::multiprecision::mpz_int Generator::count(LatinSquare::LatinSquare& latinSquare) {
+        const auto size = latinSquare.size();
+        std::vector<uint_fast16_t> transversal;
         transversal.reserve(size);
-        boost::multiprecision::uint512_t numberOfTransversals = 0;
-        int counter = 0;
+
+        boost::multiprecision::mpz_int transversalsCounter = 0;
+        uint_fast8_t counter = 0;
 
         while (true) {
             if (transversal.size() < size) {
-                auto& region = latinSquare.getEnabledRegionWithMinimumEntropy();
+                auto& region = latinSquare.minEntropyRegion();
 
-                if (region.getEntropy() > 0) {
+                if (region.entropy() > 0) {
                     counter = 0;
 
-                    auto& cell = region.getEnabledCells()[0].get();
+                    const auto regionIndex = region.index();
+                    auto cell = region.enabledCells()[0];
+                    const auto cellIndex = cell->index();
+                    transversal.emplace_back(cellIndex);
+                    auto indexes = latinSquare.relatedToChosenCellIndexes(cell);
+                    latinSquare.disable(indexes);
+                    latinSquare.decrease(indexes, cellIndex);
+                    latinSquare.disable(cellIndex);
 
-                    transversal.emplace_back(cell);
-                    const auto relatedCells = latinSquare.getCellsRelatedToChosenCell(cell);
-                    latinSquare.disableRelatedCells(relatedCells);
-                    latinSquare.decreaseRelatedRegionsEntropy(relatedCells);
-                    const auto disabledCellsIds = latinSquare.getDisabledCellsIds(relatedCells, cell);
-                    const auto relatedRegions = latinSquare.getRelatedRegions(cell);
-                    latinSquare.disableRelatedRegions(relatedRegions);
+                    updateHistory_.emplace_back(cellIndex, indexes);
 
-                    updateHistory_.emplace(cell, disabledCellsIds);
-
-                    if (checkIfAddToBacktrackingHistory(cell)) {
-                        backtrackingHistory_.emplace(region, cell);
+                    if (checkAddToBacktrackingHistory(cellIndex)) {
+                        backtrackingHistory_.emplace_back(regionIndex, cellIndex);
                     }
                 } else {
-                    ++counter;
+                    if (++counter > 1) {
+                        auto backtrackingData = backtrackingHistory_.back();
+                        backtrackingHistory_.pop_back();
 
-                    if (counter > 1) {
-                        auto backtrackingData = backtrackingHistory_.top();
-                        backtrackingHistory_.pop();
+                        std::vector<uint_fast16_t> indexes;
+                        indexes.reserve(size);
+                        indexes.emplace_back(backtrackingData.cellIndex());
+                        const auto& regionIndex = backtrackingData.regionIndex();
 
-                        std::vector<std::string> disabledCellsIds;
-                        disabledCellsIds.reserve(size);
-                        disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
+                        while (checkRemoveFromBacktrackingHistory(regionIndex)) {
+                            backtrackingData = backtrackingHistory_.back();
+                            backtrackingHistory_.pop_back();
 
-                        const auto& regionId = backtrackingData.getRegionId();
-
-                        while (checkIfRemoveFromBacktrackingHistory(regionId)) {
-                            backtrackingData = backtrackingHistory_.top();
-                            backtrackingHistory_.pop();
-
-                            disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
+                            indexes.emplace_back(backtrackingData.cellIndex());
                         }
 
-                        const auto disabledCells = latinSquare.getCells(disabledCellsIds);
-                        latinSquare.enableDisabledCells(disabledCells);
-                        latinSquare.increaseRelatedRegionsEntropy(disabledCells);
+                        latinSquare.enable(indexes);
+                        latinSquare.increase(indexes);
 
                         if (updateHistory_.empty()) {
                             break;
@@ -143,59 +125,31 @@ namespace Transversal {
                     }
 
                     transversal.pop_back();
-                    const auto updateData = updateHistory_.top();
-                    updateHistory_.pop();
 
-                    const auto disabledCells = latinSquare.getCells(updateData.getDisabledCellsIds());
-                    latinSquare.enableDisabledCells(disabledCells);
-                    latinSquare.increaseRelatedRegionsEntropy(disabledCells);
-                    const auto relatedRegions = latinSquare.getRelatedRegions(
-                        latinSquare.getCell(updateData.getChosenCellId()));
-                    latinSquare.enableRelatedRegions(relatedRegions);
+                    const auto updateData = updateHistory_.back();
+                    updateHistory_.pop_back();
+
+                    const auto indexes = updateData.indexes();
+                    latinSquare.enable(indexes);
+                    latinSquare.increase(indexes);
+                    latinSquare.enable(updateData.index());
                 }
             } else {
-                ++numberOfTransversals;
+                ++transversalsCounter;
                 ++counter;
 
-                // if (counter > 1) {
-                //     auto backtrackingData = backtrackingHistory_.top();
-                //     backtrackingHistory_.pop();
-
-                //     std::vector<std::string> disabledCellsIds;
-                //     disabledCellsIds.reserve(size);
-                //     disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
-
-                //     const auto& regionId = backtrackingData.getRegionId();
-
-                //     while (checkIfRemoveFromBacktrackingHistory(regionId)) {
-                //         backtrackingData = backtrackingHistory_.top();
-                //         backtrackingHistory_.pop();
-
-                //         disabledCellsIds.emplace_back(backtrackingData.getChosenCellId());
-                //     }
-
-                //     const auto disabledCells = latinSquare.getCells(disabledCellsIds);
-                //     latinSquare.enableDisabledCells(disabledCells);
-                //     latinSquare.increaseRelatedRegionsEntropy(disabledCells);
-
-                //     if (updateHistory_.empty()) {
-                //         break;
-                //     }
-                // }
-
                 transversal.pop_back();
-                const auto updateData = updateHistory_.top();
-                updateHistory_.pop();
 
-                const auto disabledCells = latinSquare.getCells(updateData.getDisabledCellsIds());
-                latinSquare.enableDisabledCells(disabledCells);
-                latinSquare.increaseRelatedRegionsEntropy(disabledCells);
-                const auto relatedRegions = latinSquare.getRelatedRegions(
-                    latinSquare.getCell(updateData.getChosenCellId()));
-                latinSquare.enableRelatedRegions(relatedRegions);
+                const auto updateData = updateHistory_.back();
+                updateHistory_.pop_back();
+
+                const auto indexes = updateData.indexes();
+                latinSquare.enable(indexes);
+                latinSquare.increase(indexes);
+                latinSquare.enable(updateData.index());
             }
         }
 
-        return numberOfTransversals;
+        return transversalsCounter;
     }
 }

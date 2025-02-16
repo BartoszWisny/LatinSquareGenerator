@@ -1,103 +1,67 @@
 [
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\BacktrackingData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\BacktrackingData.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/BacktrackingData.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/BacktrackingData.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Cell.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Cell.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Cell.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Cell.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Cell.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Cell.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\EntropyData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\EntropyData.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\EntropyData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\EntropyData.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/EntropyData.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/EntropyData.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Generator.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Generator.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Generator.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Generator.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Generator.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Generator.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\LatinSquare.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\LatinSquare.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\LatinSquare.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\LatinSquare.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/LatinSquare.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/LatinSquare.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Logger.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Logger.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Logger.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Logger.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Region.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Region.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Region.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Region.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Region.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Region.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\UpdateData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\UpdateData.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/UpdateData.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/UpdateData.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Utils.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Utils.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\LatinSquare\\Utils.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\LatinSquare\\Utils.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/LatinSquare/Utils.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/LatinSquare/Utils.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Main.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Main.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Main.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Main.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Main.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\BacktrackingData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\BacktrackingData.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal/BacktrackingData.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/Transversal/BacktrackingData.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\Generator.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\Generator.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\Generator.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\Generator.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal/Generator.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Generator.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\Logger.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\Logger.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal/Logger.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Logger.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\UpdateData.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\UpdateData.cpp\"",
-  "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal/UpdateData.cpp",
-  "output": "CMakeFiles/LatinSquareGenerator.dir/src/Transversal/UpdateData.cpp.obj"
-},
-{
-  "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\Utils.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\Utils.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\Transversal\\Utils.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\Transversal\\Utils.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/Transversal/Utils.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/Transversal/Utils.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\cpp\\iostream.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\cpp\\iostream.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\cpp\\iostream.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\cpp\\iostream.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/iostream.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/cpp/iostream.cpp.obj"
 },
 {
   "directory": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\cpp\\string.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\cpp\\string.cpp\"",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe  @CMakeFiles/LatinSquareGenerator.dir/includes_CXX.rsp -Wall -Wextra -Ofast -lgmpxx -lgmp -flto=auto -march=native -g -std=c++20 -o CMakeFiles\\LatinSquareGenerator.dir\\src\\cpp\\string.cpp.obj -c \"C:\\Users\\User\\Desktop\\PRACA MAGISTERSKA\\LatinSquareGenerator\\src\\cpp\\string.cpp\"",
   "file": "C:/Users/User/Desktop/PRACA MAGISTERSKA/LatinSquareGenerator/src/cpp/string.cpp",
   "output": "CMakeFiles/LatinSquareGenerator.dir/src/cpp/string.cpp.obj"
 }

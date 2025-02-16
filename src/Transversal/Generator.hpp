@@ -1,32 +1,33 @@
 #pragma once
 
-#include <functional>
-#include <random>
-#include <stack>
-#include <string>
+#include <cstdint>
 #include <vector>
 
-#include <boost/multiprecision/cpp_int.hpp>
+#include <boost/multiprecision/gmp.hpp>
 
 #include "BacktrackingData.hpp"
-#include "LatinSquare/Cell.hpp"
 #include "LatinSquare/LatinSquare.hpp"
 #include "UpdateData.hpp"
 
 namespace Transversal {
     class Generator {
         public:
-            const std::vector<std::reference_wrapper<LatinSquare::Cell>> findRandomTransversal(
-                LatinSquare::LatinSquare& latinSquare, std::mt19937& mersenneTwister);
+            [[nodiscard]] const std::vector<uint_fast16_t> random(LatinSquare::LatinSquare& latinSquare);
 
-            const boost::multiprecision::uint512_t /* uint64_t */ countAllTransversals(
-                LatinSquare::LatinSquare& latinSquare);
+            [[nodiscard]] const boost::multiprecision::mpz_int count(LatinSquare::LatinSquare& latinSquare);
 
         private:
-            bool checkIfAddToBacktrackingHistory(const LatinSquare::Cell& cell) const;
-            bool checkIfRemoveFromBacktrackingHistory(const std::string& regionId) const;
+            [[nodiscard]] inline constexpr bool checkAddToBacktrackingHistory(
+                const uint_fast16_t index) const noexcept {
+                return backtrackingHistory_.empty() || index != backtrackingHistory_.back().cellIndex();
+            }
 
-            std::stack<UpdateData> updateHistory_;
-            std::stack<BacktrackingData> backtrackingHistory_;
+            [[nodiscard]] inline constexpr bool checkRemoveFromBacktrackingHistory(
+                const uint_fast8_t index) const noexcept {
+                return !backtrackingHistory_.empty() && index == backtrackingHistory_.back().regionIndex();
+            }
+
+            std::vector<UpdateData> updateHistory_;
+            std::vector<BacktrackingData> backtrackingHistory_;
     };
 }

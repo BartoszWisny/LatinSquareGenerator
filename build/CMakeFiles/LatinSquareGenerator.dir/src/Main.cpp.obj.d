@@ -1,40 +1,32 @@
 CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Main.cpp \
  C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Main.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/random \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/requires_hosted.h \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Generator.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/os_defines.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/cpu_defines.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/pstl_config.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cmath \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/cpp_type_traits.h \
- C:/msys64/ucrt64/include/c++/14.1.0/ext/type_traits.h \
- C:/msys64/ucrt64/include/math.h C:/msys64/ucrt64/include/crtdefs.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdint.h \
+ C:/msys64/ucrt64/include/stdint.h C:/msys64/ucrt64/include/crtdefs.h \
  C:/msys64/ucrt64/include/corecrt.h C:/msys64/ucrt64/include/_mingw.h \
  C:/msys64/ucrt64/include/_mingw_mac.h \
  C:/msys64/ucrt64/include/_mingw_secapi.h \
  C:/msys64/ucrt64/include/vadefs.h \
  C:/msys64/ucrt64/include/sdks/_mingw_ddk.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/std_abs.h \
- C:/msys64/ucrt64/include/stdlib.h \
- C:/msys64/ucrt64/include/corecrt_wstdlib.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/limits.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h \
- C:/msys64/ucrt64/include/limits.h \
- C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
- C:/msys64/ucrt64/include/c++/14.1.0/stdlib.h \
- C:/msys64/ucrt64/include/malloc.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h \
- C:/msys64/ucrt64/include/errno.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/version.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/specfun.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stddef.h \
+ C:/msys64/ucrt64/include/stddef.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/vector \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/requires_hosted.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algobase.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/functexcept.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/exception_defines.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/cpp_type_traits.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/ext/type_traits.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ext/numeric_traits.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_pair.h \
  C:/msys64/ucrt64/include/c++/14.1.0/type_traits \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/version.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/move.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/utility.h \
  C:/msys64/ucrt64/include/c++/14.1.0/compare \
@@ -53,119 +45,95 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/debug/debug.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/predefined_ops.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bit \
- C:/msys64/ucrt64/include/c++/14.1.0/limits \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/gamma.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/special_function_util.h \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/bessel_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/beta_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/ell_integral.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/exp_integral.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/hypergeometric.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/legendre_function.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/modified_bessel_func.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_hermite.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_laguerre.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/tr1/riemann_zeta.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdint \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdint.h \
- C:/msys64/ucrt64/include/stdint.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stddef.h \
- C:/msys64/ucrt64/include/stddef.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdlib \
- C:/msys64/ucrt64/include/c++/14.1.0/string \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stringfwd.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/memoryfwd.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/char_traits.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/postypes.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cwchar \
- C:/msys64/ucrt64/include/wchar.h \
- C:/msys64/ucrt64/include/corecrt_stdio_config.h \
- C:/msys64/ucrt64/include/_mingw_off_t.h \
- C:/msys64/ucrt64/include/_mingw_stat64.h \
- C:/msys64/ucrt64/include/swprintf.inl \
- C:/msys64/ucrt64/include/sec_api/wchar_s.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/allocator.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++allocator.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/new_allocator.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/localefwd.h \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++locale.h \
- C:/msys64/ucrt64/include/c++/14.1.0/clocale \
- C:/msys64/ucrt64/include/locale.h C:/msys64/ucrt64/include/stdio.h \
- C:/msys64/ucrt64/include/sec_api/stdio_s.h \
- C:/msys64/ucrt64/include/c++/14.1.0/iosfwd \
- C:/msys64/ucrt64/include/c++/14.1.0/cctype \
- C:/msys64/ucrt64/include/ctype.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream_insert.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_forced.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_function.h \
- C:/msys64/ucrt64/include/c++/14.1.0/backward/binders.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/refwrap.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/invoke.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/range_access.h \
- C:/msys64/ucrt64/include/c++/14.1.0/initializer_list \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/memoryfwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_uninitialized.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ext/alloc_traits.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/alloc_traits.h \
- C:/msys64/ucrt64/include/c++/14.1.0/string_view \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_vector.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/initializer_list \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/functional_hash.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/hash_bytes.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_base.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/max_size_type.h \
- C:/msys64/ucrt64/include/c++/14.1.0/numbers \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/string_view.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/ext/string_conversions.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdio \
- C:/msys64/ucrt64/include/c++/14.1.0/cerrno \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/charconv.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/refwrap.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/invoke.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_function.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/backward/binders.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/range_access.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/memory_resource.h \
  C:/msys64/ucrt64/include/c++/14.1.0/cstddef \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/uses_allocator.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/uses_allocator_args.h \
  C:/msys64/ucrt64/include/c++/14.1.0/tuple \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_util.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/random.h \
- C:/msys64/ucrt64/include/c++/14.1.0/vector \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_uninitialized.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_vector.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_bvector.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/vector.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/uniform_int_dist.h \
- C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/opt_random.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/pmmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/emmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xmmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mwaitintrin.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/random.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/numeric \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_numeric.h \
- C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_numeric_defs.h \
- C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Generator.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/stack \
- C:/msys64/ucrt64/include/c++/14.1.0/deque \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_deque.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/deque.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_stack.h \
- D:/boost/boost/multiprecision/cpp_int.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/cstring \
- C:/msys64/ucrt64/include/string.h \
- C:/msys64/ucrt64/include/sec_api/string_s.h \
- C:/msys64/ucrt64/include/c++/14.1.0/iostream \
- C:/msys64/ucrt64/include/c++/14.1.0/ostream \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_base.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/max_size_type.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/numbers \
+ C:/msys64/ucrt64/include/boost/multiprecision/gmp.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/standalone_config.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/climits \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/limits.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/syslimits.h \
+ C:/msys64/ucrt64/include/limits.h \
+ C:/msys64/ucrt64/include/boost/config.hpp \
+ C:/msys64/ucrt64/include/boost/config/user.hpp \
+ C:/msys64/ucrt64/include/boost/config/detail/select_compiler_config.hpp \
+ C:/msys64/ucrt64/include/boost/config/compiler/gcc.hpp \
+ C:/msys64/ucrt64/include/boost/config/detail/select_stdlib_config.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/version \
+ C:/msys64/ucrt64/include/boost/config/stdlib/libstdcpp3.hpp \
+ C:/msys64/ucrt64/include/boost/config/detail/select_platform_config.hpp \
+ C:/msys64/ucrt64/include/boost/config/platform/win32.hpp \
+ C:/msys64/ucrt64/include/boost/config/detail/suffix.hpp \
+ C:/msys64/ucrt64/include/boost/config/helper_macros.hpp \
+ C:/msys64/ucrt64/include/boost/config/detail/cxx_composite.hpp \
+ C:/msys64/ucrt64/include/boost/config/workaround.hpp \
+ C:/msys64/ucrt64/include/boost/integer.hpp \
+ C:/msys64/ucrt64/include/boost/integer_fwd.hpp \
+ C:/msys64/ucrt64/include/boost/limits.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/limits \
+ C:/msys64/ucrt64/include/boost/cstdint.hpp \
+ C:/msys64/ucrt64/include/boost/integer_traits.hpp \
+ C:/msys64/ucrt64/include/wchar.h \
+ C:/msys64/ucrt64/include/corecrt_stdio_config.h \
+ C:/msys64/ucrt64/include/corecrt_wstdlib.h \
+ C:/msys64/ucrt64/include/_mingw_off_t.h \
+ C:/msys64/ucrt64/include/_mingw_stat64.h \
+ C:/msys64/ucrt64/include/swprintf.inl \
+ C:/msys64/ucrt64/include/sec_api/wchar_s.h \
+ C:/msys64/ucrt64/include/boost/static_assert.hpp \
+ C:/msys64/ucrt64/include/boost/detail/workaround.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/number.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/precision.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/is_variable_precision.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/number_base.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/ios \
+ C:/msys64/ucrt64/include/c++/14.1.0/iosfwd \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stringfwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/postypes.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cwchar \
  C:/msys64/ucrt64/include/c++/14.1.0/exception \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/exception_ptr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_init_exception.h \
  C:/msys64/ucrt64/include/c++/14.1.0/typeinfo \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/nested_exception.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/char_traits.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/localefwd.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/c++locale.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/clocale \
+ C:/msys64/ucrt64/include/locale.h C:/msys64/ucrt64/include/stdio.h \
+ C:/msys64/ucrt64/include/sec_api/stdio_s.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cctype \
+ C:/msys64/ucrt64/include/ctype.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ios_base.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ext/atomicity.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/gthr-default.h \
- C:/msys64/ucrt64/include/pthread.h C:/msys64/ucrt64/include/sys/types.h \
- C:/msys64/ucrt64/include/process.h \
+ C:/msys64/ucrt64/include/pthread.h C:/msys64/ucrt64/include/errno.h \
+ C:/msys64/ucrt64/include/sys/types.h C:/msys64/ucrt64/include/process.h \
  C:/msys64/ucrt64/include/corecrt_startup.h \
  C:/msys64/ucrt64/include/signal.h \
  C:/msys64/ucrt64/include/pthread_signal.h \
@@ -177,6 +145,24 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/pthread_unistd.h \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/atomic_word.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/string \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream_insert.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/cxxabi_forced.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/string_view \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/string_view.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/ext/string_conversions.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdlib \
+ C:/msys64/ucrt64/include/stdlib.h \
+ C:/msys64/ucrt64/include/sec_api/stdlib_s.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/stdlib.h \
+ C:/msys64/ucrt64/include/malloc.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mm_malloc.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/std_abs.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdio \
+ C:/msys64/ucrt64/include/c++/14.1.0/cerrno \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/charconv.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_string.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_classes.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/system_error \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/error_constants.h \
@@ -192,10 +178,83 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/x86_64-w64-mingw32/bits/ctype_inline.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/basic_ios.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/istream \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
- C:/msys64/ucrt64/include/c++/14.1.0/iomanip \
+ C:/msys64/ucrt64/include/boost/multiprecision/fwd.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/cpp_int/cpp_int_config.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/assert.hpp \
+ C:/msys64/ucrt64/include/boost/assert.hpp \
+ C:/msys64/ucrt64/include/assert.h \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/transcendental_reduction_type.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/std_integer_traits.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/no_exceptions_support.hpp \
+ C:/msys64/ucrt64/include/boost/core/no_exceptions_support.hpp \
+ C:/msys64/ucrt64/include/boost/throw_exception.hpp \
+ C:/msys64/ucrt64/include/boost/exception/exception.hpp \
+ C:/msys64/ucrt64/include/boost/assert/source_location.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstring \
+ C:/msys64/ucrt64/include/string.h \
+ C:/msys64/ucrt64/include/sec_api/string_s.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/source_location \
+ C:/msys64/ucrt64/include/c++/14.1.0/utility \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_relops.h \
+ C:/msys64/ucrt64/include/boost/lexical_cast.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/buffer_view.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/bad_lexical_cast.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/try_lexical_convert.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/conditional.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_arithmetic.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_integral.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/integral_constant.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_floating_point.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/is_character.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_same.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/converter_numeric.hpp \
+ C:/msys64/ucrt64/include/boost/core/cmath.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/cmath \
+ C:/msys64/ucrt64/include/math.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/specfun.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/gamma.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/special_function_util.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/bessel_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/beta_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/ell_integral.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/exp_integral.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/hypergeometric.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/legendre_function.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/modified_bessel_func.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_hermite.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/poly_laguerre.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/tr1/riemann_zeta.tcc \
+ C:/msys64/ucrt64/include/boost/core/enable_if.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/type_identity.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/make_unsigned.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_signed.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/remove_cv.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_enum.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/intrinsics.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/detail/config.hpp \
+ C:/msys64/ucrt64/include/boost/version.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_unsigned.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_const.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_volatile.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/add_const.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/add_volatile.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_float.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/converter_lexical.hpp \
+ C:/msys64/ucrt64/include/boost/detail/lcast_precision.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/widest_char.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/array \
+ C:/msys64/ucrt64/include/boost/container/container_fwd.hpp \
+ C:/msys64/ucrt64/include/boost/container/detail/workaround.hpp \
+ C:/msys64/ucrt64/include/boost/container/detail/std_fwd.hpp \
+ C:/msys64/ucrt64/include/boost/move/detail/std_ns_begin.hpp \
+ C:/msys64/ucrt64/include/boost/move/detail/std_ns_end.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/converter_lexical_streams.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_pointer.hpp \
+ C:/msys64/ucrt64/include/boost/core/snprintf.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/cstdarg \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdarg.h \
+ C:/msys64/ucrt64/include/stdarg.h \
+ C:/msys64/ucrt64/include/_mingw_stdarg.h \
  C:/msys64/ucrt64/include/c++/14.1.0/locale \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets_nonio.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ctime \
@@ -204,198 +263,137 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/codecvt.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_facets_nonio.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/locale_conv.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/quoted_string.h \
  C:/msys64/ucrt64/include/c++/14.1.0/sstream \
+ C:/msys64/ucrt64/include/c++/14.1.0/istream \
+ C:/msys64/ucrt64/include/c++/14.1.0/ostream \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ostream.tcc \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/istream.tcc \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/sstream.tcc \
- D:/boost/boost/multiprecision/detail/standalone_config.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/climits D:/boost/boost/config.hpp \
- D:/boost/boost/config/user.hpp \
- D:/boost/boost/config/detail/select_compiler_config.hpp \
- D:/boost/boost/config/compiler/gcc.hpp \
- D:/boost/boost/config/detail/select_stdlib_config.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/version \
- D:/boost/boost/config/stdlib/libstdcpp3.hpp \
- D:/boost/boost/config/detail/select_platform_config.hpp \
- D:/boost/boost/config/platform/win32.hpp \
- D:/boost/boost/config/detail/suffix.hpp \
- D:/boost/boost/config/helper_macros.hpp \
- D:/boost/boost/config/detail/cxx_composite.hpp \
- D:/boost/boost/config/workaround.hpp D:/boost/boost/integer.hpp \
- D:/boost/boost/integer_fwd.hpp D:/boost/boost/limits.hpp \
- D:/boost/boost/cstdint.hpp D:/boost/boost/integer_traits.hpp \
- D:/boost/boost/static_assert.hpp D:/boost/boost/detail/workaround.hpp \
- D:/boost/boost/multiprecision/detail/endian.hpp \
- D:/boost/boost/predef/other/endian.h \
- D:/boost/boost/predef/version_number.h D:/boost/boost/predef/make.h \
- D:/boost/boost/predef/detail/test.h \
- D:/boost/boost/predef/library/c/gnu.h \
- D:/boost/boost/predef/library/c/_prefix.h \
- D:/boost/boost/predef/detail/_cassert.h \
- C:/msys64/ucrt64/include/c++/14.1.0/cassert \
- C:/msys64/ucrt64/include/assert.h D:/boost/boost/predef/os/macos.h \
- D:/boost/boost/predef/os/ios.h D:/boost/boost/predef/os/bsd.h \
- D:/boost/boost/predef/os/bsd/bsdi.h \
- D:/boost/boost/predef/os/bsd/dragonfly.h \
- D:/boost/boost/predef/os/bsd/free.h D:/boost/boost/predef/os/bsd/open.h \
- D:/boost/boost/predef/os/bsd/net.h \
- D:/boost/boost/predef/platform/android.h \
- D:/boost/boost/predef/architecture.h \
- D:/boost/boost/predef/architecture/alpha.h \
- D:/boost/boost/predef/architecture/arm.h \
- D:/boost/boost/predef/architecture/blackfin.h \
- D:/boost/boost/predef/architecture/convex.h \
- D:/boost/boost/predef/architecture/e2k.h \
- D:/boost/boost/predef/architecture/ia64.h \
- D:/boost/boost/predef/architecture/loongarch.h \
- D:/boost/boost/predef/architecture/m68k.h \
- D:/boost/boost/predef/architecture/mips.h \
- D:/boost/boost/predef/architecture/parisc.h \
- D:/boost/boost/predef/architecture/ppc.h \
- D:/boost/boost/predef/architecture/ptx.h \
- D:/boost/boost/predef/architecture/pyramid.h \
- D:/boost/boost/predef/architecture/riscv.h \
- D:/boost/boost/predef/architecture/rs6k.h \
- D:/boost/boost/predef/architecture/sparc.h \
- D:/boost/boost/predef/architecture/superh.h \
- D:/boost/boost/predef/architecture/sys370.h \
- D:/boost/boost/predef/architecture/sys390.h \
- D:/boost/boost/predef/architecture/x86.h \
- D:/boost/boost/predef/architecture/x86/32.h \
- D:/boost/boost/predef/architecture/x86/64.h \
- D:/boost/boost/predef/architecture/z.h \
- D:/boost/boost/multiprecision/number.hpp \
- D:/boost/boost/multiprecision/detail/precision.hpp \
- D:/boost/boost/multiprecision/traits/is_variable_precision.hpp \
- D:/boost/boost/multiprecision/detail/number_base.hpp \
- D:/boost/boost/multiprecision/fwd.hpp \
- D:/boost/boost/multiprecision/cpp_int/cpp_int_config.hpp \
- D:/boost/boost/multiprecision/detail/assert.hpp \
- D:/boost/boost/assert.hpp \
- D:/boost/boost/multiprecision/traits/transcendental_reduction_type.hpp \
- D:/boost/boost/multiprecision/traits/std_integer_traits.hpp \
- D:/boost/boost/multiprecision/detail/no_exceptions_support.hpp \
- D:/boost/boost/core/no_exceptions_support.hpp \
- D:/boost/boost/throw_exception.hpp \
- D:/boost/boost/exception/exception.hpp \
- D:/boost/boost/assert/source_location.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/source_location \
- C:/msys64/ucrt64/include/c++/14.1.0/utility \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_relops.h \
- D:/boost/boost/lexical_cast.hpp \
- D:/boost/boost/lexical_cast/detail/buffer_view.hpp \
- D:/boost/boost/lexical_cast/bad_lexical_cast.hpp \
- D:/boost/boost/lexical_cast/try_lexical_convert.hpp \
- D:/boost/boost/type_traits/conditional.hpp \
- D:/boost/boost/type_traits/is_arithmetic.hpp \
- D:/boost/boost/type_traits/is_integral.hpp \
- D:/boost/boost/type_traits/integral_constant.hpp \
- D:/boost/boost/type_traits/is_floating_point.hpp \
- D:/boost/boost/lexical_cast/detail/is_character.hpp \
- D:/boost/boost/type_traits/is_same.hpp \
- D:/boost/boost/lexical_cast/detail/converter_numeric.hpp \
- D:/boost/boost/core/cmath.hpp D:/boost/boost/core/enable_if.hpp \
- D:/boost/boost/type_traits/type_identity.hpp \
- D:/boost/boost/type_traits/make_unsigned.hpp \
- D:/boost/boost/type_traits/is_signed.hpp \
- D:/boost/boost/type_traits/remove_cv.hpp \
- D:/boost/boost/type_traits/is_enum.hpp \
- D:/boost/boost/type_traits/intrinsics.hpp \
- D:/boost/boost/type_traits/detail/config.hpp D:/boost/boost/version.hpp \
- D:/boost/boost/type_traits/is_unsigned.hpp \
- D:/boost/boost/type_traits/is_const.hpp \
- D:/boost/boost/type_traits/is_volatile.hpp \
- D:/boost/boost/type_traits/add_const.hpp \
- D:/boost/boost/type_traits/add_volatile.hpp \
- D:/boost/boost/type_traits/is_float.hpp \
- D:/boost/boost/lexical_cast/detail/converter_lexical.hpp \
- D:/boost/boost/detail/lcast_precision.hpp \
- D:/boost/boost/lexical_cast/detail/widest_char.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/array \
- D:/boost/boost/container/container_fwd.hpp \
- D:/boost/boost/container/detail/workaround.hpp \
- D:/boost/boost/container/detail/std_fwd.hpp \
- D:/boost/boost/move/detail/std_ns_begin.hpp \
- D:/boost/boost/move/detail/std_ns_end.hpp \
- D:/boost/boost/lexical_cast/detail/converter_lexical_streams.hpp \
- D:/boost/boost/type_traits/is_pointer.hpp \
- D:/boost/boost/core/snprintf.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/cstdarg \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/stdarg.h \
- C:/msys64/ucrt64/include/stdarg.h \
- C:/msys64/ucrt64/include/_mingw_stdarg.h \
- D:/boost/boost/lexical_cast/detail/lcast_char_constants.hpp \
- D:/boost/boost/lexical_cast/detail/lcast_unsigned_converters.hpp \
- D:/boost/boost/core/noncopyable.hpp \
- D:/boost/boost/lexical_cast/detail/lcast_basic_unlockedbuf.hpp \
- D:/boost/boost/detail/basic_pointerbuf.hpp \
- D:/boost/boost/lexical_cast/detail/inf_nan.hpp \
- D:/boost/boost/type_traits/is_reference.hpp \
- D:/boost/boost/type_traits/is_lvalue_reference.hpp \
- D:/boost/boost/type_traits/is_rvalue_reference.hpp \
- D:/boost/boost/core/nvp.hpp D:/boost/boost/core/addressof.hpp \
- D:/boost/boost/math/tools/complex.hpp \
- D:/boost/boost/math/tools/is_detected.hpp \
- D:/boost/boost/multiprecision/detail/check_cpp11_config.hpp \
- D:/boost/boost/multiprecision/detail/digits.hpp \
- D:/boost/boost/multiprecision/detail/generic_interconvert.hpp \
- D:/boost/boost/multiprecision/detail/default_ops.hpp \
- D:/boost/boost/multiprecision/traits/is_backend.hpp \
- D:/boost/boost/multiprecision/detail/fpclassify.hpp \
- D:/boost/boost/multiprecision/detail/float128_functions.hpp \
- D:/boost/boost/cstdfloat.hpp \
- D:/boost/boost/math/cstdfloat/cstdfloat_types.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/lcast_char_constants.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/lcast_unsigned_converters.hpp \
+ C:/msys64/ucrt64/include/boost/core/noncopyable.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/lcast_basic_unlockedbuf.hpp \
+ C:/msys64/ucrt64/include/boost/detail/basic_pointerbuf.hpp \
+ C:/msys64/ucrt64/include/boost/lexical_cast/detail/inf_nan.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_reference.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_lvalue_reference.hpp \
+ C:/msys64/ucrt64/include/boost/type_traits/is_rvalue_reference.hpp \
+ C:/msys64/ucrt64/include/boost/core/nvp.hpp \
+ C:/msys64/ucrt64/include/boost/core/addressof.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/complex.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/is_detected.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/check_cpp11_config.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/digits.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/generic_interconvert.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/default_ops.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/is_backend.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/fpclassify.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/float128_functions.hpp \
+ C:/msys64/ucrt64/include/boost/cstdfloat.hpp \
+ C:/msys64/ucrt64/include/boost/math/cstdfloat/cstdfloat_types.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/cfloat \
  C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/float.h \
- C:/msys64/ucrt64/include/float.h D:/boost/boost/math/tools/config.hpp \
- D:/boost/boost/math/tools/is_standalone.hpp \
+ C:/msys64/ucrt64/include/float.h \
+ C:/msys64/ucrt64/include/boost/math/tools/config.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/is_standalone.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/algorithm \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_algo.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/algorithmfwd.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_heap.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/uniform_int_dist.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_tempbuf.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algo.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_algobase.h \
  C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_algorithm_defs.h \
- D:/boost/boost/math/tools/user.hpp \
- D:/boost/boost/math/cstdfloat/cstdfloat_limits.hpp \
- D:/boost/boost/math/cstdfloat/cstdfloat_cmath.hpp \
- D:/boost/boost/math/cstdfloat/cstdfloat_iostream.hpp \
- D:/boost/boost/math/cstdfloat/cstdfloat_complex.hpp \
- D:/boost/boost/math/special_functions/fpclassify.hpp \
- D:/boost/boost/math/tools/real_cast.hpp \
- D:/boost/boost/math/special_functions/math_fwd.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/execution_defs.h \
+ C:/msys64/ucrt64/include/boost/math/tools/user.hpp \
+ C:/msys64/ucrt64/include/boost/math/cstdfloat/cstdfloat_limits.hpp \
+ C:/msys64/ucrt64/include/boost/math/cstdfloat/cstdfloat_cmath.hpp \
+ C:/msys64/ucrt64/include/boost/math/cstdfloat/cstdfloat_iostream.hpp \
+ C:/msys64/ucrt64/include/boost/math/cstdfloat/cstdfloat_complex.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/fpclassify.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/real_cast.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/math_fwd.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/complex \
- D:/boost/boost/math/special_functions/detail/round_fwd.hpp \
- D:/boost/boost/math/tools/promotion.hpp \
- D:/boost/boost/math/policies/policy.hpp D:/boost/boost/math/tools/mp.hpp \
- D:/boost/boost/math/special_functions/detail/fp_traits.hpp \
- D:/boost/boost/math/tools/assert.hpp \
- D:/boost/boost/math/special_functions/next.hpp \
- D:/boost/boost/math/policies/error_handling.hpp \
- D:/boost/boost/math/tools/precision.hpp \
- D:/boost/boost/math/tools/throw_exception.hpp \
- D:/boost/boost/math/special_functions/sign.hpp \
- D:/boost/boost/math/special_functions/trunc.hpp \
- D:/boost/boost/math/ccmath/detail/config.hpp \
- D:/boost/boost/math/tools/is_constant_evaluated.hpp \
- D:/boost/boost/math/ccmath/ldexp.hpp D:/boost/boost/math/ccmath/abs.hpp \
- D:/boost/boost/math/ccmath/isnan.hpp \
- D:/boost/boost/math/ccmath/isinf.hpp \
- D:/boost/boost/math/tools/traits.hpp \
- D:/boost/boost/math/special_functions/hypot.hpp \
- D:/boost/boost/multiprecision/detail/functions/constants.hpp \
- D:/boost/boost/multiprecision/detail/functions/pow.hpp \
- D:/boost/boost/multiprecision/detail/functions/trig.hpp \
- D:/boost/boost/multiprecision/detail/no_et_ops.hpp \
- D:/boost/boost/multiprecision/detail/et_ops.hpp \
- D:/boost/boost/multiprecision/detail/min_max.hpp \
- D:/boost/boost/multiprecision/detail/functions/trunc.hpp \
- D:/boost/boost/multiprecision/detail/number_compare.hpp \
- D:/boost/boost/multiprecision/traits/is_restricted_conversion.hpp \
- D:/boost/boost/multiprecision/traits/explicit_conversion.hpp \
- D:/boost/boost/multiprecision/traits/is_complex.hpp \
- D:/boost/boost/multiprecision/traits/is_convertible_arithmetic.hpp \
- D:/boost/boost/multiprecision/detail/hash.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/round_fwd.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/promotion.hpp \
+ C:/msys64/ucrt64/include/boost/math/policies/policy.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/mp.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/fp_traits.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/assert.hpp \
+ C:/msys64/ucrt64/include/boost/predef/other/endian.h \
+ C:/msys64/ucrt64/include/boost/predef/version_number.h \
+ C:/msys64/ucrt64/include/boost/predef/make.h \
+ C:/msys64/ucrt64/include/boost/predef/detail/test.h \
+ C:/msys64/ucrt64/include/boost/predef/library/c/gnu.h \
+ C:/msys64/ucrt64/include/boost/predef/library/c/_prefix.h \
+ C:/msys64/ucrt64/include/boost/predef/detail/_cassert.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/cassert \
+ C:/msys64/ucrt64/include/boost/predef/os/macos.h \
+ C:/msys64/ucrt64/include/boost/predef/os/ios.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd/bsdi.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd/dragonfly.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd/free.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd/open.h \
+ C:/msys64/ucrt64/include/boost/predef/os/bsd/net.h \
+ C:/msys64/ucrt64/include/boost/predef/platform/android.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/alpha.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/arm.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/blackfin.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/convex.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/e2k.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/ia64.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/loongarch.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/m68k.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/mips.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/parisc.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/ppc.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/ptx.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/pyramid.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/riscv.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/rs6k.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/sparc.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/superh.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/sys370.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/sys390.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/x86.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/x86/32.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/x86/64.h \
+ C:/msys64/ucrt64/include/boost/predef/architecture/z.h \
+ C:/msys64/ucrt64/include/boost/math/special_functions/next.hpp \
+ C:/msys64/ucrt64/include/boost/math/policies/error_handling.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/iomanip \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/quoted_string.h \
+ C:/msys64/ucrt64/include/boost/math/tools/precision.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/throw_exception.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/sign.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/trunc.hpp \
+ C:/msys64/ucrt64/include/boost/math/ccmath/detail/config.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/is_constant_evaluated.hpp \
+ C:/msys64/ucrt64/include/boost/math/ccmath/ldexp.hpp \
+ C:/msys64/ucrt64/include/boost/math/ccmath/abs.hpp \
+ C:/msys64/ucrt64/include/boost/math/ccmath/isnan.hpp \
+ C:/msys64/ucrt64/include/boost/math/ccmath/isinf.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/traits.hpp \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xmmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mmintrin.h \
+ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/emmintrin.h \
+ C:/msys64/ucrt64/include/boost/math/special_functions/hypot.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/functions/constants.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/functions/pow.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/functions/trig.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/no_et_ops.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/et_ops.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/min_max.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/functions/trunc.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/number_compare.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/is_restricted_conversion.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/explicit_conversion.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/is_complex.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/is_convertible_arithmetic.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/hash.hpp \
  C:/msys64/ucrt64/include/c++/14.1.0/functional \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/std_function.h \
  C:/msys64/ucrt64/include/c++/14.1.0/unordered_map \
@@ -406,149 +404,86 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/enable_special_members.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/node_handle.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/erase_if.h \
- D:/boost/boost/multiprecision/detail/ublas_interop.hpp \
- D:/boost/boost/multiprecision/detail/integer_ops.hpp \
- D:/boost/boost/multiprecision/detail/rebind.hpp \
- D:/boost/boost/multiprecision/rational_adaptor.hpp \
- D:/boost/boost/multiprecision/traits/is_byte_container.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/iterator \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/stream_iterator.h \
- D:/boost/boost/multiprecision/cpp_int/checked.hpp \
- D:/boost/boost/multiprecision/detail/constexpr.hpp \
- D:/boost/boost/multiprecision/cpp_int/value_pack.hpp \
- D:/boost/boost/multiprecision/detail/empty_value.hpp \
- D:/boost/boost/multiprecision/cpp_int/limits.hpp \
- D:/boost/boost/multiprecision/traits/max_digits10.hpp \
- D:/boost/boost/multiprecision/cpp_int/comparison.hpp \
- D:/boost/boost/multiprecision/cpp_int/add.hpp \
- D:/boost/boost/multiprecision/cpp_int/add_unsigned.hpp \
- D:/boost/boost/multiprecision/cpp_int/intel_intrinsics.hpp \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/immintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/x86gprintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/ia32intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/adxintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/bmiintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/bmi2intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/cetintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/cldemoteintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/clflushoptintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/clwbintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/clzerointrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/cmpccxaddintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/enqcmdintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/fxsrintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/lzcntintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/lwpintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/movdirintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/mwaitxintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/pconfigintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/popcntintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/pkuintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/prfchiintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/raointintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/rdseedintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/rtmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/serializeintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/sgxintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/tbmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/tsxldtrkintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/uintrintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/waitpkgintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/wbnoinvdintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xsaveintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xsavecintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xsaveoptintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xsavesintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/xtestintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/hresetintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/usermsrintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/tmmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/smmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/wmmintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxvnniintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxifmaintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxvnniint8intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxvnniint16intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx2intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512fintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512erintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512pfintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512cdintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512bwintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512dqintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vlbwintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vldqintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512ifmaintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512ifmavlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vbmiintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vbmivlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx5124fmapsintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx5124vnniwintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vpopcntdqintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vbmi2intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vbmi2vlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vnniintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vnnivlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vpopcntdqvlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512bitalgintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512bitalgvlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vp2intersectintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512vp2intersectvlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512fp16intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512fp16vlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/shaintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/sm3intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/sha512intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/sm4intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/fmaintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/f16cintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/gfniintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/vaesintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/vpclmulqdqintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512bf16vlintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avx512bf16intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/avxneconvertintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/amxtileintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/amxint8intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/amxbf16intrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/amxcomplexintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/prfchwintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/keylockerintrin.h \
- C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.1.0/include/amxfp16intrin.h \
- D:/boost/boost/multiprecision/cpp_int/multiply.hpp \
- D:/boost/boost/multiprecision/integer.hpp \
- D:/boost/boost/multiprecision/detail/bitscan.hpp \
- D:/boost/boost/multiprecision/cpp_int/divide.hpp \
- D:/boost/boost/multiprecision/cpp_int/bitwise.hpp \
- D:/boost/boost/multiprecision/cpp_int/misc.hpp \
- D:/boost/boost/integer/common_factor_rt.hpp \
- D:/boost/boost/multiprecision/cpp_int/literals.hpp \
- D:/boost/boost/multiprecision/cpp_int/serialize.hpp \
- D:/boost/boost/multiprecision/cpp_int/import_export.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/BacktrackingData.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Cell.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/EntropyData.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Types.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/LatinSquare.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Region.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/UpdateData.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Utils.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/Generator.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/BacktrackingData.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/UpdateData.hpp \
- C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/Utils.hpp \
- C:/msys64/ucrt64/include/c++/14.1.0/chrono \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/chrono.h \
- C:/msys64/ucrt64/include/c++/14.1.0/ratio \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/parse_numbers.h \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/ublas_interop.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/debug_adaptor.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/traits/extract_exponent_type.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/integer_ops.hpp \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/atomic.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/atomic \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/atomic_base.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/atomic_lockfree_defines.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/atomic_wait.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/std_mutex.h \
+ C:/msys64/ucrt64/include/boost/multiprecision/detail/string_helpers.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/iostream \
+ C:/msys64/ucrt64/include/c++/14.1.0/memory \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/stl_raw_storage_iter.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/align.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/unique_ptr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/shared_ptr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/shared_ptr_base.h \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/allocated_ptr.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/unique_ptr.h \
  C:/msys64/ucrt64/include/c++/14.1.0/ext/concurrence.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/align.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/shared_ptr_atomic.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/backward/auto_ptr.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/ranges_uninitialized.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/pstl/glue_memory_defs.h \
+ C:/msys64/ucrt64/include/boost/math/special_functions/asinh.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/sqrt1pm1.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/log1p.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/series.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/rational.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/detail/polynomial_horner3_20.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/detail/rational_horner3_20.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/big_constant.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/expm1.hpp \
+ C:/msys64/ucrt64/include/boost/math/constants/constants.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/cxx03_warn.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/convert_from_string.hpp \
+ C:/msys64/ucrt64/include/boost/math/constants/calculate_constants.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/acosh.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/atanh.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/cbrt.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/gamma.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/fraction.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/powm1.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/lanczos.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/lanczos_sse2.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/igamma_large.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/unchecked_factorial.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/lgamma_small.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/bernoulli.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/unchecked_bernoulli.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/bernoulli_details.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/atomic.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/toms748_solve.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/mutex \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/chrono.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/ratio \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/parse_numbers.h \
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/unique_lock.h \
+ C:/msys64/ucrt64/include/boost/math/special_functions/polygamma.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/factorials.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/polygamma.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/zeta.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/sin_pi.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/digamma.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/cos_pi.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/pow.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/trigamma.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/igamma_inverse.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/tuple.hpp \
+ C:/msys64/ucrt64/include/boost/math/tools/roots.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/gamma_inva.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/erf.hpp \
+ C:/msys64/ucrt64/include/boost/math/special_functions/detail/erf_inv.hpp \
+ C:/msys64/ucrt64/include/gmp.h \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/BacktrackingData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/EntropyData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Constants.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/LatinSquare.hpp \
+ C:/Users/User/Desktop/PRACAM~1/LATINS~2/src/cpp/random.hpp \
+ C:/msys64/ucrt64/include/c++/14.1.0/chrono \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/chrono_io.h \
  C:/msys64/ucrt64/include/c++/14.1.0/format \
  C:/msys64/ucrt64/include/c++/14.1.0/charconv \
@@ -556,4 +491,12 @@ CMakeFiles/LatinSquareGenerator.dir/src/Main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.1.0/span \
  C:/msys64/ucrt64/include/c++/14.1.0/variant \
  C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode.h \
- C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode-data.h
+ C:/msys64/ucrt64/include/c++/14.1.0/bits/unicode-data.h \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Cell.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Region.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/UpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\LatinSquare/Utils.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/Generator.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/BacktrackingData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/UpdateData.hpp \
+ C:\Users\User\Desktop\PRACA\ MAGISTERSKA\LatinSquareGenerator\src\Transversal/Utils.hpp

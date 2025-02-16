@@ -1,223 +1,204 @@
 #include "LatinSquare.hpp"
 
-#include <algorithm>
-#include <limits>
-
-#include <cpp/iterator.hpp>
+#include <memory>
 
 namespace LatinSquare {
-    LatinSquare::LatinSquare() {}
-
-    LatinSquare::LatinSquare(const int size, const Type type)
+    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
-        setGrid(type);
+        reset(type);
     }
 
-    LatinSquare::LatinSquare(const int size, const Type type, std::mt19937& mersenneTwister)
-        : size_(size), mersenneTwister_(mersenneTwister) {
-        setGrid(type);
+    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept
+        : size_(size), splitmix64_(splitmix64) {
+        reset(type);
     }
 
-    int LatinSquare::getSize() const {
-        return size_;
-    }
+    void LatinSquare::reset(const Type type) noexcept {
+        uint_fast16_t gridSize = size_;
+        gridSize *= size_;
+        grid_.resize(gridSize);
+        notFilled_ = gridSize;
+        std::shared_ptr<Cell> cell;
+        uint_fast16_t row = 0;
+        uint_fast16_t column = 0;
 
-    const std::vector<Cell>& LatinSquare::getGrid() const {
-        return grid_;
-    }
+        for (uint_fast16_t index = 0; index < gridSize; ++index) {
+            cell = std::make_shared<Cell>(index, row, column, size_, type);
+            grid_[index] = cell;
 
-    void LatinSquare::setGrid(const Type type) {
-        const auto gridSize = size_ * size_;
-        grid_.reserve(gridSize);
+            if (cell->filled()) {
+                --notFilled_;
+            }
 
-        for (int index = 0; index < gridSize; ++index) {
-            grid_.emplace_back(index / size_, index % size_, type, size_);
+            if (++column == size_) {
+                column = 0;
+                ++row;
+            }
         }
     }
 
-    void LatinSquare::setRegions() {
+    void LatinSquare::setRegions() noexcept {
         regions_.reserve(3 * size_);
-
-        std::vector<std::reference_wrapper<Cell>> rowCells, columnCells, numberCells;
+        std::vector<Region> columns, numbers;
+        columns.reserve(size_);
+        numbers.reserve(size_);
+        std::vector<std::shared_ptr<Cell>> rowCells, columnCells, numberCells;
         rowCells.reserve(size_);
         columnCells.reserve(size_);
         numberCells.reserve(size_);
 
-        const auto rowRegion = 'R', columnRegion = 'C', numberRegion = '#';
-        std::string indexString, rowId, columnId, numberId;
-
-        for (int index = 0; index < size_; ++index) {
+        for (uint_fast8_t index = 0; index < size_; ++index) {
             rowCells.clear();
             columnCells.clear();
             numberCells.clear();
 
             for (auto& cell : grid_) {
-                if (cell.getRow() == index) {
+                if (cell->rawRow() == index) {
                     rowCells.emplace_back(cell);
                 }
 
-                if (cell.getColumn() == index) {
+                if (cell->rawColumn() == index) {
                     columnCells.emplace_back(cell);
                 }
 
-                if (cell.getNumber() == index) {
+                if (cell->number() == index) {
                     numberCells.emplace_back(cell);
                 }
             }
 
-            indexString = std::to_string(index);
-            rowId = rowRegion;
-            rowId += indexString;
-            columnId = columnRegion;
-            columnId += indexString;
-            numberId = numberRegion;
-            numberId += indexString;
-
-            regions_.emplace_back(rowId, size_, rowCells);
-            regions_.emplace_back(columnId, size_, columnCells);
-            regions_.emplace_back(numberId, size_, numberCells);
+            regions_.emplace_back(index, index | ROW_FLAG, rowCells, size_);
+            columns.emplace_back(index + size_, index | COLUMN_FLAG, columnCells, size_);
+            numbers.emplace_back(index + (size_ << 1), index, numberCells, size_);
         }
+
+        regions_.insert(regions_.end(), columns.begin(), columns.end());
+        regions_.insert(regions_.end(), numbers.begin(), numbers.end());
     }
 
-    void LatinSquare::sortGrid() {
-        std::sort(grid_.begin(), grid_.end(),
-                  [](const auto& firstCell, const auto& secondCell) {
-                      return firstCell.getRow() == secondCell.getRow() ?
-                             firstCell.getColumn() < secondCell.getColumn() : firstCell.getRow() < secondCell.getRow();
-                  });
-    }
-
-    Cell& LatinSquare::getCell(const std::string& id) {
-        const auto& iterator = std::find_if(
-            grid_.begin(), grid_.end(), [&id](const auto& cell) { return cell.getId() == id; });
-
-        return *iterator;
-    }
-
-    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCells(const std::vector<std::string>& ids) {
-        std::vector<std::reference_wrapper<Cell>> cells;
-        cells.reserve(ids.size());
+    std::shared_ptr<Cell> LatinSquare::minEntropyCell() noexcept {
+        std::shared_ptr<Cell> iterator = nullptr;
+        uint_fast8_t minEntropy = 0xFF;
+        uint_fast8_t entropy;
 
         for (auto& cell : grid_) {
-            if (std::find(ids.cbegin(), ids.cend(), cell.getId()) != ids.cend()) {
-                cells.emplace_back(cell);
+            if (cell->filled()) {
+                continue;
+            }
+
+            entropy = cell->entropy();
+
+            if (entropy == 0) {
+                return cell;
+            }
+
+            if (entropy < minEntropy) {
+                minEntropy = entropy;
+                iterator = cell;
             }
         }
 
-        return cells;
+        return iterator;
     }
 
-    const std::vector<std::reference_wrapper<Region>> LatinSquare::getRegions(const std::vector<std::string>& ids) {
-        std::vector<std::reference_wrapper<Region>> regions;
-        regions.reserve(ids.size());
-
-        for (auto& region : regions_) {
-            if (std::find(ids.cbegin(), ids.cend(), region.getId()) != ids.cend()) {
-                regions.emplace_back(region);
-            }
-        }
-
-        return regions;
-    }
-
-    bool LatinSquare::checkIfNotFilledCellExists() const {
-        return std::any_of(grid_.cbegin(), grid_.cend(), [](const auto& cell) { return !cell.isFilled(); });
-    }
-
-    Cell& LatinSquare::getNotFilledCellWithMinimumEntropy() {
-        Cell* iterator = nullptr;
-        auto minEntropy = std::numeric_limits<int>::max();
-        int entropy;
+    std::shared_ptr<Cell> LatinSquare::randomMinEntropyCell() noexcept {
+        std::shared_ptr<Cell> iterator = nullptr;
+        uint_fast8_t minEntropy = 0xFF;
+        uint_fast8_t entropy;
 
         for (auto& cell : grid_) {
-            if (!cell.isFilled()) {
-                entropy = cell.getEntropy();
+            if (cell->filled()) {
+                continue;
+            }
 
-                if (entropy < minEntropy) {
-                    minEntropy = entropy;
-                    iterator = &cell;
+            entropy = cell->entropy();
+
+            if (entropy < minEntropy) {
+                minEntropy = entropy;
+                iterator = cell;
+            } else if (entropy == minEntropy) {
+                if (splitmix64_.next() & 1) {
+                    iterator = cell;
                 }
             }
         }
 
-        return *iterator;
+        return iterator;
     }
 
-    Cell& LatinSquare::getRandomNotFilledCellWithMinimumEntropy() {
-        Cell* iterator = nullptr;
-        auto minEntropy = std::numeric_limits<int>::max();
-        int entropy;
+    const std::vector<uint_fast16_t> LatinSquare::relatedToFilledCellIndexes(
+        const std::shared_ptr<Cell> filledCell) const noexcept {
+        std::vector<uint_fast16_t> indexes;
+        indexes.reserve((size_ - 1) << 1);
+        uint_fast16_t rowIndex = filledCell->rawRow();
+        rowIndex *= size_;
+        uint_fast16_t columnIndex = filledCell->rawColumn();
 
-        for (auto& cell : grid_) {
-            if (!cell.isFilled()) {
-                entropy = cell.getEntropy();
-
-                if (entropy < minEntropy) {
-                    minEntropy = entropy;
-                    iterator = &cell;
-                } else if (entropy == minEntropy) {
-                    if (mersenneTwister_() & 1) {
-                        iterator = &cell;
-                    }
-                }
+        for (uint_fast8_t i = 0; i < size_; ++i) {
+            if (!grid_[rowIndex]->filled()) {
+                indexes.emplace_back(rowIndex);
             }
+
+            if (!grid_[columnIndex]->filled()) {
+                indexes.emplace_back(columnIndex);
+            }
+
+            ++rowIndex;
+            columnIndex += size_;
         }
 
-        return *iterator;
+        return indexes;
     }
 
-    bool LatinSquare::checkIfNotFilledAndRelatedToFilledCell(const Cell& filledCell, const Cell& cell) const {
-        return !cell.isFilled()
-               && ((filledCell.getRow() == cell.getRow()) ^ (filledCell.getColumn() == cell.getColumn()));
+    void LatinSquare::update(std::vector<uint_fast16_t>& indexes, const uint_fast8_t number) noexcept {
+        auto partitionIndex = std::partition(indexes.begin(), indexes.end(),
+                                             [this, number](const auto index) {
+                                                 return grid_[index]->remove(number);
+                                             });
+        indexes.erase(partitionIndex, indexes.end());
     }
 
-    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCellsRelatedToFilledCell(const Cell& filledCell) {
-        std::vector<std::reference_wrapper<Cell>> cells;
-        cells.reserve(2 * size_ - 2);
-
-        std::copy_if(grid_.begin(), grid_.end(), cpp::back_emplacer(cells),
-                     [this, &filledCell](const auto& cell) {
-                         return checkIfNotFilledAndRelatedToFilledCell(filledCell, cell);
-                     });
-
-        return cells;
-    }
-
-    void LatinSquare::updateRelatedCells(std::vector<std::reference_wrapper<Cell>>& cells, const int number) {
-        cells.erase(std::remove_if(cells.begin(), cells.end(),
-                                   [number](const auto& cellRef) {
-                                       return !cellRef.get().removeRemainingNumber(number);
-                                   }), cells.end());
-    }
-
-    const std::vector<std::string> LatinSquare::getUpdatedCellsIds(
-        const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::vector<std::string> ids;
-        ids.reserve(cells.size());
-
-        for (const auto& cellRef : cells) {
-            ids.emplace_back(cellRef.get().getId());
-        }
-
-        return ids;
-    }
-
-    void LatinSquare::restoreUpdatedCells(const std::vector<std::reference_wrapper<Cell>>& cells, const int number) {
-        std::for_each(cells.cbegin(), cells.cend(),
-                      [number](const auto& cellRef) { cellRef.get().restoreRemainingNumber(number); });
-    }
-
-    Region& LatinSquare::getEnabledRegionWithMinimumEntropy() {
+    Region& LatinSquare::minEntropyRegion() noexcept {
         Region* iterator = nullptr;
-        auto minEntropy = std::numeric_limits<int>::max();
-        int entropy;
+        uint_fast8_t minEntropy = 0xFF;
+        uint_fast8_t entropy;
 
         for (auto& region : regions_) {
-            if (region.isEnabled()) {
-                entropy = region.getEntropy();
+            if (region.notEnabled()) {
+                continue;
+            }
 
-                if (entropy < minEntropy) {
-                    minEntropy = entropy;
+            entropy = region.entropy();
+
+            if (entropy == 0) {
+                return region;
+            }
+
+            if (entropy < minEntropy) {
+                minEntropy = entropy;
+                iterator = &region;
+            }
+        }
+
+        return *iterator;
+    }
+
+    Region& LatinSquare::randomMinEntropyRegion() noexcept {
+        Region* iterator = nullptr;
+        uint_fast8_t minEntropy = 0xFF;
+        uint_fast8_t entropy;
+
+        for (auto& region : regions_) {
+            if (region.notEnabled()) {
+                continue;
+            }
+
+            entropy = region.entropy();
+
+            if (entropy < minEntropy) {
+                minEntropy = entropy;
+                iterator = &region;
+            } else if (entropy == minEntropy) {
+                if (splitmix64_.next() & 1) {
                     iterator = &region;
                 }
             }
@@ -226,169 +207,140 @@ namespace LatinSquare {
         return *iterator;
     }
 
-    Region& LatinSquare::getRandomEnabledRegionWithMinimumEntropy() {
-        Region* iterator = nullptr;
-        auto minEntropy = std::numeric_limits<int>::max();
-        int entropy;
+    const std::vector<uint_fast16_t> LatinSquare::relatedToChosenCellIndexes(
+        const std::shared_ptr<Cell> chosenCell) const noexcept {
+        std::vector<uint_fast16_t> indexes;
+        indexes.reserve(3 * size_ - 2);
+        const auto row = chosenCell->row();
+        const auto column = chosenCell->column();
+        const auto number = chosenCell->number();
 
-        for (auto& region : regions_) {
-            if (region.isEnabled()) {
-                entropy = region.getEntropy();
-
-                if (entropy < minEntropy) {
-                    minEntropy = entropy;
-                    iterator = &region;
-                } else if (entropy == minEntropy) {
-                    if (mersenneTwister_() & 1) {
-                        iterator = &region;
-                    }
-                }
+        for (auto& cell : grid_) {
+            if (cell->enabled() && (cell->row() == row || cell->column() == column || cell->number() == number)) {
+                indexes.emplace_back(cell->index());
             }
         }
 
-        return *iterator;
+        return indexes;
     }
 
-    bool LatinSquare::checkIfEnabledAndRelatedToChosenCell(const Cell& chosenCell, const Cell& cell) const {
-        return cell.isEnabled() && (chosenCell.getRow() == cell.getRow()
-               || chosenCell.getColumn() == cell.getColumn() || chosenCell.getNumber() == cell.getNumber());
-    }
+    void LatinSquare::decrease(std::vector<uint_fast16_t>& indexes, const uint_fast16_t chosenIndex) noexcept {
+        uint_fast64_t bits = 1ULL << size_;
+        --bits;
+        uint_fast64_t usedRows = bits, usedColumns = bits, usedNumbers = bits;
+        const uint_fast8_t regionsSize = 3 * size_;
+        std::vector<uint_fast8_t> regionIndexes;
+        regionIndexes.reserve(regionsSize);
+        std::vector<uint_fast8_t> regionUpdates(regionsSize, 0);
+        auto cell = grid_[0];
+        uint_fast8_t rowIndex, columnIndex, numberIndex;
+        uint_fast64_t rowBit, columnBit, numberBit;
 
-    const std::vector<std::reference_wrapper<Cell>> LatinSquare::getCellsRelatedToChosenCell(const Cell& chosenCell) {
-        std::vector<std::reference_wrapper<Cell>> cells;
-        cells.reserve(3 * size_ - 2);
+        for (const auto index : indexes) {
+            cell = grid_[index];
+            rowIndex = cell->rawRow();
+            rowBit = 1ULL << rowIndex;
+            columnIndex = cell->rawColumn();
+            columnBit = 1ULL << columnIndex;
+            columnIndex += size_;
+            numberIndex = cell->number();
+            numberBit = 1ULL << numberIndex;
+            numberIndex += (size_ << 1);
 
-        std::copy_if(grid_.begin(), grid_.end(), cpp::back_emplacer(cells),
-                     [this, &chosenCell](const auto& cell) {
-                         return checkIfEnabledAndRelatedToChosenCell(chosenCell, cell);
-                     });
-
-        return cells;
-    }
-
-    void LatinSquare::disableRelatedCells(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::for_each(cells.cbegin(), cells.cend(), [](const auto& cellRef) { cellRef.get().disable(); });
-    }
-
-    void LatinSquare::decreaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::vector<std::string> regionsIds;
-        regionsIds.reserve(3 * size_);
-        std::vector<bool> usedIds(3 * size_, false); // consider using bitset here
-        std::vector<int> entropyUpdates(3 * size_, 0);
-        int rowIdAsInt, columnIdAsInt, numberIdAsInt;
-        Cell* cell = nullptr;
-        Region* region = nullptr;
-
-        auto addToRegionsIds = [&regionsIds, &usedIds](const auto& id, const auto idAsInt) {
-                                   if (!usedIds[idAsInt]) {
-                                       regionsIds.emplace_back(id);
-                                       usedIds[idAsInt] = true;
-                                   }
-                               };
-
-        for (const auto& cellRef : cells) {
-            cell = &cellRef.get();
-            rowIdAsInt = (*cell).getRowIdAsInt();
-            columnIdAsInt = (*cell).getColumnIdAsInt();
-            numberIdAsInt = (*cell).getNumberIdAsInt();
-
-            addToRegionsIds((*cell).getRowId(), rowIdAsInt);
-            addToRegionsIds((*cell).getColumnId(), columnIdAsInt);
-            addToRegionsIds((*cell).getNumberId(), numberIdAsInt);
-            ++entropyUpdates[rowIdAsInt];
-            ++entropyUpdates[columnIdAsInt];
-            ++entropyUpdates[numberIdAsInt];
-        }
-
-        const auto regions = getRegions(regionsIds);
-
-        for (const auto& regionRef : regions) {
-            region = &regionRef.get();
-
-            (*region).decreaseEntropyBy(entropyUpdates[(*region).getIdAsInt()]);
-        }
-    }
-
-    const std::vector<std::string> LatinSquare::getDisabledCellsIds(
-        const std::vector<std::reference_wrapper<Cell>>& cells, const Cell& chosenCell) {
-        std::vector<std::string> ids;
-        ids.reserve(cells.size() - 1);
-        Cell* cell = nullptr;
-
-        for (const auto& cellRef : cells) {
-            cell = &cellRef.get();
-
-            if ((*cell).getId() != chosenCell.getId()) {
-                ids.emplace_back((*cell).getId());
+            if (usedRows & rowBit) {
+                regionIndexes.emplace_back(rowIndex);
+                usedRows &= ~rowBit;
             }
+
+            if (usedColumns & columnBit) {
+                regionIndexes.emplace_back(columnIndex);
+                usedColumns &= ~columnBit;
+            }
+
+            if (usedNumbers & numberBit) {
+                regionIndexes.emplace_back(numberIndex);
+                usedNumbers &= ~numberBit;
+            }
+
+            ++regionUpdates[rowIndex];
+            ++regionUpdates[columnIndex];
+            ++regionUpdates[numberIndex];
         }
 
-        return ids;
-    }
-
-    bool LatinSquare::checkIfRelatedRegion(const Cell& cell, const Region& region) const {
-        return cell.getRowId() == region.getId() || cell.getColumnId() == region.getId()
-               || cell.getNumberId() == region.getId();
-    }
-
-    const std::vector<std::reference_wrapper<Region>> LatinSquare::getRelatedRegions(const Cell& cell) {
-        std::vector<std::reference_wrapper<Region>> regions;
-        regions.reserve(3);
-
-        std::copy_if(regions_.begin(), regions_.end(), cpp::back_emplacer(regions),
-                     [this, &cell](const auto& region) { return checkIfRelatedRegion(cell, region); });
-
-        return regions;
-    }
-
-    void LatinSquare::disableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions) {
-        std::for_each(regions.cbegin(), regions.cend(), [](const auto& regionRef) { regionRef.get().disable(); });
-    }
-
-    void LatinSquare::enableDisabledCells(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::for_each(cells.cbegin(), cells.cend(), [](const auto& cellRef) { cellRef.get().enable(); });
-    }
-
-    void LatinSquare::increaseRelatedRegionsEntropy(const std::vector<std::reference_wrapper<Cell>>& cells) {
-        std::vector<std::string> regionsIds;
-        regionsIds.reserve(3 * size_);
-        std::vector<bool> usedIds(3 * size_, false); // consider using bitset here
-        std::vector<int> entropyUpdates(3 * size_, 0);
-        int rowIdAsInt, columnIdAsInt, numberIdAsInt;
-        Cell* cell = nullptr;
-        Region* region = nullptr;
-
-        auto addToRegionsIds = [&regionsIds, &usedIds](const std::string& id, int idAsInt) {
-                                   if (!usedIds[idAsInt]) {
-                                       regionsIds.emplace_back(id);
-                                       usedIds[idAsInt] = true;
-                                   }
-                               };
-
-        for (const auto& cellRef : cells) {
-            cell = &cellRef.get();
-            rowIdAsInt = (*cell).getRowIdAsInt();
-            columnIdAsInt = (*cell).getColumnIdAsInt();
-            numberIdAsInt = (*cell).getNumberIdAsInt();
-
-            addToRegionsIds((*cell).getRowId(), rowIdAsInt);
-            addToRegionsIds((*cell).getColumnId(), columnIdAsInt);
-            addToRegionsIds((*cell).getNumberId(), numberIdAsInt);
-            ++entropyUpdates[rowIdAsInt];
-            ++entropyUpdates[columnIdAsInt];
-            ++entropyUpdates[numberIdAsInt];
+        for (const auto index : regionIndexes) {
+            regions_[index].decrease(regionUpdates[index]);
         }
 
-        const auto regions = getRegions(regionsIds);
+        indexes.erase(std::remove(indexes.begin(), indexes.end(), chosenIndex), indexes.end());
+    }
 
-        for (const auto& regionRef : regions) {
-            region = &regionRef.get();
+    void LatinSquare::disable(const uint_fast16_t index) noexcept {
+        const auto cell = grid_[index];
+        auto columnIndex = cell->rawColumn();
+        columnIndex += size_;
+        auto numberIndex = cell->number();
+        numberIndex += (size_ << 1);
+        regions_[cell->rawRow()].disable();
+        regions_[columnIndex].disable();
+        regions_[numberIndex].disable();
+    }
 
-            (*region).increaseEntropyBy(entropyUpdates[(*region).getIdAsInt()]);
+    void LatinSquare::increase(const std::vector<uint_fast16_t>& indexes) noexcept {
+        uint_fast64_t bits = 1ULL << size_;
+        --bits;
+        uint_fast64_t usedRows = bits, usedColumns = bits, usedNumbers = bits;
+        const uint_fast8_t regionsSize = 3 * size_;
+        std::vector<uint_fast8_t> regionIndexes;
+        regionIndexes.reserve(regionsSize);
+        std::vector<uint_fast8_t> regionUpdates(regionsSize, 0);
+        auto cell = grid_[0];
+        uint_fast8_t rowIndex, columnIndex, numberIndex;
+        uint_fast64_t rowBit, columnBit, numberBit;
+
+        for (const auto index : indexes) {
+            cell = grid_[index];
+            rowIndex = cell->rawRow();
+            rowBit = 1ULL << rowIndex;
+            columnIndex = cell->rawColumn();
+            columnBit = 1ULL << columnIndex;
+            columnIndex += size_;
+            numberIndex = cell->number();
+            numberBit = 1ULL << numberIndex;
+            numberIndex += (size_ << 1);
+
+            if (usedRows & rowBit) {
+                regionIndexes.emplace_back(rowIndex);
+                usedRows &= ~rowBit;
+            }
+
+            if (usedColumns & columnBit) {
+                regionIndexes.emplace_back(columnIndex);
+                usedColumns &= ~columnBit;
+            }
+
+            if (usedNumbers & numberBit) {
+                regionIndexes.emplace_back(numberIndex);
+                usedNumbers &= ~numberBit;
+            }
+
+            ++regionUpdates[rowIndex];
+            ++regionUpdates[columnIndex];
+            ++regionUpdates[numberIndex];
+        }
+
+        for (const auto index : regionIndexes) {
+            regions_[index].increase(regionUpdates[index]);
         }
     }
 
-    void LatinSquare::enableRelatedRegions(const std::vector<std::reference_wrapper<Region>>& regions) {
-        std::for_each(regions.cbegin(), regions.cend(), [](const auto& regionRef) { regionRef.get().enable(); });
+    void LatinSquare::enable(const uint_fast16_t index) noexcept {
+        const auto cell = grid_[index];
+        auto columnIndex = cell->rawColumn();
+        columnIndex += size_;
+        auto numberIndex = cell->number();
+        numberIndex += (size_ << 1);
+        regions_[cell->rawRow()].enable();
+        regions_[columnIndex].enable();
+        regions_[numberIndex].enable();
     }
 }

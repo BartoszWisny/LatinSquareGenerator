@@ -1,55 +1,112 @@
 #pragma once
 
+#include <cstdint>
 #include <string>
 #include <vector>
 
+#include "Constants.hpp"
 #include "EntropyData.hpp"
-#include "Types.hpp"
 
 namespace LatinSquare {
     class Cell {
         public:
-            Cell(const int row, const int column, const Type type, const int latinSquareSize);
+            explicit Cell(const uint_fast16_t index, const uint_fast8_t row, const uint_fast8_t column,
+                const uint_fast8_t size, const Type type) noexcept;
 
-            int getRow() const;
-            int getColumn() const;
-            int getNumber() const;
-            const std::string& getRowId() const;
-            const std::string& getColumnId() const;
-            const std::string& getId() const;
-            const std::string& getNumberId() const;
-            const std::string& getFullId() const;
-            int getRowIdAsInt() const;
-            int getColumnIdAsInt() const;
-            int getNumberIdAsInt() const;
-            int getEntropy() const;
-            const std::vector<int>& getRemainingNumbers() const;
-            const EntropyData& getEntropyData() const;
-            void setEntropyData(const EntropyData& entropyData);
-            bool isFilled() const;
-            void setFilled();
-            void setNotFilled();
-            bool isEnabled() const;
-            void enable();
-            void disable();
+            [[nodiscard]] inline constexpr uint_fast16_t index() const noexcept {
+                return index_;
+            }
 
-            void reset(const Type type);
-            void fill(const int number);
-            void clear(EntropyData entropyData);
+            [[nodiscard]] inline constexpr uint_fast8_t row() const noexcept {
+                return row_;
+            }
 
-            bool removeRemainingNumber(const int number);
-            void restoreRemainingNumber(const int number);
+            [[nodiscard]] inline constexpr uint_fast8_t column() const noexcept {
+                return column_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t number() const noexcept{
+                return number_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t rawRow() const noexcept {
+                return rawRow_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t rawColumn() const noexcept {
+                return rawColumn_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept {
+                return entropyData_.entropy();
+            }
+
+            [[nodiscard]] inline const std::vector<uint_fast8_t> numbers() const noexcept {
+                return entropyData_.numbers();
+            }
+
+            [[nodiscard]] inline const EntropyData& entropyData() const noexcept {
+                return entropyData_;
+            }
+
+            [[nodiscard]] inline constexpr bool filled() const noexcept {
+                return number_ != EMPTY;
+            }
+
+            [[nodiscard]] inline constexpr bool enabled() const noexcept {
+                return enabled_;
+            }
+
+            inline constexpr void set(const EntropyData& entropyData) noexcept {
+                entropyData_ = entropyData;
+            }
+
+            inline constexpr void enable() noexcept {
+                enabled_ = true;
+            }
+
+            inline constexpr void disable() noexcept {
+                enabled_ = false;
+            }
+
+            inline constexpr void fill(const uint_fast8_t number) noexcept {
+                number_ = number;
+                entropyData_.clear();
+            }
+
+            inline constexpr void clear(EntropyData entropyData) noexcept {
+                entropyData.remove(number_);
+                number_ = EMPTY;
+                entropyData_ = entropyData;
+            }
+
+            /* [[nodiscard]] */ inline constexpr bool remove(const uint_fast8_t number) noexcept {
+                return entropyData_.remove(number);
+            }
+
+            inline constexpr void restore(const uint_fast8_t number) noexcept {
+                entropyData_.restore(number);
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t delta() const noexcept {
+                return (rowColumnSum_ + size_ - number_) % size_;
+            }
+
+            [[nodiscard]] const std::string id() const noexcept;
 
         private:
-            void setNumber(const int number);
-            void setIds();
-            void setFullId();
-            void setNumberIdAsInt();
+            constexpr void reset(const Type type) noexcept;
 
-            int row_, column_, number_, latinSquareSize_, maxNumber_, rowColumnSum_, rowIdAsInt_, columnIdAsInt_,
-                numberIdAsInt_;
-            std::string rowId_, columnId_, id_, numberId_, fullId_;
+            uint_fast16_t index_;
+            uint_fast8_t row_;
+            uint_fast8_t column_;
+            uint_fast8_t number_;
+            uint_fast8_t rawRow_;
+            uint_fast8_t rawColumn_;
+            uint_fast8_t size_;
             EntropyData entropyData_;
-            bool filled_, enabled_;
+            uint_fast8_t maxNumber_;
+            uint_fast8_t rowColumnSum_;
+            bool enabled_;
     };
 }
