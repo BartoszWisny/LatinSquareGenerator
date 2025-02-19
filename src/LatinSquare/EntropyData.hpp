@@ -20,9 +20,9 @@ namespace LatinSquare {
                 numbers_ = 0;
             }
 
-            inline constexpr bool remove(const uint_fast8_t number) noexcept {
+            inline constexpr uint_fast64_t remove(const uint_fast8_t number) noexcept {
                 const auto bit = 1ULL << number;
-                const auto set = (numbers_ & bit) != 0;
+                const auto set = numbers_ & bit;
                 numbers_ &= ~bit;
                 return set;
             }

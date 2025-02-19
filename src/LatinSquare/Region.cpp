@@ -1,16 +1,16 @@
 #include "Region.hpp"
 
 namespace LatinSquare {
-    const std::vector<std::shared_ptr<Cell>> Region::enabledCells() const noexcept {
-        std::vector<std::shared_ptr<Cell>> cells;
-        cells.reserve(size_);
+    const std::vector<uint_fast16_t> Region::enabledCellIndexes() const noexcept {
+        std::vector<uint_fast16_t> indexes;
+        indexes.reserve(size_);
 
         for (const auto& cell : cells_) {
             if (cell->enabled()) {
-                cells.emplace_back(cell);
+                indexes.emplace_back(cell->index());
             }
         }
 
-        return cells;
+        return indexes;
     }
 }

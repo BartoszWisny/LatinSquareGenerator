@@ -8,8 +8,6 @@
 namespace LatinSquare {
     class UpdateData {
         public:
-            UpdateData() = default;
-
             inline constexpr explicit UpdateData(const uint_fast16_t index, const uint_fast8_t number,
                 const EntropyData& entropyData, const std::vector<uint_fast16_t>& indexes) noexcept
                 : index_(index), number_(number), entropyData_(entropyData), indexes_(indexes) {}

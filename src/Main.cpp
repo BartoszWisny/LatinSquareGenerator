@@ -54,11 +54,11 @@ int main() {
     // std::cout << latinSquareGenerator.countAllLatinSquares(6) << std::endl;
     // std::cout << latinSquareGenerator.countAllLatinSquares(7) << std::endl;
 
-    // auto latinSquare = latinSquareGenerator.random(13, LatinSquare::Type::ReducedCyclic);
+    auto latinSquare = latinSquareGenerator.random(13, LatinSquare::Type::ReducedCyclic);
     // auto latinSquare = latinSquareGenerator.random(10, LatinSquare::Type::ReducedDiagonal);
-    // latinSquare.setRegions();
-    // auto transversalGenerator = Transversal::Generator();
-    // std::cout << "LS generated" << std::endl;
+    latinSquare.setRegions();
+    auto transversalGenerator = Transversal::Generator();
+    std::cout << "LS generated" << std::endl;
 
     // ---
     auto start = std::chrono::steady_clock::now();
@@ -66,8 +66,8 @@ int main() {
 
     // auto latinSquare = latinSquareGenerator.random(16, LatinSquare::Type::Reduced);
 
-    // const auto count = transversalGenerator.count(latinSquare);
-    const auto count = latinSquareGenerator.count(7);
+    const auto count = transversalGenerator.count(latinSquare);
+    // const auto count = latinSquareGenerator.count(6);
 
     // auto latinSquare = latinSquareGenerator.random(20, LatinSquare::Type::Reduced);
 
@@ -82,25 +82,3 @@ int main() {
 
     return 0;
 }
-
-// TODO:
-// - add function to measure time of generating random latin square and random transversal
-// - consider using std::move and implementing move for Cell, Region, etc.
-// - use CUDA (highly recommended)
-// - compare to constraint programming solvers
-
-
-// --- TESTING ---
-// #include <chrono>
-// #include <iostream>
-
-// ---
-// auto start = std::chrono::high_resolution_clock::now();
-// ---
-
-// ---
-// auto stop = std::chrono::high_resolution_clock::now();
-// const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-// std::cout << "Time: " << duration << std::endl;
-// ---
-// --- TESTING ---

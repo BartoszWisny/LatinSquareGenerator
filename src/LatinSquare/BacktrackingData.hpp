@@ -7,8 +7,6 @@
 namespace LatinSquare {
     class BacktrackingData {
         public:
-            BacktrackingData() = default;
-
             inline constexpr explicit BacktrackingData(
                 const uint_fast16_t index, const EntropyData& entropyData) noexcept
                 : index_(index), entropyData_(entropyData) {}

@@ -17,24 +17,16 @@ namespace LatinSquare {
                 return index_;
             }
 
-            [[nodiscard]] inline constexpr uint_fast8_t row() const noexcept {
-                return row_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t column() const noexcept {
-                return column_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t number() const noexcept{
-                return number_;
-            }
-
             [[nodiscard]] inline constexpr uint_fast8_t rawRow() const noexcept {
                 return rawRow_;
             }
 
             [[nodiscard]] inline constexpr uint_fast8_t rawColumn() const noexcept {
                 return rawColumn_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t number() const noexcept{
+                return number_;
             }
 
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept {
@@ -49,8 +41,24 @@ namespace LatinSquare {
                 return entropyData_;
             }
 
+            [[nodiscard]] inline constexpr uint_fast8_t regionRow() const noexcept {
+                return regionRow_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t regionColumn() const noexcept {
+                return regionColumn_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t regionNumber() const noexcept {
+                return regionNumber_;
+            }
+
             [[nodiscard]] inline constexpr bool filled() const noexcept {
                 return number_ != EMPTY;
+            }
+
+            [[nodiscard]] inline constexpr bool notFilled() const noexcept {
+                return number_ == EMPTY;
             }
 
             [[nodiscard]] inline constexpr bool enabled() const noexcept {
@@ -71,16 +79,19 @@ namespace LatinSquare {
 
             inline constexpr void fill(const uint_fast8_t number) noexcept {
                 number_ = number;
+                regionNumber_ = number_;
+                regionNumber_ += (size_ << 1);
                 entropyData_.clear();
             }
 
             inline constexpr void clear(EntropyData entropyData) noexcept {
                 entropyData.remove(number_);
                 number_ = EMPTY;
+                regionNumber_ = EMPTY;
                 entropyData_ = entropyData;
             }
 
-            /* [[nodiscard]] */ inline constexpr bool remove(const uint_fast8_t number) noexcept {
+            inline constexpr bool remove(const uint_fast8_t number) noexcept {
                 return entropyData_.remove(number);
             }
 
@@ -98,14 +109,15 @@ namespace LatinSquare {
             constexpr void reset(const Type type) noexcept;
 
             uint_fast16_t index_;
-            uint_fast8_t row_;
-            uint_fast8_t column_;
-            uint_fast8_t number_;
             uint_fast8_t rawRow_;
             uint_fast8_t rawColumn_;
+            uint_fast8_t number_;
             uint_fast8_t size_;
             EntropyData entropyData_;
             uint_fast8_t maxNumber_;
+            uint_fast8_t regionRow_;
+            uint_fast8_t regionColumn_;
+            uint_fast8_t regionNumber_;
             uint_fast8_t rowColumnSum_;
             bool enabled_;
     };

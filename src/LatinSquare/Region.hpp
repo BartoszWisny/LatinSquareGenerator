@@ -9,16 +9,14 @@
 namespace LatinSquare {
     class Region {
         public:
-            inline constexpr explicit Region(const uint_fast8_t index, const uint_fast8_t id,
-                const std::vector<std::shared_ptr<Cell>> cells, const uint_fast8_t size) noexcept
-                : index_(index), id_(id), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {}
+            Region() = default;
+
+            inline constexpr explicit Region(const uint_fast8_t index, const std::vector<std::shared_ptr<Cell>> cells,
+                const uint_fast8_t size) noexcept
+                : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {}
 
             [[nodiscard]] inline constexpr uint_fast8_t index() const noexcept {
                 return index_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t id() const noexcept {
-                return id_;
             }
 
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept {
@@ -37,19 +35,18 @@ namespace LatinSquare {
                 notEnabled_ = true;
             }
 
-            inline constexpr void decrease(const uint_fast8_t number) noexcept {
-                entropy_ -= number;
+            inline constexpr void decrease() noexcept {
+                --entropy_;
             }
 
-            inline constexpr void increase(const uint_fast8_t number) noexcept {
-                entropy_ += number;
+            inline constexpr void increase() noexcept {
+                ++entropy_;
             }
 
-            [[nodiscard]] const std::vector<std::shared_ptr<Cell>> enabledCells() const noexcept;
+            [[nodiscard]] const std::vector<uint_fast16_t> enabledCellIndexes() const noexcept;
 
         private:
             uint_fast8_t index_;
-            uint_fast8_t id_;
             std::vector<std::shared_ptr<Cell>> cells_;
             uint_fast8_t size_;
             uint_fast8_t entropy_;

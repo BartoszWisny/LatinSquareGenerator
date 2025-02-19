@@ -1,19 +1,16 @@
 #include "Generator.hpp"
 
+#include "Cell.hpp"
+#include "EntropyData.hpp"
+
 namespace LatinSquare {
     // set max iterations (pruning) to prevent from program getting stuck (for big squares it is possible)
     const LatinSquare Generator::random(const uint_fast8_t size, const Type type) noexcept {
         cpp::splitmix64 splitmix64;
         LatinSquare latinSquare(size, type, splitmix64);
 
-        std::shared_ptr<Cell> cell;
-        uint_fast16_t index;
-        std::vector<uint_fast8_t> numbers;
         uint_fast8_t number;
         EntropyData entropyData;
-        std::vector<uint_fast16_t> indexes;
-        BacktrackingData backtrackingData;
-        UpdateData updateData;
 
         uint_fast16_t gridSize = size;
         gridSize *= size;
@@ -22,50 +19,38 @@ namespace LatinSquare {
 
         uint_fast16_t counter = 0;
 
-        // uint_fast64_t it = 0;
-
         while (latinSquare.notFilled()) {
-            // ++it;
+            auto& cell = latinSquare.randomMinEntropyCell();
 
-            cell = latinSquare.randomMinEntropyCell();
-
-            if (cell->entropy() > 0) {
+            if (cell.entropy()) {
                 counter = 0;
 
-                index = cell->index();
-                numbers = cell->numbers();
-                number = numbers[splitmix64.next() % numbers.size()];
-                entropyData = cell->entropyData();
-                latinSquare.fill(index, number);
-                indexes = latinSquare.relatedToFilledCellIndexes(cell);
-                latinSquare.update(indexes, number);
+                number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
+                entropyData = cell.entropyData();
+                latinSquare.fill(cell, number);
 
-                updateHistory_.emplace_back(index, number, entropyData, indexes);
+                updateHistory_.emplace_back(cell.index(), number, entropyData, latinSquare.update(cell, number));
 
-                if (checkBacktrackingHistory(index)) {
-                    backtrackingHistory_.emplace_back(index, entropyData);
+                if (backtrackingHistory_.empty() || cell.index() != backtrackingHistory_.back().index()) {
+                    backtrackingHistory_.emplace_back(cell.index(), entropyData);
                 }
             } else {
                 if (++counter > 1) {
-                    backtrackingData = backtrackingHistory_.back();
-                    backtrackingHistory_.pop_back();
+                    latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
-                    latinSquare.set(backtrackingData.index(), backtrackingData.entropyData());
+                    backtrackingHistory_.pop_back();
 
                     if (updateHistory_.empty()) {
                         break;
                     }
                 }
 
-                updateData = updateHistory_.back();
-                updateHistory_.pop_back();
+                latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
-                latinSquare.clear(updateData.index(), updateData.entropyData());
-                latinSquare.restore(updateData.indexes(), updateData.number());
+                updateHistory_.pop_back();
             }
         }
-
-        // std::cout << "Iterations: " << it << std::endl;
 
         return latinSquare;
     }
@@ -73,13 +58,8 @@ namespace LatinSquare {
     const boost::multiprecision::mpz_int Generator::count(const uint_fast8_t size) {
         LatinSquare latinSquare(size, Type::Reduced);
 
-        std::shared_ptr<Cell> cell;
-        uint_fast16_t index;
         uint_fast8_t number;
         EntropyData entropyData;
-        std::vector<uint_fast16_t> indexes;
-        BacktrackingData backtrackingData;
-        UpdateData updateData;
 
         uint_fast16_t gridSize = size;
         gridSize *= size;
@@ -91,50 +71,44 @@ namespace LatinSquare {
 
         while (true) {
             if (latinSquare.notFilled()) {
-                cell = latinSquare.minEntropyCell();
+                auto& cell = latinSquare.minEntropyCell();
 
-                if (cell->entropy() > 0) {
+                if (cell.entropy()) {
                     counter = 0;
 
-                    index = cell->index();
-                    number = cell->numbers()[0];
-                    entropyData = cell->entropyData();
-                    latinSquare.fill(index, number);
-                    indexes = latinSquare.relatedToFilledCellIndexes(cell);
-                    latinSquare.update(indexes, number);
+                    number = cell.numbers()[0];
+                    entropyData = cell.entropyData();
+                    latinSquare.fill(cell, number);
 
-                    updateHistory_.emplace_back(index, number, entropyData, indexes);
+                    updateHistory_.emplace_back(cell.index(), number, entropyData, latinSquare.update(cell, number));
 
-                    if (checkBacktrackingHistory(index)) {
-                        backtrackingHistory_.emplace_back(index, entropyData);
+                    if (backtrackingHistory_.empty() || cell.index() != backtrackingHistory_.back().index()) {
+                        backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
                     if (++counter > 1) {
-                        backtrackingData = backtrackingHistory_.back();
-                        backtrackingHistory_.pop_back();
+                        latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
-                        latinSquare.set(backtrackingData.index(), backtrackingData.entropyData());
+                        backtrackingHistory_.pop_back();
 
                         if (updateHistory_.empty()) {
                             break;
                         }
                     }
 
-                    updateData = updateHistory_.back();
-                    updateHistory_.pop_back();
+                    latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
-                    latinSquare.clear(updateData.index(), updateData.entropyData());
-                    latinSquare.restore(updateData.indexes(), updateData.number());
+                    updateHistory_.pop_back();
                 }
             } else {
                 ++latinSquaresCounter;
                 ++counter;
 
-                updateData = updateHistory_.back();
-                updateHistory_.pop_back();
+                latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
-                latinSquare.clear(updateData.index(), updateData.entropyData());
-                latinSquare.restore(updateData.indexes(), updateData.number());
+                updateHistory_.pop_back();
             }
         }
 

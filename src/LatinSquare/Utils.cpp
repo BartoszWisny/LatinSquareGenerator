@@ -37,7 +37,7 @@ namespace LatinSquare {
         std::cout.put('\n');
 
         for (const auto& cell : grid) {
-            if (cell->rawColumn() == 0x00) {
+            if (cell->rawColumn() == 0) {
                 std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
                 std::cout.put('+');
                 std::cout.put('\n');

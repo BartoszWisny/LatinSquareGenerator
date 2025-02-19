@@ -18,10 +18,6 @@ namespace LatinSquare {
             [[nodiscard]] const boost::multiprecision::mpz_int count(const uint_fast8_t size);
 
         private:
-            [[nodiscard]] inline constexpr bool checkBacktrackingHistory(const uint_fast16_t index) const noexcept {
-                return backtrackingHistory_.empty() || index != backtrackingHistory_.back().index();
-            }
-
             std::vector<UpdateData> updateHistory_;
             std::vector<BacktrackingData> backtrackingHistory_;
     };
