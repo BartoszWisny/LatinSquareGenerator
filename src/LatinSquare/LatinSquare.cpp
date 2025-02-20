@@ -1,7 +1,5 @@
 #include "LatinSquare.hpp"
 
-#include <memory>
-
 namespace LatinSquare {
     LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
@@ -67,8 +65,10 @@ namespace LatinSquare {
             numbers.emplace_back(index + (size_ << 1), numberCells, size_);
         }
 
-        regions_.insert(regions_.end(), columns.begin(), columns.end());
-        regions_.insert(regions_.end(), numbers.begin(), numbers.end());
+        regions_.insert(
+            regions_.end(), std::make_move_iterator(columns.begin()), std::make_move_iterator(columns.end()));
+        regions_.insert(
+            regions_.end(), std::make_move_iterator(numbers.begin()), std::make_move_iterator(numbers.end()));
     }
 
     Cell& LatinSquare::minEntropyCell() noexcept {

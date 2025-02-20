@@ -58,11 +58,18 @@ int main() {
     // auto latinSquare = latinSquareGenerator.random(10, LatinSquare::Type::ReducedDiagonal);
     latinSquare.setRegions();
     auto transversalGenerator = Transversal::Generator();
+    // auto transversal = transversalGenerator.random(latinSquare);
     std::cout << "LS generated" << std::endl;
 
     // ---
     auto start = std::chrono::steady_clock::now();
     // ---
+
+    // LatinSquare::printBoard(latinSquare);
+
+    // Transversal::printIds(latinSquare, transversal);
+    // Transversal::printBoard(latinSquare, transversal);
+
 
     // auto latinSquare = latinSquareGenerator.random(16, LatinSquare::Type::Reduced);
 

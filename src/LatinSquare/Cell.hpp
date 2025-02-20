@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <utility>
 
 #include "Constants.hpp"
 #include "EntropyData.hpp"
@@ -12,6 +13,43 @@ namespace LatinSquare {
         public:
             explicit Cell(const uint_fast16_t index, const uint_fast8_t row, const uint_fast8_t column,
                 const uint_fast8_t size, const Type type) noexcept;
+
+            Cell(const Cell&) = delete;
+            Cell& operator=(const Cell&) = delete;
+
+            Cell(Cell&& other) noexcept {
+                index_ = std::exchange(other.index_, 0);
+                rawRow_ = std::exchange(other.rawRow_, 0);
+                rawColumn_ = std::exchange(other.rawColumn_, 0);
+                number_ = std::exchange(other.number_, 0);
+                size_ = std::exchange(other.size_, 0);
+                entropyData_ = std::move(other.entropyData_);
+                maxNumber_ = std::exchange(other.maxNumber_, 0);
+                regionRow_ = std::exchange(other.regionRow_, 0);
+                regionColumn_ = std::exchange(other.regionColumn_, 0);
+                regionNumber_ = std::exchange(other.regionNumber_, 0);
+                rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
+                enabled_ = std::exchange(other.enabled_, false);
+            }
+
+            Cell& operator=(Cell&& other) noexcept {
+                if (this != &other) {
+                    index_ = std::exchange(other.index_, 0);
+                    rawRow_ = std::exchange(other.rawRow_, 0);
+                    rawColumn_ = std::exchange(other.rawColumn_, 0);
+                    number_ = std::exchange(other.number_, 0);
+                    size_ = std::exchange(other.size_, 0);
+                    entropyData_ = std::move(other.entropyData_);
+                    maxNumber_ = std::exchange(other.maxNumber_, 0);
+                    regionRow_ = std::exchange(other.regionRow_, 0);
+                    regionColumn_ = std::exchange(other.regionColumn_, 0);
+                    regionNumber_ = std::exchange(other.regionNumber_, 0);
+                    rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
+                    enabled_ = std::exchange(other.enabled_, false);
+                }
+
+                return *this;
+            }
 
             [[nodiscard]] inline constexpr uint_fast16_t index() const noexcept {
                 return index_;

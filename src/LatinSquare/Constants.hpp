@@ -3,9 +3,7 @@
 #include <cstdint>
 
 namespace LatinSquare {
-    static constexpr uint_fast8_t EMPTY = 0xB0;
-    static constexpr uint_fast8_t ROW_FLAG = 0x40;
-    static constexpr uint_fast8_t COLUMN_FLAG = 0x80;
+    static constexpr uint_fast8_t EMPTY = 0xFF;
 
     enum class Type : uint_fast8_t {
         Normal = 0x00,

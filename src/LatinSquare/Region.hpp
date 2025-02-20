@@ -3,17 +3,39 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
+#include <utility>
 
 #include "Cell.hpp"
 
 namespace LatinSquare {
     class Region {
         public:
-            Region() = default;
-
             inline constexpr explicit Region(const uint_fast8_t index, const std::vector<std::shared_ptr<Cell>> cells,
                 const uint_fast8_t size) noexcept
                 : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {}
+
+            Region(const Region&) = delete;
+            Region& operator=(const Region&) = delete;
+
+            Region(Region&& other) noexcept {
+                index_ = std::exchange(other.index_, 0);
+                cells_ = std::move(other.cells_);
+                size_ = std::exchange(other.size_, 0);
+                entropy_ = std::exchange(other.entropy_, 0);
+                notEnabled_ = std::exchange(other.notEnabled_, true);
+            }
+
+            Region& operator=(Region&& other) noexcept {
+                if (this != &other) {
+                    index_ = std::exchange(other.index_, 0);
+                    cells_ = std::move(other.cells_);
+                    size_ = std::exchange(other.size_, 0);
+                    entropy_ = std::exchange(other.entropy_, 0);
+                    notEnabled_ = std::exchange(other.notEnabled_, true);
+                }
+
+                return *this;
+            }
 
             [[nodiscard]] inline constexpr uint_fast8_t index() const noexcept {
                 return index_;

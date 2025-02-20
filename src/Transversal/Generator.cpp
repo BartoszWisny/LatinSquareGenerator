@@ -110,7 +110,8 @@ namespace Transversal {
 
                         backtrackingHistory_.pop_back();
 
-                        while (!backtrackingHistory_.empty() && regionIndex == backtrackingHistory_.back().regionIndex()) {
+                        while (!backtrackingHistory_.empty()
+                               && regionIndex == backtrackingHistory_.back().regionIndex()) {
                             indexes.emplace_back(backtrackingHistory_.back().cellIndex());
                             regionIndex = backtrackingHistory_.back().regionIndex();
 

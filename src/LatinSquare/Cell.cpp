@@ -4,7 +4,7 @@ namespace LatinSquare {
     Cell::Cell(const uint_fast16_t index, const uint_fast8_t row, const uint_fast8_t column, const uint_fast8_t size,
         const Type type) noexcept
         : index_(index), rawRow_(row), rawColumn_(column), number_(EMPTY), size_(size),
-          entropyData_(EntropyData(size_)), maxNumber_(size_ - 1), regionRow_(rawRow_),
+          entropyData_(size_), maxNumber_(size_ - 1), regionRow_(rawRow_),
           regionColumn_(rawColumn_ + size_), regionNumber_(EMPTY), rowColumnSum_(row + column), enabled_(true) {
         reset(type);
     }

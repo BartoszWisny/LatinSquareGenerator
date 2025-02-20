@@ -3,6 +3,6 @@
 #include "LatinSquare.hpp"
 
 namespace LatinSquare {
-    void printIds(LatinSquare& latinSquare);
-    void printBoard(LatinSquare& latinSquare);
+    void printIds(LatinSquare& latinSquare) noexcept;
+    void printBoard(LatinSquare& latinSquare) noexcept;
 }
