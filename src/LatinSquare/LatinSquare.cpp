@@ -17,20 +17,27 @@ namespace LatinSquare {
     }
 
     void LatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
+        grid_.clear();
         gridSize_ = size_;
         gridSize_ *= size_;
-        notFilled_ = 0;
+        notFilled_ = gridSize_;
         grid_.resize(gridSize_);
         uint_fast16_t row = 0;
         uint_fast16_t column = 0;
 
         for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Normal);
-            grid_[index]->fill(numbers[index]);
+            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
 
             if (++column == size_) {
                 column = 0;
                 ++row;
+            }
+        }
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            if (numbers[index] != 0xFF) {
+                fill(*grid_[index], numbers[index]);
+                update(*grid_[index], numbers[index]);
             }
         }
     }

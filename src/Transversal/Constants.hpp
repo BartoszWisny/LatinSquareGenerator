@@ -9,6 +9,7 @@ namespace Transversal {
     static constexpr std::string_view TRANSVERSALS_RANDOM = "-tr";
     static constexpr std::string_view TRANSVERSALS_COUNT = "-tc";
     static constexpr std::string_view TRANSVERSALS_MINMAX = "-tm";
+    static constexpr std::string_view TRANSVERSALS_TEMPLATE = "-tt";
 
     static constexpr std::string_view TRANSVERSALS = "Number of transversals: ";
     static constexpr std::string_view MIN_TRANSVERSALS = "Minimum number of transversals: ";

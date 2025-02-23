@@ -14,8 +14,10 @@ namespace LatinSquare {
                 const uint_fast8_t size) noexcept
                 : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {}
 
-            Region(const Region&) = delete;
-            Region& operator=(const Region&) = delete;
+            // Region(const Region&) = delete;
+            // Region& operator=(const Region&) = delete;
+            Region(const Region&) = default;
+            Region& operator=(const Region&) = default;
 
             Region(Region&& other) noexcept {
                 index_ = std::exchange(other.index_, 0);

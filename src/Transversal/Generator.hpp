@@ -11,6 +11,7 @@
 #include "LatinSquare/Constants.hpp"
 #include "LatinSquare/LatinSquare.hpp"
 #include "LatinSquare/UpdateData.hpp"
+#include "MinMaxData.hpp"
 #include "UpdateData.hpp"
 
 namespace Transversal {
@@ -21,8 +22,10 @@ namespace Transversal {
             [[nodiscard]] const boost::multiprecision::mpz_int count(
                 LatinSquare::LatinSquare& latinSquare) noexcept;
 
-            [[nodiscard]] const std::array<boost::multiprecision::mpz_int, 2> minMax(
+            [[nodiscard]] const std::array<MinMaxData, 2> minMax(
                 const uint_fast8_t size, const LatinSquare::Type type) noexcept;
+
+            [[nodiscard]] const std::array<MinMaxData, 2> minMax(LatinSquare::LatinSquare& latinSquare) noexcept;
 
         private:
             [[nodiscard]] constexpr boost::multiprecision::mpz_int factorial(const uint_fast8_t size) noexcept;

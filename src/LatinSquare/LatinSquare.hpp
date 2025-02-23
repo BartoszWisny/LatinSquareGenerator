@@ -18,6 +18,35 @@ namespace LatinSquare {
             explicit LatinSquare(const uint_fast8_t size, const Type type) noexcept;
             explicit LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept;
 
+            LatinSquare(const LatinSquare& other)
+                : size_(other.size_), gridSize_(other.gridSize_), regionsSize_(other.regionsSize_),
+                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_) {
+                grid_.reserve(other.grid_.size());
+
+                for (const auto& cell : other.grid_) {
+                    grid_.push_back(std::make_shared<Cell>(*cell));
+                }
+            }
+
+            LatinSquare& operator=(const LatinSquare& other) {
+                if (this != &other) {
+                    size_ = other.size_;
+                    gridSize_ = other.gridSize_;
+                    regionsSize_ = other.regionsSize_;
+                    regions_ = other.regions_;
+                    splitmix64_ = other.splitmix64_;
+                    notFilled_ = other.notFilled_;
+                    grid_.clear();
+                    grid_.reserve(other.grid_.size());
+
+                    for (const auto& cell : other.grid_) {
+                        grid_.push_back(std::make_shared<Cell>(*cell));
+                    }
+                }
+
+                return *this;
+            }
+
             [[nodiscard]] inline constexpr uint_fast8_t size() const noexcept {
                 return size_;
             }
@@ -56,7 +85,7 @@ namespace LatinSquare {
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
-            [[nodiscard]] const std::vector<uint_fast16_t> update(Cell& cell, const uint_fast8_t number) noexcept;
+            const std::vector<uint_fast16_t> update(Cell& cell, const uint_fast8_t number) noexcept;
 
             [[nodiscard]] Region& minEntropyRegion() noexcept;
             [[nodiscard]] Region& randomMinEntropyRegion() noexcept;

@@ -42,7 +42,7 @@ namespace LatinSquare {
             while (iss >> word) {
                 number = std::strtoul(word.c_str(), nullptr, 10);
 
-                if (number > 0 && number <= MAX_SIZE) {
+                if (number <= MAX_SIZE) {
                     numbers.push_back(--number);
                     ++counter;
                 } else {

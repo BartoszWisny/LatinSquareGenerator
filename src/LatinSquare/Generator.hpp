@@ -17,6 +17,8 @@ namespace LatinSquare {
 
             [[nodiscard]] const boost::multiprecision::mpz_int count(const uint_fast8_t size, const Type type) noexcept;
 
+            [[nodiscard]] const boost::multiprecision::mpz_int count(LatinSquare& latinSquare) noexcept;
+
         private:
             std::vector<UpdateData> updateHistory_;
             std::vector<BacktrackingData> backtrackingHistory_;

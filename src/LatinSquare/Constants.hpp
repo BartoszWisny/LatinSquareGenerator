@@ -10,10 +10,11 @@ namespace LatinSquare {
     enum class Type : uint_fast8_t {
         Unknown = 0x00,
         Normal = 0x01,
-        Reduced = 0x02,
-        ReducedCyclic = 0x03,
-        ReducedDiagonal = 0x04,
-        ReducedSuperSymmetric = 0x05
+        Custom = 0x02,
+        Reduced = 0x03,
+        ReducedCyclic = 0x04,
+        ReducedDiagonal = 0x05,
+        ReducedSuperSymmetric = 0x06
     };
 
     static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
@@ -27,14 +28,19 @@ namespace LatinSquare {
     static constexpr std::string_view LATIN_SQUARES_RANDOM = "-lr";
     static constexpr std::string_view LATIN_SQUARES_FILE = "-lf";
     static constexpr std::string_view LATIN_SQUARES_COUNT = "-lc";
+    static constexpr std::string_view LATIN_SQUARES_TEMPLATE = "-lt";
 
     static constexpr std::string_view LATIN_SQUARES = "Number of latin squares: ";
     static constexpr std::string_view USAGE =
         "USAGE:\n"
         "Generate random latin square:\n"
         "-lr <size> <type>\n"
+        "Generate random latin square to file:\n"
+        "-lf <size> <type> <filename>\n"
         "Find number of latin squares:\n"
         "-lc <size> <type>\n"
+        "Find number of latin squares for template:\n"
+        "-lt <size> <filename>\n"
         "Find random transversal in latin square:\n"
         "-tr <size> <filename>\n"
         "Find number of transversals in latin square:\n"
@@ -44,7 +50,8 @@ namespace LatinSquare {
         "<size> should be from 1 to 64\n"
         "<type> should be one of: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal), "
         "S (reduced super-symmetric)\n"
-        "File <filename> should contain latin square with <size> rows, <size> columns and numbers from 1 to <size>";
+        "File <filename> should contain latin square or template with <size> rows, <size> columns "
+        "and numbers from 1 to <size> (or 0 for empty cells)";
 
     static constexpr std::string_view TIME = "Time: ";
     static constexpr std::string_view SECONDS = " seconds";

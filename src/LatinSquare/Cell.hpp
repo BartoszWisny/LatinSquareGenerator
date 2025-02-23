@@ -14,8 +14,10 @@ namespace LatinSquare {
             explicit Cell(const uint_fast16_t index, const uint_fast8_t row, const uint_fast8_t column,
                 const uint_fast8_t size, const Type type) noexcept;
 
-            Cell(const Cell&) = delete;
-            Cell& operator=(const Cell&) = delete;
+            // Cell(const Cell&) = delete;
+            // Cell& operator=(const Cell&) = delete;
+            Cell(const Cell&) = default;
+            Cell& operator=(const Cell&) = default;
 
             Cell(Cell&& other) noexcept {
                 index_ = std::exchange(other.index_, 0);

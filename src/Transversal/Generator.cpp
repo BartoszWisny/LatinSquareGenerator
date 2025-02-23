@@ -171,10 +171,12 @@ namespace Transversal {
         return result;
     }
 
-    // TODO: maybe add collecting latinSquares with min and max counts
-    const std::array<boost::multiprecision::mpz_int, 2> Generator::minMax(
-        const uint_fast8_t size, const LatinSquare::Type type) noexcept {
+    const std::array<MinMaxData, 2> Generator::minMax(const uint_fast8_t size, const LatinSquare::Type type) noexcept {
         LatinSquare::LatinSquare latinSquare(size, type);
+
+        if (!latinSquare.notFilled()) {
+            return {MinMaxData(1, latinSquare), MinMaxData(1, latinSquare)};
+        }
 
         uint_fast8_t number;
         LatinSquare::EntropyData entropyData;
@@ -184,7 +186,8 @@ namespace Transversal {
         latinSquareUpdateHistory_.reserve(gridSize);
         latinSquareBacktrackingHistory_.reserve(gridSize);
 
-        std::array<boost::multiprecision::mpz_int, 2> latinSquaresCounters = {factorial(size), 0};
+        std::array<MinMaxData, 2> latinSquaresCounters =
+            {MinMaxData(factorial(size), latinSquare), MinMaxData(-1, latinSquare)};
         boost::multiprecision::mpz_int transversalsCounter;
         uint_fast16_t counter = 0;
 
@@ -229,10 +232,14 @@ namespace Transversal {
                 latinSquare.setRegions();
                 transversalsCounter = count(latinSquare);
 
-                if (transversalsCounter < latinSquaresCounters[0]) {
-                    latinSquaresCounters[0] = transversalsCounter;
-                } else if (transversalsCounter > latinSquaresCounters[1]) {
-                    latinSquaresCounters[1] = transversalsCounter;
+                if (transversalsCounter < latinSquaresCounters[0].counter()) {
+                    latinSquaresCounters[0].set(transversalsCounter);
+                    latinSquaresCounters[0].set(latinSquare);
+                }
+
+                if (transversalsCounter > latinSquaresCounters[1].counter()) {
+                    latinSquaresCounters[1].set(transversalsCounter);
+                    latinSquaresCounters[1].set(latinSquare);
                 }
 
                 ++counter;
@@ -246,9 +253,97 @@ namespace Transversal {
             }
         }
 
-        if (latinSquaresCounters[0] > latinSquaresCounters[1]) {
-            latinSquaresCounters[0] = 0;
-            latinSquaresCounters[1] = 0;
+        if (latinSquaresCounters[0].counter() > latinSquaresCounters[1].counter()) {
+            latinSquaresCounters[0].set(0);
+            latinSquaresCounters[1].set(0);
+        }
+
+        return latinSquaresCounters;
+    }
+
+    const std::array<MinMaxData, 2> Generator::minMax(LatinSquare::LatinSquare& latinSquare) noexcept {
+        if (!latinSquare.notFilled()) {
+            return {MinMaxData(1, latinSquare), MinMaxData(1, latinSquare)};
+        }
+
+        uint_fast8_t number;
+        LatinSquare::EntropyData entropyData;
+
+        uint_fast16_t gridSize = latinSquare.size();
+        gridSize *= latinSquare.size();
+        latinSquareUpdateHistory_.reserve(gridSize);
+        latinSquareBacktrackingHistory_.reserve(gridSize);
+
+        std::array<MinMaxData, 2> latinSquaresCounters =
+            {MinMaxData(factorial(latinSquare.size()), latinSquare), MinMaxData(-1, latinSquare)};
+        boost::multiprecision::mpz_int transversalsCounter;
+        uint_fast16_t counter = 0;
+
+        while (true) {
+            if (latinSquare.notFilled()) {
+                auto& cell = latinSquare.minEntropyCell();
+
+                if (cell.entropy()) {
+                    counter = 0;
+
+                    number = cell.numbers()[0];
+                    entropyData = cell.entropyData();
+                    latinSquare.fill(cell, number);
+
+                    latinSquareUpdateHistory_.emplace_back(
+                        cell.index(), number, entropyData, latinSquare.update(cell, number));
+
+                    if (latinSquareBacktrackingHistory_.empty()
+                        || cell.index() != latinSquareBacktrackingHistory_.back().index()) {
+                        latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
+                    }
+                } else {
+                    if (++counter > 1) {
+                        latinSquare.set(latinSquareBacktrackingHistory_.back().index(),
+                                        latinSquareBacktrackingHistory_.back().entropyData());
+
+                        latinSquareBacktrackingHistory_.pop_back();
+
+                        if (latinSquareUpdateHistory_.empty()) {
+                            break;
+                        }
+                    }
+
+                    latinSquare.clear(
+                        latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
+                    latinSquare.restore(
+                        latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());
+
+                    latinSquareUpdateHistory_.pop_back();
+                }
+            } else {
+                latinSquare.setRegions();
+                transversalsCounter = count(latinSquare);
+
+                if (transversalsCounter < latinSquaresCounters[0].counter()) {
+                    latinSquaresCounters[0].set(transversalsCounter);
+                    latinSquaresCounters[0].set(latinSquare);
+                }
+
+                if (transversalsCounter > latinSquaresCounters[1].counter()) {
+                    latinSquaresCounters[1].set(transversalsCounter);
+                    latinSquaresCounters[1].set(latinSquare);
+                }
+
+                ++counter;
+
+                latinSquare.clear(
+                    latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
+                latinSquare.restore(
+                    latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());
+
+                latinSquareUpdateHistory_.pop_back();
+            }
+        }
+
+        if (latinSquaresCounters[0].counter() > latinSquaresCounters[1].counter()) {
+            latinSquaresCounters[0].set(0);
+            latinSquaresCounters[1].set(0);
         }
 
         return latinSquaresCounters;
