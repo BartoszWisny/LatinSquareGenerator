@@ -36,6 +36,8 @@ namespace LatinSquare {
                 entropyData_.remove(0);
                 entropyData_.remove(maxNumber_);
             }
+        } else if (type == Type::ReducedSuperSymmetric) {
+            // TODO: add super-symmetric latin squares
         }
     }
 

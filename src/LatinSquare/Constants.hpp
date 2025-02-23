@@ -1,15 +1,51 @@
 #pragma once
 
 #include <cstdint>
+#include <string_view>
 
 namespace LatinSquare {
     static constexpr uint_fast8_t EMPTY = 0xFF;
+    static constexpr uint_fast8_t MAX_SIZE = 64;
 
     enum class Type : uint_fast8_t {
-        Normal = 0x00,
-        Reduced = 0x01,
-        ReducedCyclic = 0x02,
-        ReducedDiagonal = 0x03,
-        ReducedSuperSymmetric = 0x04
+        Unknown = 0x00,
+        Normal = 0x01,
+        Reduced = 0x02,
+        ReducedCyclic = 0x03,
+        ReducedDiagonal = 0x04,
+        ReducedSuperSymmetric = 0x05
     };
+
+    static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
+
+    static constexpr std::string_view TYPE_NORMAL = "N";
+    static constexpr std::string_view TYPE_REDUCED = "R";
+    static constexpr std::string_view TYPE_REDUCED_CYCLIC = "C";
+    static constexpr std::string_view TYPE_REDUCED_DIAGONAL = "D";
+    static constexpr std::string_view TYPE_REDUCED_SUPER_SYMMETRIC = "S";
+
+    static constexpr std::string_view LATIN_SQUARES_RANDOM = "-lr";
+    static constexpr std::string_view LATIN_SQUARES_FILE = "-lf";
+    static constexpr std::string_view LATIN_SQUARES_COUNT = "-lc";
+
+    static constexpr std::string_view LATIN_SQUARES = "Number of latin squares: ";
+    static constexpr std::string_view USAGE =
+        "USAGE:\n"
+        "Generate random latin square:\n"
+        "-lr <size> <type>\n"
+        "Find number of latin squares:\n"
+        "-lc <size> <type>\n"
+        "Find random transversal in latin square:\n"
+        "-tr <size> <filename>\n"
+        "Find number of transversals in latin square:\n"
+        "-tc <size> <filename>\n"
+        "Find minimum and maximum number of transversals in latin squares:\n"
+        "-tm <size> <type>\n"
+        "<size> should be from 1 to 64\n"
+        "<type> should be one of: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal), "
+        "S (reduced super-symmetric)\n"
+        "File <filename> should contain latin square with <size> rows, <size> columns and numbers from 1 to <size>";
+
+    static constexpr std::string_view TIME = "Time: ";
+    static constexpr std::string_view SECONDS = " seconds";
 }

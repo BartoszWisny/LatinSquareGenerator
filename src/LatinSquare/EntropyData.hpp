@@ -4,13 +4,16 @@
 #include <cstdint>
 #include <vector>
 
+#include "Constants.hpp"
+
 namespace LatinSquare {
     class EntropyData {
         public:
             EntropyData() = default;
 
             inline constexpr explicit EntropyData(const uint_fast8_t maxEntropy) noexcept
-                : maxEntropy_(maxEntropy), numbers_((1ULL << maxEntropy_) - 1) {}
+                : maxEntropy_(maxEntropy),
+                  numbers_(maxEntropy_ < MAX_SIZE ? (1ULL << maxEntropy_) - 1 : 0xFFFFFFFFFFFFFFFF) {}
 
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept{
                 return std::popcount(numbers_);

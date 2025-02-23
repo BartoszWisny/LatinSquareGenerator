@@ -14,6 +14,7 @@
 namespace LatinSquare {
     class LatinSquare {
         public:
+            explicit LatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept;
             explicit LatinSquare(const uint_fast8_t size, const Type type) noexcept;
             explicit LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept;
 
@@ -50,6 +51,7 @@ namespace LatinSquare {
                 }
             }
 
+            void reset(const Type type) noexcept;
             void setRegions() noexcept;
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
@@ -64,7 +66,7 @@ namespace LatinSquare {
             void enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept;
 
         private:
-            void reset(const Type type) noexcept;
+            void set(const std::vector<uint_fast8_t>& numbers) noexcept;
 
             uint_fast8_t size_;
             uint_fast16_t gridSize_;

@@ -15,7 +15,7 @@ namespace LatinSquare {
         public:
             [[nodiscard]] const LatinSquare random(const uint_fast8_t size, const Type type) noexcept;
 
-            [[nodiscard]] const boost::multiprecision::mpz_int count(const uint_fast8_t size);
+            [[nodiscard]] const boost::multiprecision::mpz_int count(const uint_fast8_t size, const Type type) noexcept;
 
         private:
             std::vector<UpdateData> updateHistory_;

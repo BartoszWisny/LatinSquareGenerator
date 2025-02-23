@@ -4,7 +4,6 @@
 #include "EntropyData.hpp"
 
 namespace LatinSquare {
-    // set max iterations (pruning) to prevent from program getting stuck (for big squares it is possible)
     const LatinSquare Generator::random(const uint_fast8_t size, const Type type) noexcept {
         cpp::splitmix64 splitmix64;
         LatinSquare latinSquare(size, type, splitmix64);
@@ -18,8 +17,11 @@ namespace LatinSquare {
         backtrackingHistory_.reserve(gridSize);
 
         uint_fast16_t counter = 0;
+        uint_fast32_t iterations = 0;
 
         while (latinSquare.notFilled()) {
+            ++iterations;
+
             auto& cell = latinSquare.randomMinEntropyCell();
 
             if (cell.entropy()) {
@@ -50,13 +52,22 @@ namespace LatinSquare {
 
                 updateHistory_.pop_back();
             }
+
+            if (iterations > MAX_ITERATIONS) {
+                latinSquare.reset(type);
+                iterations = 0;
+            }
         }
 
         return latinSquare;
     }
 
-    const boost::multiprecision::mpz_int Generator::count(const uint_fast8_t size) {
-        LatinSquare latinSquare(size, Type::Reduced);
+    const boost::multiprecision::mpz_int Generator::count(const uint_fast8_t size, const Type type) noexcept {
+        LatinSquare latinSquare(size, type);
+
+        if (!latinSquare.notFilled()) {
+            return 1;
+        }
 
         uint_fast8_t number;
         EntropyData entropyData;

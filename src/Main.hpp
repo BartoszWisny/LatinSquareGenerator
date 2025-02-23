@@ -1,4 +1,4 @@
 #pragma once
 
 void setup();
-int main();
+int main(int arc, char* argv[]);

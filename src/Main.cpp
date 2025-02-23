@@ -1,91 +1,149 @@
 #include "Main.hpp"
 
+#include <chrono>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <string_view>
+
+#include "LatinSquare/Constants.hpp"
 #include "LatinSquare/Generator.hpp"
 #include "LatinSquare/Utils.hpp"
+#include "Transversal/Constants.hpp"
 #include "Transversal/Generator.hpp"
 #include "Transversal/Utils.hpp"
-
-
-
-#include <chrono>
-#include <iostream>
-
 
 void setup() {
     std::ios::sync_with_stdio(false);
     std::cin.tie(nullptr);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     setup();
     auto latinSquareGenerator = LatinSquare::Generator();
-
-    // // ---
-    // // auto start = std::chrono::high_resolution_clock::now();
-    // // ---
-
-    // auto latinSquare = latinSquareGenerator.generateRandomLatinSquare(
-    //     10, LatinSquare::Type::Reduced /* 9, LatinSquare::Type::ReducedCyclic */ /* 10, LatinSquare::Type::ReducedDiagonal */, mersenneTwister);
-
-    // // ---
-    // // auto stop = std::chrono::high_resolution_clock::now();
-    // // const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-    // // std::cout << "Time: " << duration << std::endl;
-    // // ---
-
-    // latinSquare.sort();
-    // // LatinSquare::printLatinSquareFullIds(latinSquare);
-    // // LatinSquare::printLatinSquareBoard(latinSquare);
-
-    // latinSquare.setRegions();
-    // auto transversalGenerator = Transversal::Generator();
-    // auto transversal = transversalGenerator.findRandomTransversal(latinSquare, mersenneTwister);
-    // // Transversal::printTransversalFullIds(transversal);
-    // Transversal::printTransversalBoard(latinSquare, transversal);
-
-    // ---
-    // std::cout << "Time: " << duration << std::endl;
-    // ---
-
-    // std::cout << latinSquareGenerator.countAllLatinSquares(2) << std::endl;
-    // std::cout << latinSquareGenerator.countAllLatinSquares(3) << std::endl;
-    // std::cout << latinSquareGenerator.countAllLatinSquares(4) << std::endl;
-    // std::cout << latinSquareGenerator.countAllLatinSquares(5) << std::endl;
-    // std::cout << latinSquareGenerator.countAllLatinSquares(6) << std::endl;
-    // std::cout << latinSquareGenerator.countAllLatinSquares(7) << std::endl;
-
-    auto latinSquare = latinSquareGenerator.random(13, LatinSquare::Type::ReducedCyclic);
-    // auto latinSquare = latinSquareGenerator.random(10, LatinSquare::Type::ReducedDiagonal);
-    latinSquare.setRegions();
     auto transversalGenerator = Transversal::Generator();
-    // auto transversal = transversalGenerator.random(latinSquare);
-    std::cout << "LS generated" << std::endl;
 
-    // ---
-    auto start = std::chrono::steady_clock::now();
-    // ---
+    if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_RANDOM) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::convert(argv[3]);
 
-    // LatinSquare::printBoard(latinSquare);
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto latinSquare = latinSquareGenerator.random(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printBoard(latinSquare);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 5 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_FILE) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::convert(argv[3]);
+        const std::string filename = argv[4];
 
-    // Transversal::printIds(latinSquare, transversal);
-    // Transversal::printBoard(latinSquare, transversal);
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown
+            && std::string_view(filename).compare("") != 0) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto latinSquare = latinSquareGenerator.random(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printFile(latinSquare, filename);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_COUNT) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::convert(argv[3]);
 
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto count = latinSquareGenerator.count(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            std::cout.write(LatinSquare::LATIN_SQUARES.data(), LatinSquare::LATIN_SQUARES.length());
+            std::cout << count << std::endl;
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_RANDOM) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const auto numbers = LatinSquare::convert(argv[3], size);
 
-    // auto latinSquare = latinSquareGenerator.random(16, LatinSquare::Type::Reduced);
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && !numbers.empty()) {
+            auto latinSquare = LatinSquare::LatinSquare(size, numbers);
+            latinSquare.setRegions();
+            const auto start = std::chrono::steady_clock::now();
+            auto transversal = transversalGenerator.random(latinSquare);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            Transversal::printBoard(latinSquare, transversal);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_COUNT) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const auto numbers = LatinSquare::convert(argv[3], size);
 
-    const auto count = transversalGenerator.count(latinSquare);
-    // const auto count = latinSquareGenerator.count(6);
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && !numbers.empty()) {
+            auto latinSquare = LatinSquare::LatinSquare(size, numbers);
+            latinSquare.setRegions();
+            const auto start = std::chrono::steady_clock::now();
+            const auto count = transversalGenerator.count(latinSquare);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(Transversal::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(Transversal::SECONDS);
+            std::cout.write(Transversal::TRANSVERSALS.data(), Transversal::TRANSVERSALS.length());
+            std::cout << count << std::endl;
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_MINMAX) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::convert(argv[3]);
 
-    // auto latinSquare = latinSquareGenerator.random(20, LatinSquare::Type::Reduced);
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto counts = transversalGenerator.minMax(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(Transversal::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(Transversal::SECONDS);
+            std::cout.write(Transversal::MIN_TRANSVERSALS.data(), Transversal::MIN_TRANSVERSALS.length());
+            std::cout << counts[0] << std::endl;
+            std::cout.write(Transversal::MAX_TRANSVERSALS.data(), Transversal::MAX_TRANSVERSALS.length());
+            std::cout << counts[1] << std::endl;
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    }
 
-    // ---
-    auto stop = std::chrono::steady_clock::now();
-    std::cout << count << std::endl;
-    const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-    std::cout << "Time: " << duration.count() / 1000000.0 << " seconds" << std::endl;
-    // ---
-
-    // LatinSquare::printBoard(latinSquare);
-
+    std::cout.write(LatinSquare::USAGE.data(), LatinSquare::USAGE.length());
     return 0;
 }

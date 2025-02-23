@@ -1,6 +1,11 @@
 #include "LatinSquare.hpp"
 
 namespace LatinSquare {
+    LatinSquare::LatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept
+        : size_(size) {
+        set(numbers);
+    }
+
     LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
         reset(type);
@@ -11,7 +16,27 @@ namespace LatinSquare {
         reset(type);
     }
 
+    void LatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
+        gridSize_ = size_;
+        gridSize_ *= size_;
+        notFilled_ = 0;
+        grid_.resize(gridSize_);
+        uint_fast16_t row = 0;
+        uint_fast16_t column = 0;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Normal);
+            grid_[index]->fill(numbers[index]);
+
+            if (++column == size_) {
+                column = 0;
+                ++row;
+            }
+        }
+    }
+
     void LatinSquare::reset(const Type type) noexcept {
+        grid_.clear();
         gridSize_ = size_;
         gridSize_ *= size_;
         notFilled_ = gridSize_;
@@ -31,6 +56,11 @@ namespace LatinSquare {
     }
 
     void LatinSquare::setRegions() noexcept {
+        for (auto& cell : grid_) {
+            cell->enable();
+        }
+
+        regions_.clear();
         regionsSize_ = 3 * size_;
         regions_.reserve(regionsSize_);
         std::vector<Region> columns, numbers;
