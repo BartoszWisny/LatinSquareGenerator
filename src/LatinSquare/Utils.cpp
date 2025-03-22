@@ -9,7 +9,7 @@
 #include <cpp/string.hpp>
 
 namespace LatinSquare {
-    Type convert(const std::string& type) noexcept {
+    Type getType(const std::string& type) noexcept {
         if (type == TYPE_NORMAL) {
             return Type::Normal;
         } else if (type == TYPE_REDUCED) {
@@ -25,7 +25,7 @@ namespace LatinSquare {
         }
     }
 
-    const std::vector<uint_fast8_t> convert(const std::string& filename, const uint_fast8_t size) noexcept {
+    const std::pair<uint_fast8_t, std::vector<uint_fast8_t>> convert(const std::string& filename) noexcept {
         std::ifstream file(filename);
 
         if (!file) {
@@ -34,7 +34,7 @@ namespace LatinSquare {
 
         std::vector<uint_fast8_t> numbers;
         std::string line, word;
-        uint_fast8_t number, counter = 0, linesCounter = 0;
+        uint_fast8_t number, size = 0, counter = 0, linesCounter = 0;
 
         while (std::getline(file, line)) {
             std::istringstream iss(line);
@@ -43,14 +43,16 @@ namespace LatinSquare {
                 number = std::strtoul(word.c_str(), nullptr, 10);
 
                 if (number <= MAX_SIZE) {
-                    numbers.push_back(--number);
+                    numbers.emplace_back(--number);
                     ++counter;
                 } else {
                     return {};
                 }
             }
 
-            if (counter != size) {
+            if (size == 0) {
+                size = counter;
+            } else if (counter != size) {
                 return {};
             }
 
@@ -62,7 +64,7 @@ namespace LatinSquare {
             return {};
         }
 
-        return numbers;
+        return {size, numbers};
     }
 
     void printIds(const LatinSquare& latinSquare) noexcept {

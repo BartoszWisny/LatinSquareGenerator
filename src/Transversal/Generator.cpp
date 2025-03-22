@@ -4,8 +4,6 @@
 #include "LatinSquare/EntropyData.hpp"
 #include "LatinSquare/Region.hpp"
 
-#include <iostream>
-
 namespace Transversal {
     const std::vector<uint_fast16_t> Generator::random(LatinSquare::LatinSquare& latinSquare) noexcept {
         cpp::splitmix64 splitmix64;
@@ -37,10 +35,7 @@ namespace Transversal {
                 latinSquare.disable(cellIndex);
 
                 updateHistory_.emplace_back(cellIndex, latinSquare.disableAndDecrease(cellIndex));
-
-                if (backtrackingHistory_.empty() || cellIndex != backtrackingHistory_.back().cellIndex()) {
-                    backtrackingHistory_.emplace_back(region.index(), cellIndex);
-                }
+                backtrackingHistory_.emplace_back(region.index(), cellIndex);
             } else {
                 if (++counter > 1) {
                     indexes.clear();
@@ -51,9 +46,8 @@ namespace Transversal {
 
                     backtrackingHistory_.pop_back();
 
-                    while (!backtrackingHistory_.empty() && regionIndex == backtrackingHistory_.back().regionIndex()) {
+                    while (backtrackingHistory_.size() && regionIndex == backtrackingHistory_.back().regionIndex()) {
                         indexes.emplace_back(backtrackingHistory_.back().cellIndex());
-                        regionIndex = backtrackingHistory_.back().regionIndex();
 
                         backtrackingHistory_.pop_back();
                     }
@@ -84,8 +78,13 @@ namespace Transversal {
     }
 
     const boost::multiprecision::mpz_int Generator::count(LatinSquare::LatinSquare& latinSquare) noexcept {
-        std::vector<uint_fast16_t> transversal;
-        transversal.reserve(latinSquare.size());
+        uint_fast8_t transversalSize = 0;
+        uint_fast8_t almostSize = latinSquare.size();
+        --almostSize;
+
+        if (almostSize == 0) {
+            return 1;
+        }
 
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
@@ -98,22 +97,21 @@ namespace Transversal {
         uint_fast8_t counter = 0;
 
         while (true) {
-            if (transversal.size() < latinSquare.size()) {
+            if (transversalSize < almostSize) {
                 auto& region = latinSquare.minEntropyRegion();
 
                 if (region.entropy()) {
+                    ++transversalSize;
                     counter = 0;
 
                     cellIndex = region.enabledCellIndexes()[0];
-                    transversal.emplace_back(cellIndex);
                     latinSquare.disable(cellIndex);
 
                     updateHistory_.emplace_back(cellIndex, latinSquare.disableAndDecrease(cellIndex));
-
-                    if (backtrackingHistory_.empty() || cellIndex != backtrackingHistory_.back().cellIndex()) {
-                        backtrackingHistory_.emplace_back(region.index(), cellIndex);
-                    }
+                    backtrackingHistory_.emplace_back(region.index(), cellIndex);
                 } else {
+                    --transversalSize;
+
                     if (++counter > 1) {
                         indexes.clear();
                         indexes.reserve(latinSquare.size());
@@ -123,10 +121,9 @@ namespace Transversal {
 
                         backtrackingHistory_.pop_back();
 
-                        while (!backtrackingHistory_.empty()
+                        while (backtrackingHistory_.size()
                                && regionIndex == backtrackingHistory_.back().regionIndex()) {
                             indexes.emplace_back(backtrackingHistory_.back().cellIndex());
-                            regionIndex = backtrackingHistory_.back().regionIndex();
 
                             backtrackingHistory_.pop_back();
                         }
@@ -138,18 +135,18 @@ namespace Transversal {
                         }
                     }
 
-                    transversal.pop_back();
-
                     latinSquare.enable(updateHistory_.back().index());
                     latinSquare.enableAndIncrease(updateHistory_.back().indexes());
 
                     updateHistory_.pop_back();
                 }
             } else {
-                ++transversalsCounter;
-                ++counter;
+                --transversalSize;
+                counter = 1;
 
-                transversal.pop_back();
+                if (latinSquare.minEntropyRegion().entropy()) {
+                    ++transversalsCounter;
+                }
 
                 latinSquare.enable(updateHistory_.back().index());
                 latinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -174,7 +171,22 @@ namespace Transversal {
     const std::array<MinMaxData, 2> Generator::minMax(const uint_fast8_t size, const LatinSquare::Type type) noexcept {
         LatinSquare::LatinSquare latinSquare(size, type);
 
-        if (!latinSquare.notFilled()) {
+        boost::multiprecision::mpz_int transversalsCounter;
+
+        if (latinSquare.notFilled() < 2) {
+            if (latinSquare.notFilled()) {
+                auto& cell = latinSquare.minEntropyCell();
+
+                if (cell.entropy()) {
+                    latinSquare.fill(cell, cell.numbers()[0]);
+                }
+
+                latinSquare.setRegions();
+                transversalsCounter = count(latinSquare);
+
+                return {MinMaxData(transversalsCounter, latinSquare), MinMaxData(transversalsCounter, latinSquare)};
+            }
+
             return {MinMaxData(1, latinSquare), MinMaxData(1, latinSquare)};
         }
 
@@ -188,11 +200,10 @@ namespace Transversal {
 
         std::array<MinMaxData, 2> latinSquaresCounters =
             {MinMaxData(factorial(size), latinSquare), MinMaxData(-1, latinSquare)};
-        boost::multiprecision::mpz_int transversalsCounter;
         uint_fast16_t counter = 0;
 
         while (true) {
-            if (latinSquare.notFilled()) {
+            if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
@@ -221,7 +232,7 @@ namespace Transversal {
                         }
                     }
 
-                    latinSquare.clear(
+                    latinSquare.clearAndRemove(
                         latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
                     latinSquare.restore(
                         latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());
@@ -229,22 +240,32 @@ namespace Transversal {
                     latinSquareUpdateHistory_.pop_back();
                 }
             } else {
-                latinSquare.setRegions();
-                transversalsCounter = count(latinSquare);
+                counter = 1;
 
-                if (transversalsCounter < latinSquaresCounters[0].counter()) {
-                    latinSquaresCounters[0].set(transversalsCounter);
-                    latinSquaresCounters[0].set(latinSquare);
+                auto& cell = latinSquare.minEntropyCell();
+
+                if (cell.entropy()) {
+                    number = cell.numbers()[0];
+                    entropyData = cell.entropyData();
+                    latinSquare.fill(cell, number);
+
+                    latinSquare.setRegions();
+                    transversalsCounter = count(latinSquare);
+
+                    if (transversalsCounter < latinSquaresCounters[0].counter()) {
+                        latinSquaresCounters[0].set(transversalsCounter);
+                        latinSquaresCounters[0].set(latinSquare);
+                    }
+
+                    if (transversalsCounter > latinSquaresCounters[1].counter()) {
+                        latinSquaresCounters[1].set(transversalsCounter);
+                        latinSquaresCounters[1].set(latinSquare);
+                    }
+
+                    latinSquare.clear(cell.index(), entropyData);
                 }
 
-                if (transversalsCounter > latinSquaresCounters[1].counter()) {
-                    latinSquaresCounters[1].set(transversalsCounter);
-                    latinSquaresCounters[1].set(latinSquare);
-                }
-
-                ++counter;
-
-                latinSquare.clear(
+                latinSquare.clearAndRemove(
                     latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
                 latinSquare.restore(
                     latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());
@@ -262,7 +283,22 @@ namespace Transversal {
     }
 
     const std::array<MinMaxData, 2> Generator::minMax(LatinSquare::LatinSquare& latinSquare) noexcept {
-        if (!latinSquare.notFilled()) {
+        boost::multiprecision::mpz_int transversalsCounter;
+
+        if (latinSquare.notFilled() < 2) {
+            if (latinSquare.notFilled()) {
+                auto& cell = latinSquare.minEntropyCell();
+
+                if (cell.entropy()) {
+                    latinSquare.fill(cell, cell.numbers()[0]);
+                }
+
+                latinSquare.setRegions();
+                transversalsCounter = count(latinSquare);
+
+                return {MinMaxData(transversalsCounter, latinSquare), MinMaxData(transversalsCounter, latinSquare)};
+            }
+
             return {MinMaxData(1, latinSquare), MinMaxData(1, latinSquare)};
         }
 
@@ -276,11 +312,10 @@ namespace Transversal {
 
         std::array<MinMaxData, 2> latinSquaresCounters =
             {MinMaxData(factorial(latinSquare.size()), latinSquare), MinMaxData(-1, latinSquare)};
-        boost::multiprecision::mpz_int transversalsCounter;
         uint_fast16_t counter = 0;
 
         while (true) {
-            if (latinSquare.notFilled()) {
+            if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
@@ -309,7 +344,7 @@ namespace Transversal {
                         }
                     }
 
-                    latinSquare.clear(
+                    latinSquare.clearAndRemove(
                         latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
                     latinSquare.restore(
                         latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());
@@ -317,22 +352,32 @@ namespace Transversal {
                     latinSquareUpdateHistory_.pop_back();
                 }
             } else {
-                latinSquare.setRegions();
-                transversalsCounter = count(latinSquare);
+                counter = 1;
 
-                if (transversalsCounter < latinSquaresCounters[0].counter()) {
-                    latinSquaresCounters[0].set(transversalsCounter);
-                    latinSquaresCounters[0].set(latinSquare);
+                auto& cell = latinSquare.minEntropyCell();
+
+                if (cell.entropy()) {
+                    number = cell.numbers()[0];
+                    entropyData = cell.entropyData();
+                    latinSquare.fill(cell, number);
+
+                    latinSquare.setRegions();
+                    transversalsCounter = count(latinSquare);
+
+                    if (transversalsCounter < latinSquaresCounters[0].counter()) {
+                        latinSquaresCounters[0].set(transversalsCounter);
+                        latinSquaresCounters[0].set(latinSquare);
+                    }
+
+                    if (transversalsCounter > latinSquaresCounters[1].counter()) {
+                        latinSquaresCounters[1].set(transversalsCounter);
+                        latinSquaresCounters[1].set(latinSquare);
+                    }
+
+                    latinSquare.clear(cell.index(), entropyData);
                 }
 
-                if (transversalsCounter > latinSquaresCounters[1].counter()) {
-                    latinSquaresCounters[1].set(transversalsCounter);
-                    latinSquaresCounters[1].set(latinSquare);
-                }
-
-                ++counter;
-
-                latinSquare.clear(
+                latinSquare.clearAndRemove(
                     latinSquareUpdateHistory_.back().index(), latinSquareUpdateHistory_.back().entropyData());
                 latinSquare.restore(
                     latinSquareUpdateHistory_.back().indexes(), latinSquareUpdateHistory_.back().number());

@@ -47,7 +47,7 @@ namespace LatinSquare {
                     }
                 }
 
-                latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -65,7 +65,7 @@ namespace LatinSquare {
     const boost::multiprecision::mpz_int Generator::count(const uint_fast8_t size, const Type type) noexcept {
         LatinSquare latinSquare(size, type);
 
-        if (!latinSquare.notFilled()) {
+        if (latinSquare.notFilled() < 2) {
             return 1;
         }
 
@@ -81,7 +81,7 @@ namespace LatinSquare {
         uint_fast16_t counter = 0;
 
         while (true) {
-            if (latinSquare.notFilled()) {
+            if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
@@ -107,16 +107,19 @@ namespace LatinSquare {
                         }
                     }
 
-                    latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                     latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
                 }
             } else {
-                ++latinSquaresCounter;
-                ++counter;
+                counter = 1;
 
-                latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                if (latinSquare.minEntropyCell().entropy()) {
+                    ++latinSquaresCounter;
+                }
+
+                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -127,7 +130,7 @@ namespace LatinSquare {
     }
 
     const boost::multiprecision::mpz_int Generator::count(LatinSquare& latinSquare) noexcept {
-        if (!latinSquare.notFilled()) {
+        if (latinSquare.notFilled() < 2) {
             return 1;
         }
 
@@ -143,7 +146,7 @@ namespace LatinSquare {
         uint_fast16_t counter = 0;
 
         while (true) {
-            if (latinSquare.notFilled()) {
+            if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
@@ -169,16 +172,19 @@ namespace LatinSquare {
                         }
                     }
 
-                    latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                     latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
                 }
             } else {
-                ++latinSquaresCounter;
-                ++counter;
+                counter = 1;
 
-                latinSquare.clear(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                if (latinSquare.minEntropyCell().entropy()) {
+                    ++latinSquaresCounter;
+                }
+
+                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();

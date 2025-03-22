@@ -10,6 +10,8 @@
 namespace LatinSquare {
     class Region {
         public:
+            Region() = default;
+
             inline constexpr explicit Region(const uint_fast8_t index, const std::vector<std::shared_ptr<Cell>> cells,
                 const uint_fast8_t size) noexcept
                 : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {}
@@ -60,6 +62,11 @@ namespace LatinSquare {
             }
 
             inline constexpr void decrease() noexcept {
+                --entropy_;
+            }
+
+            inline constexpr void disableAndDecrease() noexcept {
+                notEnabled_ = true;
                 --entropy_;
             }
 

@@ -3,7 +3,7 @@
 namespace LatinSquare {
     const std::vector<uint_fast8_t> EntropyData::numbers() const noexcept {
         std::vector<uint_fast8_t> numbers;
-        numbers.reserve(std::popcount(numbers_));
+        numbers.reserve(entropy());
         auto bits = numbers_;
 
         while (bits) {

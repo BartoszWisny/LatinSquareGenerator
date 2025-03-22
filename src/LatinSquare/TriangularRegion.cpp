@@ -1,12 +1,12 @@
-#include "Region.hpp"
+#include "TriangularRegion.hpp"
 
 namespace LatinSquare {
-    const std::vector<uint_fast16_t> Region::enabledCellIndexes() const noexcept {
+    const std::vector<uint_fast16_t> TriangularRegion::notFilledCellIndexes() const noexcept {
         std::vector<uint_fast16_t> indexes;
-        indexes.reserve(entropy_);
+        indexes.reserve(size_);
 
         for (const auto& cell : cells_) {
-            if (cell->enabled()) {
+            if (cell->notFilled()) {
                 indexes.emplace_back(cell->index());
             }
         }

@@ -12,18 +12,24 @@ namespace LatinSquare {
         Normal = 0x01,
         Custom = 0x02,
         Reduced = 0x03,
-        ReducedCyclic = 0x04,
-        ReducedDiagonal = 0x05,
-        ReducedSuperSymmetric = 0x06
+        ReducedSymmetric = 0x04,
+        ReducedCyclic = 0x05,
+
+        // TODO: check if these types are needed
+        ReducedDiagonal = 0x06,
+        ReducedSuperSymmetric = 0x07
     };
 
     static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
 
     static constexpr std::string_view TYPE_NORMAL = "N";
     static constexpr std::string_view TYPE_REDUCED = "R";
-    static constexpr std::string_view TYPE_REDUCED_CYCLIC = "C";
-    static constexpr std::string_view TYPE_REDUCED_DIAGONAL = "D";
-    static constexpr std::string_view TYPE_REDUCED_SUPER_SYMMETRIC = "S";
+    static constexpr std::string_view TYPE_REDUCED_SYMMETRIC = "RS";
+    static constexpr std::string_view TYPE_REDUCED_CYCLIC = "RC";
+
+    // TODO: check if these types are needed
+    static constexpr std::string_view TYPE_REDUCED_DIAGONAL = "RD";
+    static constexpr std::string_view TYPE_REDUCED_SUPER_SYMMETRIC = "RSS";
 
     static constexpr std::string_view LATIN_SQUARES_RANDOM = "-lr";
     static constexpr std::string_view LATIN_SQUARES_FILE = "-lf";
@@ -40,13 +46,15 @@ namespace LatinSquare {
         "Find number of latin squares:\n"
         "-lc <size> <type>\n"
         "Find number of latin squares for template:\n"
-        "-lt <size> <filename>\n"
+        "-lt <filename>\n"
         "Find random transversal in latin square:\n"
-        "-tr <size> <filename>\n"
+        "-tr <filename>\n"
         "Find number of transversals in latin square:\n"
-        "-tc <size> <filename>\n"
+        "-tc <filename>\n"
         "Find minimum and maximum number of transversals in latin squares:\n"
         "-tm <size> <type>\n"
+        "Find minimum and maximum number of transversals in latin squares for template:\n"
+        "-tt <filename>\n"
         "<size> should be from 1 to 64\n"
         "<type> should be one of: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal), "
         "S (reduced super-symmetric)\n"

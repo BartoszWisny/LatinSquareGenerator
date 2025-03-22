@@ -25,6 +25,7 @@ namespace LatinSquare {
                 rawColumn_ = std::exchange(other.rawColumn_, 0);
                 number_ = std::exchange(other.number_, 0);
                 size_ = std::exchange(other.size_, 0);
+                doubleSize_ = std::exchange(other.doubleSize_, 0);
                 entropyData_ = std::move(other.entropyData_);
                 maxNumber_ = std::exchange(other.maxNumber_, 0);
                 regionRow_ = std::exchange(other.regionRow_, 0);
@@ -32,6 +33,7 @@ namespace LatinSquare {
                 regionNumber_ = std::exchange(other.regionNumber_, 0);
                 rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                 enabled_ = std::exchange(other.enabled_, false);
+                notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
             }
 
             Cell& operator=(Cell&& other) noexcept {
@@ -41,6 +43,7 @@ namespace LatinSquare {
                     rawColumn_ = std::exchange(other.rawColumn_, 0);
                     number_ = std::exchange(other.number_, 0);
                     size_ = std::exchange(other.size_, 0);
+                    doubleSize_ = std::exchange(other.doubleSize_, 0);
                     entropyData_ = std::move(other.entropyData_);
                     maxNumber_ = std::exchange(other.maxNumber_, 0);
                     regionRow_ = std::exchange(other.regionRow_, 0);
@@ -48,6 +51,7 @@ namespace LatinSquare {
                     regionNumber_ = std::exchange(other.regionNumber_, 0);
                     rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                     enabled_ = std::exchange(other.enabled_, false);
+                    notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
                 }
 
                 return *this;
@@ -105,6 +109,10 @@ namespace LatinSquare {
                 return enabled_;
             }
 
+            [[nodiscard]] inline constexpr bool notOnDiagonal() const noexcept {
+                return notOnDiagonal_;
+            }
+
             inline constexpr void set(const EntropyData& entropyData) noexcept {
                 entropyData_ = entropyData;
             }
@@ -120,14 +128,18 @@ namespace LatinSquare {
             inline constexpr void fill(const uint_fast8_t number) noexcept {
                 number_ = number;
                 regionNumber_ = number_;
-                regionNumber_ += (size_ << 1);
+                regionNumber_ += doubleSize_;
                 entropyData_.clear();
             }
 
-            inline constexpr void clear(EntropyData entropyData) noexcept {
+            inline constexpr void clearAndRemove(EntropyData entropyData) noexcept {
                 entropyData.remove(number_);
                 number_ = EMPTY;
-                regionNumber_ = EMPTY;
+                entropyData_ = entropyData;
+            }
+
+            inline constexpr void clear(EntropyData entropyData) noexcept {
+                number_ = EMPTY;
                 entropyData_ = entropyData;
             }
 
@@ -153,6 +165,7 @@ namespace LatinSquare {
             uint_fast8_t rawColumn_;
             uint_fast8_t number_;
             uint_fast8_t size_;
+            uint_fast8_t doubleSize_;
             EntropyData entropyData_;
             uint_fast8_t maxNumber_;
             uint_fast8_t regionRow_;
@@ -160,5 +173,6 @@ namespace LatinSquare {
             uint_fast8_t regionNumber_;
             uint_fast8_t rowColumnSum_;
             bool enabled_;
+            bool notOnDiagonal_;
     };
 }
