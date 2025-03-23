@@ -39,7 +39,6 @@ int main(int argc, char* argv[]) {
             timeString.append(LatinSquare::SECONDS);
             LatinSquare::printBoard(latinSquare);
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     } else if (argc == 5 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_FILE) == 0) {
@@ -60,7 +59,6 @@ int main(int argc, char* argv[]) {
             timeString.append(LatinSquare::SECONDS);
             LatinSquare::printFile(latinSquare, filename);
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     } else if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_COUNT) == 0) {
@@ -80,10 +78,45 @@ int main(int argc, char* argv[]) {
             std::cout.write(LatinSquare::LATIN_SQUARES.data(), LatinSquare::LATIN_SQUARES.length());
             std::cout << count << std::endl;
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
-    } else if (argc == 3 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_TEMPLATE) == 0) {
+    } else if (argc == 3 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_TEMPLATE_RANDOM) == 0) {
+        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto latinSquare = latinSquareGenerator.random(size, numbers);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printBoard(latinSquare);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_TEMPLATE_FILE) == 0) {
+        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+        const std::string filename = argv[3];
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()
+            && std::string_view(filename).compare("") != 0) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto latinSquare = latinSquareGenerator.random(size, numbers);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printFile(latinSquare, filename);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 3 && std::string_view(argv[1]).compare(LatinSquare::LATIN_SQUARES_TEMPLATE_COUNT) == 0) {
         const auto [size, numbers] = LatinSquare::convert(argv[2]);
 
         if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
@@ -100,7 +133,121 @@ int main(int argc, char* argv[]) {
             std::cout.write(LatinSquare::LATIN_SQUARES.data(), LatinSquare::LATIN_SQUARES.length());
             std::cout << count << std::endl;
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_RANDOM) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::getType(argv[3]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto symmetricLatinSquare = latinSquareGenerator.symmetricRandom(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printBoard(symmetricLatinSquare);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 5 && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_FILE) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::getType(argv[3]);
+        const std::string filename = argv[4];
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown
+            && std::string_view(filename).compare("") != 0) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto symmetricLatinSquare = latinSquareGenerator.symmetricRandom(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printFile(symmetricLatinSquare, filename);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_COUNT) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::getType(argv[3]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto count = latinSquareGenerator.symmetricCount(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            std::cout.write(LatinSquare::LATIN_SQUARES.data(), LatinSquare::LATIN_SQUARES.length());
+            std::cout << count << std::endl;
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 3
+               && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_TEMPLATE_RANDOM) == 0) {
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto symmetricLatinSquare = latinSquareGenerator.symmetricRandom(size, numbers);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printBoard(symmetricLatinSquare);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 4
+               && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_TEMPLATE_FILE) == 0) {
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
+        const std::string filename = argv[3];
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()
+            && std::string_view(filename).compare("") != 0) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto symmetricLatinSquare = latinSquareGenerator.symmetricRandom(size, numbers);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            LatinSquare::printFile(symmetricLatinSquare, filename);
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 3
+               && std::string_view(argv[1]).compare(LatinSquare::SYMMETRIC_LATIN_SQUARES_TEMPLATE_COUNT) == 0) {
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
+            const auto start = std::chrono::steady_clock::now();
+            const auto count = latinSquareGenerator.symmetricCount(symmetricLatinSquare);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(LatinSquare::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(LatinSquare::SECONDS);
+            std::cout.write(LatinSquare::LATIN_SQUARES.data(), LatinSquare::LATIN_SQUARES.length());
+            std::cout << count << std::endl;
+            std::cout.write(timeString.c_str(), timeString.size());
             return 0;
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_RANDOM) == 0) {
@@ -120,7 +267,6 @@ int main(int argc, char* argv[]) {
             timeString.append(LatinSquare::SECONDS);
             Transversal::printBoard(latinSquare, transversal);
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_COUNT) == 0) {
@@ -141,7 +287,6 @@ int main(int argc, char* argv[]) {
             std::cout.write(Transversal::TRANSVERSALS.data(), Transversal::TRANSVERSALS.length());
             std::cout << count << std::endl;
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_MINMAX) == 0) {
@@ -173,7 +318,6 @@ int main(int argc, char* argv[]) {
             }
 
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_TEMPLATE) == 0) {
@@ -205,7 +349,6 @@ int main(int argc, char* argv[]) {
             }
 
             std::cout.write(timeString.c_str(), timeString.size());
-            std::cout.put('\n');
             return 0;
         }
     }

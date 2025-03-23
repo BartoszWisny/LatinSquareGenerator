@@ -14,8 +14,6 @@ namespace LatinSquare {
             explicit Cell(const uint_fast16_t index, const uint_fast8_t row, const uint_fast8_t column,
                 const uint_fast8_t size, const Type type) noexcept;
 
-            // Cell(const Cell&) = delete;
-            // Cell& operator=(const Cell&) = delete;
             Cell(const Cell&) = default;
             Cell& operator=(const Cell&) = default;
 
@@ -26,6 +24,7 @@ namespace LatinSquare {
                 number_ = std::exchange(other.number_, 0);
                 size_ = std::exchange(other.size_, 0);
                 doubleSize_ = std::exchange(other.doubleSize_, 0);
+                type_ = std::exchange(other.type_, Type::Custom);
                 entropyData_ = std::move(other.entropyData_);
                 maxNumber_ = std::exchange(other.maxNumber_, 0);
                 regionRow_ = std::exchange(other.regionRow_, 0);
@@ -44,6 +43,7 @@ namespace LatinSquare {
                     number_ = std::exchange(other.number_, 0);
                     size_ = std::exchange(other.size_, 0);
                     doubleSize_ = std::exchange(other.doubleSize_, 0);
+                    type_ = std::exchange(other.type_, Type::Custom);
                     entropyData_ = std::move(other.entropyData_);
                     maxNumber_ = std::exchange(other.maxNumber_, 0);
                     regionRow_ = std::exchange(other.regionRow_, 0);
@@ -125,11 +125,17 @@ namespace LatinSquare {
                 enabled_ = false;
             }
 
-            inline constexpr void fill(const uint_fast8_t number) noexcept {
+            inline constexpr void fillAndClear(const uint_fast8_t number) noexcept {
                 number_ = number;
                 regionNumber_ = number_;
                 regionNumber_ += doubleSize_;
                 entropyData_.clear();
+            }
+
+            inline constexpr void fill(const uint_fast8_t number) noexcept {
+                number_ = number;
+                regionNumber_ = number_;
+                regionNumber_ += doubleSize_;
             }
 
             inline constexpr void clearAndRemove(EntropyData entropyData) noexcept {
@@ -155,17 +161,17 @@ namespace LatinSquare {
                 return (rowColumnSum_ + size_ - number_) % size_;
             }
 
+            void reset() noexcept;
             [[nodiscard]] const std::string id() const noexcept;
 
         private:
-            constexpr void reset(const Type type) noexcept;
-
             uint_fast16_t index_;
             uint_fast8_t rawRow_;
             uint_fast8_t rawColumn_;
             uint_fast8_t number_;
             uint_fast8_t size_;
             uint_fast8_t doubleSize_;
+            Type type_;
             EntropyData entropyData_;
             uint_fast8_t maxNumber_;
             uint_fast8_t regionRow_;

@@ -1,75 +1,50 @@
 #include "SymmetricLatinSquare.hpp"
 
-// #include <iterator>
-
 namespace LatinSquare {
-    // SymmetricLatinSquare::SymmetricLatinSquare(
-    //     const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept
-    //     : size_(size) {
-    //     set(numbers);
-    // }
-
     SymmetricLatinSquare::SymmetricLatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
-        reset(type);
+        set(type);
     }
 
     SymmetricLatinSquare::SymmetricLatinSquare(
         const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept
         : size_(size), splitmix64_(splitmix64) {
-        reset(type);
+        set(type);
     }
 
-    // void LatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
-    //     grid_.clear();
-    //     entropyGrid_.clear();
-    //     gridSize_ = size_;
-    //     gridSize_ *= size_;
-    //     notFilled_ = gridSize_;
-    //     grid_.resize(gridSize_);
-    //     uint_fast16_t entropyGridSize = 0;
-    //     uint_fast16_t entropyGridIndex = -1;
-    //     uint_fast16_t row = 0;
-    //     uint_fast16_t column = 0;
+    SymmetricLatinSquare::SymmetricLatinSquare(
+        const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept
+        : size_(size) {
+        set(numbers);
+    }
 
-    //     for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-    //         grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
-    //         entropyGridSize += (numbers[index] == 0xFF);
+    SymmetricLatinSquare::SymmetricLatinSquare(
+        const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers, cpp::splitmix64& splitmix64) noexcept
+        : size_(size), splitmix64_(splitmix64) {
+        set(numbers);
+    }
 
-    //         if (++column == size_) {
-    //             column = 0;
-    //             ++row;
-    //         }
-    //     }
+    void SymmetricLatinSquare::set(const Type type) noexcept {
+        if (grid_.size()) {
+            reset();
+            return;
+        }
 
-    //     entropyGrid_.resize(entropyGridSize);
-
-    //     for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-    //         if (numbers[index] == 0xFF) {
-    //             entropyGrid_[++entropyGridIndex] = grid_[index];
-    //         } else {
-    //             fill(*grid_[index], numbers[index]);
-    //             update(*grid_[index], numbers[index]);
-    //         }
-    //     }
-    // }
-
-    void SymmetricLatinSquare::reset(const Type type) noexcept {
         grid_.clear();
         triangularGrid_.clear();
         entropyTriangularGrid_.clear();
         triangularRegions_.clear();
         gridSize_ = size_;
         gridSize_ *= size_;
-        triangularGridSize_ = size_;
-        triangularGridSize_ *= (size_ + 1);
+        triangularGridSize_ = gridSize_;
+        triangularGridSize_ += size_;
         triangularGridSize_ >>= 1;
-        uint_fast16_t entropyTriangularGridSize = triangularGridSize_;
-        entropyTriangularGridSize -= size_;
-        notFilled_ = triangularGridSize_;
+        entropyTriangularGridSize_ = triangularGridSize_;
+        entropyTriangularGridSize_ -= size_;
+        notFilled_ = entropyTriangularGridSize_;
         grid_.resize(gridSize_);
         triangularGrid_.resize(triangularGridSize_);
-        entropyTriangularGrid_.reserve(entropyTriangularGridSize);
+        entropyTriangularGrid_.reserve(entropyTriangularGridSize_);
         triangularRegions_.reserve(size_);
         std::vector<std::vector<std::shared_ptr<Cell>>> cells;
         cells.resize(size_);
@@ -85,14 +60,16 @@ namespace LatinSquare {
         for (uint_fast16_t index = 0; index < gridSize_; ++index) {
             grid_[index] = std::make_shared<Cell>(index, row, column, size_, type);
 
-            if (row <= column) {
+            if (row >= column) {
                 triangularGrid_[++triangularIndex] = grid_[index];
                 cells[grid_[index]->rawRow()].emplace_back(grid_[index]);
                 cells[grid_[index]->rawColumn()].emplace_back(grid_[index]);
+            }
 
+            if (row > column) {
                 if (grid_[index]->filled()) {
                     --notFilled_;
-                } else if (row < column) {
+                } else {
                     entropyTriangularGrid_.emplace_back(grid_[index]);
                 }
             }
@@ -105,6 +82,100 @@ namespace LatinSquare {
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
             triangularRegions_.emplace_back(index, cells[index], size_);
+        }
+    }
+
+    void SymmetricLatinSquare::reset() noexcept {
+        notFilled_ = entropyTriangularGridSize_;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index]->reset();
+
+            if (grid_[index]->rawRow() > grid_[index]->rawColumn()) {
+                notFilled_ -= grid_[index]->filled();
+            }
+        }
+    }
+
+    void SymmetricLatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
+        if (grid_.size()) {
+            reset(numbers);
+            return;
+        }
+
+        grid_.clear();
+        triangularGrid_.clear();
+        entropyTriangularGrid_.clear();
+        triangularRegions_.clear();
+        gridSize_ = size_;
+        gridSize_ *= size_;
+        triangularGridSize_ = gridSize_;
+        triangularGridSize_ += size_;
+        triangularGridSize_ >>= 1;
+        grid_.resize(gridSize_);
+        triangularGrid_.resize(triangularGridSize_);
+        triangularRegions_.reserve(size_);
+        std::vector<std::vector<std::shared_ptr<Cell>>> cells;
+        cells.resize(size_);
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            cells[index].reserve(size_);
+        }
+
+        entropyTriangularGridSize_ = 0;
+        uint_fast16_t triangularIndex = -1;
+        uint_fast16_t row = 0;
+        uint_fast16_t column = 0;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
+
+            if (row >= column) {
+                triangularGrid_[++triangularIndex] = grid_[index];
+                cells[grid_[index]->rawRow()].emplace_back(grid_[index]);
+                cells[grid_[index]->rawColumn()].emplace_back(grid_[index]);
+            }
+
+            if (row > column) {
+                entropyTriangularGridSize_ += (numbers[triangularIndex] == 0xFF);
+            }
+
+            if (++column == size_) {
+                column = 0;
+                ++row;
+            }
+        }
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            triangularRegions_.emplace_back(index, cells[index], size_);
+        }
+
+        notFilled_ = entropyTriangularGridSize_;
+        entropyTriangularGrid_.resize(entropyTriangularGridSize_);
+        uint_fast16_t entropyTriangularIndex = -1;
+
+        for (uint_fast16_t index = 0; index < triangularGridSize_; ++index) {
+            if (numbers[index] == 0xFF) {
+                if (triangularGrid_[index]->rawRow() > triangularGrid_[index]->rawColumn()) {
+                    entropyTriangularGrid_[++entropyTriangularIndex] = triangularGrid_[index];
+                }
+            } else {
+                triangularGrid_[index]->fillAndClear(numbers[index]);
+                update(*triangularGrid_[index], numbers[index]);
+            }
+        }
+    }
+
+    void SymmetricLatinSquare::reset(const std::vector<uint_fast8_t>& numbers) noexcept {
+        notFilled_ = entropyTriangularGridSize_;
+
+        for (uint_fast16_t index = 0; index < triangularGridSize_; ++index) {
+            triangularGrid_[index]->reset();
+
+            if (numbers[index] != 0xFF) {
+                triangularGrid_[index]->fillAndClear(numbers[index]);
+                update(*triangularGrid_[index], numbers[index]);
+            }
         }
     }
 
@@ -196,7 +267,6 @@ namespace LatinSquare {
         return *minCell;
     }
 
-    // TODO: check which method of getting unfilled cells is the best
     const std::vector<uint_fast16_t> SymmetricLatinSquare::update(Cell& cell, const uint_fast8_t number) noexcept {
         std::vector<uint_fast16_t> indexes;
         indexes.reserve((size_ - 1) << 1);
@@ -218,45 +288,40 @@ namespace LatinSquare {
         return indexes;
     }
 
-    bool SymmetricLatinSquare::fillDiagonal() noexcept {
-        uint_fast16_t step = 1;
-
-        for (uint_fast16_t index = 0; index < triangularGridSize_; index += step) {
-            if (triangularGrid_[index]->entropy() == 0) {
-                return false;
+    uint_fast8_t SymmetricLatinSquare::checkDiagonal() noexcept {
+        for (uint_fast16_t index = 0, step = 1; index < triangularGridSize_; index += ++step) {
+            if (triangularGrid_[index]->notFilled() && !triangularGrid_[index]->entropy()) {
+                return 0;
             }
-
-            fill(*triangularGrid_[index], triangularGrid_[index]->numbers()[0]);
-            ++step;
         }
 
-        return true;
+        return 1;
     }
 
     void SymmetricLatinSquare::fillGrid() noexcept {
-        uint_fast16_t index = 1;
-        uint_fast16_t triangularIndex = 0;
-        uint_fast16_t columnIndex = 1;
-        uint_fast8_t counter = 1;
-        uint_fast8_t columnSize = 1;
+        uint_fast16_t index = 0;
+        uint_fast16_t triangularIndex = 1;
 
-        while (columnSize < size_) {
-            grid_[index] = triangularGrid_[++triangularIndex];
+        if (grid_[0]->notFilled()) {
+            grid_[0]->fill(triangularGrid_[0]->numbers()[0]);
+        }
 
-            if (counter == columnSize) {
-                index = ++columnIndex;
-                ++triangularIndex;
-                counter = 1;
-                ++columnSize;
-            } else {
-                index += size_;
-                ++counter;
+        for (uint_fast8_t columnSize = 1, columnIndex = 1; columnSize < size_; ++columnSize, ++columnIndex) {
+            index = columnIndex;
+
+            for (uint_fast8_t counter = 0; counter < columnSize; ++counter, index += size_, ++triangularIndex) {
+                if (grid_[index]->notFilled()) {
+                    grid_[index]->fill(triangularGrid_[triangularIndex]->number());
+                }
             }
+
+            if (grid_[index]->notFilled()) {
+                grid_[index]->fill(triangularGrid_[triangularIndex]->numbers()[0]);
+            }
+
+            ++triangularIndex;
         }
     }
-
-
-
 
     // Region& LatinSquare::minEntropyRegion() noexcept {
     //     Region* iterator = nullptr;

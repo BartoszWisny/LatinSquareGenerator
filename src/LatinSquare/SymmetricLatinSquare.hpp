@@ -14,18 +14,35 @@
 namespace LatinSquare {
     class SymmetricLatinSquare {
         public:
-            // explicit SymmetricLatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept;
             explicit SymmetricLatinSquare(const uint_fast8_t size, const Type type) noexcept;
             explicit SymmetricLatinSquare(
                 const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept;
 
+            explicit SymmetricLatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept;
+            explicit SymmetricLatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers,
+                cpp::splitmix64& splitmix64) noexcept;
+
             SymmetricLatinSquare(const SymmetricLatinSquare& other)
-                : size_(other.size_), gridSize_(other.gridSize_), /* regionsSize_(other.regionsSize_),
-                  regions_(other.regions_), */ splitmix64_(other.splitmix64_), notFilled_(other.notFilled_) {
+                : size_(other.size_), gridSize_(other.gridSize_), triangularGridSize_(other.triangularGridSize_),
+                  entropyTriangularGridSize_(other.entropyTriangularGridSize_), doubleSize_(other.doubleSize_),
+                  regionsSize_(other.regionsSize_), triangularRegions_(other.triangularRegions_),
+                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_) {
                 grid_.reserve(other.grid_.size());
 
                 for (const auto& cell : other.grid_) {
                     grid_.emplace_back(std::make_shared<Cell>(*cell));
+                }
+
+                triangularGrid_.reserve(other.triangularGrid_.size());
+
+                for (const auto& cell : other.triangularGrid_) {
+                    triangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                }
+
+                entropyTriangularGrid_.reserve(other.entropyTriangularGrid_.size());
+
+                for (const auto& cell : other.entropyTriangularGrid_) {
+                    entropyTriangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
                 }
             }
 
@@ -33,8 +50,12 @@ namespace LatinSquare {
                 if (this != &other) {
                     size_ = other.size_;
                     gridSize_ = other.gridSize_;
-                    // regionsSize_ = other.regionsSize_;
-                    // regions_ = other.regions_;
+                    doubleSize_ = other.doubleSize_;
+                    triangularGridSize_ = other.triangularGridSize_;
+                    entropyTriangularGridSize_ = other.entropyTriangularGridSize_;
+                    regionsSize_ = other.regionsSize_;
+                    triangularRegions_ = other.triangularRegions_;
+                    regions_ = other.regions_;
                     splitmix64_ = other.splitmix64_;
                     notFilled_ = other.notFilled_;
                     grid_.clear();
@@ -42,6 +63,20 @@ namespace LatinSquare {
 
                     for (const auto& cell : other.grid_) {
                         grid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    triangularGrid_.clear();
+                    triangularGrid_.reserve(other.triangularGrid_.size());
+
+                    for (const auto& cell : other.triangularGrid_) {
+                        triangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    entropyTriangularGrid_.clear();
+                    entropyTriangularGrid_.reserve(other.entropyTriangularGrid_.size());
+
+                    for (const auto& cell : other.entropyTriangularGrid_) {
+                        entropyTriangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
                     }
                 }
 
@@ -60,8 +95,8 @@ namespace LatinSquare {
                 return notFilled_;
             }
 
-            inline void fill(Cell& cell, const uint_fast8_t number) noexcept {
-                cell.fill(number);
+            inline void fillAndClear(Cell& cell, const uint_fast8_t number) noexcept {
+                cell.fillAndClear(number);
                 --notFilled_;
             }
 
@@ -69,8 +104,8 @@ namespace LatinSquare {
                 grid_[index]->set(entropyData);
             }
 
-            inline void clear(const uint_fast16_t index, const EntropyData& entropyData) noexcept {
-                grid_[index]->clear(entropyData);
+            inline void clearAndRemove(const uint_fast16_t index, const EntropyData& entropyData) noexcept {
+                grid_[index]->clearAndRemove(entropyData);
                 ++notFilled_;
             }
 
@@ -81,13 +116,14 @@ namespace LatinSquare {
                 }
             }
 
-            void reset(const Type type) noexcept;
+            void set(const Type type) noexcept;
+            void set(const std::vector<uint_fast8_t>& numbers) noexcept;
             // void setRegions() noexcept;
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
             const std::vector<uint_fast16_t> update(Cell& cell, const uint_fast8_t number) noexcept;
-            [[nodiscard]] bool fillDiagonal() noexcept;
+            [[nodiscard]] uint_fast8_t checkDiagonal() noexcept;
             void fillGrid() noexcept;
 
             // [[nodiscard]] Region& minEntropyRegion() noexcept;
@@ -98,19 +134,20 @@ namespace LatinSquare {
             // void enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept;
 
         private:
-            // void set(const std::vector<uint_fast8_t>& numbers) noexcept;
+            void reset() noexcept;
+            void reset(const std::vector<uint_fast8_t>& numbers) noexcept;
 
             uint_fast8_t size_;
             uint_fast16_t gridSize_;
             uint_fast16_t triangularGridSize_;
-            // uint_fast8_t regionsSize_;
-
+            uint_fast16_t entropyTriangularGridSize_;
+            uint_fast8_t doubleSize_;
+            uint_fast8_t regionsSize_;
             std::vector<std::shared_ptr<Cell>> grid_;
             std::vector<std::shared_ptr<Cell>> triangularGrid_;
             std::vector<std::shared_ptr<Cell>> entropyTriangularGrid_;
             std::vector<TriangularRegion> triangularRegions_;
-
-            // std::vector<Region> regions_;
+            std::vector<Region> regions_;
             cpp::splitmix64 splitmix64_;
             uint_fast16_t notFilled_;
     };

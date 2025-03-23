@@ -1,5 +1,7 @@
 #include "Generator.hpp"
 
+#include <cpp/random.hpp>
+
 #include "Constants.hpp"
 #include "LatinSquare/EntropyData.hpp"
 #include "LatinSquare/Region.hpp"
@@ -178,7 +180,7 @@ namespace Transversal {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
-                    latinSquare.fill(cell, cell.numbers()[0]);
+                    latinSquare.fillAndClear(cell, cell.numbers()[0]);
                 }
 
                 latinSquare.setRegions();
@@ -211,7 +213,7 @@ namespace Transversal {
 
                     number = cell.numbers()[0];
                     entropyData = cell.entropyData();
-                    latinSquare.fill(cell, number);
+                    latinSquare.fillAndClear(cell, number);
 
                     latinSquareUpdateHistory_.emplace_back(
                         cell.index(), number, entropyData, latinSquare.update(cell, number));
@@ -247,7 +249,7 @@ namespace Transversal {
                 if (cell.entropy()) {
                     number = cell.numbers()[0];
                     entropyData = cell.entropyData();
-                    latinSquare.fill(cell, number);
+                    latinSquare.fillAndClear(cell, number);
 
                     latinSquare.setRegions();
                     transversalsCounter = count(latinSquare);
@@ -290,7 +292,7 @@ namespace Transversal {
                 auto& cell = latinSquare.minEntropyCell();
 
                 if (cell.entropy()) {
-                    latinSquare.fill(cell, cell.numbers()[0]);
+                    latinSquare.fillAndClear(cell, cell.numbers()[0]);
                 }
 
                 latinSquare.setRegions();
@@ -323,7 +325,7 @@ namespace Transversal {
 
                     number = cell.numbers()[0];
                     entropyData = cell.entropyData();
-                    latinSquare.fill(cell, number);
+                    latinSquare.fillAndClear(cell, number);
 
                     latinSquareUpdateHistory_.emplace_back(
                         cell.index(), number, entropyData, latinSquare.update(cell, number));
@@ -359,7 +361,7 @@ namespace Transversal {
                 if (cell.entropy()) {
                     number = cell.numbers()[0];
                     entropyData = cell.entropyData();
-                    latinSquare.fill(cell, number);
+                    latinSquare.fillAndClear(cell, number);
 
                     latinSquare.setRegions();
                     transversalsCounter = count(latinSquare);

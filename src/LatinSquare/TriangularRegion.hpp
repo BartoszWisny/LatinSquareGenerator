@@ -14,8 +14,6 @@ namespace LatinSquare {
                 const std::vector<std::shared_ptr<Cell>> cells, const uint_fast8_t size) noexcept
                 : index_(index), cells_(cells), size_(size) {}
 
-            // TriangularRegion(const TriangularRegion&) = delete;
-            // TriangularRegion& operator=(const TriangularRegion&) = delete;
             TriangularRegion(const TriangularRegion&) = default;
             TriangularRegion& operator=(const TriangularRegion&) = default;
 
@@ -39,7 +37,6 @@ namespace LatinSquare {
                 return index_;
             }
 
-            // TODO: check which is better: returning all cells or indexes of not filled cells (etc.)
             [[nodiscard]] const std::vector<uint_fast16_t> notFilledCellIndexes() const noexcept;
 
         private:

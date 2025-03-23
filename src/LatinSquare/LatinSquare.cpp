@@ -1,58 +1,33 @@
 #include "LatinSquare.hpp"
 
-#include <iterator>
-
 namespace LatinSquare {
+    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
+        : size_(size) {
+        set(type);
+    }
+
+    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept
+        : size_(size), splitmix64_(splitmix64) {
+        set(type);
+    }
+
     LatinSquare::LatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers) noexcept
         : size_(size) {
         set(numbers);
     }
 
-    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
-        : size_(size) {
-        reset(type);
-    }
-
-    LatinSquare::LatinSquare(const uint_fast8_t size, const Type type, cpp::splitmix64& splitmix64) noexcept
+    LatinSquare::LatinSquare(
+        const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers, cpp::splitmix64& splitmix64) noexcept
         : size_(size), splitmix64_(splitmix64) {
-        reset(type);
+        set(numbers);
     }
 
-    void LatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
-        grid_.clear();
-        entropyGrid_.clear();
-        gridSize_ = size_;
-        gridSize_ *= size_;
-        notFilled_ = gridSize_;
-        grid_.resize(gridSize_);
-        uint_fast16_t entropyGridSize = 0;
-        uint_fast16_t row = 0;
-        uint_fast16_t column = 0;
-
-        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
-            entropyGridSize += (numbers[index] == 0xFF);
-
-            if (++column == size_) {
-                column = 0;
-                ++row;
-            }
+    void LatinSquare::set(const Type type) noexcept {
+        if (grid_.size()) {
+            reset();
+            return;
         }
 
-        entropyGrid_.resize(entropyGridSize);
-        uint_fast16_t entropyIndex = -1;
-
-        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-            if (numbers[index] == 0xFF) {
-                entropyGrid_[++entropyIndex] = grid_[index];
-            } else {
-                fill(*grid_[index], numbers[index]);
-                update(*grid_[index], numbers[index]);
-            }
-        }
-    }
-
-    void LatinSquare::reset(const Type type) noexcept {
         grid_.clear();
         entropyGrid_.clear();
         gridSize_ = size_;
@@ -75,6 +50,68 @@ namespace LatinSquare {
             if (++column == size_) {
                 column = 0;
                 ++row;
+            }
+        }
+    }
+
+    void LatinSquare::reset() noexcept {
+        notFilled_ = gridSize_;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index]->reset();
+            notFilled_ -= grid_[index]->filled();
+        }
+    }
+
+    void LatinSquare::set(const std::vector<uint_fast8_t>& numbers) noexcept {
+        if (grid_.size()) {
+            reset(numbers);
+            return;
+        }
+
+        grid_.clear();
+        entropyGrid_.clear();
+        gridSize_ = size_;
+        gridSize_ *= size_;
+        notFilled_ = gridSize_;
+        grid_.resize(gridSize_);
+        entropyGridSize_ = 0;
+        uint_fast16_t row = 0;
+        uint_fast16_t column = 0;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
+            entropyGridSize_ += (numbers[index] == 0xFF);
+
+            if (++column == size_) {
+                column = 0;
+                ++row;
+            }
+        }
+
+        notFilled_ = entropyGridSize_;
+        entropyGrid_.resize(entropyGridSize_);
+        uint_fast16_t entropyIndex = -1;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            if (numbers[index] == 0xFF) {
+                entropyGrid_[++entropyIndex] = grid_[index];
+            } else {
+                grid_[index]->fillAndClear(numbers[index]);
+                update(*grid_[index], numbers[index]);
+            }
+        }
+    }
+
+    void LatinSquare::reset(const std::vector<uint_fast8_t>& numbers) noexcept {
+        notFilled_ = entropyGridSize_;
+
+        for (uint_fast16_t index = 0; index < gridSize_; ++index) {
+            grid_[index]->reset();
+
+            if (numbers[index] != 0xFF) {
+                grid_[index]->fillAndClear(numbers[index]);
+                update(*grid_[index], numbers[index]);
             }
         }
     }
