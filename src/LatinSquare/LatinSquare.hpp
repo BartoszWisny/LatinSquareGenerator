@@ -22,8 +22,10 @@ namespace LatinSquare {
 
             LatinSquare(const LatinSquare& other)
                 : size_(other.size_), gridSize_(other.gridSize_), entropyGridSize_(other.entropyGridSize_),
-                  doubleSize_(other.doubleSize_), regionsSize_(other.regionsSize_), regions_(other.regions_),
-                  splitmix64_(other.splitmix64_), notFilled_(other.notFilled_) {
+                  doubleSize_(other.doubleSize_), maxUpdateSize_(other.maxUpdateSize_),
+                  regionsSize_(other.regionsSize_), maxDisableAndDecreaseSize_(other.maxDisableAndDecreaseSize_),
+                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_),
+                  updateIndexes_(other.updateIndexes_), disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
                 grid_.reserve(other.grid_.size());
 
                 for (const auto& cell : other.grid_) {
@@ -35,6 +37,16 @@ namespace LatinSquare {
                 for (const auto& cell : other.entropyGrid_) {
                     entropyGrid_.emplace_back(std::make_shared<Cell>(*cell));
                 }
+
+                numberCells_.resize(other.numberCells_.size());
+
+                for (size_t index = 0; index < other.numberCells_.size(); ++index) {
+                    numberCells_[index].reserve(other.numberCells_[index].size());
+
+                    for (const auto& cell : other.numberCells_[index]) {
+                        numberCells_[index].emplace_back(std::make_shared<Cell>(*cell));
+                    }
+                }
             }
 
             LatinSquare& operator=(const LatinSquare& other) {
@@ -43,10 +55,14 @@ namespace LatinSquare {
                     gridSize_ = other.gridSize_;
                     entropyGridSize_ = other.entropyGridSize_;
                     doubleSize_ = other.doubleSize_;
+                    maxUpdateSize_ = other.maxUpdateSize_;
                     regionsSize_ = other.regionsSize_;
+                    maxDisableAndDecreaseSize_ = other.maxDisableAndDecreaseSize_;
                     regions_ = other.regions_;
                     splitmix64_ = other.splitmix64_;
                     notFilled_ = other.notFilled_;
+                    updateIndexes_ = other.updateIndexes_;
+                    disableAndDecreaseIndexes_ = other.disableAndDecreaseIndexes_;
                     grid_.clear();
                     grid_.reserve(other.grid_.size());
 
@@ -59,6 +75,17 @@ namespace LatinSquare {
 
                     for (const auto& cell : other.entropyGrid_) {
                         entropyGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    numberCells_.clear();
+                    numberCells_.resize(other.numberCells_.size());
+
+                    for (size_t index = 0; index < other.numberCells_.size(); ++index) {
+                        numberCells_[index].reserve(other.numberCells_[index].size());
+
+                        for (const auto& cell : other.numberCells_[index]) {
+                            numberCells_[index].emplace_back(std::make_shared<Cell>(*cell));
+                        }
                     }
                 }
 
@@ -127,11 +154,16 @@ namespace LatinSquare {
             uint_fast16_t gridSize_;
             uint_fast16_t entropyGridSize_;
             uint_fast8_t doubleSize_;
+            uint_fast8_t maxUpdateSize_;
             uint_fast8_t regionsSize_;
+            uint_fast8_t maxDisableAndDecreaseSize_;
             std::vector<std::shared_ptr<Cell>> grid_;
             std::vector<std::shared_ptr<Cell>> entropyGrid_;
             std::vector<Region> regions_;
             cpp::splitmix64 splitmix64_;
             uint_fast16_t notFilled_;
+            std::vector<uint_fast16_t> updateIndexes_;
+            std::vector<std::vector<std::shared_ptr<Cell>>> numberCells_;
+            std::vector<uint_fast16_t> disableAndDecreaseIndexes_;
     };
 }

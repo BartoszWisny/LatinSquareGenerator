@@ -37,7 +37,8 @@ namespace LatinSquare {
                 return index_;
             }
 
-            [[nodiscard]] const std::vector<uint_fast16_t> notFilledCellIndexes() const noexcept;
+            [[nodiscard]] const std::vector<uint_fast16_t> updatedCellIndexes(
+                const uint_fast8_t number) const noexcept;
 
         private:
             uint_fast8_t index_;

@@ -5,11 +5,6 @@
 #include "Cell.hpp"
 #include "EntropyData.hpp"
 
-
-
-
-#include "Utils.hpp"
-
 namespace LatinSquare {
     const LatinSquare Generator::random(const uint_fast8_t size, const Type type) noexcept {
         cpp::splitmix64 splitmix64;
@@ -18,10 +13,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t gridSize = size;
-        gridSize *= size;
-        updateHistory_.reserve(gridSize);
-        backtrackingHistory_.reserve(gridSize);
+        updateHistory_.reserve(latinSquare.notFilled());
+        backtrackingHistory_.reserve(latinSquare.notFilled());
 
         uint_fast16_t counter = 0;
         uint_fast32_t iterations = 0;
@@ -74,10 +67,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t gridSize = size;
-        gridSize *= size;
-        updateHistory_.reserve(gridSize);
-        backtrackingHistory_.reserve(gridSize);
+        updateHistory_.reserve(latinSquare.notFilled());
+        backtrackingHistory_.reserve(latinSquare.notFilled());
 
         uint_fast16_t counter = 0;
         uint_fast32_t iterations = 0;
@@ -133,10 +124,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t gridSize = size;
-        gridSize *= size;
-        updateHistory_.reserve(gridSize);
-        backtrackingHistory_.reserve(gridSize);
+        updateHistory_.reserve(latinSquare.notFilled());
+        backtrackingHistory_.reserve(latinSquare.notFilled());
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;
@@ -195,10 +184,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t gridSize = latinSquare.size();
-        gridSize *= latinSquare.size();
-        updateHistory_.reserve(gridSize);
-        backtrackingHistory_.reserve(gridSize);
+        updateHistory_.reserve(latinSquare.notFilled());
+        backtrackingHistory_.reserve(latinSquare.notFilled());
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;
@@ -256,11 +243,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t entropyTriangularGridSize = size;
-        entropyTriangularGridSize *= (size - 1);
-        entropyTriangularGridSize >>= 1;
-        updateHistory_.reserve(entropyTriangularGridSize);
-        backtrackingHistory_.reserve(entropyTriangularGridSize);
+        updateHistory_.reserve(symmetricLatinSquare.notFilled());
+        backtrackingHistory_.reserve(symmetricLatinSquare.notFilled());
 
         uint_fast16_t counter = 0;
         uint_fast32_t iterations = 0;
@@ -329,11 +313,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t entropyTriangularGridSize = size;
-        entropyTriangularGridSize *= (size - 1);
-        entropyTriangularGridSize >>= 1;
-        updateHistory_.reserve(entropyTriangularGridSize);
-        backtrackingHistory_.reserve(entropyTriangularGridSize);
+        updateHistory_.reserve(symmetricLatinSquare.notFilled());
+        backtrackingHistory_.reserve(symmetricLatinSquare.notFilled());
 
         uint_fast16_t counter = 0;
         uint_fast32_t iterations = 0;
@@ -404,11 +385,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t entropyTriangularGridSize = size;
-        entropyTriangularGridSize *= (size - 1);
-        entropyTriangularGridSize >>= 1;
-        updateHistory_.reserve(entropyTriangularGridSize);
-        backtrackingHistory_.reserve(entropyTriangularGridSize);
+        updateHistory_.reserve(symmetricLatinSquare.notFilled());
+        backtrackingHistory_.reserve(symmetricLatinSquare.notFilled());
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;
@@ -462,7 +440,6 @@ namespace LatinSquare {
         return latinSquaresCounter;
     }
 
-    // TODO: this code does not work so find problem here
     const boost::multiprecision::mpz_int Generator::symmetricCount(
         SymmetricLatinSquare& symmetricLatinSquare) noexcept {
         if (!symmetricLatinSquare.notFilled()) {
@@ -472,11 +449,8 @@ namespace LatinSquare {
         uint_fast8_t number;
         EntropyData entropyData;
 
-        uint_fast16_t entropyTriangularGridSize = symmetricLatinSquare.size();
-        entropyTriangularGridSize *= (symmetricLatinSquare.size() - 1);
-        entropyTriangularGridSize >>= 1;
-        updateHistory_.reserve(entropyTriangularGridSize);
-        backtrackingHistory_.reserve(entropyTriangularGridSize);
+        updateHistory_.reserve(symmetricLatinSquare.notFilled());
+        backtrackingHistory_.reserve(symmetricLatinSquare.notFilled());
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;

@@ -10,8 +10,10 @@
 #include "LatinSquare/BacktrackingData.hpp"
 #include "LatinSquare/Constants.hpp"
 #include "LatinSquare/LatinSquare.hpp"
+#include "LatinSquare/SymmetricLatinSquare.hpp"
 #include "LatinSquare/UpdateData.hpp"
 #include "MinMaxData.hpp"
+#include "SymmetricMinMaxData.hpp"
 #include "UpdateData.hpp"
 
 namespace Transversal {
@@ -21,11 +23,19 @@ namespace Transversal {
 
             [[nodiscard]] const boost::multiprecision::mpz_int count(
                 LatinSquare::LatinSquare& latinSquare) noexcept;
-
             [[nodiscard]] const std::array<MinMaxData, 2> minMax(
                 const uint_fast8_t size, const LatinSquare::Type type) noexcept;
-
             [[nodiscard]] const std::array<MinMaxData, 2> minMax(LatinSquare::LatinSquare& latinSquare) noexcept;
+
+            [[nodiscard]] const std::vector<uint_fast16_t> symmetricRandom(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+
+            [[nodiscard]] const boost::multiprecision::mpz_int symmetricCount(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+            [[nodiscard]] const std::array<SymmetricMinMaxData, 2> symmetricMinMax(
+                const uint_fast8_t size, const LatinSquare::Type type) noexcept;
+            [[nodiscard]] const std::array<SymmetricMinMaxData, 2> symmetricMinMax(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
 
         private:
             [[nodiscard]] constexpr boost::multiprecision::mpz_int factorial(const uint_fast8_t size) noexcept;

@@ -12,12 +12,8 @@ namespace LatinSquare {
         Normal = 0x01,
         Custom = 0x02,
         Reduced = 0x03,
-        ReducedSymmetric = 0x04,
-        ReducedCyclic = 0x05,
-
-        // TODO: check if these types are needed
-        ReducedDiagonal = 0x06,
-        ReducedSuperSymmetric = 0x07
+        ReducedCyclic = 0x04,
+        ReducedDiagonal = 0x05
     };
 
     static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
@@ -25,12 +21,8 @@ namespace LatinSquare {
 
     static constexpr std::string_view TYPE_NORMAL = "N";
     static constexpr std::string_view TYPE_REDUCED = "R";
-    static constexpr std::string_view TYPE_REDUCED_SYMMETRIC = "RS";
-    static constexpr std::string_view TYPE_REDUCED_CYCLIC = "RC";
-
-    // TODO: check if these types are needed
-    static constexpr std::string_view TYPE_REDUCED_DIAGONAL = "RD";
-    static constexpr std::string_view TYPE_REDUCED_SUPER_SYMMETRIC = "RSS";
+    static constexpr std::string_view TYPE_REDUCED_CYCLIC = "C";
+    static constexpr std::string_view TYPE_REDUCED_DIAGONAL = "D";
 
     static constexpr std::string_view LATIN_SQUARES_RANDOM = "-lr";
     static constexpr std::string_view LATIN_SQUARES_FILE = "-lf";
@@ -56,11 +48,11 @@ namespace LatinSquare {
         "Find number of latin squares:\n"
         "-lc <size> <type>\n"
         "Generate random latin square for template:\n"
-        "-ltr <input>\n"
+        "-ltr <template_input>\n"
         "Generate random latin square for template to file:\n"
-        "-ltf <input> <output>\n"
+        "-ltf <template_input> <output>\n"
         "Find number of latin squares for template:\n"
-        "-ltc <input>\n\n"
+        "-ltc <template_input>\n\n"
         "Generate random symmetric latin square:\n"
         "-slr <size> <type>\n"
         "Generate random symmetric latin square to file:\n"
@@ -68,26 +60,34 @@ namespace LatinSquare {
         "Find number of symmetric latin squares:\n"
         "-slc <size> <type>\n"
         "Generate symmetric random latin square for template:\n"
-        "-sltr <input>\n"
+        "-sltr <triangular_input>\n"
         "Generate symmetric random latin square for template to file:\n"
-        "-sltf <input> <output>\n"
+        "-sltf <triangular_input> <output>\n"
         "Find number of symmetric latin squares for template:\n"
-        "-sltc <input>\n\n"
+        "-sltc <triangular_input>\n\n"
         "Find random transversal in latin square:\n"
-        "-tr <input>\n"
+        "-tr <full_input>\n"
         "Find number of transversals in latin square:\n"
-        "-tc <input>\n"
+        "-tc <full_input>\n"
         "Find minimum and maximum number of transversals in latin squares:\n"
         "-tm <size> <type>\n"
         "Find minimum and maximum number of transversals in latin squares for template:\n"
-        "-tt <input>\n\n"
-
-
-        "<size> should be from 1 to 64\n"
-        "<type> should be one of: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal), "
-        "S (reduced super-symmetric)\n"
-        "File <input> should contain latin square or template with <size> rows, <size> columns "
-        "and numbers from 1 to <size> (or 0 for empty cells)\n";
+        "-tt <template_input>\n\n"
+        "Find random transversal in symmetric latin square:\n"
+        "-str <full_input>\n"
+        "Find number of transversals in symmetric latin square:\n"
+        "-stc <full_input>\n"
+        "Find minimum and maximum number of transversals in symmetric latin squares:\n"
+        "-stm <size> <type>\n"
+        "Find minimum and maximum number of transversals in symmetric latin squares for template:\n"
+        "-stt <triangular_input>\n\n"
+        "<size> should be number from 1 to 64\n"
+        "<type> should be one of characters: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal)"
+        "File <template_input> should contain template of latin square with <size> rows, <size> columns "
+        "and numbers from 1 to <size> or 0 for empty cells\n"
+        "File <triangular_input> should contain template of lower-triangular table of symmetric latin square "
+        "with <size> rows, <size> columns and numbers from 1 to <size> or 0 for empty cells\n"
+        "File <full_input> should contain latin square with <size> rows, <size> columns and numbers from 1 to <size>\n";
 
     static constexpr std::string_view TIME = "Time: ";
     static constexpr std::string_view SECONDS = " seconds\n";

@@ -4,8 +4,14 @@
 #include <vector>
 
 #include "LatinSquare/LatinSquare.hpp"
+#include "LatinSquare/SymmetricLatinSquare.hpp"
 
 namespace Transversal {
     void printIds(LatinSquare::LatinSquare& latinSquare, std::vector<uint_fast16_t>& transversal) noexcept;
     void printBoard(LatinSquare::LatinSquare& latinSquare, std::vector<uint_fast16_t>& transversal) noexcept;
+
+    void printIds(
+        LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept;
+    void printBoard(
+        LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept;
 }

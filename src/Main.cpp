@@ -255,39 +255,45 @@ int main(int argc, char* argv[]) {
 
         if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
             auto latinSquare = LatinSquare::LatinSquare(size, numbers);
-            latinSquare.setRegions();
-            const auto start = std::chrono::steady_clock::now();
-            auto transversal = transversalGenerator.random(latinSquare);
-            const auto stop = std::chrono::steady_clock::now();
-            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-            const auto seconds = duration.count() / 1000000.0;
-            std::string timeString;
-            timeString.append(LatinSquare::TIME);
-            timeString.append(std::to_string(seconds));
-            timeString.append(LatinSquare::SECONDS);
-            Transversal::printBoard(latinSquare, transversal);
-            std::cout.write(timeString.c_str(), timeString.size());
-            return 0;
+
+            if (!latinSquare.notFilled()) {
+                latinSquare.setRegions();
+                const auto start = std::chrono::steady_clock::now();
+                auto transversal = transversalGenerator.random(latinSquare);
+                const auto stop = std::chrono::steady_clock::now();
+                const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+                const auto seconds = duration.count() / 1000000.0;
+                std::string timeString;
+                timeString.append(LatinSquare::TIME);
+                timeString.append(std::to_string(seconds));
+                timeString.append(LatinSquare::SECONDS);
+                Transversal::printBoard(latinSquare, transversal);
+                std::cout.write(timeString.c_str(), timeString.size());
+                return 0;
+            }
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_COUNT) == 0) {
         const auto [size, numbers] = LatinSquare::convert(argv[2]);
 
         if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
             auto latinSquare = LatinSquare::LatinSquare(size, numbers);
-            latinSquare.setRegions();
-            const auto start = std::chrono::steady_clock::now();
-            const auto count = transversalGenerator.count(latinSquare);
-            const auto stop = std::chrono::steady_clock::now();
-            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-            const auto seconds = duration.count() / 1000000.0;
-            std::string timeString;
-            timeString.append(Transversal::TIME);
-            timeString.append(std::to_string(seconds));
-            timeString.append(Transversal::SECONDS);
-            std::cout.write(Transversal::TRANSVERSALS.data(), Transversal::TRANSVERSALS.length());
-            std::cout << count << std::endl;
-            std::cout.write(timeString.c_str(), timeString.size());
-            return 0;
+
+            if (!latinSquare.notFilled()) {
+                latinSquare.setRegions();
+                const auto start = std::chrono::steady_clock::now();
+                const auto count = transversalGenerator.count(latinSquare);
+                const auto stop = std::chrono::steady_clock::now();
+                const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+                const auto seconds = duration.count() / 1000000.0;
+                std::string timeString;
+                timeString.append(Transversal::TIME);
+                timeString.append(std::to_string(seconds));
+                timeString.append(Transversal::SECONDS);
+                std::cout.write(Transversal::TRANSVERSALS.data(), Transversal::TRANSVERSALS.length());
+                std::cout << count << std::endl;
+                std::cout.write(timeString.c_str(), timeString.size());
+                return 0;
+            }
         }
     } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::TRANSVERSALS_MINMAX) == 0) {
         const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
@@ -346,6 +352,113 @@ int main(int argc, char* argv[]) {
 
             if (!counts[1].latinSquare().notFilled()) {
                 LatinSquare::printBoard(counts[1].latinSquare());
+            }
+
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_RANDOM) == 0) {
+        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
+
+            if (!symmetricLatinSquare.notFilled()) {
+                symmetricLatinSquare.setRegions();
+                const auto start = std::chrono::steady_clock::now();
+                auto transversal = transversalGenerator.symmetricRandom(symmetricLatinSquare);
+                const auto stop = std::chrono::steady_clock::now();
+                const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+                const auto seconds = duration.count() / 1000000.0;
+                std::string timeString;
+                timeString.append(LatinSquare::TIME);
+                timeString.append(std::to_string(seconds));
+                timeString.append(LatinSquare::SECONDS);
+                Transversal::printBoard(symmetricLatinSquare, transversal);
+                std::cout.write(timeString.c_str(), timeString.size());
+                return 0;
+            }
+        }
+    } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_COUNT) == 0) {
+        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
+
+            if (!symmetricLatinSquare.notFilled()) {
+                symmetricLatinSquare.setRegions();
+                const auto start = std::chrono::steady_clock::now();
+                const auto count = transversalGenerator.symmetricCount(symmetricLatinSquare);
+                const auto stop = std::chrono::steady_clock::now();
+                const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+                const auto seconds = duration.count() / 1000000.0;
+                std::string timeString;
+                timeString.append(Transversal::TIME);
+                timeString.append(std::to_string(seconds));
+                timeString.append(Transversal::SECONDS);
+                std::cout.write(Transversal::TRANSVERSALS.data(), Transversal::TRANSVERSALS.length());
+                std::cout << count << std::endl;
+                std::cout.write(timeString.c_str(), timeString.size());
+                return 0;
+            }
+        }
+    } else if (argc == 4 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_MINMAX) == 0) {
+        const uint_fast8_t size = std::strtoul(argv[2], nullptr, 10);
+        const LatinSquare::Type type = LatinSquare::getType(argv[3]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && type != LatinSquare::Type::Unknown) {
+            const auto start = std::chrono::steady_clock::now();
+            const auto counts = transversalGenerator.symmetricMinMax(size, type);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(Transversal::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(Transversal::SECONDS);
+            std::cout.write(Transversal::MIN_TRANSVERSALS.data(), Transversal::MIN_TRANSVERSALS.length());
+            std::cout << counts[0].counter() << std::endl;
+
+            if (!counts[0].symmetricLatinSquare().notFilled()) {
+                LatinSquare::printBoard(counts[0].symmetricLatinSquare());
+            }
+
+            std::cout.write(Transversal::MAX_TRANSVERSALS.data(), Transversal::MAX_TRANSVERSALS.length());
+            std::cout << counts[1].counter() << std::endl;
+
+            if (!counts[1].symmetricLatinSquare().notFilled()) {
+                LatinSquare::printBoard(counts[1].symmetricLatinSquare());
+            }
+
+            std::cout.write(timeString.c_str(), timeString.size());
+            return 0;
+        }
+    } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_TEMPLATE) == 0) {
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
+
+        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+            auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
+            const auto start = std::chrono::steady_clock::now();
+            const auto counts = transversalGenerator.symmetricMinMax(symmetricLatinSquare);
+            const auto stop = std::chrono::steady_clock::now();
+            const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+            const auto seconds = duration.count() / 1000000.0;
+            std::string timeString;
+            timeString.append(Transversal::TIME);
+            timeString.append(std::to_string(seconds));
+            timeString.append(Transversal::SECONDS);
+            std::cout.write(Transversal::MIN_TRANSVERSALS.data(), Transversal::MIN_TRANSVERSALS.length());
+            std::cout << counts[0].counter() << std::endl;
+
+            if (!counts[0].symmetricLatinSquare().notFilled()) {
+                LatinSquare::printBoard(counts[0].symmetricLatinSquare());
+            }
+
+            std::cout.write(Transversal::MAX_TRANSVERSALS.data(), Transversal::MAX_TRANSVERSALS.length());
+            std::cout << counts[1].counter() << std::endl;
+
+            if (!counts[1].symmetricLatinSquare().notFilled()) {
+                LatinSquare::printBoard(counts[1].symmetricLatinSquare());
             }
 
             std::cout.write(timeString.c_str(), timeString.size());

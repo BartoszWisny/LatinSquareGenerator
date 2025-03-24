@@ -18,8 +18,6 @@ namespace LatinSquare {
             return Type::ReducedCyclic;
         } else if (type == TYPE_REDUCED_DIAGONAL) {
             return Type::ReducedDiagonal;
-        } else if (type == TYPE_REDUCED_SUPER_SYMMETRIC) {
-            return Type::ReducedSuperSymmetric;
         } else {
             return Type::Unknown;
         }

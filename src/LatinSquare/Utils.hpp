@@ -25,4 +25,6 @@ namespace LatinSquare {
     void printIds(const SymmetricLatinSquare& symmetricLatinSquare) noexcept;
     void printBoard(const SymmetricLatinSquare& symmetricLatinSquare) noexcept;
     void printFile(const SymmetricLatinSquare& symmetricLatinSquare, const std::string filename) noexcept;
+
+    // TODO: add function to check if latin square fulfills all of the properties
 }

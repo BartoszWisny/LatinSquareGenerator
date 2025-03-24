@@ -5,6 +5,7 @@ namespace LatinSquare {
         const Type type) noexcept
         : index_(index), rawRow_(row), rawColumn_(column), size_(size), doubleSize_(size_ << 1), type_(type),
           maxNumber_(size_ - 1), regionRow_(rawRow_), regionColumn_(rawColumn_ + size_), regionNumber_(EMPTY),
+          triangularRegionRow_(rawRow_), triangularRegionColumn_(rawColumn_), triangularRegionNumber_(EMPTY),
           rowColumnSum_(row + column), enabled_(true), notOnDiagonal_(rawRow_ != rawColumn_) {
         reset();
     }
@@ -13,7 +14,7 @@ namespace LatinSquare {
         number_ = EMPTY;
         entropyData_ = EntropyData(size_);
 
-        if (type_ == Type::Reduced || type_ == Type::ReducedSymmetric) {
+        if (type_ == Type::Reduced || type_ == Type::ReducedDiagonal) {
             if (rawRow_ == 0) {
                 fillAndClear(rawColumn());
             } else if (rawColumn_ == 0) {
@@ -23,14 +24,7 @@ namespace LatinSquare {
                 entropyData_.remove(rawColumn());
             }
         } else if (type_ == Type::ReducedCyclic) {
-            fillAndClear(rowColumnSum_ % size_);
-        }
-
-        // TODO: check if these types are needed
-        else if (type_ == Type::ReducedDiagonal) {
-            // TODO: add reduced diagonal latin squares
-        } else if (type_ == Type::ReducedSuperSymmetric) {
-            // TODO: add super-symmetric latin squares
+            fillAndClear(rowColumnSum_ >= size_ ? rowColumnSum_ - size_ : rowColumnSum_);
         }
     }
 
