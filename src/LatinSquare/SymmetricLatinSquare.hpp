@@ -27,7 +27,8 @@ namespace LatinSquare {
                   entropyTriangularGridSize_(other.entropyTriangularGridSize_), doubleSize_(other.doubleSize_),
                   maxUpdateSize_(other.maxUpdateSize_), triangularRegions_(other.triangularRegions_),
                   regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_),
-                  updateIndexes_(other.updateIndexes_), disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
+                  updateIndexes_(other.updateIndexes_), fillGridIndexes_(other.fillGridIndexes_),
+                  disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
                 grid_.reserve(other.grid_.size());
 
                 for (const auto& cell : other.grid_) {
@@ -70,6 +71,7 @@ namespace LatinSquare {
                     splitmix64_ = other.splitmix64_;
                     notFilled_ = other.notFilled_;
                     updateIndexes_ = other.updateIndexes_;
+                    fillGridIndexes_ = other.fillGridIndexes_;
                     disableAndDecreaseIndexes_ = other.disableAndDecreaseIndexes_;
                     grid_.clear();
                     grid_.reserve(other.grid_.size());
@@ -147,7 +149,7 @@ namespace LatinSquare {
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
-            const std::vector<uint_fast16_t> update(Cell& cell, const uint_fast8_t number) noexcept;
+            const std::vector<uint_fast16_t>& update(Cell& cell, const uint_fast8_t number) noexcept;
             [[nodiscard]] uint_fast8_t checkDiagonal() noexcept;
             void fillGrid() noexcept;
             void clearGrid() noexcept;
@@ -155,7 +157,7 @@ namespace LatinSquare {
             [[nodiscard]] Region& minEntropyRegion() noexcept;
             [[nodiscard]] Region& randomMinEntropyRegion() noexcept;
             void disable(const uint_fast16_t index) noexcept;
-            [[nodiscard]] const std::vector<uint_fast16_t> disableAndDecrease(const uint_fast16_t index) noexcept;
+            [[nodiscard]] const std::vector<uint_fast16_t>& disableAndDecrease(const uint_fast16_t index) noexcept;
             void enable(const uint_fast16_t index) noexcept;
             void enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept;
 

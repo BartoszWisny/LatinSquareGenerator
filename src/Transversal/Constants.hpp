@@ -21,5 +21,5 @@ namespace Transversal {
     static constexpr std::string_view MAX_TRANSVERSALS = "Maximum number of transversals: ";
 
     static constexpr std::string_view TIME = "Time: ";
-    static constexpr std::string_view SECONDS = " seconds";
+    static constexpr std::string_view SECONDS = " seconds\n";
 }

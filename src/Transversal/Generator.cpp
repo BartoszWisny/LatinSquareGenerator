@@ -12,7 +12,6 @@ namespace Transversal {
         std::vector<uint_fast16_t> transversal;
         transversal.reserve(latinSquare.size());
 
-        std::vector<uint_fast16_t> cellIndexes;
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
         std::vector<uint_fast16_t> indexes;
@@ -31,7 +30,7 @@ namespace Transversal {
             if (region.entropy()) {
                 counter = 0;
 
-                cellIndexes = region.enabledCellIndexes();
+                const auto& cellIndexes = region.enabledCellIndexes();
                 cellIndex = cellIndexes[splitmix64.next() % cellIndexes.size()];
                 transversal.emplace_back(cellIndex);
                 latinSquare.disable(cellIndex);
@@ -388,7 +387,6 @@ namespace Transversal {
         std::vector<uint_fast16_t> transversal;
         transversal.reserve(symmetricLatinSquare.size());
 
-        std::vector<uint_fast16_t> cellIndexes;
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
         std::vector<uint_fast16_t> indexes;
@@ -407,7 +405,7 @@ namespace Transversal {
             if (region.entropy()) {
                 counter = 0;
 
-                cellIndexes = region.enabledCellIndexes();
+                const auto& cellIndexes = region.enabledCellIndexes();
                 cellIndex = cellIndexes[splitmix64.next() % cellIndexes.size()];
                 transversal.emplace_back(cellIndex);
                 symmetricLatinSquare.disable(cellIndex);

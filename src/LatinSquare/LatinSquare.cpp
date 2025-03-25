@@ -150,6 +150,7 @@ namespace LatinSquare {
         disableAndDecreaseIndexes_.reserve(maxDisableAndDecreaseSize_);
 
         for (auto& cell : grid_) {
+            cell->setRegionNumber();
             rowCells[cell->rawRow()].emplace_back(cell);
             columnCells[cell->rawColumn()].emplace_back(cell);
             numberCells_[cell->number()].emplace_back(cell);
@@ -180,6 +181,7 @@ namespace LatinSquare {
         }
 
         for (auto& cell : grid_) {
+            cell->setRegionNumber();
             numberCells_[cell->number()].emplace_back(cell);
         }
 
@@ -236,18 +238,20 @@ namespace LatinSquare {
         return *minCell;
     }
 
-    const std::vector<uint_fast16_t> LatinSquare::update(Cell& cell, const uint_fast8_t number) noexcept {
+    const std::vector<uint_fast16_t>& LatinSquare::update(Cell& cell, const uint_fast8_t number) noexcept {
         updateIndexes_.clear();
         uint_fast16_t rowIndex = cell.rawRow();
         rowIndex *= size_;
         uint_fast16_t columnIndex = cell.rawColumn();
 
         while (columnIndex < gridSize_) {
-            if (grid_[rowIndex]->notFilled() && grid_[rowIndex]->remove(number)) {
+            if (grid_[rowIndex]->notFilled() && grid_[rowIndex]->canBeRemoved(number)) {
+                grid_[rowIndex]->remove();
                 updateIndexes_.emplace_back(rowIndex);
             }
 
-            if (grid_[columnIndex]->notFilled() && grid_[columnIndex]->remove(number)) {
+            if (grid_[columnIndex]->notFilled() && grid_[columnIndex]->canBeRemoved(number)) {
+                grid_[columnIndex]->remove();
                 updateIndexes_.emplace_back(columnIndex);
             }
 
@@ -311,7 +315,7 @@ namespace LatinSquare {
         regions_[grid_[index]->regionNumber()].disableAndDecrease();
     }
 
-    const std::vector<uint_fast16_t> LatinSquare::disableAndDecrease(const uint_fast16_t index) noexcept {
+    const std::vector<uint_fast16_t>& LatinSquare::disableAndDecrease(const uint_fast16_t index) noexcept {
         disableAndDecreaseIndexes_.clear();
         uint_fast16_t rowIndex = grid_[index]->rawRow();
         rowIndex *= size_;
@@ -338,7 +342,7 @@ namespace LatinSquare {
             columnIndex += size_;
         }
 
-        const auto numberIndexes = regions_[grid_[index]->regionNumber()].enabledCellIndexes();
+        const auto& numberIndexes = regions_[grid_[index]->regionNumber()].enabledCellIndexes();
 
         for (const auto numberIndex : numberIndexes) {
             grid_[numberIndex]->disable();

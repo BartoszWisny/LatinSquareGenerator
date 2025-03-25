@@ -5,8 +5,7 @@ namespace LatinSquare {
         const Type type) noexcept
         : index_(index), rawRow_(row), rawColumn_(column), size_(size), doubleSize_(size_ << 1), type_(type),
           maxNumber_(size_ - 1), regionRow_(rawRow_), regionColumn_(rawColumn_ + size_), regionNumber_(EMPTY),
-          triangularRegionRow_(rawRow_), triangularRegionColumn_(rawColumn_), triangularRegionNumber_(EMPTY),
-          rowColumnSum_(row + column), enabled_(true), notOnDiagonal_(rawRow_ != rawColumn_) {
+          rowColumnSum_(row + column), enabled_(true) {
         reset();
     }
 
@@ -16,12 +15,12 @@ namespace LatinSquare {
 
         if (type_ == Type::Reduced || type_ == Type::ReducedDiagonal) {
             if (rawRow_ == 0) {
-                fillAndClear(rawColumn());
+                fillAndClear(rawColumn_);
             } else if (rawColumn_ == 0) {
-                fillAndClear(rawRow());
+                fillAndClear(rawRow_);
             } else {
-                entropyData_.remove(rawRow());
-                entropyData_.remove(rawColumn());
+                entropyData_.remove(rawRow_);
+                entropyData_.remove(rawColumn_);
             }
         } else if (type_ == Type::ReducedCyclic) {
             fillAndClear(rowColumnSum_ >= size_ ? rowColumnSum_ - size_ : rowColumnSum_);

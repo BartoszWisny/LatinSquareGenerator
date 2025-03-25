@@ -1,16 +1,20 @@
 #include "Region.hpp"
 
 namespace LatinSquare {
-    const std::vector<uint_fast16_t> Region::enabledCellIndexes() const noexcept {
-        std::vector<uint_fast16_t> indexes;
-        indexes.reserve(entropy_);
+    const std::vector<uint_fast16_t>& Region::enabledCellIndexes() noexcept {
+        enabledCellIndexes_.resize(entropy_);
+        uint_fast8_t counter = 0;
 
         for (const auto& cell : cells_) {
             if (cell->enabled()) {
-                indexes.emplace_back(cell->index());
+                enabledCellIndexes_[counter] = cell->index();
+
+                if (++counter == entropy_) {
+                    break;
+                }
             }
         }
 
-        return indexes;
+        return enabledCellIndexes_;
     }
 }

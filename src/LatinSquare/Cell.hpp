@@ -30,12 +30,8 @@ namespace LatinSquare {
                 regionRow_ = std::exchange(other.regionRow_, 0);
                 regionColumn_ = std::exchange(other.regionColumn_, 0);
                 regionNumber_ = std::exchange(other.regionNumber_, 0);
-                triangularRegionRow_ = std::exchange(other.triangularRegionRow_, 0);
-                triangularRegionColumn_ = std::exchange(other.triangularRegionColumn_, 0);
-                triangularRegionNumber_ = std::exchange(other.triangularRegionNumber_, 0);
                 rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                 enabled_ = std::exchange(other.enabled_, false);
-                notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
             }
 
             Cell& operator=(Cell&& other) noexcept {
@@ -52,12 +48,8 @@ namespace LatinSquare {
                     regionRow_ = std::exchange(other.regionRow_, 0);
                     regionColumn_ = std::exchange(other.regionColumn_, 0);
                     regionNumber_ = std::exchange(other.regionNumber_, 0);
-                    triangularRegionRow_ = std::exchange(other.triangularRegionRow_, 0);
-                    triangularRegionColumn_ = std::exchange(other.triangularRegionColumn_, 0);
-                    triangularRegionNumber_ = std::exchange(other.triangularRegionNumber_, 0);
                     rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                     enabled_ = std::exchange(other.enabled_, false);
-                    notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
                 }
 
                 return *this;
@@ -103,18 +95,6 @@ namespace LatinSquare {
                 return regionNumber_;
             }
 
-            [[nodiscard]] inline constexpr uint_fast8_t triangularRegionRow() const noexcept {
-                return triangularRegionRow_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t triangularRegionColumn() const noexcept {
-                return triangularRegionColumn_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t triangularRegionNumber() const noexcept {
-                return triangularRegionNumber_;
-            }
-
             [[nodiscard]] inline constexpr bool filled() const noexcept {
                 return number_ != EMPTY;
             }
@@ -125,10 +105,6 @@ namespace LatinSquare {
 
             [[nodiscard]] inline constexpr bool enabled() const noexcept {
                 return enabled_;
-            }
-
-            [[nodiscard]] inline constexpr bool notOnDiagonal() const noexcept {
-                return notOnDiagonal_;
             }
 
             inline constexpr void set(const EntropyData& entropyData) noexcept {
@@ -145,19 +121,16 @@ namespace LatinSquare {
 
             inline constexpr void fillAndClear(const uint_fast8_t number) noexcept {
                 number_ = number;
-                regionNumber_ = number_;
-                regionNumber_ += doubleSize_;
-                triangularRegionNumber_ = number_;
-                triangularRegionNumber_ += size_;
                 entropyData_.clear();
             }
 
             inline constexpr void fill(const uint_fast8_t number) noexcept {
                 number_ = number;
+            }
+
+            inline constexpr void setRegionNumber() noexcept {
                 regionNumber_ = number_;
                 regionNumber_ += doubleSize_;
-                triangularRegionNumber_ = number_;
-                triangularRegionNumber_ += size_;
             }
 
             inline constexpr void clearAndRemove(EntropyData entropyData) noexcept {
@@ -166,7 +139,7 @@ namespace LatinSquare {
                 entropyData_ = entropyData;
             }
 
-            inline constexpr void clear(EntropyData entropyData) noexcept {
+            inline constexpr void clear(const EntropyData& entropyData) noexcept {
                 number_ = EMPTY;
                 entropyData_ = entropyData;
             }
@@ -175,8 +148,16 @@ namespace LatinSquare {
                 number_ = EMPTY;
             }
 
-            inline constexpr bool remove(const uint_fast8_t number) noexcept {
+            [[nodiscard]] inline constexpr uint_fast64_t canBeRemoved(const uint_fast8_t number) noexcept {
+                return entropyData_.canBeRemoved(number);
+            }
+
+            inline constexpr void remove(const uint_fast8_t number) noexcept {
                 return entropyData_.remove(number);
+            }
+
+            inline constexpr void remove() noexcept {
+                return entropyData_.remove();
             }
 
             inline constexpr void restore(const uint_fast8_t number) noexcept {
@@ -203,11 +184,7 @@ namespace LatinSquare {
             uint_fast8_t regionRow_;
             uint_fast8_t regionColumn_;
             uint_fast8_t regionNumber_;
-            uint_fast8_t triangularRegionRow_;
-            uint_fast8_t triangularRegionColumn_;
-            uint_fast8_t triangularRegionNumber_;
             uint_fast8_t rowColumnSum_;
             bool enabled_;
-            bool notOnDiagonal_;
     };
 }
