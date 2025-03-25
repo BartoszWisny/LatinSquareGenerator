@@ -83,7 +83,7 @@ namespace Transversal {
         uint_fast8_t almostSize = latinSquare.size();
         --almostSize;
 
-        if (almostSize == 0) {
+        if (!almostSize) {
             return 1;
         }
 
@@ -459,7 +459,7 @@ namespace Transversal {
         uint_fast8_t almostSize = symmetricLatinSquare.size();
         --almostSize;
 
-        if (almostSize == 0) {
+        if (!almostSize) {
             return 1;
         }
 

@@ -1,11 +1,5 @@
 #include "SymmetricLatinSquare.hpp"
 
-
-
-
-
-#include <iostream>
-
 namespace LatinSquare {
     SymmetricLatinSquare::SymmetricLatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
@@ -313,7 +307,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (cell->entropy() == 0) {
+            if (!cell->entropy()) {
                 return *cell;
             }
 
@@ -333,6 +327,10 @@ namespace LatinSquare {
         for (auto& cell : entropyTriangularGrid_) {
             if (cell->filled()) {
                 continue;
+            }
+
+            if (!cell->entropy()) {
+                return *cell;
             }
 
             if (cell->entropy() < minEntropy) {
@@ -406,7 +404,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (region.entropy() == 0) {
+            if (!region.entropy()) {
                 return region;
             }
 
@@ -428,7 +426,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (region.entropy() == 0) {
+            if (!region.entropy()) {
                 return region;
             }
 

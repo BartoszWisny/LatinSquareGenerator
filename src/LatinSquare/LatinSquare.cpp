@@ -201,7 +201,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (cell->entropy() == 0) {
+            if (!cell->entropy()) {
                 return *cell;
             }
 
@@ -223,7 +223,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (cell->entropy() == 0) {
+            if (!cell->entropy()) {
                 return *cell;
             }
 
@@ -271,7 +271,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (region.entropy() == 0) {
+            if (!region.entropy()) {
                 return region;
             }
 
@@ -293,7 +293,7 @@ namespace LatinSquare {
                 continue;
             }
 
-            if (region.entropy() == 0) {
+            if (!region.entropy()) {
                 return region;
             }
 
