@@ -180,6 +180,7 @@ namespace Transversal {
         }
     }
 
+    // TODO: adjust this function for triangular grid
     void printBoard(
         LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
         if (transversal.empty()) {
@@ -187,6 +188,7 @@ namespace Transversal {
             std::cout.write(info.c_str(), info.size());
             std::cout.put('\n');
         } else {
+            symmetricLatinSquare.fillGrid();
             const auto& grid = symmetricLatinSquare.grid();
             std::sort(transversal.begin(), transversal.end());
             const auto barLength = static_cast<uint_fast8_t>(std::log10(symmetricLatinSquare.size()) + 1) + 2;

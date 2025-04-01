@@ -358,13 +358,13 @@ int main(int argc, char* argv[]) {
             return 0;
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_RANDOM) == 0) {
-        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
 
         if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
             auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
 
             if (!symmetricLatinSquare.notFilled()) {
-                symmetricLatinSquare.setRegions();
+                symmetricLatinSquare.setNumberRegions();
                 const auto start = std::chrono::steady_clock::now();
                 auto transversal = transversalGenerator.symmetricRandom(symmetricLatinSquare);
                 const auto stop = std::chrono::steady_clock::now();
@@ -380,13 +380,13 @@ int main(int argc, char* argv[]) {
             }
         }
     } else if (argc == 3 && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRANSVERSALS_COUNT) == 0) {
-        const auto [size, numbers] = LatinSquare::convert(argv[2]);
+        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
 
         if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
             auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
 
             if (!symmetricLatinSquare.notFilled()) {
-                symmetricLatinSquare.setRegions();
+                symmetricLatinSquare.setNumberRegions();
                 const auto start = std::chrono::steady_clock::now();
                 const auto count = transversalGenerator.symmetricCount(symmetricLatinSquare);
                 const auto stop = std::chrono::steady_clock::now();

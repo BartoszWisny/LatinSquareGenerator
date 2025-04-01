@@ -13,7 +13,9 @@
 #include "LatinSquare/SymmetricLatinSquare.hpp"
 #include "LatinSquare/UpdateData.hpp"
 #include "MinMaxData.hpp"
+#include "SymmetricBacktrackingData.hpp"
 #include "SymmetricMinMaxData.hpp"
+#include "SymmetricUpdateData.hpp"
 #include "UpdateData.hpp"
 
 namespace Transversal {
@@ -42,6 +44,8 @@ namespace Transversal {
 
             std::vector<UpdateData> updateHistory_;
             std::vector<BacktrackingData> backtrackingHistory_;
+            std::vector<SymmetricUpdateData> symmetricUpdateHistory_;
+            std::vector<SymmetricBacktrackingData> symmetricBacktrackingHistory_;
             std::vector<LatinSquare::UpdateData> latinSquareUpdateHistory_;
             std::vector<LatinSquare::BacktrackingData> latinSquareBacktrackingHistory_;
     };

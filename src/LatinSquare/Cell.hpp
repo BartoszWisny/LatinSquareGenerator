@@ -1,6 +1,8 @@
 #pragma once
 
+#include <array>
 #include <cstdint>
+#include <map>
 #include <string>
 #include <vector>
 #include <utility>
@@ -32,6 +34,9 @@ namespace LatinSquare {
                 regionNumber_ = std::exchange(other.regionNumber_, 0);
                 rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                 enabled_ = std::exchange(other.enabled_, false);
+                notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
+                otherRegionIndexes_ = std::move(other.otherRegionIndexes_);
+                triangularEnabled_ = std::move(other.triangularEnabled_);
             }
 
             Cell& operator=(Cell&& other) noexcept {
@@ -50,6 +55,9 @@ namespace LatinSquare {
                     regionNumber_ = std::exchange(other.regionNumber_, 0);
                     rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
                     enabled_ = std::exchange(other.enabled_, false);
+                    notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
+                    otherRegionIndexes_ = std::move(other.otherRegionIndexes_);
+                    triangularEnabled_ = std::move(other.triangularEnabled_);
                 }
 
                 return *this;
@@ -107,6 +115,34 @@ namespace LatinSquare {
                 return enabled_;
             }
 
+            [[nodiscard]] inline constexpr bool notOnDiagonal() const noexcept {
+                return notOnDiagonal_;
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t otherRegionIndex(const uint_fast8_t regionIndex) noexcept {
+                return otherRegionIndexes_[regionIndex];
+            }
+
+            [[nodiscard]] inline constexpr bool triangularEnabled() noexcept {
+                return triangularEnabled_[rawColumn_] || triangularEnabled_[rawRow_];
+            }
+
+            [[nodiscard]] inline constexpr bool triangularEnabled(const uint_fast8_t regionIndex) noexcept {
+                return triangularEnabled_[regionIndex];
+            }
+
+            [[nodiscard]] inline constexpr bool otherTriangularEnabled(const uint_fast8_t regionIndex) noexcept {
+                return triangularEnabled_[otherRegionIndexes_[regionIndex]];
+            }
+
+            [[nodiscard]] inline constexpr bool columnTriangularEnabled() noexcept {
+                return triangularEnabled_[rawColumn_];
+            }
+
+            [[nodiscard]] inline constexpr bool rowTriangularEnabled() noexcept {
+                return triangularEnabled_[rawRow_];
+            }
+
             inline constexpr void set(const EntropyData& entropyData) noexcept {
                 entropyData_ = entropyData;
             }
@@ -117,6 +153,19 @@ namespace LatinSquare {
 
             inline constexpr void disable() noexcept {
                 enabled_ = false;
+            }
+
+            inline constexpr void triangularDisable() noexcept {
+                triangularEnabled_[rawColumn_] = false;
+                triangularEnabled_[rawRow_] = false;
+            }
+
+            inline constexpr void triangularEnable(const uint_fast8_t regionIndex) noexcept {
+                triangularEnabled_[regionIndex] = true;
+            }
+
+            inline constexpr void triangularDisable(const uint_fast8_t regionIndex) noexcept {
+                triangularEnabled_[regionIndex] = false;
             }
 
             inline constexpr void fillAndClear(const uint_fast8_t number) noexcept {
@@ -164,10 +213,6 @@ namespace LatinSquare {
                 entropyData_.restore(number);
             }
 
-            [[nodiscard]] inline constexpr uint_fast8_t delta() const noexcept {
-                return (rowColumnSum_ + size_ - number_) % size_;
-            }
-
             void reset() noexcept;
             [[nodiscard]] const std::string id() const noexcept;
 
@@ -186,5 +231,8 @@ namespace LatinSquare {
             uint_fast8_t regionNumber_;
             uint_fast8_t rowColumnSum_;
             bool enabled_;
+            bool notOnDiagonal_;
+            std::map<uint_fast8_t, uint_fast8_t> otherRegionIndexes_;
+            std::map<uint_fast8_t, bool> triangularEnabled_;
     };
 }

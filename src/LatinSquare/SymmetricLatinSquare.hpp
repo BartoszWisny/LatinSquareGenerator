@@ -9,6 +9,7 @@
 #include "Cell.hpp"
 #include "Constants.hpp"
 #include "Region.hpp"
+#include "Transversal/SymmetricCellUpdateData.hpp"
 #include "TriangularRegion.hpp"
 
 namespace LatinSquare {
@@ -25,10 +26,12 @@ namespace LatinSquare {
             SymmetricLatinSquare(const SymmetricLatinSquare& other)
                 : size_(other.size_), gridSize_(other.gridSize_), triangularGridSize_(other.triangularGridSize_),
                   entropyTriangularGridSize_(other.entropyTriangularGridSize_), doubleSize_(other.doubleSize_),
-                  maxUpdateSize_(other.maxUpdateSize_), triangularRegions_(other.triangularRegions_),
-                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_),
-                  updateIndexes_(other.updateIndexes_), fillGridIndexes_(other.fillGridIndexes_),
-                  disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
+                  maxUpdateSize_(other.maxUpdateSize_), maxFillDiagonalSize_(other.maxFillDiagonalSize_),
+                  maxOtherCellsUpdateData_(other.maxOtherCellsUpdateData_),
+                  triangularRegions_(other.triangularRegions_), numberRegions_(other.numberRegions_),
+                  splitmix64_(other.splitmix64_), notFilled_(other.notFilled_), updateIndexes_(other.updateIndexes_),
+                  fillDiagonalIndexes_(other.fillDiagonalIndexes_),
+                  cellUpdateData_(other.cellUpdateData_), otherCellsUpdateData_(other.otherCellsUpdateData_) {
                 grid_.reserve(other.grid_.size());
 
                 for (const auto& cell : other.grid_) {
@@ -45,6 +48,12 @@ namespace LatinSquare {
 
                 for (const auto& cell : other.entropyTriangularGrid_) {
                     entropyTriangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                }
+
+                diagonalGrid_.reserve(other.diagonalGrid_.size());
+
+                for (const auto& cell : other.diagonalGrid_) {
+                    diagonalGrid_.emplace_back(std::make_shared<Cell>(*cell));
                 }
 
                 numberCells_.resize(other.numberCells_.size());
@@ -66,13 +75,16 @@ namespace LatinSquare {
                     entropyTriangularGridSize_ = other.entropyTriangularGridSize_;
                     doubleSize_ = other.doubleSize_;
                     maxUpdateSize_ = other.maxUpdateSize_;
+                    maxFillDiagonalSize_ = other.maxFillDiagonalSize_;
+                    maxOtherCellsUpdateData_ = other.maxOtherCellsUpdateData_;
                     triangularRegions_ = other.triangularRegions_;
-                    regions_ = other.regions_;
+                    numberRegions_ = other.numberRegions_;
                     splitmix64_ = other.splitmix64_;
                     notFilled_ = other.notFilled_;
                     updateIndexes_ = other.updateIndexes_;
-                    fillGridIndexes_ = other.fillGridIndexes_;
-                    disableAndDecreaseIndexes_ = other.disableAndDecreaseIndexes_;
+                    fillDiagonalIndexes_ = other.fillDiagonalIndexes_;
+                    cellUpdateData_ = other.cellUpdateData_;
+                    otherCellsUpdateData_ = other.otherCellsUpdateData_;
                     grid_.clear();
                     grid_.reserve(other.grid_.size());
 
@@ -92,6 +104,13 @@ namespace LatinSquare {
 
                     for (const auto& cell : other.entropyTriangularGrid_) {
                         entropyTriangularGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    diagonalGrid_.clear();
+                    diagonalGrid_.reserve(other.diagonalGrid_.size());
+
+                    for (const auto& cell : other.diagonalGrid_) {
+                        diagonalGrid_.emplace_back(std::make_shared<Cell>(*cell));
                     }
 
                     numberCells_.clear();
@@ -143,29 +162,34 @@ namespace LatinSquare {
             }
 
             void set(const Type type) noexcept;
-            void triangularSet(const std::vector<uint_fast8_t>& numbers) noexcept;
             void set(const std::vector<uint_fast8_t>& numbers) noexcept;
-            void setRegions() noexcept;
+            void setNumberRegions() noexcept;
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
             const std::vector<uint_fast16_t>& update(Cell& cell, const uint_fast8_t number) noexcept;
             [[nodiscard]] uint_fast8_t checkDiagonal() noexcept;
             void fillGrid() noexcept;
-            void clearGrid() noexcept;
+            void fillDiagonal() noexcept;
+            void clearDiagonal() noexcept;
 
-            [[nodiscard]] Region& minEntropyRegion() noexcept;
-            [[nodiscard]] Region& randomMinEntropyRegion() noexcept;
-            void disable(const uint_fast16_t index) noexcept;
-            [[nodiscard]] const std::vector<uint_fast16_t>& disableAndDecrease(const uint_fast16_t index) noexcept;
-            void enable(const uint_fast16_t index) noexcept;
-            void enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept;
+            [[nodiscard]] TriangularRegion& minEntropyTriangularRegion() noexcept;
+            [[nodiscard]] TriangularRegion& randomMinEntropyTriangularRegion() noexcept;
+            [[nodiscard]] const std::vector<Transversal::SymmetricCellUpdateData>& disable(
+                const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept;
+            [[nodiscard]] const std::vector<Transversal::SymmetricCellUpdateData>& disableAndDecrease(
+                const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept;
+            void enable(const uint_fast8_t regionIndex,
+                const std::vector<Transversal::SymmetricCellUpdateData>& cellUpdateData) noexcept;
+            void enableAndIncrease(
+                const std::vector<Transversal::SymmetricCellUpdateData>& otherCellsUpdateData) noexcept;
+            void enableAndIncrease(const uint_fast8_t regionIndex,
+                const std::vector<Transversal::SymmetricCellUpdateData>& cellsUpdateData) noexcept;
 
         private:
             void reset() noexcept;
-            void triangularReset(const std::vector<uint_fast8_t>& numbers) noexcept;
             void reset(const std::vector<uint_fast8_t>& numbers) noexcept;
-            void resetRegions() noexcept;
+            void resetNumberRegions() noexcept;
 
             uint_fast8_t size_;
             uint_fast16_t gridSize_;
@@ -173,18 +197,20 @@ namespace LatinSquare {
             uint_fast16_t entropyTriangularGridSize_;
             uint_fast8_t doubleSize_;
             uint_fast8_t maxUpdateSize_;
-            uint_fast8_t regionsSize_;
-            uint_fast8_t maxDisableAndDecreaseSize_;
+            uint_fast8_t maxFillDiagonalSize_;
+            uint_fast8_t maxOtherCellsUpdateData_;
             std::vector<std::shared_ptr<Cell>> grid_;
             std::vector<std::shared_ptr<Cell>> triangularGrid_;
             std::vector<std::shared_ptr<Cell>> entropyTriangularGrid_;
+            std::vector<std::shared_ptr<Cell>> diagonalGrid_;
             std::vector<TriangularRegion> triangularRegions_;
-            std::vector<Region> regions_;
+            std::vector<TriangularRegion> numberRegions_;
             cpp::splitmix64 splitmix64_;
             uint_fast16_t notFilled_;
             std::vector<uint_fast16_t> updateIndexes_;
-            std::vector<uint_fast16_t> fillGridIndexes_;
+            std::vector<uint_fast16_t> fillDiagonalIndexes_;
             std::vector<std::vector<std::shared_ptr<Cell>>> numberCells_;
-            std::vector<uint_fast16_t> disableAndDecreaseIndexes_;
+            std::vector<Transversal::SymmetricCellUpdateData> cellUpdateData_;
+            std::vector<Transversal::SymmetricCellUpdateData> otherCellsUpdateData_;
     };
 }

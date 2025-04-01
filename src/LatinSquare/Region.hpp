@@ -59,21 +59,17 @@ namespace LatinSquare {
                 notEnabled_ = false;
             }
 
-            inline constexpr void disable() noexcept {
-                notEnabled_ = true;
-            }
-
             inline constexpr void decrease() noexcept {
-                --entropy_;
-            }
-
-            inline constexpr void disableAndDecrease() noexcept {
-                notEnabled_ = true;
                 --entropy_;
             }
 
             inline constexpr void increase() noexcept {
                 ++entropy_;
+            }
+
+            inline constexpr void disableAndDecrease() noexcept {
+                notEnabled_ = true;
+                --entropy_;
             }
 
             [[nodiscard]] const std::vector<uint_fast16_t>& enabledCellIndexes() noexcept;

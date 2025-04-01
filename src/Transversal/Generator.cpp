@@ -5,6 +5,12 @@
 #include "Constants.hpp"
 #include "LatinSquare/EntropyData.hpp"
 #include "LatinSquare/Region.hpp"
+#include "SymmetricCellUpdateData.hpp"
+
+
+
+
+#include "LatinSquare/Utils.hpp"
 
 namespace Transversal {
     const std::vector<uint_fast16_t> Generator::random(LatinSquare::LatinSquare& latinSquare) noexcept {
@@ -97,7 +103,11 @@ namespace Transversal {
         boost::multiprecision::mpz_int transversalsCounter = 0;
         uint_fast8_t counter = 0;
 
+        // int iterations = 0;
+
         while (true) {
+            // ++iterations;
+
             if (transversalSize < almostSize) {
                 auto& region = latinSquare.minEntropyRegion();
 
@@ -144,10 +154,7 @@ namespace Transversal {
             } else {
                 --transversalSize;
                 counter = 1;
-
-                if (latinSquare.minEntropyRegion().entropy()) {
-                    ++transversalsCounter;
-                }
+                transversalsCounter += latinSquare.minEntropyRegion().entropy();
 
                 latinSquare.enable(updateHistory_.back().index());
                 latinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -155,6 +162,8 @@ namespace Transversal {
                 updateHistory_.pop_back();
             }
         }
+
+        // std::cout << "Iterations: " << iterations << std::endl;
 
         return transversalsCounter;
     }
@@ -389,10 +398,11 @@ namespace Transversal {
 
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<uint_fast16_t> indexes;
+        std::vector<SymmetricCellUpdateData> cellsUpdateData;
+        cellsUpdateData.reserve(symmetricLatinSquare.size());
 
-        updateHistory_.reserve(symmetricLatinSquare.size());
-        backtrackingHistory_.reserve(symmetricLatinSquare.size());
+        symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
+        symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
 
         uint_fast8_t counter = 0;
         uint_fast32_t iterations = 0;
@@ -400,51 +410,57 @@ namespace Transversal {
         while (transversal.size() < symmetricLatinSquare.size()) {
             ++iterations;
 
-            auto& region = symmetricLatinSquare.randomMinEntropyRegion();
+            auto& region = symmetricLatinSquare.randomMinEntropyTriangularRegion();
 
             if (region.entropy()) {
                 counter = 0;
 
-                const auto& cellIndexes = region.enabledCellIndexes();
+                const auto& cellIndexes = region.triangularLocalEnabledCellIndexes();
                 cellIndex = cellIndexes[splitmix64.next() % cellIndexes.size()];
                 transversal.emplace_back(cellIndex);
-                symmetricLatinSquare.disable(cellIndex);
+                const auto& symmetricCellUpdateData = symmetricLatinSquare.disable(cellIndex, region.index());
 
-                updateHistory_.emplace_back(cellIndex, symmetricLatinSquare.disableAndDecrease(cellIndex));
-                backtrackingHistory_.emplace_back(region.index(), cellIndex);
+                symmetricUpdateHistory_.emplace_back(region.index(), symmetricCellUpdateData,
+                    symmetricLatinSquare.disableAndDecrease(cellIndex, region.index()));
+                symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
             } else {
                 if (++counter > 1) {
-                    indexes.clear();
-                    indexes.reserve(symmetricLatinSquare.size());
-                    indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                    cellsUpdateData.clear();
+                    cellsUpdateData.insert(cellsUpdateData.end(),
+                        symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
+                        symmetricBacktrackingHistory_.back().cellUpdateData().end());
 
-                    regionIndex = backtrackingHistory_.back().regionIndex();
+                    regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
 
-                    backtrackingHistory_.pop_back();
+                    symmetricBacktrackingHistory_.pop_back();
 
-                    while (backtrackingHistory_.size() && regionIndex == backtrackingHistory_.back().regionIndex()) {
-                        indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                    while (symmetricBacktrackingHistory_.size()
+                           && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
+                        cellsUpdateData.insert(cellsUpdateData.end(),
+                            symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
+                            symmetricBacktrackingHistory_.back().cellUpdateData().end());
 
-                        backtrackingHistory_.pop_back();
+                        symmetricBacktrackingHistory_.pop_back();
                     }
 
-                    symmetricLatinSquare.enableAndIncrease(indexes);
+                    symmetricLatinSquare.enableAndIncrease(regionIndex, cellsUpdateData);
 
-                    if (updateHistory_.empty()) {
+                    if (symmetricUpdateHistory_.empty()) {
                         break;
                     }
                 }
 
                 transversal.pop_back();
 
-                symmetricLatinSquare.enable(updateHistory_.back().index());
-                symmetricLatinSquare.enableAndIncrease(updateHistory_.back().indexes());
+                symmetricLatinSquare.enable(
+                    symmetricUpdateHistory_.back().regionIndex(), symmetricUpdateHistory_.back().cellUpdateData());
+                symmetricLatinSquare.enableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
 
-                updateHistory_.pop_back();
+                symmetricUpdateHistory_.pop_back();
             }
 
             if (iterations > MAX_ITERATIONS) {
-                symmetricLatinSquare.setRegions();
+                symmetricLatinSquare.setNumberRegions();
                 transversal.clear();
                 iterations = 0;
             }
@@ -463,74 +479,87 @@ namespace Transversal {
             return 1;
         }
 
+        uint_fast8_t doubleSize = symmetricLatinSquare.size();
+        doubleSize <<= 1;
+
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<uint_fast16_t> indexes;
+        std::vector<SymmetricCellUpdateData> cellsUpdateData;
+        cellsUpdateData.reserve(doubleSize);
 
-        updateHistory_.reserve(symmetricLatinSquare.size());
-        backtrackingHistory_.reserve(symmetricLatinSquare.size());
+        symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
+        symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
 
         boost::multiprecision::mpz_int transversalsCounter = 0;
         uint_fast8_t counter = 0;
 
+        // int iterations = 0;
+
         while (true) {
+            // ++iterations;
+
             if (transversalSize < almostSize) {
-                auto& region = symmetricLatinSquare.minEntropyRegion();
+                auto& region = symmetricLatinSquare.minEntropyTriangularRegion();
 
                 if (region.entropy()) {
                     ++transversalSize;
                     counter = 0;
 
-                    cellIndex = region.enabledCellIndexes()[0];
-                    symmetricLatinSquare.disable(cellIndex);
+                    cellIndex = region.triangularLocalEnabledCellIndexes()[0];
+                    const auto& symmetricCellUpdateData = symmetricLatinSquare.disable(cellIndex, region.index());
 
-                    updateHistory_.emplace_back(cellIndex, symmetricLatinSquare.disableAndDecrease(cellIndex));
-                    backtrackingHistory_.emplace_back(region.index(), cellIndex);
+                    symmetricUpdateHistory_.emplace_back(region.index(), symmetricCellUpdateData,
+                        symmetricLatinSquare.disableAndDecrease(cellIndex, region.index()));
+                    symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
                 } else {
                     --transversalSize;
 
                     if (++counter > 1) {
-                        indexes.clear();
-                        indexes.reserve(symmetricLatinSquare.size());
-                        indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                        cellsUpdateData.clear();
+                        cellsUpdateData.insert(cellsUpdateData.end(),
+                            symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
+                            symmetricBacktrackingHistory_.back().cellUpdateData().end());
 
-                        regionIndex = backtrackingHistory_.back().regionIndex();
+                        regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
 
-                        backtrackingHistory_.pop_back();
+                        symmetricBacktrackingHistory_.pop_back();
 
-                        while (backtrackingHistory_.size()
-                               && regionIndex == backtrackingHistory_.back().regionIndex()) {
-                            indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                        while (symmetricBacktrackingHistory_.size()
+                               && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
+                            cellsUpdateData.insert(cellsUpdateData.end(),
+                                symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
+                                symmetricBacktrackingHistory_.back().cellUpdateData().end());
 
-                            backtrackingHistory_.pop_back();
+                            symmetricBacktrackingHistory_.pop_back();
                         }
 
-                        symmetricLatinSquare.enableAndIncrease(indexes);
+                        symmetricLatinSquare.enableAndIncrease(regionIndex, cellsUpdateData);
 
-                        if (updateHistory_.empty()) {
+                        if (symmetricUpdateHistory_.empty()) {
                             break;
                         }
                     }
 
-                    symmetricLatinSquare.enable(updateHistory_.back().index());
-                    symmetricLatinSquare.enableAndIncrease(updateHistory_.back().indexes());
+                    symmetricLatinSquare.enable(
+                        symmetricUpdateHistory_.back().regionIndex(), symmetricUpdateHistory_.back().cellUpdateData());
+                    symmetricLatinSquare.enableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
 
-                    updateHistory_.pop_back();
+                    symmetricUpdateHistory_.pop_back();
                 }
             } else {
                 --transversalSize;
                 counter = 1;
+                transversalsCounter += symmetricLatinSquare.minEntropyTriangularRegion().entropy();
 
-                if (symmetricLatinSquare.minEntropyRegion().entropy()) {
-                    ++transversalsCounter;
-                }
+                symmetricLatinSquare.enable(
+                    symmetricUpdateHistory_.back().regionIndex(), symmetricUpdateHistory_.back().cellUpdateData());
+                symmetricLatinSquare.enableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
 
-                symmetricLatinSquare.enable(updateHistory_.back().index());
-                symmetricLatinSquare.enableAndIncrease(updateHistory_.back().indexes());
-
-                updateHistory_.pop_back();
+                symmetricUpdateHistory_.pop_back();
             }
         }
+
+        // std::cout << "Iterations: " << iterations << std::endl;
 
         return transversalsCounter;
     }
@@ -543,8 +572,9 @@ namespace Transversal {
 
         if (!symmetricLatinSquare.notFilled()) {
             if (symmetricLatinSquare.checkDiagonal()) {
-                symmetricLatinSquare.fillGrid();
-                symmetricLatinSquare.setRegions();
+                symmetricLatinSquare.fillDiagonal();
+
+                symmetricLatinSquare.setNumberRegions();
                 transversalsCounter = symmetricCount(symmetricLatinSquare);
 
                 return {SymmetricMinMaxData(transversalsCounter, symmetricLatinSquare),
@@ -605,9 +635,9 @@ namespace Transversal {
                 counter = 1;
 
                 if (symmetricLatinSquare.checkDiagonal()) {
-                    symmetricLatinSquare.fillGrid();
+                    symmetricLatinSquare.fillDiagonal();
 
-                    symmetricLatinSquare.setRegions();
+                    symmetricLatinSquare.setNumberRegions();
                     transversalsCounter = symmetricCount(symmetricLatinSquare);
 
                     if (transversalsCounter < latinSquaresCounters[0].counter()) {
@@ -620,7 +650,7 @@ namespace Transversal {
                         latinSquaresCounters[1].set(symmetricLatinSquare);
                     }
 
-                    symmetricLatinSquare.clearGrid();
+                    symmetricLatinSquare.clearDiagonal();
                 }
 
                 if (latinSquareUpdateHistory_.empty()) {
@@ -650,8 +680,9 @@ namespace Transversal {
 
         if (!symmetricLatinSquare.notFilled()) {
             if (symmetricLatinSquare.checkDiagonal()) {
-                symmetricLatinSquare.fillGrid();
-                symmetricLatinSquare.setRegions();
+                symmetricLatinSquare.fillDiagonal();
+
+                symmetricLatinSquare.setNumberRegions();
                 transversalsCounter = symmetricCount(symmetricLatinSquare);
 
                 return {SymmetricMinMaxData(transversalsCounter, symmetricLatinSquare),
@@ -713,9 +744,9 @@ namespace Transversal {
                 counter = 1;
 
                 if (symmetricLatinSquare.checkDiagonal()) {
-                    symmetricLatinSquare.fillGrid();
+                    symmetricLatinSquare.fillDiagonal();
 
-                    symmetricLatinSquare.setRegions();
+                    symmetricLatinSquare.setNumberRegions();
                     transversalsCounter = symmetricCount(symmetricLatinSquare);
 
                     if (transversalsCounter < latinSquaresCounters[0].counter()) {
@@ -728,7 +759,7 @@ namespace Transversal {
                         latinSquaresCounters[1].set(symmetricLatinSquare);
                     }
 
-                    symmetricLatinSquare.clearGrid();
+                    symmetricLatinSquare.clearDiagonal();
                 }
 
                 if (latinSquareUpdateHistory_.empty()) {
