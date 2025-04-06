@@ -11,31 +11,11 @@ namespace Transversal {
                 const LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept
                 : counter_(counter), symmetricLatinSquare_(symmetricLatinSquare) {}
 
-            SymmetricMinMaxData(const SymmetricMinMaxData& other)
-                : counter_(other.counter_), symmetricLatinSquare_(other.symmetricLatinSquare_) {}
+            SymmetricMinMaxData(const SymmetricMinMaxData&) = default;
+            SymmetricMinMaxData& operator=(const SymmetricMinMaxData&) = default;
 
-            SymmetricMinMaxData& operator=(const SymmetricMinMaxData& other) {
-                if (this != &other) {
-                    counter_ = other.counter_;
-                    symmetricLatinSquare_ = other.symmetricLatinSquare_;
-                }
-
-                return *this;
-            }
-
-            // SymmetricMinMaxData(SymmetricMinMaxData&& other) noexcept {
-            //     counter_ = std::exchange(other.counter_, 0);
-            //     symmetricLatinSquare_ = std::move(other.symmetricLatinSquare_);
-            // }
-
-            // SymmetricMinMaxData& operator=(SymmetricMinMaxData&& other) noexcept {
-            //     if (this != &other) {
-            //         counter_ = std::exchange(other.counter_, 0);
-            //         symmetricLatinSquare_ = std::move(other.symmetricLatinSquare_);
-            //     }
-
-            //     return *this;
-            // }
+            SymmetricMinMaxData(SymmetricMinMaxData&&) noexcept = default;
+            SymmetricMinMaxData& operator=(SymmetricMinMaxData&&) noexcept = default;
 
             [[nodiscard]] inline const boost::multiprecision::mpz_int& counter() const noexcept {
                 return counter_;

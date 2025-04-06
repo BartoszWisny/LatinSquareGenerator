@@ -42,4 +42,16 @@ namespace LatinSquare {
 
         return triangularLocalEnabledCellIndexes_;
     }
+
+    const std::vector<uint_fast16_t>& TriangularRegion::triangularOtherLocalEnabledCellIndexes() noexcept {
+        triangularOtherLocalEnabledCellIndexes_.clear();
+
+        for (const auto& cell : cells_) {
+            if (cell->otherTriangularEnabled(index_)) {
+                triangularOtherLocalEnabledCellIndexes_.emplace_back(cell->index());
+            }
+        }
+
+        return triangularOtherLocalEnabledCellIndexes_;
+    }
 }

@@ -3,7 +3,6 @@
 #include <cstdint>
 #include <memory>
 #include <vector>
-#include <utility>
 
 #include "Cell.hpp"
 
@@ -21,29 +20,8 @@ namespace LatinSquare {
             Region(const Region&) = default;
             Region& operator=(const Region&) = default;
 
-            inline constexpr Region(Region&& other) noexcept {
-                index_ = std::exchange(other.index_, 0);
-                cells_ = std::move(other.cells_);
-                size_ = std::exchange(other.size_, 0);
-                entropy_ = std::exchange(other.entropy_, 0);
-                notEnabled_ = std::exchange(other.notEnabled_, true);
-                counter_ = std::exchange(other.counter_, 0);
-                enabledCellIndexes_ = std::move(other.enabledCellIndexes_);
-            }
-
-            inline constexpr Region& operator=(Region&& other) noexcept {
-                if (this != &other) {
-                    index_ = std::exchange(other.index_, 0);
-                    cells_ = std::move(other.cells_);
-                    size_ = std::exchange(other.size_, 0);
-                    entropy_ = std::exchange(other.entropy_, 0);
-                    notEnabled_ = std::exchange(other.notEnabled_, true);
-                    counter_ = std::exchange(other.counter_, 0);
-                    enabledCellIndexes_ = std::move(other.enabledCellIndexes_);
-                }
-
-                return *this;
-            }
+            Region(Region&&) noexcept = default;
+            Region& operator=(Region&&) noexcept = default;
 
             [[nodiscard]] inline constexpr uint_fast8_t index() const noexcept {
                 return index_;

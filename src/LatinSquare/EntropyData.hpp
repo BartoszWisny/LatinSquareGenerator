@@ -3,7 +3,6 @@
 #include <bit>
 #include <cstdint>
 #include <vector>
-#include <utility>
 
 #include "Constants.hpp"
 
@@ -19,18 +18,8 @@ namespace LatinSquare {
             EntropyData(const EntropyData&) = default;
             EntropyData& operator=(const EntropyData&) = default;
 
-            inline constexpr EntropyData(EntropyData&& other) noexcept
-                : maxEntropy_(other.maxEntropy_), numbers_(other.numbers_), bit_(other.bit_) {}
-
-            inline constexpr EntropyData& operator=(EntropyData&& other) noexcept {
-                if (this != &other) {
-                    maxEntropy_ = std::exchange(other.maxEntropy_, 0);
-                    numbers_ = std::exchange(other.numbers_, 0);
-                    bit_ = std::exchange(other.bit_, 0);
-                }
-
-                return *this;
-            }
+            EntropyData(EntropyData&&) noexcept = default;
+            EntropyData& operator=(EntropyData&&) noexcept = default;
 
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept{
                 return std::popcount(numbers_);

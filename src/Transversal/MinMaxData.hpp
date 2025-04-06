@@ -1,7 +1,5 @@
 #pragma once
 
-#include <utility>
-
 #include <boost/multiprecision/gmp.hpp>
 
 #include "LatinSquare/LatinSquare.hpp"
@@ -13,38 +11,11 @@ namespace Transversal {
                 const boost::multiprecision::mpz_int& counter, const LatinSquare::LatinSquare& latinSquare) noexcept
                 : counter_(counter), latinSquare_(latinSquare) {}
 
+            MinMaxData(const MinMaxData&) = default;
+            MinMaxData& operator=(const MinMaxData&) = default;
 
-
-
-            MinMaxData(const MinMaxData& other)
-                : counter_(other.counter_), latinSquare_(other.latinSquare_) {}
-
-            MinMaxData& operator=(const MinMaxData& other) {
-                if (this != &other) {
-                    counter_ = other.counter_;
-                    latinSquare_ = other.latinSquare_;
-                }
-
-                return *this;
-            }
-
-            // MinMaxData(MinMaxData&& other) noexcept {
-            //     counter_ = std::exchange(other.counter_, 0);
-            //     latinSquare_ = std::move(latinSquare_);
-            // }
-
-            // MinMaxData& operator=(MinMaxData&& other) noexcept {
-            //     if (this != &other) {
-            //         counter_ = std::exchange(other.counter_, 0);
-            //         latinSquare_ = std::move(latinSquare_);
-            //     }
-
-            //     return *this;
-            // }
-
-
-
-
+            MinMaxData(MinMaxData&&) noexcept = default;
+            MinMaxData& operator=(MinMaxData&&) noexcept = default;
 
             [[nodiscard]] inline const boost::multiprecision::mpz_int& counter() const noexcept {
                 return counter_;

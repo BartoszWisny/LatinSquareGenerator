@@ -17,49 +17,8 @@ namespace LatinSquare {
             Cell(const Cell&) = default;
             Cell& operator=(const Cell&) = default;
 
-            Cell(Cell&& other) noexcept {
-                index_ = std::exchange(other.index_, 0);
-                rawRow_ = std::exchange(other.rawRow_, 0);
-                rawColumn_ = std::exchange(other.rawColumn_, 0);
-                number_ = std::exchange(other.number_, 0);
-                size_ = std::exchange(other.size_, 0);
-                doubleSize_ = std::exchange(other.doubleSize_, 0);
-                type_ = std::exchange(other.type_, Type::Custom);
-                entropyData_ = std::move(other.entropyData_);
-                maxNumber_ = std::exchange(other.maxNumber_, 0);
-                regionRow_ = std::exchange(other.regionRow_, 0);
-                regionColumn_ = std::exchange(other.regionColumn_, 0);
-                regionNumber_ = std::exchange(other.regionNumber_, 0);
-                rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
-                enabled_ = std::exchange(other.enabled_, false);
-                notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
-                otherRegionIndexes_ = std::move(other.otherRegionIndexes_);
-                triangularEnabled_ = std::move(other.triangularEnabled_);
-            }
-
-            Cell& operator=(Cell&& other) noexcept {
-                if (this != &other) {
-                    index_ = std::exchange(other.index_, 0);
-                    rawRow_ = std::exchange(other.rawRow_, 0);
-                    rawColumn_ = std::exchange(other.rawColumn_, 0);
-                    number_ = std::exchange(other.number_, 0);
-                    size_ = std::exchange(other.size_, 0);
-                    doubleSize_ = std::exchange(other.doubleSize_, 0);
-                    type_ = std::exchange(other.type_, Type::Custom);
-                    entropyData_ = std::move(other.entropyData_);
-                    maxNumber_ = std::exchange(other.maxNumber_, 0);
-                    regionRow_ = std::exchange(other.regionRow_, 0);
-                    regionColumn_ = std::exchange(other.regionColumn_, 0);
-                    regionNumber_ = std::exchange(other.regionNumber_, 0);
-                    rowColumnSum_ = std::exchange(other.rowColumnSum_, 0);
-                    enabled_ = std::exchange(other.enabled_, false);
-                    notOnDiagonal_ = std::exchange(other.notOnDiagonal_, false);
-                    otherRegionIndexes_ = std::move(other.otherRegionIndexes_);
-                    triangularEnabled_ = std::move(other.triangularEnabled_);
-                }
-
-                return *this;
-            }
+            Cell(Cell&& other) noexcept = default;
+            Cell& operator=(Cell&& other) noexcept = default;
 
             [[nodiscard]] inline constexpr uint_fast16_t index() const noexcept {
                 return index_;
@@ -151,11 +110,6 @@ namespace LatinSquare {
 
             inline constexpr void disable() noexcept {
                 enabled_ = false;
-            }
-
-            inline constexpr void triangularDisable() noexcept {
-                triangularEnabled_[0] = false;
-                triangularEnabled_[notOnDiagonal_] = false;
             }
 
             inline constexpr void triangularEnable(const uint_fast8_t regionIndex) noexcept {
