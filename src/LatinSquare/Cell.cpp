@@ -14,7 +14,7 @@ namespace LatinSquare {
         number_ = EMPTY;
         entropyData_ = EntropyData(size_);
 
-        if (type_ == Type::Reduced || type_ == Type::ReducedDiagonal) {
+        if (type_ == Type::Reduced) {
             if (rawRow_ == 0) {
                 fillAndClear(rawColumn_);
             } else if (rawColumn_ == 0) {
@@ -25,6 +25,21 @@ namespace LatinSquare {
             }
         } else if (type_ == Type::ReducedCyclic) {
             fillAndClear(rowColumnSum_ >= size_ ? rowColumnSum_ - size_ : rowColumnSum_);
+        } else if (type_ == Type::ReducedDiagonal) {
+            if (rawRow_ == 0) {
+                fillAndClear(rawColumn_);
+            } else if (rawColumn_ == 0) {
+                fillAndClear(rawRow_);
+            } else if ((size_ & 1) == 0 && rawRow_ == rawColumn_) {
+                fillAndClear(0);
+            } else {
+                if ((size_ & 1) == 0) {
+                    entropyData_.remove(0);
+                }
+
+                entropyData_.remove(rawRow_);
+                entropyData_.remove(rawColumn_);
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 #include "SymmetricLatinSquare.hpp"
 
 namespace LatinSquare {
+    // TODO: add additional region for diagonal latin squares
+
     SymmetricLatinSquare::SymmetricLatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
         set(type);
