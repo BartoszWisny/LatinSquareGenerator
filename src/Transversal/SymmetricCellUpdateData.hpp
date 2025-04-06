@@ -13,40 +13,40 @@ namespace Transversal {
                 const uint_fast16_t cellIndex, const uint_fast8_t regionIndex, const bool enabled) noexcept
                 : cellIndex_(cellIndex), regionIndex_(regionIndex), enabled_(enabled) {}
 
-            SymmetricCellUpdateData(const SymmetricCellUpdateData& other)
-                : cellIndex_(other.cellIndex_), regionIndex_(other.regionIndex_), enabled_(other.enabled_) {}
+            // SymmetricCellUpdateData(const SymmetricCellUpdateData& other)
+            //     : cellIndex_(other.cellIndex_), regionIndex_(other.regionIndex_), enabled_(other.enabled_) {}
 
-            SymmetricCellUpdateData& operator=(const SymmetricCellUpdateData& other) {
-                if (this != &other) {
-                    cellIndex_ = other.cellIndex_;
-                    regionIndex_ = other.regionIndex_;
-                    enabled_ = other.enabled_;
-                }
+            // SymmetricCellUpdateData& operator=(const SymmetricCellUpdateData& other) {
+            //     if (this != &other) {
+            //         cellIndex_ = other.cellIndex_;
+            //         regionIndex_ = other.regionIndex_;
+            //         enabled_ = other.enabled_;
+            //     }
 
-                return *this;
-            }
+            //     return *this;
+            // }
 
-            SymmetricCellUpdateData(SymmetricCellUpdateData&& other) noexcept {
-                cellIndex_ = std::exchange(other.cellIndex_, 0);
-                regionIndex_ = std::exchange(other.regionIndex_, 0);
-                enabled_ = std::exchange(other.enabled_, false);
-            }
+            // SymmetricCellUpdateData(SymmetricCellUpdateData&& other) noexcept {
+            //     cellIndex_ = std::exchange(other.cellIndex_, 0);
+            //     regionIndex_ = std::exchange(other.regionIndex_, 0);
+            //     enabled_ = std::exchange(other.enabled_, false);
+            // }
 
-            SymmetricCellUpdateData& operator=(SymmetricCellUpdateData&& other) noexcept {
-                if (this != &other) {
-                    cellIndex_ = std::exchange(other.cellIndex_, 0);
-                    regionIndex_ = std::exchange(other.regionIndex_, 0);
-                    enabled_ = std::exchange(other.enabled_, false);
-                }
+            // SymmetricCellUpdateData& operator=(SymmetricCellUpdateData&& other) noexcept {
+            //     if (this != &other) {
+            //         cellIndex_ = std::exchange(other.cellIndex_, 0);
+            //         regionIndex_ = std::exchange(other.regionIndex_, 0);
+            //         enabled_ = std::exchange(other.enabled_, false);
+            //     }
 
-                return *this;
-            }
+            //     return *this;
+            // }
 
-            // SymmetricCellUpdateData(const SymmetricCellUpdateData&) = default;
-            // SymmetricCellUpdateData& operator=(const SymmetricCellUpdateData&) = default;
+            SymmetricCellUpdateData(const SymmetricCellUpdateData&) = default;
+            SymmetricCellUpdateData& operator=(const SymmetricCellUpdateData&) = default;
 
-            // SymmetricCellUpdateData(SymmetricCellUpdateData&&) noexcept = default;
-            // SymmetricCellUpdateData& operator=(SymmetricCellUpdateData&&) noexcept = default;
+            SymmetricCellUpdateData(SymmetricCellUpdateData&&) noexcept = default;
+            SymmetricCellUpdateData& operator=(SymmetricCellUpdateData&&) noexcept = default;
 
             [[nodiscard]] inline constexpr uint_fast16_t cellIndex() const noexcept {
                 return cellIndex_;

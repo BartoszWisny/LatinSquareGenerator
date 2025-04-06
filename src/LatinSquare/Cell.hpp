@@ -1,8 +1,6 @@
 #pragma once
 
-#include <array>
 #include <cstdint>
-#include <map>
 #include <string>
 #include <vector>
 #include <utility>
@@ -120,27 +118,27 @@ namespace LatinSquare {
             }
 
             [[nodiscard]] inline constexpr uint_fast8_t otherRegionIndex(const uint_fast8_t regionIndex) noexcept {
-                return otherRegionIndexes_[regionIndex];
+                return otherRegionIndexes_[regionIndex != rawColumn_];
             }
 
             [[nodiscard]] inline constexpr bool triangularEnabled() noexcept {
-                return triangularEnabled_[rawColumn_] || triangularEnabled_[rawRow_];
+                return triangularEnabled_[0] || triangularEnabled_[notOnDiagonal_];
             }
 
             [[nodiscard]] inline constexpr bool triangularEnabled(const uint_fast8_t regionIndex) noexcept {
-                return triangularEnabled_[regionIndex];
+                return triangularEnabled_[regionIndex != rawColumn_];
             }
 
             [[nodiscard]] inline constexpr bool otherTriangularEnabled(const uint_fast8_t regionIndex) noexcept {
-                return triangularEnabled_[otherRegionIndexes_[regionIndex]];
+                return triangularEnabled_[otherRegionIndex(regionIndex) != rawColumn_];
             }
 
             [[nodiscard]] inline constexpr bool columnTriangularEnabled() noexcept {
-                return triangularEnabled_[rawColumn_];
+                return triangularEnabled_[0];
             }
 
             [[nodiscard]] inline constexpr bool rowTriangularEnabled() noexcept {
-                return triangularEnabled_[rawRow_];
+                return triangularEnabled_[notOnDiagonal_];
             }
 
             inline constexpr void set(const EntropyData& entropyData) noexcept {
@@ -156,16 +154,16 @@ namespace LatinSquare {
             }
 
             inline constexpr void triangularDisable() noexcept {
-                triangularEnabled_[rawColumn_] = false;
-                triangularEnabled_[rawRow_] = false;
+                triangularEnabled_[0] = false;
+                triangularEnabled_[notOnDiagonal_] = false;
             }
 
             inline constexpr void triangularEnable(const uint_fast8_t regionIndex) noexcept {
-                triangularEnabled_[regionIndex] = true;
+                triangularEnabled_[regionIndex != rawColumn_] = true;
             }
 
             inline constexpr void triangularDisable(const uint_fast8_t regionIndex) noexcept {
-                triangularEnabled_[regionIndex] = false;
+                triangularEnabled_[regionIndex != rawColumn_] = false;
             }
 
             inline constexpr void fillAndClear(const uint_fast8_t number) noexcept {
@@ -232,7 +230,7 @@ namespace LatinSquare {
             uint_fast8_t rowColumnSum_;
             bool enabled_;
             bool notOnDiagonal_;
-            std::map<uint_fast8_t, uint_fast8_t> otherRegionIndexes_;
-            std::map<uint_fast8_t, bool> triangularEnabled_;
+            std::vector<uint_fast8_t> otherRegionIndexes_;
+            std::vector<bool> triangularEnabled_;
     };
 }

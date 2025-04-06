@@ -183,8 +183,7 @@ namespace LatinSquare {
                 const std::vector<Transversal::SymmetricCellUpdateData>& cellUpdateData) noexcept;
             void enableAndIncrease(
                 const std::vector<Transversal::SymmetricCellUpdateData>& otherCellsUpdateData) noexcept;
-            void enableAndIncrease(const uint_fast8_t regionIndex,
-                const std::vector<Transversal::SymmetricCellUpdateData>& cellsUpdateData) noexcept;
+            void enableAndIncrease(const Transversal::SymmetricCellUpdateData& updateData) noexcept;
 
         private:
             void reset() noexcept;
@@ -198,7 +197,7 @@ namespace LatinSquare {
             uint_fast8_t doubleSize_;
             uint_fast8_t maxUpdateSize_;
             uint_fast8_t maxFillDiagonalSize_;
-            uint_fast8_t maxOtherCellsUpdateData_;
+            uint_fast16_t maxOtherCellsUpdateData_;
             std::vector<std::shared_ptr<Cell>> grid_;
             std::vector<std::shared_ptr<Cell>> triangularGrid_;
             std::vector<std::shared_ptr<Cell>> entropyTriangularGrid_;

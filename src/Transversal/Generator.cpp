@@ -20,7 +20,6 @@ namespace Transversal {
 
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<uint_fast16_t> indexes;
 
         updateHistory_.reserve(latinSquare.size());
         backtrackingHistory_.reserve(latinSquare.size());
@@ -45,21 +44,17 @@ namespace Transversal {
                 backtrackingHistory_.emplace_back(region.index(), cellIndex);
             } else {
                 if (++counter > 1) {
-                    indexes.clear();
-                    indexes.reserve(latinSquare.size());
-                    indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                    latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                     regionIndex = backtrackingHistory_.back().regionIndex();
 
                     backtrackingHistory_.pop_back();
 
                     while (backtrackingHistory_.size() && regionIndex == backtrackingHistory_.back().regionIndex()) {
-                        indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                        latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                         backtrackingHistory_.pop_back();
                     }
-
-                    latinSquare.enableAndIncrease(indexes);
 
                     if (updateHistory_.empty()) {
                         break;
@@ -95,7 +90,6 @@ namespace Transversal {
 
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<uint_fast16_t> indexes;
 
         updateHistory_.reserve(latinSquare.size());
         backtrackingHistory_.reserve(latinSquare.size());
@@ -124,9 +118,7 @@ namespace Transversal {
                     --transversalSize;
 
                     if (++counter > 1) {
-                        indexes.clear();
-                        indexes.reserve(latinSquare.size());
-                        indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                        latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                         regionIndex = backtrackingHistory_.back().regionIndex();
 
@@ -134,12 +126,10 @@ namespace Transversal {
 
                         while (backtrackingHistory_.size()
                                && regionIndex == backtrackingHistory_.back().regionIndex()) {
-                            indexes.emplace_back(backtrackingHistory_.back().cellIndex());
+                            latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                             backtrackingHistory_.pop_back();
                         }
-
-                        latinSquare.enableAndIncrease(indexes);
 
                         if (updateHistory_.empty()) {
                             break;
@@ -398,8 +388,6 @@ namespace Transversal {
 
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<SymmetricCellUpdateData> cellsUpdateData;
-        cellsUpdateData.reserve(symmetricLatinSquare.size());
 
         symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
         symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
@@ -425,25 +413,19 @@ namespace Transversal {
                 symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
             } else {
                 if (++counter > 1) {
-                    cellsUpdateData.clear();
-                    cellsUpdateData.insert(cellsUpdateData.end(),
-                        symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
-                        symmetricBacktrackingHistory_.back().cellUpdateData().end());
-
                     regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
+
+                    symmetricLatinSquare.enableAndIncrease(symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
                     symmetricBacktrackingHistory_.pop_back();
 
                     while (symmetricBacktrackingHistory_.size()
                            && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
-                        cellsUpdateData.insert(cellsUpdateData.end(),
-                            symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
-                            symmetricBacktrackingHistory_.back().cellUpdateData().end());
+                        symmetricLatinSquare.enableAndIncrease(
+                            symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
                         symmetricBacktrackingHistory_.pop_back();
                     }
-
-                    symmetricLatinSquare.enableAndIncrease(regionIndex, cellsUpdateData);
 
                     if (symmetricUpdateHistory_.empty()) {
                         break;
@@ -479,13 +461,8 @@ namespace Transversal {
             return 1;
         }
 
-        uint_fast8_t doubleSize = symmetricLatinSquare.size();
-        doubleSize <<= 1;
-
         uint_fast16_t cellIndex;
         uint_fast8_t regionIndex;
-        std::vector<SymmetricCellUpdateData> cellsUpdateData;
-        cellsUpdateData.reserve(doubleSize);
 
         symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
         symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
@@ -515,25 +492,20 @@ namespace Transversal {
                     --transversalSize;
 
                     if (++counter > 1) {
-                        cellsUpdateData.clear();
-                        cellsUpdateData.insert(cellsUpdateData.end(),
-                            symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
-                            symmetricBacktrackingHistory_.back().cellUpdateData().end());
-
                         regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
+
+                        symmetricLatinSquare.enableAndIncrease(
+                            symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
                         symmetricBacktrackingHistory_.pop_back();
 
                         while (symmetricBacktrackingHistory_.size()
                                && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
-                            cellsUpdateData.insert(cellsUpdateData.end(),
-                                symmetricBacktrackingHistory_.back().cellUpdateData().begin(),
-                                symmetricBacktrackingHistory_.back().cellUpdateData().end());
+                            symmetricLatinSquare.enableAndIncrease(
+                                symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
                             symmetricBacktrackingHistory_.pop_back();
                         }
-
-                        symmetricLatinSquare.enableAndIncrease(regionIndex, cellsUpdateData);
 
                         if (symmetricUpdateHistory_.empty()) {
                             break;
@@ -594,7 +566,11 @@ namespace Transversal {
             {SymmetricMinMaxData(factorial(size), symmetricLatinSquare), SymmetricMinMaxData(-1, symmetricLatinSquare)};
         uint_fast16_t counter = 0;
 
+        // int iterations = 0;
+
         while (true) {
+            // ++iterations;
+
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
@@ -670,6 +646,8 @@ namespace Transversal {
             latinSquaresCounters[0].set(0);
             latinSquaresCounters[1].set(0);
         }
+
+        // std::cout << "Minmax iterations: " << iterations << std::endl;
 
         return latinSquaresCounters;
     }

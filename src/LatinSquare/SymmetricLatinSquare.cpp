@@ -195,10 +195,12 @@ namespace LatinSquare {
                 if (triangularGrid_[index]->rawRow() > triangularGrid_[index]->rawColumn()) {
                     entropyTriangularGrid_[++entropyTriangularIndex] = triangularGrid_[index];
                 }
-            } else {
-                triangularGrid_[index]->fillAndClear(numbers[index]);
-                update(*triangularGrid_[index], numbers[index]);
+
+                continue;
             }
+
+            triangularGrid_[index]->fillAndClear(numbers[index]);
+            update(*triangularGrid_[index], numbers[index]);
         }
     }
 
@@ -223,7 +225,7 @@ namespace LatinSquare {
 
         maxOtherCellsUpdateData_ = size_;
         --maxOtherCellsUpdateData_;
-        maxOtherCellsUpdateData_ *= 4;
+        maxOtherCellsUpdateData_ *= 6;
         numberRegions_.reserve(size_);
         numberCells_.resize(size_);
 
@@ -239,7 +241,7 @@ namespace LatinSquare {
         }
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
-            numberRegions_.emplace_back(index, numberCells_[index], size_);
+            numberRegions_.emplace_back(size_, numberCells_[index], size_);
         }
     }
 
@@ -255,7 +257,7 @@ namespace LatinSquare {
         }
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
-            numberRegions_.emplace_back(index, numberCells_[index], size_);
+            numberRegions_.emplace_back(size_, numberCells_[index], size_);
         }
     }
 
@@ -297,7 +299,10 @@ namespace LatinSquare {
             if (cell->entropy() < minEntropy) {
                 minEntropy = cell->entropy();
                 minCell = &(*cell);
-            } else if (cell->entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
+                continue;
+            }
+
+            if (cell->entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
                 minCell = &(*cell);
             }
         }
@@ -383,7 +388,10 @@ namespace LatinSquare {
                 minEntropy = region.entropy();
                 triangularEnabled = region.triangularEnabled();
                 iterator = &region;
-            } else if (region.entropy() == minEntropy && region.triangularEnabled() < triangularEnabled) {
+                continue;
+            }
+
+            if (region.entropy() == minEntropy && region.triangularEnabled() < triangularEnabled) {
                 triangularEnabled = region.triangularEnabled();
                 iterator = &region;
             }
@@ -408,7 +416,10 @@ namespace LatinSquare {
             if (region.entropy() < minEntropy) {
                 minEntropy = region.entropy();
                 iterator = &region;
-            } else if (region.entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
+                continue;
+            }
+
+            if (region.entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
                 iterator = &region;
             }
         }
@@ -420,9 +431,10 @@ namespace LatinSquare {
         const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept {
         cellUpdateData_.clear();
         otherCellsUpdateData_.clear();
+        const auto cellOtherRegionIndex = grid_[cellIndex]->otherRegionIndex(regionIndex);
         const auto otherTriangularEnabled = grid_[cellIndex]->otherTriangularEnabled(regionIndex);
         grid_[cellIndex]->triangularDisable();
-        triangularRegions_[regionIndex].disableAndDecrease();
+        triangularRegions_[regionIndex].triangularDisableAndDecrease();
         cellUpdateData_.emplace_back(cellIndex, regionIndex);
 
         if (!triangularRegions_[regionIndex].triangularEnabled()) {
@@ -435,40 +447,38 @@ namespace LatinSquare {
                 }
 
                 if (grid_[index]->notOnDiagonal() && grid_[index]->otherTriangularEnabled(regionIndex)) {
-                    triangularRegions_[grid_[index]->otherRegionIndex(regionIndex)].decrease();
-                    otherCellsUpdateData_.emplace_back(index, grid_[index]->otherRegionIndex(regionIndex));
+                    const auto otherRegionIndex = grid_[index]->otherRegionIndex(regionIndex);
+                    triangularRegions_[otherRegionIndex].decrease();
+                    otherCellsUpdateData_.emplace_back(index, otherRegionIndex);
                 }
 
                 grid_[index]->triangularDisable();
             }
         }
 
-        if (grid_[cellIndex]->notOnDiagonal()
-            && triangularRegions_[grid_[cellIndex]->otherRegionIndex(regionIndex)].triangularEnabled()) {
+        if (grid_[cellIndex]->notOnDiagonal() && triangularRegions_[cellOtherRegionIndex].triangularEnabled()) {
             if (otherTriangularEnabled) {
-                triangularRegions_[grid_[cellIndex]->otherRegionIndex(regionIndex)].decrease();
+                triangularRegions_[cellOtherRegionIndex].decrease();
             }
 
-            triangularRegions_[grid_[cellIndex]->otherRegionIndex(regionIndex)].triangularDisable();
-            cellUpdateData_.emplace_back(
-                cellIndex, grid_[cellIndex]->otherRegionIndex(regionIndex), otherTriangularEnabled);
+            triangularRegions_[cellOtherRegionIndex].triangularDisable();
+            cellUpdateData_.emplace_back(cellIndex, cellOtherRegionIndex, otherTriangularEnabled);
 
-            if (!triangularRegions_[grid_[cellIndex]->otherRegionIndex(regionIndex)].triangularEnabled()) {
-                const auto& regionIndexes = triangularRegions_[
-                    grid_[cellIndex]->otherRegionIndex(regionIndex)].triangularGlobalEnabledCellIndexes();
+            if (!triangularRegions_[cellOtherRegionIndex].triangularEnabled()) {
+                const auto& regionIndexes =
+                    triangularRegions_[cellOtherRegionIndex].triangularGlobalEnabledCellIndexes();
 
                 for (const auto index : regionIndexes) {
-                    if (grid_[index]->triangularEnabled(grid_[cellIndex]->otherRegionIndex(regionIndex))) {
-                        triangularRegions_[grid_[cellIndex]->otherRegionIndex(regionIndex)].decrease();
-                        otherCellsUpdateData_.emplace_back(index, grid_[cellIndex]->otherRegionIndex(regionIndex));
+                    if (grid_[index]->triangularEnabled(cellOtherRegionIndex)) {
+                        triangularRegions_[cellOtherRegionIndex].decrease();
+                        otherCellsUpdateData_.emplace_back(index, cellOtherRegionIndex);
                     }
 
-                    if (grid_[index]->notOnDiagonal()
-                        && grid_[index]->otherTriangularEnabled(grid_[cellIndex]->otherRegionIndex(regionIndex))) {
-                        triangularRegions_[
-                            grid_[index]->otherRegionIndex(grid_[cellIndex]->otherRegionIndex(regionIndex))].decrease();
-                        otherCellsUpdateData_.emplace_back(
-                            index, grid_[index]->otherRegionIndex(grid_[cellIndex]->otherRegionIndex(regionIndex)));
+                    if (grid_[index]->notOnDiagonal() && grid_[index]->otherTriangularEnabled(cellOtherRegionIndex)) {
+                        const auto otherRegionIndex =
+                            grid_[index]->otherRegionIndex(grid_[cellIndex]->otherRegionIndex(regionIndex));
+                        triangularRegions_[otherRegionIndex].decrease();
+                        otherCellsUpdateData_.emplace_back(index, otherRegionIndex);
                     }
 
                     grid_[index]->triangularDisable();
@@ -512,9 +522,10 @@ namespace LatinSquare {
                     otherCellsUpdateData_.emplace_back(index, regionIndex);
                 }
 
-                if (grid_[index]->notOnDiagonal() && grid_[index]->otherTriangularEnabled(regionIndex)) {
-                    triangularRegions_[grid_[index]->otherRegionIndex(regionIndex)].decrease();
-                    otherCellsUpdateData_.emplace_back(index, grid_[index]->otherRegionIndex(regionIndex));
+                if (grid_[index]->otherTriangularEnabled(regionIndex)) {
+                    const auto otherRegionIndex = grid_[index]->otherRegionIndex(regionIndex);
+                    triangularRegions_[otherRegionIndex].decrease();
+                    otherCellsUpdateData_.emplace_back(index, otherRegionIndex);
                 }
 
                 grid_[index]->triangularDisable();
@@ -564,13 +575,8 @@ namespace LatinSquare {
         }
     }
 
-    void SymmetricLatinSquare::enableAndIncrease(const uint_fast8_t regionIndex,
-        const std::vector<Transversal::SymmetricCellUpdateData>& cellsUpdateData) noexcept {
-        for (const auto& updateData : cellsUpdateData) {
-            if (updateData.regionIndex() == regionIndex) {
-                grid_[updateData.cellIndex()]->triangularEnable(regionIndex);
-                triangularRegions_[regionIndex].increase();
-            }
-        }
+    void SymmetricLatinSquare::enableAndIncrease(const Transversal::SymmetricCellUpdateData& updateData) noexcept {
+        grid_[updateData.cellIndex()]->triangularEnable(updateData.regionIndex());
+        triangularRegions_[updateData.regionIndex()].increase();
     }
 }

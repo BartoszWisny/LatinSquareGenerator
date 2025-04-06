@@ -14,7 +14,7 @@ namespace LatinSquare {
 
             inline constexpr explicit Region(const uint_fast8_t index, const std::vector<std::shared_ptr<Cell>>& cells,
                 const uint_fast8_t size) noexcept
-                : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false) {
+                : index_(index), cells_(cells), size_(size), entropy_(size_), notEnabled_(false), counter_(0) {
                 enabledCellIndexes_.reserve(size_);
             }
 
@@ -27,6 +27,7 @@ namespace LatinSquare {
                 size_ = std::exchange(other.size_, 0);
                 entropy_ = std::exchange(other.entropy_, 0);
                 notEnabled_ = std::exchange(other.notEnabled_, true);
+                counter_ = std::exchange(other.counter_, 0);
                 enabledCellIndexes_ = std::move(other.enabledCellIndexes_);
             }
 
@@ -37,6 +38,7 @@ namespace LatinSquare {
                     size_ = std::exchange(other.size_, 0);
                     entropy_ = std::exchange(other.entropy_, 0);
                     notEnabled_ = std::exchange(other.notEnabled_, true);
+                    counter_ = std::exchange(other.counter_, 0);
                     enabledCellIndexes_ = std::move(other.enabledCellIndexes_);
                 }
 
@@ -80,6 +82,7 @@ namespace LatinSquare {
             uint_fast8_t size_;
             uint_fast8_t entropy_;
             bool notEnabled_;
+            uint_fast8_t counter_;
             std::vector<uint_fast16_t> enabledCellIndexes_;
     };
 }

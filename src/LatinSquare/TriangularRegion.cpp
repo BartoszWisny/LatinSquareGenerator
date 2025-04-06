@@ -28,13 +28,13 @@ namespace LatinSquare {
 
     const std::vector<uint_fast16_t>& TriangularRegion::triangularLocalEnabledCellIndexes() noexcept {
         triangularLocalEnabledCellIndexes_.resize(entropy_);
-        uint_fast8_t counter = 0;
+        counter_ = 0;
 
         for (const auto& cell : cells_) {
             if (cell->triangularEnabled(index_)) {
-                triangularLocalEnabledCellIndexes_[counter] = cell->index();
+                triangularLocalEnabledCellIndexes_[counter_] = cell->index();
 
-                if (++counter == entropy_) {
+                if (++counter_ == entropy_) {
                     break;
                 }
             }

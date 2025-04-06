@@ -361,6 +361,13 @@ namespace LatinSquare {
         regions_[grid_[index]->regionNumber()].enable();
     }
 
+    void LatinSquare::enableAndIncrease(const uint_fast16_t index) noexcept {
+        grid_[index]->enable();
+        regions_[grid_[index]->regionRow()].increase();
+        regions_[grid_[index]->regionColumn()].increase();
+        regions_[grid_[index]->regionNumber()].increase();
+    }
+
     void LatinSquare::enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept {
         for (const auto index : indexes) {
             grid_[index]->enable();
