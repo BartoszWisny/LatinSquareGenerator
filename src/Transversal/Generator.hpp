@@ -23,20 +23,29 @@ namespace Transversal {
         public:
             [[nodiscard]] const std::vector<uint_fast16_t> random(LatinSquare::LatinSquare& latinSquare) noexcept;
 
-            [[nodiscard]] const boost::multiprecision::mpz_int count(
-                LatinSquare::LatinSquare& latinSquare) noexcept;
-            [[nodiscard]] const std::array<MinMaxData, 2> minMax(
+            [[nodiscard]] const boost::multiprecision::mpz_int count(LatinSquare::LatinSquare& latinSquare) noexcept;
+            [[nodiscard]] const std::vector<MinMaxData>& minMax(
                 const uint_fast8_t size, const LatinSquare::Type type) noexcept;
-            [[nodiscard]] const std::array<MinMaxData, 2> minMax(LatinSquare::LatinSquare& latinSquare) noexcept;
+            [[nodiscard]] const std::vector<MinMaxData>& minMax(LatinSquare::LatinSquare& latinSquare) noexcept;
 
             [[nodiscard]] const std::vector<uint_fast16_t> symmetricRandom(
                 LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
 
             [[nodiscard]] const boost::multiprecision::mpz_int symmetricCount(
                 LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
-            [[nodiscard]] const std::array<SymmetricMinMaxData, 2> symmetricMinMax(
+            [[nodiscard]] const std::vector<SymmetricMinMaxData>& symmetricMinMax(
                 const uint_fast8_t size, const LatinSquare::Type type) noexcept;
-            [[nodiscard]] const std::array<SymmetricMinMaxData, 2> symmetricMinMax(
+            [[nodiscard]] const std::vector<SymmetricMinMaxData>& symmetricMinMax(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+
+            [[nodiscard]] const std::vector<uint_fast16_t> symmetricTriangularRandom(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+
+            [[nodiscard]] const boost::multiprecision::mpz_int symmetricTriangularCount(
+                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+            [[nodiscard]] const std::vector<SymmetricMinMaxData>& symmetricTriangularMinMax(
+                const uint_fast8_t size, const LatinSquare::Type type) noexcept;
+            [[nodiscard]] const std::vector<SymmetricMinMaxData>& symmetricTriangularMinMax(
                 LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
 
         private:
@@ -48,5 +57,7 @@ namespace Transversal {
             std::vector<SymmetricBacktrackingData> symmetricBacktrackingHistory_;
             std::vector<LatinSquare::UpdateData> latinSquareUpdateHistory_;
             std::vector<LatinSquare::BacktrackingData> latinSquareBacktrackingHistory_;
+            std::vector<MinMaxData> latinSquaresCounters_;
+            std::vector<SymmetricMinMaxData> symmetricLatinSquaresCounters_;
     };
 }

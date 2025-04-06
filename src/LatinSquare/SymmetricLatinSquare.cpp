@@ -213,6 +213,73 @@ namespace LatinSquare {
         }
     }
 
+    void SymmetricLatinSquare::setRegions() noexcept {
+        if (regions_.size()) {
+            resetRegions();
+            return;
+        }
+
+        regionsSize_ = size_;
+        regionsSize_ *= 3;
+        maxDisableAndDecreaseSize_ = size_;
+        --maxDisableAndDecreaseSize_;
+        maxDisableAndDecreaseSize_ *= 3;
+        regions_.reserve(regionsSize_);
+        std::vector<std::vector<std::shared_ptr<Cell>>> rowCells, columnCells;
+        rowCells.resize(size_);
+        columnCells.resize(size_);
+        numberCells_.resize(size_);
+        disableAndDecreaseIndexes_.reserve(maxDisableAndDecreaseSize_);
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            rowCells[index].reserve(size_);
+            columnCells[index].reserve(size_);
+            numberCells_[index].reserve(size_);
+        }
+
+        for (auto& cell : grid_) {
+            cell->setRegionNumber();
+            rowCells[cell->rawRow()].emplace_back(cell);
+            columnCells[cell->rawColumn()].emplace_back(cell);
+            numberCells_[cell->number()].emplace_back(cell);
+        }
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            regions_.emplace_back(index, rowCells[index], size_);
+        }
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            uint_fast8_t columnIndex = index;
+            columnIndex += size_;
+            regions_.emplace_back(columnIndex, columnCells[index], size_);
+        }
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            uint_fast8_t numberIndex = index;
+            numberIndex += doubleSize_;
+            regions_.emplace_back(numberIndex, numberCells_[index], size_);
+        }
+    }
+
+    void SymmetricLatinSquare::resetRegions() noexcept {
+        regions_.resize(doubleSize_);
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            numberCells_[index].clear();
+        }
+
+        for (auto& cell : grid_) {
+            cell->setRegionNumber();
+            numberCells_[cell->number()].emplace_back(cell);
+        }
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            uint_fast8_t numberIndex = index;
+            numberIndex += doubleSize_;
+            regions_.emplace_back(numberIndex, numberCells_[index], size_);
+        }
+    }
+
     void SymmetricLatinSquare::setNumberRegions() noexcept {
         if (numberRegions_.size()) {
             resetNumberRegions();
@@ -224,13 +291,12 @@ namespace LatinSquare {
         maxOtherCellsUpdateData_ *= 3;
         numberRegions_.reserve(size_);
         numberCells_.resize(size_);
-
-        for (uint_fast8_t index = 0; index < size_; ++index) {
-            numberCells_[index].reserve(size_);
-        }
-
         cellUpdateData_.reserve(2);
         otherCellsUpdateData_.reserve(maxOtherCellsUpdateData_);
+
+        for (uint_fast8_t index = 0; index < size_; ++index) {
+            numberCells_[index].clear();
+        }
 
         for (auto& cell : triangularGrid_) {
             numberCells_[cell->number()].emplace_back(cell);
@@ -366,6 +432,121 @@ namespace LatinSquare {
         fillDiagonalIndexes_.clear();
     }
 
+    Region& SymmetricLatinSquare::minEntropyRegion() noexcept {
+        Region* iterator = nullptr;
+        uint_fast8_t minEntropy = 0xFF;
+
+        for (auto& region : regions_) {
+            if (region.notEnabled()) {
+                continue;
+            }
+
+            if (!region.entropy()) {
+                return region;
+            }
+
+            if (region.entropy() < minEntropy) {
+                minEntropy = region.entropy();
+                iterator = &region;
+            }
+        }
+
+        return *iterator;
+    }
+
+    Region& SymmetricLatinSquare::randomMinEntropyRegion() noexcept {
+        Region* iterator = nullptr;
+        uint_fast8_t minEntropy = 0xFF;
+
+        for (auto& region : regions_) {
+            if (region.notEnabled()) {
+                continue;
+            }
+
+            if (!region.entropy()) {
+                return region;
+            }
+
+            if (region.entropy() < minEntropy) {
+                minEntropy = region.entropy();
+                iterator = &region;
+            } else if (region.entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
+                iterator = &region;
+            }
+        }
+
+        return *iterator;
+    }
+
+    void SymmetricLatinSquare::disable(const uint_fast16_t index) noexcept {
+        grid_[index]->disable();
+        regions_[grid_[index]->regionRow()].disableAndDecrease();
+        regions_[grid_[index]->regionColumn()].disableAndDecrease();
+        regions_[grid_[index]->regionNumber()].disableAndDecrease();
+    }
+
+    const std::vector<uint_fast16_t>& SymmetricLatinSquare::disableAndDecrease(const uint_fast16_t index) noexcept {
+        disableAndDecreaseIndexes_.clear();
+        uint_fast16_t rowIndex = grid_[index]->rawRow();
+        rowIndex *= size_;
+        uint_fast16_t columnIndex = grid_[index]->rawColumn();
+
+        while (columnIndex < gridSize_) {
+            if (grid_[rowIndex]->enabled()) {
+                grid_[rowIndex]->disable();
+                regions_[grid_[rowIndex]->regionRow()].decrease();
+                regions_[grid_[rowIndex]->regionColumn()].decrease();
+                regions_[grid_[rowIndex]->regionNumber()].decrease();
+                disableAndDecreaseIndexes_.emplace_back(rowIndex);
+            }
+
+            if (grid_[columnIndex]->enabled()) {
+                grid_[columnIndex]->disable();
+                regions_[grid_[columnIndex]->regionRow()].decrease();
+                regions_[grid_[columnIndex]->regionColumn()].decrease();
+                regions_[grid_[columnIndex]->regionNumber()].decrease();
+                disableAndDecreaseIndexes_.emplace_back(columnIndex);
+            }
+
+            ++rowIndex;
+            columnIndex += size_;
+        }
+
+        const auto& numberIndexes = regions_[grid_[index]->regionNumber()].enabledCellIndexes();
+
+        for (const auto numberIndex : numberIndexes) {
+            grid_[numberIndex]->disable();
+            regions_[grid_[numberIndex]->regionRow()].decrease();
+            regions_[grid_[numberIndex]->regionColumn()].decrease();
+            regions_[grid_[numberIndex]->regionNumber()].decrease();
+            disableAndDecreaseIndexes_.emplace_back(numberIndex);
+        }
+
+        return disableAndDecreaseIndexes_;
+    }
+
+    void SymmetricLatinSquare::enable(const uint_fast16_t index) noexcept {
+        regions_[grid_[index]->regionRow()].enable();
+        regions_[grid_[index]->regionColumn()].enable();
+        regions_[grid_[index]->regionNumber()].enable();
+    }
+
+    void SymmetricLatinSquare::enableAndIncrease(const uint_fast16_t index) noexcept {
+        grid_[index]->enable();
+        regions_[grid_[index]->regionRow()].increase();
+        regions_[grid_[index]->regionColumn()].increase();
+        regions_[grid_[index]->regionNumber()].increase();
+    }
+
+    void SymmetricLatinSquare::enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept {
+        for (const auto index : indexes) {
+            grid_[index]->enable();
+            regions_[grid_[index]->regionRow()].increase();
+            regions_[grid_[index]->regionColumn()].increase();
+            regions_[grid_[index]->regionNumber()].increase();
+        }
+    }
+
     TriangularRegion& SymmetricLatinSquare::minEntropyTriangularRegion() noexcept {
         TriangularRegion* iterator = nullptr;
         uint_fast8_t minEntropy = 0xFF;
@@ -415,7 +596,7 @@ namespace LatinSquare {
         return *iterator;
     }
 
-    const std::vector<Transversal::SymmetricCellUpdateData>& SymmetricLatinSquare::disable(
+    const std::vector<Transversal::SymmetricCellUpdateData>& SymmetricLatinSquare::triangularDisable(
         const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept {
         cellUpdateData_.clear();
         grid_[cellIndex]->triangularDisable(regionIndex);
@@ -432,7 +613,7 @@ namespace LatinSquare {
         return cellUpdateData_;
     }
 
-    const std::vector<Transversal::SymmetricCellUpdateData>& SymmetricLatinSquare::disableAndDecrease(
+    const std::vector<Transversal::SymmetricCellUpdateData>& SymmetricLatinSquare::triangularDisableAndDecrease(
         const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept {
         otherCellsUpdateData_.clear();
         const auto cellOtherRegionIndex = grid_[cellIndex]->otherRegionIndex(regionIndex);
@@ -465,7 +646,7 @@ namespace LatinSquare {
         return otherCellsUpdateData_;
     }
 
-    void SymmetricLatinSquare::enable(const uint_fast8_t regionIndex,
+    void SymmetricLatinSquare::triangularEnable(const uint_fast8_t regionIndex,
         const std::vector<Transversal::SymmetricCellUpdateData>& cellUpdateData) noexcept {
         triangularRegions_[regionIndex].enable();
 
@@ -475,7 +656,7 @@ namespace LatinSquare {
         }
     }
 
-    void SymmetricLatinSquare::enableAndIncrease(
+    void SymmetricLatinSquare::triangularEnableAndIncrease(
         const std::vector<Transversal::SymmetricCellUpdateData>& otherCellsUpdateData) noexcept {
         for (const auto& updateData : otherCellsUpdateData) {
             grid_[updateData.cellIndex()]->triangularEnable(updateData.regionIndex());
@@ -483,7 +664,8 @@ namespace LatinSquare {
         }
     }
 
-    void SymmetricLatinSquare::enableAndIncrease(const Transversal::SymmetricCellUpdateData& updateData) noexcept {
+    void SymmetricLatinSquare::triangularEnableAndIncrease(
+        const Transversal::SymmetricCellUpdateData& updateData) noexcept {
         grid_[updateData.cellIndex()]->triangularEnable(updateData.regionIndex());
         triangularRegions_[updateData.regionIndex()].increase();
     }

@@ -7,9 +7,10 @@
 namespace Transversal {
     class MinMaxData {
         public:
-            inline explicit MinMaxData(
-                const boost::multiprecision::mpz_int& counter, const LatinSquare::LatinSquare& latinSquare) noexcept
-                : counter_(counter), latinSquare_(latinSquare) {}
+            inline explicit MinMaxData(const boost::multiprecision::mpz_int& counter,
+                const boost::multiprecision::mpz_int& latinSquaresCounter,
+                const LatinSquare::LatinSquare& latinSquare) noexcept
+                : counter_(counter), latinSquaresCounter_(latinSquaresCounter), latinSquare_(latinSquare) {}
 
             MinMaxData(const MinMaxData&) = default;
             MinMaxData& operator=(const MinMaxData&) = default;
@@ -21,6 +22,10 @@ namespace Transversal {
                 return counter_;
             }
 
+            [[nodiscard]] inline const boost::multiprecision::mpz_int& latinSquaresCounter() const noexcept {
+                return latinSquaresCounter_;
+            }
+
             [[nodiscard]] inline const LatinSquare::LatinSquare& latinSquare() const noexcept {
                 return latinSquare_;
             }
@@ -29,12 +34,21 @@ namespace Transversal {
                 counter_ = counter;
             }
 
+            inline constexpr void reset() noexcept {
+                latinSquaresCounter_ = 1;
+            }
+
+            inline constexpr void increase() noexcept {
+                ++latinSquaresCounter_;
+            }
+
             inline constexpr void set(const LatinSquare::LatinSquare& latinSquare) noexcept {
                 latinSquare_ = latinSquare;
             }
 
         private:
             boost::multiprecision::mpz_int counter_;
+            boost::multiprecision::mpz_int latinSquaresCounter_;
             LatinSquare::LatinSquare latinSquare_;
     };
 }

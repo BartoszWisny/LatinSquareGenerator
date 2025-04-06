@@ -8,8 +8,10 @@ namespace Transversal {
     class SymmetricMinMaxData {
         public:
             inline explicit SymmetricMinMaxData(const boost::multiprecision::mpz_int& counter,
+                const boost::multiprecision::mpz_int& symmetricLatinSquaresCounter,
                 const LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept
-                : counter_(counter), symmetricLatinSquare_(symmetricLatinSquare) {}
+                : counter_(counter), symmetricLatinSquaresCounter_(symmetricLatinSquaresCounter),
+                  symmetricLatinSquare_(symmetricLatinSquare) {}
 
             SymmetricMinMaxData(const SymmetricMinMaxData&) = default;
             SymmetricMinMaxData& operator=(const SymmetricMinMaxData&) = default;
@@ -21,6 +23,10 @@ namespace Transversal {
                 return counter_;
             }
 
+            [[nodiscard]] inline const boost::multiprecision::mpz_int& symmetricLatinSquaresCounter() const noexcept {
+                return symmetricLatinSquaresCounter_;
+            }
+
             [[nodiscard]] inline const LatinSquare::SymmetricLatinSquare& symmetricLatinSquare() const noexcept {
                 return symmetricLatinSquare_;
             }
@@ -29,12 +35,21 @@ namespace Transversal {
                 counter_ = counter;
             }
 
+            inline constexpr void reset() noexcept {
+                symmetricLatinSquaresCounter_ = 1;
+            }
+
+            inline constexpr void increase() noexcept {
+                ++symmetricLatinSquaresCounter_;
+            }
+
             inline constexpr void set(const LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
                 symmetricLatinSquare_ = symmetricLatinSquare;
             }
 
         private:
             boost::multiprecision::mpz_int counter_;
+            boost::multiprecision::mpz_int symmetricLatinSquaresCounter_;
             LatinSquare::SymmetricLatinSquare symmetricLatinSquare_;
     };
 }
