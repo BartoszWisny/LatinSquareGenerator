@@ -20,11 +20,77 @@ namespace LatinSquare {
             explicit LatinSquare(const uint_fast8_t size, const std::vector<uint_fast8_t>& numbers,
                 cpp::splitmix64& splitmix64) noexcept;
 
-            LatinSquare(const LatinSquare&) = default;
-            LatinSquare& operator=(const LatinSquare&) = default;
+            LatinSquare(const LatinSquare& other)
+                : size_(other.size_), gridSize_(other.gridSize_), entropyGridSize_(other.entropyGridSize_),
+                  doubleSize_(other.doubleSize_), maxUpdateSize_(other.maxUpdateSize_),
+                  regionsSize_(other.regionsSize_), maxDisableAndDecreaseSize_(other.maxDisableAndDecreaseSize_),
+                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_),
+                  updateIndexes_(other.updateIndexes_), disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
+                grid_.reserve(other.grid_.size());
 
-            LatinSquare(LatinSquare&&) noexcept = default;
-            LatinSquare& operator=(LatinSquare&&) noexcept = default;
+                for (const auto& cell : other.grid_) {
+                    grid_.emplace_back(std::make_shared<Cell>(*cell));
+                }
+
+                entropyGrid_.reserve(other.entropyGrid_.size());
+
+                for (const auto& cell : other.entropyGrid_) {
+                    entropyGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                }
+
+                numberCells_.resize(other.numberCells_.size());
+
+                for (size_t index = 0; index < other.numberCells_.size(); ++index) {
+                    numberCells_[index].reserve(other.numberCells_[index].size());
+
+                    for (const auto& cell : other.numberCells_[index]) {
+                        numberCells_[index].emplace_back(std::make_shared<Cell>(*cell));
+                    }
+                }
+            }
+
+            LatinSquare& operator=(const LatinSquare& other) {
+                if (this != &other) {
+                    size_ = other.size_;
+                    gridSize_ = other.gridSize_;
+                    entropyGridSize_ = other.entropyGridSize_;
+                    doubleSize_ = other.doubleSize_;
+                    maxUpdateSize_ = other.maxUpdateSize_;
+                    regionsSize_ = other.regionsSize_;
+                    maxDisableAndDecreaseSize_ = other.maxDisableAndDecreaseSize_;
+                    regions_ = other.regions_;
+                    splitmix64_ = other.splitmix64_;
+                    notFilled_ = other.notFilled_;
+                    updateIndexes_ = other.updateIndexes_;
+                    disableAndDecreaseIndexes_ = other.disableAndDecreaseIndexes_;
+                    grid_.clear();
+                    grid_.reserve(other.grid_.size());
+
+                    for (const auto& cell : other.grid_) {
+                        grid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    entropyGrid_.clear();
+                    entropyGrid_.reserve(other.entropyGrid_.size());
+
+                    for (const auto& cell : other.entropyGrid_) {
+                        entropyGrid_.emplace_back(std::make_shared<Cell>(*cell));
+                    }
+
+                    numberCells_.clear();
+                    numberCells_.resize(other.numberCells_.size());
+
+                    for (size_t index = 0; index < other.numberCells_.size(); ++index) {
+                        numberCells_[index].reserve(other.numberCells_[index].size());
+
+                        for (const auto& cell : other.numberCells_[index]) {
+                            numberCells_[index].emplace_back(std::make_shared<Cell>(*cell));
+                        }
+                    }
+                }
+
+                return *this;
+            }
 
             [[nodiscard]] inline constexpr uint_fast8_t size() const noexcept {
                 return size_;
