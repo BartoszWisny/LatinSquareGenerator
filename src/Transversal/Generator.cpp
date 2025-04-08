@@ -100,7 +100,7 @@ namespace Transversal {
                     ++transversalSize;
                     counter = 0;
 
-                    cellIndex = region.enabledCellIndexes()[0];
+                    cellIndex = region.firstEnabledCellIndex();
                     latinSquare.disable(cellIndex);
 
                     updateHistory_.emplace_back(cellIndex, latinSquare.disableAndDecrease(cellIndex));
@@ -166,7 +166,7 @@ namespace Transversal {
         if (latinSquare.notFilled() < 2) {
             if (latinSquare.notFilled()) {
                 auto& cell = latinSquare.minEntropyCell();
-                latinSquare.fillAndClear(cell, cell.numbers()[0]);
+                latinSquare.fillAndClear(cell, cell.firstNumber());
             }
 
             latinSquare.setRegions();
@@ -191,10 +191,10 @@ namespace Transversal {
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -229,8 +229,8 @@ namespace Transversal {
 
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
-                    number = cell.numbers()[0];
+                if (cell.positiveEntropy()) {
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -280,7 +280,7 @@ namespace Transversal {
         if (latinSquare.notFilled() < 2) {
             if (latinSquare.notFilled()) {
                 auto& cell = latinSquare.minEntropyCell();
-                latinSquare.fillAndClear(cell, cell.numbers()[0]);
+                latinSquare.fillAndClear(cell, cell.firstNumber());
             }
 
             latinSquare.setRegions();
@@ -305,10 +305,10 @@ namespace Transversal {
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -343,8 +343,8 @@ namespace Transversal {
 
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
-                    number = cell.numbers()[0];
+                if (cell.positiveEntropy()) {
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -481,7 +481,7 @@ namespace Transversal {
                     ++transversalSize;
                     counter = 0;
 
-                    cellIndex = region.enabledCellIndexes()[0];
+                    cellIndex = region.firstEnabledCellIndex();
                     symmetricLatinSquare.disable(cellIndex);
 
                     updateHistory_.emplace_back(cellIndex, symmetricLatinSquare.disableAndDecrease(cellIndex));
@@ -567,10 +567,10 @@ namespace Transversal {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 
@@ -686,10 +686,10 @@ namespace Transversal {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 
@@ -867,7 +867,7 @@ namespace Transversal {
                     ++transversalSize;
                     counter = 0;
 
-                    cellIndex = region.triangularLocalEnabledCellIndexes()[0];
+                    cellIndex = region.firstTriangularLocalEnabledCellIndex();
                     const auto& symmetricCellUpdateData =
                         symmetricLatinSquare.triangularDisable(cellIndex, region.index());
 
@@ -960,10 +960,10 @@ namespace Transversal {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 
@@ -1079,10 +1079,10 @@ namespace Transversal {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 

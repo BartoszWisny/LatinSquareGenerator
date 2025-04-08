@@ -163,15 +163,11 @@ namespace LatinSquare {
         }
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
-            uint_fast8_t columnIndex = index;
-            columnIndex += size_;
-            regions_.emplace_back(columnIndex, columnCells[index], size_);
+            regions_.emplace_back(index + size_, columnCells[index], size_);
         }
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
-            uint_fast8_t numberIndex = index;
-            numberIndex += doubleSize_;
-            regions_.emplace_back(numberIndex, numberCells_[index], size_);
+            regions_.emplace_back(index + doubleSize_, numberCells_[index], size_);
         }
     }
 
@@ -188,56 +184,67 @@ namespace LatinSquare {
         }
 
         for (uint_fast8_t index = 0; index < size_; ++index) {
-            uint_fast8_t numberIndex = index;
-            numberIndex += doubleSize_;
-            regions_.emplace_back(numberIndex, numberCells_[index], size_);
+            regions_.emplace_back(index + doubleSize_, numberCells_[index], size_);
         }
     }
 
     Cell& LatinSquare::minEntropyCell() noexcept {
-        Cell* minCell = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+        minCell_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& cell : entropyGrid_) {
             if (cell->filled()) {
                 continue;
             }
 
-            if (!cell->entropy()) {
+            if (!cell->positiveEntropy()) {
                 return *cell;
             }
 
-            if (cell->entropy() < minEntropy) {
-                minEntropy = cell->entropy();
-                minCell = &(*cell);
+            if (cell->entropy() < minEntropy_) {
+                minCell_ = &(*cell);
+                minEntropy_ = cell->entropy();
             }
         }
 
-        return *minCell;
+        return *minCell_;
+    }
+
+    Cell& LatinSquare::lastNotFilledCell() noexcept {
+        for (auto& cell : entropyGrid_) {
+            if (cell->notFilled()) {
+                return *cell;
+            }
+        }
+
+        return *entropyGrid_[0];
     }
 
     Cell& LatinSquare::randomMinEntropyCell() noexcept {
-        Cell* minCell = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+        minCell_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& cell : entropyGrid_) {
             if (cell->filled()) {
                 continue;
             }
 
-            if (!cell->entropy()) {
+            if (!cell->positiveEntropy()) {
                 return *cell;
             }
 
-            if (cell->entropy() < minEntropy) {
-                minEntropy = cell->entropy();
-                minCell = &(*cell);
-            } else if (cell->entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
-                minCell = &(*cell);
+            if (cell->entropy() < minEntropy_) {
+                minCell_ = &(*cell);
+                minEntropy_ = cell->entropy();
+                continue;
+            }
+
+            if (cell->entropy() == minEntropy_ && splitmix64_.next() % notFilled_ == 0) {
+                minCell_ = &(*cell);
             }
         }
 
-        return *minCell;
+        return *minCell_;
     }
 
     const std::vector<uint_fast16_t>& LatinSquare::update(Cell& cell, const uint_fast8_t number) noexcept {
@@ -262,15 +269,13 @@ namespace LatinSquare {
         }
 
         if (cell.type() == Type::ReducedDiagonal && !cell.notOnDiagonal()) {
-            uint_fast16_t index = -1;
-
-            while (++index < gridSize_) {
+            for (uint_fast16_t index = 0; index < gridSize_; index += size_) {
                 if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
                     grid_[index]->remove();
                     updateIndexes_.emplace_back(index);
                 }
 
-                index += size_;
+                ++index;
             }
         }
 
@@ -278,8 +283,8 @@ namespace LatinSquare {
     }
 
     Region& LatinSquare::minEntropyRegion() noexcept {
-        Region* iterator = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+        minRegion_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {
@@ -290,18 +295,18 @@ namespace LatinSquare {
                 return region;
             }
 
-            if (region.entropy() < minEntropy) {
-                minEntropy = region.entropy();
-                iterator = &region;
+            if (region.entropy() < minEntropy_) {
+                minRegion_ = &region;
+                minEntropy_ = region.entropy();
             }
         }
 
-        return *iterator;
+        return *minRegion_;
     }
 
     Region& LatinSquare::randomMinEntropyRegion() noexcept {
-        Region* iterator = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+        minRegion_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {
@@ -312,15 +317,18 @@ namespace LatinSquare {
                 return region;
             }
 
-            if (region.entropy() < minEntropy) {
-                minEntropy = region.entropy();
-                iterator = &region;
-            } else if (region.entropy() == minEntropy && (splitmix64_.next() & 1)) { // TODO: maybe use better randomness
-                iterator = &region;
+            if (region.entropy() < minEntropy_) {
+                minRegion_ = &region;
+                minEntropy_ = region.entropy();
+                continue;
+            }
+
+            if (region.entropy() == minEntropy_ && splitmix64_.next() % regionsSize_ == 0) {
+                minRegion_ = &region;
             }
         }
 
-        return *iterator;
+        return *minRegion_;
     }
 
     void LatinSquare::disable(const uint_fast16_t index) noexcept {

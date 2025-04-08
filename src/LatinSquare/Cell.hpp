@@ -40,12 +40,20 @@ namespace LatinSquare {
                 return type_;
             }
 
+            [[nodiscard]] inline constexpr uint_fast64_t positiveEntropy() const noexcept {
+                return entropyData_.positiveEntropy();
+            }
+
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept {
                 return entropyData_.entropy();
             }
 
             [[nodiscard]] inline const std::vector<uint_fast8_t> numbers() const noexcept {
                 return entropyData_.numbers();
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t firstNumber() const noexcept {
+                return entropyData_.firstNumber();
             }
 
             [[nodiscard]] inline const EntropyData& entropyData() const noexcept {
@@ -62,10 +70,6 @@ namespace LatinSquare {
 
             [[nodiscard]] inline constexpr uint_fast8_t regionNumber() const noexcept {
                 return regionNumber_;
-            }
-
-            [[nodiscard]] inline constexpr uint_fast8_t rowColumnSum() const noexcept {
-                return rowColumnSum_;
             }
 
             [[nodiscard]] inline constexpr bool filled() const noexcept {
@@ -117,11 +121,11 @@ namespace LatinSquare {
             }
 
             inline constexpr void enable() noexcept {
-                enabled_ = true;
+                enabled_ ^= true;
             }
 
             inline constexpr void disable() noexcept {
-                enabled_ = false;
+                enabled_ ^= true;
             }
 
             inline constexpr void triangularEnable(const uint_fast8_t regionIndex) noexcept {
@@ -178,7 +182,6 @@ namespace LatinSquare {
             }
 
             void reset() noexcept;
-            [[nodiscard]] const std::string id() const noexcept;
 
         private:
             uint_fast16_t index_;

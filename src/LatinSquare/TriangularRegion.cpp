@@ -26,21 +26,31 @@ namespace LatinSquare {
         return triangularGlobalEnabledCellIndexes_;
     }
 
-    const std::vector<uint_fast16_t>& TriangularRegion::triangularLocalEnabledCellIndexes() noexcept {
-        triangularLocalEnabledCellIndexes_.resize(entropy_);
-        counter_ = 0;
+    // const std::vector<uint_fast16_t>& TriangularRegion::triangularLocalEnabledCellIndexes() noexcept {
+    //     triangularLocalEnabledCellIndexes_.resize(entropy_);
+    //     counter_ = 0;
 
+    //     for (const auto& cell : cells_) {
+    //         if (cell->triangularEnabled(index_)) {
+    //             triangularLocalEnabledCellIndexes_[counter_] = cell->index();
+
+    //             if (++counter_ == entropy_) {
+    //                 break;
+    //             }
+    //         }
+    //     }
+
+    //     return triangularLocalEnabledCellIndexes_;
+    // }
+
+    uint_fast16_t TriangularRegion::firstTriangularLocalEnabledCellIndex() noexcept {
         for (const auto& cell : cells_) {
             if (cell->triangularEnabled(index_)) {
-                triangularLocalEnabledCellIndexes_[counter_] = cell->index();
-
-                if (++counter_ == entropy_) {
-                    break;
-                }
+                return cell->index();
             }
         }
 
-        return triangularLocalEnabledCellIndexes_;
+        return 0xFFFF;
     }
 
     const std::vector<uint_fast16_t>& TriangularRegion::triangularOtherLocalEnabledCellIndexes() noexcept {

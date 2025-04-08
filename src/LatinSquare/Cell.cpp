@@ -46,14 +46,4 @@ namespace LatinSquare {
             }
         }
     }
-
-    const std::string Cell::id() const noexcept {
-        std::string id = "R";
-        id += std::to_string(rawRow_);
-        id += 'C';
-        id += std::to_string(rawColumn_);
-        id += '#';
-        id += std::to_string(number_);
-        return id;
-    }
 }

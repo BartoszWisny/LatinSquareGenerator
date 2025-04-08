@@ -17,4 +17,14 @@ namespace LatinSquare {
 
         return enabledCellIndexes_;
     }
+
+    uint_fast16_t Region::firstEnabledCellIndex() const noexcept {
+        for (const auto& cell : cells_) {
+            if (cell->enabled()) {
+                return cell->index();
+            }
+        }
+
+        return 0xFFFF;
+    }
 }

@@ -31,7 +31,8 @@ namespace LatinSquare {
                   maxDisableAndDecreaseSize_(other.maxDisableAndDecreaseSize_),
                   maxOtherCellsUpdateData_(other.maxOtherCellsUpdateData_), regions_(other.regions_),
                   triangularRegions_(other.triangularRegions_), numberRegions_(other.numberRegions_),
-                  splitmix64_(other.splitmix64_), notFilled_(other.notFilled_), updateIndexes_(other.updateIndexes_),
+                  splitmix64_(other.splitmix64_), minCell_(other.minCell_), minRegion_(other.minRegion_),
+                  minEntropy_(other.minEntropy_), notFilled_(other.notFilled_), updateIndexes_(other.updateIndexes_),
                   fillDiagonalIndexes_(other.fillDiagonalIndexes_),
                   disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_), cellUpdateData_(other.cellUpdateData_),
                   otherCellsUpdateData_(other.otherCellsUpdateData_) {
@@ -86,6 +87,9 @@ namespace LatinSquare {
                     triangularRegions_ = other.triangularRegions_;
                     numberRegions_ = other.numberRegions_;
                     splitmix64_ = other.splitmix64_;
+                    minCell_ = other.minCell_;
+                    minRegion_ = other.minRegion_;
+                    minEntropy_ = other.minEntropy_;
                     notFilled_ = other.notFilled_;
                     updateIndexes_ = other.updateIndexes_;
                     fillDiagonalIndexes_ = other.fillDiagonalIndexes_;
@@ -229,6 +233,9 @@ namespace LatinSquare {
             std::vector<TriangularRegion> triangularRegions_;
             std::vector<TriangularRegion> numberRegions_;
             cpp::splitmix64 splitmix64_;
+            Cell* minCell_;
+            Region* minRegion_;
+            uint_fast8_t minEntropy_;
             uint_fast16_t notFilled_;
             std::vector<uint_fast16_t> updateIndexes_;
             std::vector<uint_fast16_t> fillDiagonalIndexes_;

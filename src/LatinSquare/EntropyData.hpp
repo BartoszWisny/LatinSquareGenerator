@@ -21,8 +21,16 @@ namespace LatinSquare {
             EntropyData(EntropyData&&) noexcept = default;
             EntropyData& operator=(EntropyData&&) noexcept = default;
 
+            [[nodiscard]] inline constexpr uint_fast64_t positiveEntropy() const noexcept{
+                return numbers_;
+            }
+
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept{
                 return std::popcount(numbers_);
+            }
+
+            [[nodiscard]] inline constexpr uint_fast8_t firstNumber() const noexcept {
+                return std::countr_zero(numbers_);
             }
 
             inline constexpr void clear() noexcept {

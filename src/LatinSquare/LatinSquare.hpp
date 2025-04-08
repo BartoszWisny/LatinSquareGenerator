@@ -24,7 +24,8 @@ namespace LatinSquare {
                 : size_(other.size_), gridSize_(other.gridSize_), entropyGridSize_(other.entropyGridSize_),
                   doubleSize_(other.doubleSize_), maxUpdateSize_(other.maxUpdateSize_),
                   regionsSize_(other.regionsSize_), maxDisableAndDecreaseSize_(other.maxDisableAndDecreaseSize_),
-                  regions_(other.regions_), splitmix64_(other.splitmix64_), notFilled_(other.notFilled_),
+                  regions_(other.regions_), splitmix64_(other.splitmix64_), minCell_(other.minCell_),
+                  minRegion_(other.minRegion_), minEntropy_(other.minEntropy_), notFilled_(other.notFilled_),
                   updateIndexes_(other.updateIndexes_), disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_) {
                 grid_.reserve(other.grid_.size());
 
@@ -60,6 +61,9 @@ namespace LatinSquare {
                     maxDisableAndDecreaseSize_ = other.maxDisableAndDecreaseSize_;
                     regions_ = other.regions_;
                     splitmix64_ = other.splitmix64_;
+                    minCell_ = other.minCell_;
+                    minRegion_ = other.minRegion_;
+                    minEntropy_ = other.minEntropy_;
                     notFilled_ = other.notFilled_;
                     updateIndexes_ = other.updateIndexes_;
                     disableAndDecreaseIndexes_ = other.disableAndDecreaseIndexes_;
@@ -135,6 +139,7 @@ namespace LatinSquare {
             void setRegions() noexcept;
 
             [[nodiscard]] Cell& minEntropyCell() noexcept;
+            [[nodiscard]] Cell& lastNotFilledCell() noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
             const std::vector<uint_fast16_t>& update(Cell& cell, const uint_fast8_t number) noexcept;
 
@@ -162,6 +167,9 @@ namespace LatinSquare {
             std::vector<std::shared_ptr<Cell>> entropyGrid_;
             std::vector<Region> regions_;
             cpp::splitmix64 splitmix64_;
+            Cell* minCell_;
+            Region* minRegion_;
+            uint_fast8_t minEntropy_;
             uint_fast16_t notFilled_;
             std::vector<uint_fast16_t> updateIndexes_;
             std::vector<std::vector<std::shared_ptr<Cell>>> numberCells_;

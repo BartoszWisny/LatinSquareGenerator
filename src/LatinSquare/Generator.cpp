@@ -22,7 +22,7 @@ namespace LatinSquare {
         while (latinSquare.notFilled()) {
             auto& cell = latinSquare.randomMinEntropyCell();
 
-            if (cell.entropy()) {
+            if (cell.positiveEntropy()) {
                 counter = 0;
 
                 number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -76,7 +76,7 @@ namespace LatinSquare {
         while (latinSquare.notFilled()) {
             auto& cell = latinSquare.randomMinEntropyCell();
 
-            if (cell.entropy()) {
+            if (cell.positiveEntropy()) {
                 counter = 0;
 
                 number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -134,10 +134,10 @@ namespace LatinSquare {
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -164,7 +164,7 @@ namespace LatinSquare {
                 }
             } else {
                 counter = 1;
-                latinSquaresCounter += latinSquare.minEntropyCell().entropy();
+                latinSquaresCounter += latinSquare.lastNotFilledCell().entropy();
 
                 latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
@@ -194,10 +194,10 @@ namespace LatinSquare {
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     latinSquare.fillAndClear(cell, number);
 
@@ -224,7 +224,7 @@ namespace LatinSquare {
                 }
             } else {
                 counter = 1;
-                latinSquaresCounter += latinSquare.minEntropyCell().entropy();
+                latinSquaresCounter += latinSquare.lastNotFilledCell().entropy();
 
                 latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
@@ -253,7 +253,7 @@ namespace LatinSquare {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.randomMinEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
                     number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -323,7 +323,7 @@ namespace LatinSquare {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.randomMinEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
                     number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -395,10 +395,10 @@ namespace LatinSquare {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 
@@ -459,10 +459,10 @@ namespace LatinSquare {
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell();
 
-                if (cell.entropy()) {
+                if (cell.positiveEntropy()) {
                     counter = 0;
 
-                    number = cell.numbers()[0];
+                    number = cell.firstNumber();
                     entropyData = cell.entropyData();
                     symmetricLatinSquare.fillAndClear(cell, number);
 

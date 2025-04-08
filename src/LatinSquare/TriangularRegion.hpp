@@ -16,7 +16,7 @@ namespace LatinSquare {
                 : index_(index), cells_(cells), size_(size), entropy_(cells.size()), notEnabled_(false), counter_(0) {
                 updatedCellIndexes_.reserve(size_);
                 triangularGlobalEnabledCellIndexes_.reserve(size_);
-                triangularLocalEnabledCellIndexes_.reserve(size_);
+                // triangularLocalEnabledCellIndexes_.reserve(size_);
                 triangularOtherLocalEnabledCellIndexes_.reserve(size_);
             }
 
@@ -39,7 +39,7 @@ namespace LatinSquare {
             }
 
             inline constexpr void enable() noexcept {
-                notEnabled_ = false;
+                notEnabled_ ^= true;
             }
 
             inline constexpr void decrease() noexcept {
@@ -51,13 +51,14 @@ namespace LatinSquare {
             }
 
             inline constexpr void disableAndDecrease() noexcept {
-                notEnabled_ = true;
+                notEnabled_ ^= true;
                 --entropy_;
             }
 
             [[nodiscard]] const std::vector<uint_fast16_t>& updatedCellIndexes(const uint_fast8_t number) noexcept;
             [[nodiscard]] const std::vector<uint_fast16_t>& triangularGlobalEnabledCellIndexes() noexcept;
-            [[nodiscard]] const std::vector<uint_fast16_t>& triangularLocalEnabledCellIndexes() noexcept;
+            // [[nodiscard]] const std::vector<uint_fast16_t>& triangularLocalEnabledCellIndexes() noexcept;
+            [[nodiscard]] uint_fast16_t firstTriangularLocalEnabledCellIndex() noexcept;
             [[nodiscard]] const std::vector<uint_fast16_t>& triangularOtherLocalEnabledCellIndexes() noexcept;
 
         private:
@@ -69,7 +70,7 @@ namespace LatinSquare {
             uint_fast8_t counter_;
             std::vector<uint_fast16_t> updatedCellIndexes_;
             std::vector<uint_fast16_t> triangularGlobalEnabledCellIndexes_;
-            std::vector<uint_fast16_t> triangularLocalEnabledCellIndexes_;
+            // std::vector<uint_fast16_t> triangularLocalEnabledCellIndexes_;
             std::vector<uint_fast16_t> triangularOtherLocalEnabledCellIndexes_;
     };
 }
