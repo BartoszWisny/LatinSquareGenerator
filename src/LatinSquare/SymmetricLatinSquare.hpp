@@ -143,6 +143,10 @@ namespace LatinSquare {
                 return grid_;
             }
 
+            [[nodiscard]] inline const std::vector<std::shared_ptr<Cell>>& triangularGrid() const noexcept {
+                return triangularGrid_;
+            }
+
             [[nodiscard]] inline constexpr uint_fast16_t notFilled() const noexcept {
                 return notFilled_;
             }

@@ -36,6 +36,10 @@ namespace LatinSquare {
                 return number_;
             }
 
+            [[nodiscard]] inline constexpr Type type() const noexcept{
+                return type_;
+            }
+
             [[nodiscard]] inline constexpr uint_fast8_t entropy() const noexcept {
                 return entropyData_.entropy();
             }
@@ -60,6 +64,10 @@ namespace LatinSquare {
                 return regionNumber_;
             }
 
+            [[nodiscard]] inline constexpr uint_fast8_t rowColumnSum() const noexcept {
+                return rowColumnSum_;
+            }
+
             [[nodiscard]] inline constexpr bool filled() const noexcept {
                 return number_ != EMPTY;
             }
@@ -74,6 +82,10 @@ namespace LatinSquare {
 
             [[nodiscard]] inline constexpr bool notOnDiagonal() const noexcept {
                 return notOnDiagonal_;
+            }
+
+            [[nodiscard]] inline constexpr bool notOnAntidiagonal() const noexcept {
+                return notOnAntidiagonal_;
             }
 
             [[nodiscard]] inline constexpr uint_fast8_t otherRegionIndex(const uint_fast8_t regionIndex) noexcept {
@@ -184,6 +196,7 @@ namespace LatinSquare {
             uint_fast8_t rowColumnSum_;
             bool enabled_;
             bool notOnDiagonal_;
+            bool notOnAntidiagonal_;
             std::vector<uint_fast8_t> otherRegionIndexes_;
             std::vector<bool> triangularEnabled_;
     };

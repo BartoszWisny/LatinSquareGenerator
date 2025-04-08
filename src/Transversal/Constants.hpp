@@ -16,7 +16,7 @@ namespace Transversal {
     static constexpr std::string_view SYMMETRIC_TRANSVERSALS_MINMAX = "-stm";
     static constexpr std::string_view SYMMETRIC_TRANSVERSALS_TEMPLATE = "-stt";
 
-    static constexpr std::string_view SYMMETRIC_TRIANGULAR_TRANSVERSALS_RANDOM = "-sttr";
+    // static constexpr std::string_view SYMMETRIC_TRIANGULAR_TRANSVERSALS_RANDOM = "-sttr";
     static constexpr std::string_view SYMMETRIC_TRIANGULAR_TRANSVERSALS_COUNT = "-sttc";
     static constexpr std::string_view SYMMETRIC_TRIANGULAR_TRANSVERSALS_MINMAX = "-sttm";
     static constexpr std::string_view SYMMETRIC_TRIANGULAR_TRANSVERSALS_TEMPLATE = "-sttt";

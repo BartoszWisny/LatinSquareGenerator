@@ -1,8 +1,6 @@
 #include "SymmetricLatinSquare.hpp"
 
 namespace LatinSquare {
-    // TODO: add additional region for diagonal latin squares
-
     SymmetricLatinSquare::SymmetricLatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
         set(type);
@@ -41,8 +39,9 @@ namespace LatinSquare {
         entropyTriangularGridSize_ -= size_;
         doubleSize_ = size_;
         doubleSize_ <<= 1;
-        maxUpdateSize_ = doubleSize_;
-        maxUpdateSize_ -= 2;
+        maxUpdateSize_ = size_;
+        --maxUpdateSize_;
+        maxUpdateSize_ *= 2;
         maxFillDiagonalSize_ = size_;
         notFilled_ = entropyTriangularGridSize_;
         grid_.resize(gridSize_);
@@ -129,8 +128,9 @@ namespace LatinSquare {
         triangularGridSize_ >>= 1;
         doubleSize_ = size_;
         doubleSize_ <<= 1;
-        maxUpdateSize_ = doubleSize_;
-        maxUpdateSize_ -= 2;
+        maxUpdateSize_ = size_;
+        --maxUpdateSize_;
+        maxUpdateSize_ *= 2;
         maxFillDiagonalSize_ = size_;
         grid_.resize(gridSize_);
         triangularGrid_.resize(triangularGridSize_);
@@ -379,6 +379,18 @@ namespace LatinSquare {
         updateIndexes_ = triangularRegions_[cell.rawRow()].updatedCellIndexes(number);
         const auto& columnCellIndexes = triangularRegions_[cell.rawColumn()].updatedCellIndexes(number);
         updateIndexes_.insert(updateIndexes_.end(), columnCellIndexes.begin(), columnCellIndexes.end());
+
+        if (cell.type() == Type::ReducedDiagonal && !cell.notOnDiagonal()) {
+            for (uint_fast16_t index = 0; index < gridSize_; index += size_) {
+                if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
+                    grid_[index]->remove();
+                    updateIndexes_.emplace_back(index);
+                }
+
+                ++index;
+            }
+        }
+
         return updateIndexes_;
     }
 

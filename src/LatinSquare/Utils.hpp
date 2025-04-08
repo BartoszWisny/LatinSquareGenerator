@@ -15,16 +15,16 @@ namespace LatinSquare {
     [[nodiscard]] const std::pair<uint_fast8_t, std::vector<uint_fast8_t>> convert(
         const std::string& filename) noexcept;
 
-    void printIds(const LatinSquare& latinSquare) noexcept;
     void printBoard(const LatinSquare& latinSquare) noexcept;
     void printFile(const LatinSquare& latinSquare, const std::string filename) noexcept;
 
     [[nodiscard]] const std::pair<uint_fast8_t, std::vector<uint_fast8_t>> symmetricConvert(
         const std::string& filename) noexcept;
 
-    void printIds(const SymmetricLatinSquare& symmetricLatinSquare) noexcept;
     void printBoard(const SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+    void printTriangularBoard(const SymmetricLatinSquare& symmetricLatinSquare) noexcept;
     void printFile(const SymmetricLatinSquare& symmetricLatinSquare, const std::string filename) noexcept;
+    void printTriangularFile(const SymmetricLatinSquare& symmetricLatinSquare, const std::string filename) noexcept;
 
     // TODO: add function to check if latin square fulfills all of the properties
 }

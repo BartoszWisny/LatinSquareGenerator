@@ -65,15 +65,6 @@ namespace LatinSquare {
         return {size, numbers};
     }
 
-    void printIds(const LatinSquare& latinSquare) noexcept {
-        const auto& grid = latinSquare.grid();
-
-        for (const auto& cell : grid) {
-            std::cout.write(cell->id().c_str(), cell->id().size());
-            std::cout.put('\n');
-        }
-    }
-
     void printBoard(const LatinSquare& latinSquare) noexcept {
         const auto& grid = latinSquare.grid();
         std::string leftBar = "+", repeatedLeftBar, spaces, numberString;
@@ -112,8 +103,8 @@ namespace LatinSquare {
         uint_fast16_t gridSize = latinSquare.size();
         gridSize *= latinSquare.size();
         const auto& grid = latinSquare.grid();
-        uint_fast16_t row = 0;
-        uint_fast16_t column = 0;
+        uint_fast8_t row = 0;
+        uint_fast8_t column = 0;
         std::string number;
         std::ofstream file(filename);
 
@@ -175,15 +166,6 @@ namespace LatinSquare {
         return {size, numbers};
     }
 
-    void printIds(const SymmetricLatinSquare& symmetricLatinSquare) noexcept {
-        const auto& grid = symmetricLatinSquare.grid();
-
-        for (const auto& cell : grid) {
-            std::cout.write(cell->id().c_str(), cell->id().size());
-            std::cout.put('\n');
-        }
-    }
-
     void printBoard(const SymmetricLatinSquare& symmetricLatinSquare) noexcept {
         const auto& grid = symmetricLatinSquare.grid();
         std::string leftBar = "+", repeatedLeftBar, spaces, numberString;
@@ -218,12 +200,48 @@ namespace LatinSquare {
         std::cout.put('\n');
     }
 
+    void printTriangularBoard(const SymmetricLatinSquare& symmetricLatinSquare) noexcept {
+        const auto& triangularGrid = symmetricLatinSquare.triangularGrid();
+        uint_fast16_t index = -1;
+        std::string leftBar = "+", repeatedLeftBar, spaces, numberString;
+        leftBar.append(std::string(static_cast<uint_fast8_t>(std::log10(symmetricLatinSquare.size()) + 1) + 2, '-'));
+        repeatedLeftBar = cpp::repeat(leftBar, symmetricLatinSquare.size());
+        uint8_t number;
+
+        for (uint_fast8_t row = 0; row < symmetricLatinSquare.size(); ++row) {
+            for (uint_fast8_t column = 0; column <= row; ++column) {
+                std::cout.write(leftBar.c_str(), leftBar.size());
+            }
+
+            std::cout.put('+');
+            std::cout.put('\n');
+
+            for (uint_fast8_t column = 0; column <= row; ++column) {
+                number = triangularGrid[++index]->number();
+                spaces = std::string(static_cast<uint_fast8_t>(std::log10(symmetricLatinSquare.size()))
+                                    - static_cast<uint_fast8_t>(std::log10(++number)) + 1, ' ');
+                numberString = std::to_string(number);
+                std::cout.put('|');
+                std::cout.write(spaces.c_str(), spaces.size());
+                std::cout.write(numberString.c_str(), numberString.size());
+                std::cout.put(' ');
+            }
+
+            std::cout.put('|');
+            std::cout.put('\n');
+        }
+
+        std::cout.write(repeatedLeftBar.c_str(), repeatedLeftBar.size());
+        std::cout.put('+');
+        std::cout.put('\n');
+    }
+
     void printFile(const SymmetricLatinSquare& symmetricLatinSquare, const std::string filename) noexcept {
         uint_fast16_t gridSize = symmetricLatinSquare.size();
         gridSize *= symmetricLatinSquare.size();
         const auto& grid = symmetricLatinSquare.grid();
-        uint_fast16_t row = 0;
-        uint_fast16_t column = 0;
+        uint_fast8_t row = 0;
+        uint_fast8_t column = 0;
         std::string number;
         std::ofstream file(filename);
 
@@ -241,6 +259,27 @@ namespace LatinSquare {
                 ++row;
                 file.put('\n');
             }
+        }
+    }
+
+    void printTriangularFile(const SymmetricLatinSquare& symmetricLatinSquare, const std::string filename) noexcept {
+        const auto& triangularGrid = symmetricLatinSquare.triangularGrid();
+        uint_fast16_t index = -1;
+        std::string number;
+        std::ofstream file(filename);
+
+        if (!file.is_open()) {
+            return;
+        }
+
+        for (uint_fast8_t row = 0; row < symmetricLatinSquare.size(); ++row) {
+            for (uint_fast8_t column = 0; column <= row; ++column) {
+                number = std::to_string(triangularGrid[++index]->number() + 1);
+                number += " ";
+                file.write(number.c_str(), number.size());
+            }
+
+            file.put('\n');
         }
     }
 }

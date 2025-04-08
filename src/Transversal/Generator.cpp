@@ -241,9 +241,7 @@ namespace Transversal {
                         latinSquaresCounters_[0].set(transversalsCounter);
                         latinSquaresCounters_[0].reset();
                         latinSquaresCounters_[0].set(latinSquare);
-                    }
-
-                    if (transversalsCounter == latinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == latinSquaresCounters_[0].counter()) {
                         latinSquaresCounters_[0].increase();
                     }
 
@@ -251,9 +249,7 @@ namespace Transversal {
                         latinSquaresCounters_[1].set(transversalsCounter);
                         latinSquaresCounters_[1].reset();
                         latinSquaresCounters_[1].set(latinSquare);
-                    }
-
-                    if (transversalsCounter == latinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == latinSquaresCounters_[1].counter()) {
                         latinSquaresCounters_[1].increase();
                     }
 
@@ -359,9 +355,7 @@ namespace Transversal {
                         latinSquaresCounters_[0].set(transversalsCounter);
                         latinSquaresCounters_[0].reset();
                         latinSquaresCounters_[0].set(latinSquare);
-                    }
-
-                    if (transversalsCounter == latinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == latinSquaresCounters_[0].counter()) {
                         latinSquaresCounters_[0].increase();
                     }
 
@@ -369,9 +363,7 @@ namespace Transversal {
                         latinSquaresCounters_[1].set(transversalsCounter);
                         latinSquaresCounters_[1].reset();
                         latinSquaresCounters_[1].set(latinSquare);
-                    }
-
-                    if (transversalsCounter == latinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == latinSquaresCounters_[1].counter()) {
                         latinSquaresCounters_[1].increase();
                     }
 
@@ -621,9 +613,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[0].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[0].reset();
                         symmetricLatinSquaresCounters_[0].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
                         symmetricLatinSquaresCounters_[0].increase();
                     }
 
@@ -631,9 +621,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[1].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[1].reset();
                         symmetricLatinSquaresCounters_[1].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
                         symmetricLatinSquaresCounters_[1].increase();
                     }
 
@@ -744,9 +732,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[0].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[0].reset();
                         symmetricLatinSquaresCounters_[0].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
                         symmetricLatinSquaresCounters_[0].increase();
                     }
 
@@ -754,9 +740,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[1].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[1].reset();
                         symmetricLatinSquaresCounters_[1].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
                         symmetricLatinSquaresCounters_[1].increase();
                     }
 
@@ -784,77 +768,77 @@ namespace Transversal {
         return symmetricLatinSquaresCounters_;
     }
 
-    const std::vector<uint_fast16_t> Generator::symmetricTriangularRandom(
-        LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
-        cpp::splitmix64 splitmix64;
-        std::vector<uint_fast16_t> transversal;
-        transversal.reserve(symmetricLatinSquare.size());
+    // const std::vector<uint_fast16_t> Generator::symmetricTriangularRandom(
+    //     LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
+    //     cpp::splitmix64 splitmix64;
+    //     std::vector<uint_fast16_t> transversal;
+    //     transversal.reserve(symmetricLatinSquare.size());
 
-        uint_fast16_t cellIndex;
-        uint_fast8_t regionIndex;
+    //     uint_fast16_t cellIndex;
+    //     uint_fast8_t regionIndex;
 
-        symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
-        symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
+    //     symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
+    //     symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
 
-        uint_fast8_t counter = 0;
-        uint_fast32_t iterations = 0;
+    //     uint_fast8_t counter = 0;
+    //     uint_fast32_t iterations = 0;
 
-        while (transversal.size() < symmetricLatinSquare.size()) {
-            ++iterations;
+    //     while (transversal.size() < symmetricLatinSquare.size()) {
+    //         ++iterations;
 
-            auto& region = symmetricLatinSquare.randomMinEntropyTriangularRegion();
+    //         auto& region = symmetricLatinSquare.randomMinEntropyTriangularRegion();
 
-            if (region.entropy()) {
-                counter = 0;
+    //         if (region.entropy()) {
+    //             counter = 0;
 
-                const auto& cellIndexes = region.triangularLocalEnabledCellIndexes();
-                cellIndex = cellIndexes[splitmix64.next() % cellIndexes.size()];
-                transversal.emplace_back(cellIndex);
-                const auto& symmetricCellUpdateData = symmetricLatinSquare.triangularDisable(cellIndex, region.index());
+    //             const auto& cellIndexes = region.triangularLocalEnabledCellIndexes();
+    //             cellIndex = cellIndexes[splitmix64.next() % cellIndexes.size()];
+    //             transversal.emplace_back(cellIndex);
+    //             const auto& symmetricCellUpdateData = symmetricLatinSquare.triangularDisable(cellIndex, region.index());
 
-                symmetricUpdateHistory_.emplace_back(region.index(), symmetricCellUpdateData,
-                    symmetricLatinSquare.triangularDisableAndDecrease(cellIndex, region.index()));
-                symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
-            } else {
-                if (++counter > 1) {
-                    regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
+    //             symmetricUpdateHistory_.emplace_back(region.index(), symmetricCellUpdateData,
+    //                 symmetricLatinSquare.triangularDisableAndDecrease(cellIndex, region.index()));
+    //             symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
+    //         } else {
+    //             if (++counter > 1) {
+    //                 regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
 
-                    symmetricLatinSquare.triangularEnableAndIncrease(
-                        symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
+    //                 symmetricLatinSquare.triangularEnableAndIncrease(
+    //                     symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
-                    symmetricBacktrackingHistory_.pop_back();
+    //                 symmetricBacktrackingHistory_.pop_back();
 
-                    while (symmetricBacktrackingHistory_.size()
-                           && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
-                        symmetricLatinSquare.triangularEnableAndIncrease(
-                            symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
+    //                 while (symmetricBacktrackingHistory_.size()
+    //                        && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
+    //                     symmetricLatinSquare.triangularEnableAndIncrease(
+    //                         symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
-                        symmetricBacktrackingHistory_.pop_back();
-                    }
+    //                     symmetricBacktrackingHistory_.pop_back();
+    //                 }
 
-                    if (symmetricUpdateHistory_.empty()) {
-                        break;
-                    }
-                }
+    //                 if (symmetricUpdateHistory_.empty()) {
+    //                     break;
+    //                 }
+    //             }
 
-                transversal.pop_back();
+    //             transversal.pop_back();
 
-                symmetricLatinSquare.triangularEnable(
-                    symmetricUpdateHistory_.back().regionIndex(), symmetricUpdateHistory_.back().cellUpdateData());
-                symmetricLatinSquare.triangularEnableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
+    //             symmetricLatinSquare.triangularEnable(
+    //                 symmetricUpdateHistory_.back().regionIndex(), symmetricUpdateHistory_.back().cellUpdateData());
+    //             symmetricLatinSquare.triangularEnableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
 
-                symmetricUpdateHistory_.pop_back();
-            }
+    //             symmetricUpdateHistory_.pop_back();
+    //         }
 
-            if (iterations > MAX_ITERATIONS) {
-                symmetricLatinSquare.setNumberRegions();
-                transversal.clear();
-                iterations = 0;
-            }
-        }
+    //         if (iterations > MAX_ITERATIONS) {
+    //             symmetricLatinSquare.setNumberRegions();
+    //             transversal.clear();
+    //             iterations = 0;
+    //         }
+    //     }
 
-        return transversal;
-    }
+    //     return transversal;
+    // }
 
     const boost::multiprecision::mpz_int Generator::symmetricTriangularCount(
         LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
@@ -1022,9 +1006,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[0].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[0].reset();
                         symmetricLatinSquaresCounters_[0].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
                         symmetricLatinSquaresCounters_[0].increase();
                     }
 
@@ -1032,9 +1014,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[1].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[1].reset();
                         symmetricLatinSquaresCounters_[1].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
                         symmetricLatinSquaresCounters_[1].increase();
                     }
 
@@ -1145,9 +1125,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[0].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[0].reset();
                         symmetricLatinSquaresCounters_[0].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[0].counter()) {
                         symmetricLatinSquaresCounters_[0].increase();
                     }
 
@@ -1155,9 +1133,7 @@ namespace Transversal {
                         symmetricLatinSquaresCounters_[1].set(transversalsCounter);
                         symmetricLatinSquaresCounters_[1].reset();
                         symmetricLatinSquaresCounters_[1].set(symmetricLatinSquare);
-                    }
-
-                    if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
+                    } else if (transversalsCounter == symmetricLatinSquaresCounters_[1].counter()) {
                         symmetricLatinSquaresCounters_[1].increase();
                     }
 

@@ -1,8 +1,6 @@
 #include "LatinSquare.hpp"
 
 namespace LatinSquare {
-    // TODO: add additional region for diagonal latin squares
-
     LatinSquare::LatinSquare(const uint_fast8_t size, const Type type) noexcept
         : size_(size) {
         set(type);
@@ -34,8 +32,9 @@ namespace LatinSquare {
         gridSize_ *= size_;
         doubleSize_ = size_;
         doubleSize_ <<= 1;
-        maxUpdateSize_ = doubleSize_;
-        maxUpdateSize_ -= 2;
+        maxUpdateSize_ = size_;
+        --maxUpdateSize_;
+        maxUpdateSize_ *= 3;
         notFilled_ = gridSize_;
         grid_.resize(gridSize_);
         updateIndexes_.reserve(maxUpdateSize_);
@@ -81,8 +80,9 @@ namespace LatinSquare {
         gridSize_ *= size_;
         doubleSize_ = size_;
         doubleSize_ <<= 1;
-        maxUpdateSize_ = doubleSize_;
-        maxUpdateSize_ -= 2;
+        maxUpdateSize_ = size_;
+        --maxUpdateSize_;
+        maxUpdateSize_ *= 3;
         notFilled_ = gridSize_;
         grid_.resize(gridSize_);
         updateIndexes_.reserve(maxUpdateSize_);
@@ -259,6 +259,19 @@ namespace LatinSquare {
 
             ++rowIndex;
             columnIndex += size_;
+        }
+
+        if (cell.type() == Type::ReducedDiagonal && !cell.notOnDiagonal()) {
+            uint_fast16_t index = -1;
+
+            while (++index < gridSize_) {
+                if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
+                    grid_[index]->remove();
+                    updateIndexes_.emplace_back(index);
+                }
+
+                index += size_;
+            }
         }
 
         return updateIndexes_;

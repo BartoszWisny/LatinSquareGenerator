@@ -38,8 +38,8 @@ namespace Transversal {
             [[nodiscard]] const std::vector<SymmetricMinMaxData>& symmetricMinMax(
                 LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
 
-            [[nodiscard]] const std::vector<uint_fast16_t> symmetricTriangularRandom(
-                LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
+            // [[nodiscard]] const std::vector<uint_fast16_t> symmetricTriangularRandom(
+            //     LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;
 
             [[nodiscard]] const boost::multiprecision::mpz_int symmetricTriangularCount(
                 LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept;

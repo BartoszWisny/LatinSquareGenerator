@@ -9,24 +9,6 @@
 #include <cpp/string.hpp>
 
 namespace Transversal {
-    void printIds(LatinSquare::LatinSquare& latinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
-        if (transversal.empty()) {
-            const std::string info = "Transversal was not found";
-            std::cout.write(info.c_str(), info.size());
-            std::cout.put('\n');
-        } else {
-            const auto& grid = latinSquare.grid();
-            std::sort(transversal.begin(), transversal.end());
-            std::string id;
-
-            for (const auto& index : transversal) {
-                id = grid[index]->id();
-                std::cout.write(id.c_str(), id.size());
-                std::cout.put('\n');
-            }
-        }
-    }
-
     void printBoard(LatinSquare::LatinSquare& latinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
         if (transversal.empty()) {
             const std::string info = "Transversal was not found";
@@ -43,12 +25,10 @@ namespace Transversal {
             leftBar.append(shortBar);
             rightBar.append("+");
             auto isTransversalCell = false, isTransversalPreviousCell = false;
-            uint_fast16_t index = 0;
-            uint_fast8_t column = 0, previousColumn = 0, difference = 0, number = 0;
+            uint_fast8_t index = 0, column = 0, previousColumn = 0, difference = 0, number = 0;
 
             for (const auto& cell : grid) {
-                isTransversalCell =
-                    (std::find(transversal.cbegin(), transversal.cend(), cell->index()) != transversal.cend());
+                isTransversalCell = (transversal[index] == cell->index());
 
                 if (cell->rawColumn() == 0) {
                     column = grid[transversal[index]]->rawColumn();
@@ -161,26 +141,6 @@ namespace Transversal {
         }
     }
 
-    void printIds(
-        LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
-        if (transversal.empty()) {
-            const std::string info = "Transversal was not found";
-            std::cout.write(info.c_str(), info.size());
-            std::cout.put('\n');
-        } else {
-            const auto& grid = symmetricLatinSquare.grid();
-            std::sort(transversal.begin(), transversal.end());
-            std::string id;
-
-            for (const auto& index : transversal) {
-                id = grid[index]->id();
-                std::cout.write(id.c_str(), id.size());
-                std::cout.put('\n');
-            }
-        }
-    }
-
-    // TODO: adjust this function for triangular grid
     void printBoard(
         LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
         if (transversal.empty()) {
@@ -199,12 +159,10 @@ namespace Transversal {
             leftBar.append(shortBar);
             rightBar.append("+");
             auto isTransversalCell = false, isTransversalPreviousCell = false;
-            uint_fast16_t index = 0;
-            uint_fast8_t column = 0, previousColumn = 0, difference = 0, number = 0;
+            uint_fast8_t index = 0, column = 0, previousColumn = 0, difference = 0, number = 0;
 
             for (const auto& cell : grid) {
-                isTransversalCell =
-                    (std::find(transversal.cbegin(), transversal.cend(), cell->index()) != transversal.cend());
+                isTransversalCell = (transversal[index] == cell->index());
 
                 if (cell->rawColumn() == 0) {
                     column = grid[transversal[index]]->rawColumn();
@@ -316,4 +274,15 @@ namespace Transversal {
             std::cout.put('\n');
         }
     }
+
+    // void printTriangularBoard(
+    //     LatinSquare::SymmetricLatinSquare& symmetricLatinSquare, std::vector<uint_fast16_t>& transversal) noexcept {
+    //     if (transversal.empty()) {
+    //         const std::string info = "Transversal was not found";
+    //         std::cout.write(info.c_str(), info.size());
+    //         std::cout.put('\n');
+    //     } else {
+
+    //     }
+    // }
 }

@@ -169,7 +169,7 @@ int main(int argc, char* argv[]) {
             timeString.append(LatinSquare::TIME);
             timeString.append(std::to_string(seconds));
             timeString.append(LatinSquare::SECONDS);
-            LatinSquare::printFile(symmetricLatinSquare, filename);
+            LatinSquare::printTriangularFile(symmetricLatinSquare, filename);
             std::cout.write(timeString.c_str(), timeString.size());
             return 0;
         }
@@ -226,7 +226,7 @@ int main(int argc, char* argv[]) {
             timeString.append(LatinSquare::TIME);
             timeString.append(std::to_string(seconds));
             timeString.append(LatinSquare::SECONDS);
-            LatinSquare::printFile(symmetricLatinSquare, filename);
+            LatinSquare::printTriangularFile(symmetricLatinSquare, filename);
             std::cout.write(timeString.c_str(), timeString.size());
             return 0;
         }
@@ -490,29 +490,29 @@ int main(int argc, char* argv[]) {
             std::cout.write(timeString.c_str(), timeString.size());
             return 0;
         }
-    } else if (argc == 3
-             && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRIANGULAR_TRANSVERSALS_RANDOM) == 0) {
-        const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
+    // } else if (argc == 3
+    //          && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRIANGULAR_TRANSVERSALS_RANDOM) == 0) {
+    //     const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
 
-        if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
-            auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
+    //     if (size > 0 && size <= LatinSquare::MAX_SIZE && numbers.size()) {
+    //         auto symmetricLatinSquare = LatinSquare::SymmetricLatinSquare(size, numbers);
 
-            if (!symmetricLatinSquare.notFilled()) {
-                symmetricLatinSquare.setNumberRegions();
-                const auto start = std::chrono::steady_clock::now();
-                auto transversal = transversalGenerator.symmetricTriangularRandom(symmetricLatinSquare);
-                const auto stop = std::chrono::steady_clock::now();
-                const auto duration = std::chrono::duration<double, std::micro>(stop - start);
-                const auto seconds = duration.count() / 1000000.0;
-                std::string timeString;
-                timeString.append(LatinSquare::TIME);
-                timeString.append(std::to_string(seconds));
-                timeString.append(LatinSquare::SECONDS);
-                Transversal::printBoard(symmetricLatinSquare, transversal);
-                std::cout.write(timeString.c_str(), timeString.size());
-                return 0;
-            }
-        }
+    //         if (!symmetricLatinSquare.notFilled()) {
+    //             symmetricLatinSquare.setNumberRegions();
+    //             const auto start = std::chrono::steady_clock::now();
+    //             auto transversal = transversalGenerator.symmetricTriangularRandom(symmetricLatinSquare);
+    //             const auto stop = std::chrono::steady_clock::now();
+    //             const auto duration = std::chrono::duration<double, std::micro>(stop - start);
+    //             const auto seconds = duration.count() / 1000000.0;
+    //             std::string timeString;
+    //             timeString.append(LatinSquare::TIME);
+    //             timeString.append(std::to_string(seconds));
+    //             timeString.append(LatinSquare::SECONDS);
+    //             Transversal::printTriangularBoard(symmetricLatinSquare, transversal);
+    //             std::cout.write(timeString.c_str(), timeString.size());
+    //             return 0;
+    //         }
+    //     }
     } else if (argc == 3
                && std::string_view(argv[1]).compare(Transversal::SYMMETRIC_TRIANGULAR_TRANSVERSALS_COUNT) == 0) {
         const auto [size, numbers] = LatinSquare::symmetricConvert(argv[2]);
@@ -559,7 +559,7 @@ int main(int argc, char* argv[]) {
             std::cout << counts[0].symmetricLatinSquaresCounter() << std::endl;
 
             if (!counts[0].symmetricLatinSquare().notFilled()) {
-                LatinSquare::printBoard(counts[0].symmetricLatinSquare());
+                LatinSquare::printTriangularBoard(counts[0].symmetricLatinSquare());
             }
 
             std::cout.write(Transversal::MAX_TRANSVERSALS.data(), Transversal::MAX_TRANSVERSALS.length());
@@ -569,7 +569,7 @@ int main(int argc, char* argv[]) {
             std::cout << counts[1].symmetricLatinSquaresCounter() << std::endl;
 
             if (!counts[1].symmetricLatinSquare().notFilled()) {
-                LatinSquare::printBoard(counts[1].symmetricLatinSquare());
+                LatinSquare::printTriangularBoard(counts[1].symmetricLatinSquare());
             }
 
             std::cout.write(timeString.c_str(), timeString.size());
@@ -597,7 +597,7 @@ int main(int argc, char* argv[]) {
             std::cout << counts[0].symmetricLatinSquaresCounter() << std::endl;
 
             if (!counts[0].symmetricLatinSquare().notFilled()) {
-                LatinSquare::printBoard(counts[0].symmetricLatinSquare());
+                LatinSquare::printTriangularBoard(counts[0].symmetricLatinSquare());
             }
 
             std::cout.write(Transversal::MAX_TRANSVERSALS.data(), Transversal::MAX_TRANSVERSALS.length());
@@ -607,7 +607,7 @@ int main(int argc, char* argv[]) {
             std::cout << counts[1].symmetricLatinSquaresCounter() << std::endl;
 
             if (!counts[1].symmetricLatinSquare().notFilled()) {
-                LatinSquare::printBoard(counts[1].symmetricLatinSquare());
+                LatinSquare::printTriangularBoard(counts[1].symmetricLatinSquare());
             }
 
             std::cout.write(timeString.c_str(), timeString.size());
