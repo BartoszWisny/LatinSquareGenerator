@@ -50,7 +50,7 @@ namespace LatinSquare {
             }
         }
 
-        return 0xFFFF;
+        return cells_[0]->index();
     }
 
     const std::vector<uint_fast16_t>& TriangularRegion::triangularOtherLocalEnabledCellIndexes() noexcept {

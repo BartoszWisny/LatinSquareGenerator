@@ -6,6 +6,8 @@
 namespace LatinSquare {
     static constexpr uint_fast8_t EMPTY = 0xFF;
     static constexpr uint_fast8_t MAX_SIZE = 64;
+    static constexpr uint_fast16_t DEFAULT_CELL_INDEX = 0xFFFF;
+    static constexpr uint_fast8_t DEFAULT_REGION_INDEX = 0xFF;
 
     enum class Type : uint_fast8_t {
         Unknown = 0x00,

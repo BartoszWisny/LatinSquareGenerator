@@ -188,7 +188,11 @@ namespace LatinSquare {
         }
     }
 
-    Cell& LatinSquare::minEntropyCell() noexcept {
+    Cell& LatinSquare::minEntropyCell(const uint_fast16_t index) noexcept {
+        if (index < DEFAULT_CELL_INDEX) {
+            return *grid_[index];
+        }
+
         minCell_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -220,7 +224,11 @@ namespace LatinSquare {
         return *entropyGrid_[0];
     }
 
-    Cell& LatinSquare::randomMinEntropyCell() noexcept {
+    Cell& LatinSquare::randomMinEntropyCell(const uint_fast16_t index) noexcept {
+        if (index < DEFAULT_CELL_INDEX) {
+            return *grid_[index];
+        }
+
         minCell_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -282,7 +290,11 @@ namespace LatinSquare {
         return updateIndexes_;
     }
 
-    Region& LatinSquare::minEntropyRegion() noexcept {
+    Region& LatinSquare::minEntropyRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return regions_[index];
+        }
+
         minRegion_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -304,7 +316,21 @@ namespace LatinSquare {
         return *minRegion_;
     }
 
-    Region& LatinSquare::randomMinEntropyRegion() noexcept {
+    Region& LatinSquare::lastNotChosenRegion() noexcept {
+        for (auto& region : regions_) {
+            if (!region.notEnabled()) {
+                return region;
+            }
+        }
+
+        return regions_[0];
+    }
+
+    Region& LatinSquare::randomMinEntropyRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return regions_[index];
+        }
+
         minRegion_ = nullptr;
         minEntropy_ = 0xFF;
 

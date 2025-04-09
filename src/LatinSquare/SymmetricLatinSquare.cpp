@@ -319,7 +319,11 @@ namespace LatinSquare {
         }
     }
 
-    Cell& SymmetricLatinSquare::minEntropyCell() noexcept {
+    Cell& SymmetricLatinSquare::minEntropyCell(const uint_fast16_t index) noexcept {
+        if (index < DEFAULT_CELL_INDEX) {
+            return *grid_[index];
+        }
+
         minCell_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -341,7 +345,11 @@ namespace LatinSquare {
         return *minCell_;
     }
 
-    Cell& SymmetricLatinSquare::randomMinEntropyCell() noexcept {
+    Cell& SymmetricLatinSquare::randomMinEntropyCell(const uint_fast16_t index) noexcept {
+        if (index < DEFAULT_CELL_INDEX) {
+            return *grid_[index];
+        }
+
         minCell_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -440,7 +448,11 @@ namespace LatinSquare {
         fillDiagonalIndexes_.clear();
     }
 
-    Region& SymmetricLatinSquare::minEntropyRegion() noexcept {
+    Region& SymmetricLatinSquare::minEntropyRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return regions_[index];
+        }
+
         minRegion_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -462,7 +474,21 @@ namespace LatinSquare {
         return *minRegion_;
     }
 
-    Region& SymmetricLatinSquare::randomMinEntropyRegion() noexcept {
+    Region& SymmetricLatinSquare::lastNotChosenRegion() noexcept {
+        for (auto& region : regions_) {
+            if (!region.notEnabled()) {
+                return region;
+            }
+        }
+
+        return regions_[0];
+    }
+
+    Region& SymmetricLatinSquare::randomMinEntropyRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return regions_[index];
+        }
+
         minRegion_ = nullptr;
         minEntropy_ = 0xFF;
 
@@ -558,9 +584,13 @@ namespace LatinSquare {
         }
     }
 
-    TriangularRegion& SymmetricLatinSquare::minEntropyTriangularRegion() noexcept {
-        TriangularRegion* iterator = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+    TriangularRegion& SymmetricLatinSquare::minEntropyTriangularRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return triangularRegions_[index];
+        }
+
+        minTriangularRegion_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& region : triangularRegions_) {
             if (region.notEnabled()) {
@@ -571,18 +601,32 @@ namespace LatinSquare {
                 return region;
             }
 
-            if (region.entropy() < minEntropy) {
-                minEntropy = region.entropy();
-                iterator = &region;
+            if (region.entropy() < minEntropy_) {
+                minTriangularRegion_ = &region;
+                minEntropy_ = region.entropy();
             }
         }
 
-        return *iterator;
+        return *minTriangularRegion_;
     }
 
-    TriangularRegion& SymmetricLatinSquare::randomMinEntropyTriangularRegion() noexcept {
-        TriangularRegion* iterator = nullptr;
-        uint_fast8_t minEntropy = 0xFF;
+    TriangularRegion& SymmetricLatinSquare::lastNotChosenTriangularRegion() noexcept {
+        for (auto& region : triangularRegions_) {
+            if (!region.notEnabled()) {
+                return region;
+            }
+        }
+
+        return triangularRegions_[0];
+    }
+
+    TriangularRegion& SymmetricLatinSquare::randomMinEntropyTriangularRegion(const uint_fast8_t index) noexcept {
+        if (index < DEFAULT_REGION_INDEX) {
+            return triangularRegions_[index];
+        }
+
+        minTriangularRegion_ = nullptr;
+        minEntropy_ = 0xFF;
 
         for (auto& region : triangularRegions_) {
             if (region.notEnabled()) {
@@ -593,18 +637,18 @@ namespace LatinSquare {
                 return region;
             }
 
-            if (region.entropy() < minEntropy) {
-                minEntropy = region.entropy();
-                iterator = &region;
+            if (region.entropy() < minEntropy_) {
+                minTriangularRegion_ = &region;
+                minEntropy_ = region.entropy();
                 continue;
             }
 
-            if (region.entropy() == minEntropy && splitmix64_.next() % regionsSize_ == 0) {
-                iterator = &region;
+            if (region.entropy() == minEntropy_ && splitmix64_.next() % size_ == 0) {
+                minTriangularRegion_ = &region;
             }
         }
 
-        return *iterator;
+        return *minTriangularRegion_;
     }
 
     const std::vector<Transversal::SymmetricCellUpdateData>& SymmetricLatinSquare::triangularDisable(

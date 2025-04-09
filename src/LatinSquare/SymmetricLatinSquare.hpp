@@ -32,7 +32,8 @@ namespace LatinSquare {
                   maxOtherCellsUpdateData_(other.maxOtherCellsUpdateData_), regions_(other.regions_),
                   triangularRegions_(other.triangularRegions_), numberRegions_(other.numberRegions_),
                   splitmix64_(other.splitmix64_), minCell_(other.minCell_), minRegion_(other.minRegion_),
-                  minEntropy_(other.minEntropy_), notFilled_(other.notFilled_), updateIndexes_(other.updateIndexes_),
+                  minTriangularRegion_(other.minTriangularRegion_), minEntropy_(other.minEntropy_),
+                  notFilled_(other.notFilled_), updateIndexes_(other.updateIndexes_),
                   fillDiagonalIndexes_(other.fillDiagonalIndexes_),
                   disableAndDecreaseIndexes_(other.disableAndDecreaseIndexes_), cellUpdateData_(other.cellUpdateData_),
                   otherCellsUpdateData_(other.otherCellsUpdateData_) {
@@ -89,6 +90,7 @@ namespace LatinSquare {
                     splitmix64_ = other.splitmix64_;
                     minCell_ = other.minCell_;
                     minRegion_ = other.minRegion_;
+                    minTriangularRegion_ = other.minTriangularRegion_;
                     minEntropy_ = other.minEntropy_;
                     notFilled_ = other.notFilled_;
                     updateIndexes_ = other.updateIndexes_;
@@ -181,24 +183,26 @@ namespace LatinSquare {
             void setRegions() noexcept;
             void setNumberRegions() noexcept;
 
-            [[nodiscard]] Cell& minEntropyCell() noexcept;
-            [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
+            [[nodiscard]] Cell& minEntropyCell(const uint_fast16_t index) noexcept;
+            [[nodiscard]] Cell& randomMinEntropyCell(const uint_fast16_t index) noexcept;
             const std::vector<uint_fast16_t>& update(Cell& cell, const uint_fast8_t number) noexcept;
             [[nodiscard]] uint_fast8_t checkDiagonal() noexcept;
             void fillGrid() noexcept;
             void fillDiagonal() noexcept;
             void clearDiagonal() noexcept;
 
-            [[nodiscard]] Region& minEntropyRegion() noexcept;
-            [[nodiscard]] Region& randomMinEntropyRegion() noexcept;
+            [[nodiscard]] Region& minEntropyRegion(const uint_fast8_t index) noexcept;
+            [[nodiscard]] Region& lastNotChosenRegion() noexcept;
+            [[nodiscard]] Region& randomMinEntropyRegion(const uint_fast8_t index) noexcept;
             void disable(const uint_fast16_t index) noexcept;
             [[nodiscard]] const std::vector<uint_fast16_t>& disableAndDecrease(const uint_fast16_t index) noexcept;
             void enable(const uint_fast16_t index) noexcept;
             void enableAndIncrease(const uint_fast16_t index) noexcept;
             void enableAndIncrease(const std::vector<uint_fast16_t>& indexes) noexcept;
 
-            [[nodiscard]] TriangularRegion& minEntropyTriangularRegion() noexcept;
-            [[nodiscard]] TriangularRegion& randomMinEntropyTriangularRegion() noexcept;
+            [[nodiscard]] TriangularRegion& minEntropyTriangularRegion(const uint_fast8_t index) noexcept;
+            [[nodiscard]] TriangularRegion& lastNotChosenTriangularRegion() noexcept;
+            [[nodiscard]] TriangularRegion& randomMinEntropyTriangularRegion(const uint_fast8_t index) noexcept;
             [[nodiscard]] const std::vector<Transversal::SymmetricCellUpdateData>& triangularDisable(
                 const uint_fast16_t cellIndex, const uint_fast8_t regionIndex) noexcept;
             [[nodiscard]] const std::vector<Transversal::SymmetricCellUpdateData>& triangularDisableAndDecrease(
@@ -235,6 +239,7 @@ namespace LatinSquare {
             cpp::splitmix64 splitmix64_;
             Cell* minCell_;
             Region* minRegion_;
+            TriangularRegion* minTriangularRegion_;
             uint_fast8_t minEntropy_;
             uint_fast16_t notFilled_;
             std::vector<uint_fast16_t> updateIndexes_;

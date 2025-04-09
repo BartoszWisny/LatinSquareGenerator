@@ -10,6 +10,7 @@ namespace LatinSquare {
         cpp::splitmix64 splitmix64;
         LatinSquare latinSquare(size, type, splitmix64);
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -20,9 +21,10 @@ namespace LatinSquare {
         uint_fast32_t iterations = 0;
 
         while (latinSquare.notFilled()) {
-            auto& cell = latinSquare.randomMinEntropyCell();
+            auto& cell = latinSquare.randomMinEntropyCell(index);
 
             if (cell.positiveEntropy()) {
+                index = DEFAULT_CELL_INDEX;
                 counter = 0;
 
                 number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -45,7 +47,9 @@ namespace LatinSquare {
                     }
                 }
 
-                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -64,6 +68,7 @@ namespace LatinSquare {
         cpp::splitmix64 splitmix64;
         LatinSquare latinSquare(size, numbers, splitmix64);
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -74,9 +79,10 @@ namespace LatinSquare {
         uint_fast32_t iterations = 0;
 
         while (latinSquare.notFilled()) {
-            auto& cell = latinSquare.randomMinEntropyCell();
+            auto& cell = latinSquare.randomMinEntropyCell(index);
 
             if (cell.positiveEntropy()) {
+                index = DEFAULT_CELL_INDEX;
                 counter = 0;
 
                 number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -99,7 +105,9 @@ namespace LatinSquare {
                     }
                 }
 
-                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -121,6 +129,7 @@ namespace LatinSquare {
             return 1;
         }
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -132,9 +141,10 @@ namespace LatinSquare {
 
         while (true) {
             if (latinSquare.notFilled() > 1) {
-                auto& cell = latinSquare.minEntropyCell();
+                auto& cell = latinSquare.minEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.firstNumber();
@@ -157,7 +167,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -166,7 +178,9 @@ namespace LatinSquare {
                 counter = 1;
                 latinSquaresCounter += latinSquare.lastNotFilledCell().entropy();
 
-                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -181,6 +195,7 @@ namespace LatinSquare {
             return 1;
         }
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -192,9 +207,10 @@ namespace LatinSquare {
 
         while (true) {
             if (latinSquare.notFilled() > 1) {
-                auto& cell = latinSquare.minEntropyCell();
+                auto& cell = latinSquare.minEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.firstNumber();
@@ -217,7 +233,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -226,7 +244,9 @@ namespace LatinSquare {
                 counter = 1;
                 latinSquaresCounter += latinSquare.lastNotFilledCell().entropy();
 
-                latinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                latinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 latinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -240,6 +260,7 @@ namespace LatinSquare {
         cpp::splitmix64 splitmix64;
         SymmetricLatinSquare symmetricLatinSquare(size, type, splitmix64);
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -251,9 +272,10 @@ namespace LatinSquare {
 
         while (true) {
             if (symmetricLatinSquare.notFilled()) {
-                auto& cell = symmetricLatinSquare.randomMinEntropyCell();
+                auto& cell = symmetricLatinSquare.randomMinEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -278,8 +300,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    symmetricLatinSquare.clearAndRemove(
-                        updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -290,7 +313,9 @@ namespace LatinSquare {
             } else {
                 counter = 1;
 
-                symmetricLatinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -310,6 +335,7 @@ namespace LatinSquare {
         cpp::splitmix64 splitmix64;
         SymmetricLatinSquare symmetricLatinSquare(size, numbers, splitmix64);
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -321,9 +347,10 @@ namespace LatinSquare {
 
         while (true) {
             if (symmetricLatinSquare.notFilled()) {
-                auto& cell = symmetricLatinSquare.randomMinEntropyCell();
+                auto& cell = symmetricLatinSquare.randomMinEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.numbers()[splitmix64.next() % cell.numbers().size()];
@@ -348,8 +375,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    symmetricLatinSquare.clearAndRemove(
-                        updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -360,7 +388,9 @@ namespace LatinSquare {
             } else {
                 counter = 1;
 
-                symmetricLatinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -382,6 +412,7 @@ namespace LatinSquare {
             return 1;
         }
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -393,9 +424,10 @@ namespace LatinSquare {
 
         while (true) {
             if (symmetricLatinSquare.notFilled()) {
-                auto& cell = symmetricLatinSquare.minEntropyCell();
+                auto& cell = symmetricLatinSquare.minEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.firstNumber();
@@ -420,8 +452,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    symmetricLatinSquare.clearAndRemove(
-                        updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -430,7 +463,9 @@ namespace LatinSquare {
                 counter = 1;
                 latinSquaresCounter += symmetricLatinSquare.checkDiagonal();
 
-                symmetricLatinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();
@@ -446,6 +481,7 @@ namespace LatinSquare {
             return 1;
         }
 
+        uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
 
@@ -457,9 +493,10 @@ namespace LatinSquare {
 
         while (true) {
             if (symmetricLatinSquare.notFilled()) {
-                auto& cell = symmetricLatinSquare.minEntropyCell();
+                auto& cell = symmetricLatinSquare.minEntropyCell(index);
 
                 if (cell.positiveEntropy()) {
+                    index = DEFAULT_CELL_INDEX;
                     counter = 0;
 
                     number = cell.firstNumber();
@@ -484,8 +521,9 @@ namespace LatinSquare {
                         }
                     }
 
-                    symmetricLatinSquare.clearAndRemove(
-                        updateHistory_.back().index(), updateHistory_.back().entropyData());
+                    index = updateHistory_.back().index();
+
+                    symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                     symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                     updateHistory_.pop_back();
@@ -494,7 +532,9 @@ namespace LatinSquare {
                 counter = 1;
                 latinSquaresCounter += symmetricLatinSquare.checkDiagonal();
 
-                symmetricLatinSquare.clearAndRemove(updateHistory_.back().index(), updateHistory_.back().entropyData());
+                index = updateHistory_.back().index();
+
+                symmetricLatinSquare.clearAndRemove(index, updateHistory_.back().entropyData());
                 symmetricLatinSquare.restore(updateHistory_.back().indexes(), updateHistory_.back().number());
 
                 updateHistory_.pop_back();

@@ -25,6 +25,6 @@ namespace LatinSquare {
             }
         }
 
-        return 0xFFFF;
+        return cells_[0]->index();
     }
 }

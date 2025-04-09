@@ -138,13 +138,14 @@ namespace LatinSquare {
             void set(const std::vector<uint_fast8_t>& numbers) noexcept;
             void setRegions() noexcept;
 
-            [[nodiscard]] Cell& minEntropyCell() noexcept;
+            [[nodiscard]] Cell& minEntropyCell(const uint_fast16_t index) noexcept;
             [[nodiscard]] Cell& lastNotFilledCell() noexcept;
-            [[nodiscard]] Cell& randomMinEntropyCell() noexcept;
+            [[nodiscard]] Cell& randomMinEntropyCell(const uint_fast16_t index) noexcept;
             const std::vector<uint_fast16_t>& update(Cell& cell, const uint_fast8_t number) noexcept;
 
-            [[nodiscard]] Region& minEntropyRegion() noexcept;
-            [[nodiscard]] Region& randomMinEntropyRegion() noexcept;
+            [[nodiscard]] Region& minEntropyRegion(const uint_fast8_t index) noexcept;
+            [[nodiscard]] Region& lastNotChosenRegion() noexcept;
+            [[nodiscard]] Region& randomMinEntropyRegion(const uint_fast8_t index) noexcept;
             void disable(const uint_fast16_t index) noexcept;
             [[nodiscard]] const std::vector<uint_fast16_t>& disableAndDecrease(const uint_fast16_t index) noexcept;
             void enable(const uint_fast16_t index) noexcept;
