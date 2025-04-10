@@ -92,7 +92,7 @@ namespace LatinSquare {
 
         for (uint_fast16_t index = 0; index < gridSize_; ++index) {
             grid_[index] = std::make_shared<Cell>(index, row, column, size_, Type::Custom);
-            entropyGridSize_ += (numbers[index] == 0xFF);
+            entropyGridSize_ += (numbers[index] == DEFAULT_NUMBER);
 
             if (++column == size_) {
                 column = 0;
@@ -105,7 +105,7 @@ namespace LatinSquare {
         uint_fast16_t entropyIndex = -1;
 
         for (uint_fast16_t index = 0; index < gridSize_; ++index) {
-            if (numbers[index] == 0xFF) {
+            if (numbers[index] == DEFAULT_NUMBER) {
                 entropyGrid_[++entropyIndex] = grid_[index];
             } else {
                 grid_[index]->fillAndClear(numbers[index]);
@@ -120,7 +120,7 @@ namespace LatinSquare {
         for (uint_fast16_t index = 0; index < gridSize_; ++index) {
             grid_[index]->reset();
 
-            if (numbers[index] != 0xFF) {
+            if (numbers[index] != DEFAULT_NUMBER) {
                 grid_[index]->fillAndClear(numbers[index]);
                 update(*grid_[index], numbers[index]);
             }
@@ -194,7 +194,7 @@ namespace LatinSquare {
         }
 
         minCell_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& cell : entropyGrid_) {
             if (cell->filled()) {
@@ -230,7 +230,7 @@ namespace LatinSquare {
         }
 
         minCell_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& cell : entropyGrid_) {
             if (cell->filled()) {
@@ -296,7 +296,7 @@ namespace LatinSquare {
         }
 
         minRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {
@@ -332,7 +332,7 @@ namespace LatinSquare {
         }
 
         minRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {

@@ -157,8 +157,8 @@ namespace LatinSquare {
             }
 
             inline constexpr void clear(const EntropyData& entropyData) noexcept {
-                number_ = EMPTY;
                 entropyData_ = entropyData;
+                number_ = EMPTY;
             }
 
             inline constexpr void clear() noexcept {

@@ -170,7 +170,7 @@ namespace LatinSquare {
             }
 
             if (row > column) {
-                entropyTriangularGridSize_ += (numbers[triangularIndex] == 0xFF);
+                entropyTriangularGridSize_ += (numbers[triangularIndex] == DEFAULT_NUMBER);
             }
 
             if (++column == size_) {
@@ -189,7 +189,7 @@ namespace LatinSquare {
         uint_fast16_t entropyTriangularIndex = -1;
 
         for (uint_fast16_t index = 0; index < triangularGridSize_; ++index) {
-            if (numbers[index] == 0xFF) {
+            if (numbers[index] == DEFAULT_NUMBER) {
                 if (triangularGrid_[index]->rawRow() > triangularGrid_[index]->rawColumn()) {
                     entropyTriangularGrid_[++entropyTriangularIndex] = triangularGrid_[index];
                 }
@@ -208,7 +208,7 @@ namespace LatinSquare {
         for (uint_fast16_t index = 0; index < triangularGridSize_; ++index) {
             triangularGrid_[index]->reset();
 
-            if (numbers[index] != 0xFF) {
+            if (numbers[index] != DEFAULT_NUMBER) {
                 triangularGrid_[index]->fillAndClear(numbers[index]);
                 update(*triangularGrid_[index], numbers[index]);
             }
@@ -325,7 +325,7 @@ namespace LatinSquare {
         }
 
         minCell_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& cell : entropyTriangularGrid_) {
             if (cell->filled()) {
@@ -351,7 +351,7 @@ namespace LatinSquare {
         }
 
         minCell_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& cell : entropyTriangularGrid_) {
             if (cell->filled()) {
@@ -454,7 +454,7 @@ namespace LatinSquare {
         }
 
         minRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {
@@ -490,7 +490,7 @@ namespace LatinSquare {
         }
 
         minRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : regions_) {
             if (region.notEnabled()) {
@@ -590,7 +590,7 @@ namespace LatinSquare {
         }
 
         minTriangularRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : triangularRegions_) {
             if (region.notEnabled()) {
@@ -626,7 +626,7 @@ namespace LatinSquare {
         }
 
         minTriangularRegion_ = nullptr;
-        minEntropy_ = 0xFF;
+        minEntropy_ = DEFAULT_ENTROPY;
 
         for (auto& region : triangularRegions_) {
             if (region.notEnabled()) {
