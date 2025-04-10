@@ -150,10 +150,10 @@ namespace LatinSquare {
                 regionNumber_ += doubleSize_;
             }
 
-            inline constexpr void clearAndRemove(EntropyData entropyData) noexcept {
-                entropyData.remove(number_);
-                number_ = EMPTY;
+            inline constexpr void clearAndRemove(const EntropyData& entropyData) noexcept {
                 entropyData_ = entropyData;
+                entropyData_.remove(number_);
+                number_ = EMPTY;
             }
 
             inline constexpr void clear(const EntropyData& entropyData) noexcept {
