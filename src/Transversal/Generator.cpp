@@ -78,49 +78,48 @@ namespace Transversal {
     }
 
     const boost::multiprecision::mpz_int Generator::count(LatinSquare::LatinSquare& latinSquare) noexcept {
-        uint_fast8_t transversalSize = 0;
-        uint_fast8_t almostSize = latinSquare.size();
-        --almostSize;
+        transversalSize_ = 0;
+        almostSize_ = latinSquare.size();
+        --almostSize_;
 
-        if (!almostSize) {
+        if (!almostSize_) {
             return 1;
         }
 
-        uint_fast16_t cellIndex;
-        uint_fast8_t regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
+        regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
 
         updateHistory_.reserve(latinSquare.size());
         backtrackingHistory_.reserve(latinSquare.size());
 
-        boost::multiprecision::mpz_int transversalsCounter = 0;
-        uint_fast8_t counter = 0;
+        transversalsCounter_ = 0;
+        counter_ = 0;
 
         while (true) {
-            if (transversalSize < almostSize) {
-                auto& region = latinSquare.minEntropyRegion(regionIndex);
+            if (transversalSize_ < almostSize_) {
+                auto& region = latinSquare.minEntropyRegion(regionIndex_);
 
                 if (region.entropy()) {
-                    ++transversalSize;
-                    regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
-                    counter = 0;
+                    ++transversalSize_;
+                    regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
+                    counter_ = 0;
 
-                    cellIndex = region.firstEnabledCellIndex();
-                    latinSquare.disable(cellIndex);
+                    cellIndex_ = region.firstEnabledCellIndex();
+                    latinSquare.disable(cellIndex_);
 
-                    updateHistory_.emplace_back(region.index(), cellIndex, latinSquare.disableAndDecrease(cellIndex));
-                    backtrackingHistory_.emplace_back(region.index(), cellIndex);
+                    updateHistory_.emplace_back(region.index(), cellIndex_, latinSquare.disableAndDecrease(cellIndex_));
+                    backtrackingHistory_.emplace_back(region.index(), cellIndex_);
                 } else {
-                    --transversalSize;
+                    --transversalSize_;
 
-                    if (++counter > 1) {
+                    if (++counter_ > 1) {
                         latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
-                        regionIndex = backtrackingHistory_.back().regionIndex();
+                        regionIndex_ = backtrackingHistory_.back().regionIndex();
 
                         backtrackingHistory_.pop_back();
 
                         while (backtrackingHistory_.size()
-                               && regionIndex == backtrackingHistory_.back().regionIndex()) {
+                               && regionIndex_ == backtrackingHistory_.back().regionIndex()) {
                             latinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                             backtrackingHistory_.pop_back();
@@ -131,7 +130,7 @@ namespace Transversal {
                         }
                     }
 
-                    regionIndex = updateHistory_.back().regionIndex();
+                    regionIndex_ = updateHistory_.back().regionIndex();
 
                     latinSquare.enable(updateHistory_.back().cellIndex());
                     latinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -139,11 +138,11 @@ namespace Transversal {
                     updateHistory_.pop_back();
                 }
             } else {
-                --transversalSize;
-                counter = 1;
-                transversalsCounter += latinSquare.lastNotChosenRegion().entropy();
+                --transversalSize_;
+                counter_ = 1;
+                transversalsCounter_ += latinSquare.lastNotChosenRegion().entropy();
 
-                regionIndex = updateHistory_.back().regionIndex();
+                regionIndex_ = updateHistory_.back().regionIndex();
 
                 latinSquare.enable(updateHistory_.back().cellIndex());
                 latinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -152,7 +151,7 @@ namespace Transversal {
             }
         }
 
-        return transversalsCounter;
+        return transversalsCounter_;
     }
 
     constexpr boost::multiprecision::mpz_int Generator::factorial(const uint_fast8_t size) noexcept {
@@ -492,50 +491,49 @@ namespace Transversal {
 
     const boost::multiprecision::mpz_int Generator::symmetricCount(
         LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
-        uint_fast8_t transversalSize = 0;
-        uint_fast8_t almostSize = symmetricLatinSquare.size();
-        --almostSize;
+        transversalSize_ = 0;
+        almostSize_ = symmetricLatinSquare.size();
+        --almostSize_;
 
-        if (!almostSize) {
+        if (!almostSize_) {
             return 1;
         }
 
-        uint_fast16_t cellIndex;
-        uint_fast8_t regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
+        regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
 
         updateHistory_.reserve(symmetricLatinSquare.size());
         backtrackingHistory_.reserve(symmetricLatinSquare.size());
 
-        boost::multiprecision::mpz_int transversalsCounter = 0;
-        uint_fast8_t counter = 0;
+        transversalsCounter_ = 0;
+        counter_ = 0;
 
         while (true) {
-            if (transversalSize < almostSize) {
-                auto& region = symmetricLatinSquare.minEntropyRegion(regionIndex);
+            if (transversalSize_ < almostSize_) {
+                auto& region = symmetricLatinSquare.minEntropyRegion(regionIndex_);
 
                 if (region.entropy()) {
-                    ++transversalSize;
-                    regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
-                    counter = 0;
+                    ++transversalSize_;
+                    regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
+                    counter_ = 0;
 
-                    cellIndex = region.firstEnabledCellIndex();
-                    symmetricLatinSquare.disable(cellIndex);
+                    cellIndex_ = region.firstEnabledCellIndex();
+                    symmetricLatinSquare.disable(cellIndex_);
 
                     updateHistory_.emplace_back(
-                        region.index(), cellIndex, symmetricLatinSquare.disableAndDecrease(cellIndex));
-                    backtrackingHistory_.emplace_back(region.index(), cellIndex);
+                        region.index(), cellIndex_, symmetricLatinSquare.disableAndDecrease(cellIndex_));
+                    backtrackingHistory_.emplace_back(region.index(), cellIndex_);
                 } else {
-                    --transversalSize;
+                    --transversalSize_;
 
-                    if (++counter > 1) {
+                    if (++counter_ > 1) {
                         symmetricLatinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
-                        regionIndex = backtrackingHistory_.back().regionIndex();
+                        regionIndex_ = backtrackingHistory_.back().regionIndex();
 
                         backtrackingHistory_.pop_back();
 
                         while (backtrackingHistory_.size()
-                               && regionIndex == backtrackingHistory_.back().regionIndex()) {
+                               && regionIndex_ == backtrackingHistory_.back().regionIndex()) {
                             symmetricLatinSquare.enableAndIncrease(backtrackingHistory_.back().cellIndex());
 
                             backtrackingHistory_.pop_back();
@@ -546,7 +544,7 @@ namespace Transversal {
                         }
                     }
 
-                    regionIndex = updateHistory_.back().regionIndex();
+                    regionIndex_ = updateHistory_.back().regionIndex();
 
                     symmetricLatinSquare.enable(updateHistory_.back().cellIndex());
                     symmetricLatinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -554,11 +552,11 @@ namespace Transversal {
                     updateHistory_.pop_back();
                 }
             } else {
-                --transversalSize;
-                counter = 1;
-                transversalsCounter += symmetricLatinSquare.lastNotChosenRegion().entropy();
+                --transversalSize_;
+                counter_ = 1;
+                transversalsCounter_ += symmetricLatinSquare.lastNotChosenRegion().entropy();
 
-                regionIndex = updateHistory_.back().regionIndex();
+                regionIndex_ = updateHistory_.back().regionIndex();
 
                 symmetricLatinSquare.enable(updateHistory_.back().cellIndex());
                 symmetricLatinSquare.enableAndIncrease(updateHistory_.back().indexes());
@@ -567,7 +565,7 @@ namespace Transversal {
             }
         }
 
-        return transversalsCounter;
+        return transversalsCounter_;
     }
 
     const std::vector<SymmetricMinMaxData>& Generator::symmetricMinMax(
@@ -894,44 +892,43 @@ namespace Transversal {
 
     const boost::multiprecision::mpz_int Generator::symmetricTriangularCount(
         LatinSquare::SymmetricLatinSquare& symmetricLatinSquare) noexcept {
-        uint_fast8_t transversalSize = 0;
-        uint_fast8_t almostSize = symmetricLatinSquare.size();
-        --almostSize;
+        transversalSize_ = 0;
+        almostSize_ = symmetricLatinSquare.size();
+        --almostSize_;
 
-        if (!almostSize) {
+        if (!almostSize_) {
             return 1;
         }
 
-        uint_fast16_t cellIndex;
-        uint_fast8_t regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
+        regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
 
         symmetricUpdateHistory_.reserve(symmetricLatinSquare.size());
         symmetricBacktrackingHistory_.reserve(symmetricLatinSquare.size());
 
-        boost::multiprecision::mpz_int transversalsCounter = 0;
-        uint_fast8_t counter = 0;
+        transversalsCounter_ = 0;
+        counter_ = 0;
 
         while (true) {
-            if (transversalSize < almostSize) {
-                auto& region = symmetricLatinSquare.minEntropyTriangularRegion(regionIndex);
+            if (transversalSize_ < almostSize_) {
+                auto& region = symmetricLatinSquare.minEntropyTriangularRegion(regionIndex_);
 
                 if (region.entropy()) {
-                    ++transversalSize;
-                    regionIndex = LatinSquare::DEFAULT_REGION_INDEX;
-                    counter = 0;
+                    ++transversalSize_;
+                    regionIndex_ = LatinSquare::DEFAULT_REGION_INDEX;
+                    counter_ = 0;
 
-                    cellIndex = region.firstTriangularLocalEnabledCellIndex();
+                    cellIndex_ = region.firstTriangularLocalEnabledCellIndex();
                     const auto& symmetricCellUpdateData =
-                        symmetricLatinSquare.triangularDisable(cellIndex, region.index());
+                        symmetricLatinSquare.triangularDisable(cellIndex_, region.index());
 
                     symmetricUpdateHistory_.emplace_back(region.index(), symmetricCellUpdateData,
-                        symmetricLatinSquare.triangularDisableAndDecrease(cellIndex, region.index()));
+                        symmetricLatinSquare.triangularDisableAndDecrease(cellIndex_, region.index()));
                     symmetricBacktrackingHistory_.emplace_back(region.index(), symmetricCellUpdateData);
                 } else {
-                    --transversalSize;
+                    --transversalSize_;
 
-                    if (++counter > 1) {
-                        regionIndex = symmetricBacktrackingHistory_.back().regionIndex();
+                    if (++counter_ > 1) {
+                        regionIndex_ = symmetricBacktrackingHistory_.back().regionIndex();
 
                         symmetricLatinSquare.triangularEnableAndIncrease(
                             symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
@@ -939,7 +936,7 @@ namespace Transversal {
                         symmetricBacktrackingHistory_.pop_back();
 
                         while (symmetricBacktrackingHistory_.size()
-                               && regionIndex == symmetricBacktrackingHistory_.back().regionIndex()) {
+                               && regionIndex_ == symmetricBacktrackingHistory_.back().regionIndex()) {
                             symmetricLatinSquare.triangularEnableAndIncrease(
                                 symmetricBacktrackingHistory_.back().cellUpdateData()[0]);
 
@@ -951,29 +948,30 @@ namespace Transversal {
                         }
                     }
 
-                    regionIndex = symmetricUpdateHistory_.back().regionIndex();
+                    regionIndex_ = symmetricUpdateHistory_.back().regionIndex();
 
-                    symmetricLatinSquare.triangularEnable(regionIndex, symmetricUpdateHistory_.back().cellUpdateData());
+                    symmetricLatinSquare.triangularEnable(
+                        regionIndex_, symmetricUpdateHistory_.back().cellUpdateData());
                     symmetricLatinSquare.triangularEnableAndIncrease(
                         symmetricUpdateHistory_.back().otherCellsUpdateData());
 
                     symmetricUpdateHistory_.pop_back();
                 }
             } else {
-                --transversalSize;
-                counter = 1;
-                transversalsCounter += symmetricLatinSquare.lastNotChosenTriangularRegion().entropy();
+                --transversalSize_;
+                counter_ = 1;
+                transversalsCounter_ += symmetricLatinSquare.lastNotChosenTriangularRegion().entropy();
 
-                regionIndex = symmetricUpdateHistory_.back().regionIndex();
+                regionIndex_ = symmetricUpdateHistory_.back().regionIndex();
 
-                symmetricLatinSquare.triangularEnable(regionIndex, symmetricUpdateHistory_.back().cellUpdateData());
+                symmetricLatinSquare.triangularEnable(regionIndex_, symmetricUpdateHistory_.back().cellUpdateData());
                 symmetricLatinSquare.triangularEnableAndIncrease(symmetricUpdateHistory_.back().otherCellsUpdateData());
 
                 symmetricUpdateHistory_.pop_back();
             }
         }
 
-        return transversalsCounter;
+        return transversalsCounter_;
     }
 
     const std::vector<SymmetricMinMaxData>& Generator::symmetricTriangularMinMax(

@@ -51,6 +51,12 @@ namespace Transversal {
         private:
             [[nodiscard]] constexpr boost::multiprecision::mpz_int factorial(const uint_fast8_t size) noexcept;
 
+            uint_fast8_t transversalSize_;
+            uint_fast8_t almostSize_;
+            uint_fast16_t cellIndex_;
+            uint_fast8_t regionIndex_;
+            boost::multiprecision::mpz_int transversalsCounter_;
+            uint_fast8_t counter_;
             std::vector<UpdateData> updateHistory_;
             std::vector<BacktrackingData> backtrackingHistory_;
             std::vector<SymmetricUpdateData> symmetricUpdateHistory_;
