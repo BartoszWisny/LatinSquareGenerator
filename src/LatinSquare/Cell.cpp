@@ -33,12 +33,12 @@ namespace LatinSquare {
                 fillAndClear(rawRow_);
             } else if ((size_ & 1) == 0 && !notOnDiagonal_) {
                 fillAndClear(0);
-            } else if ((size_ & 1) == 0 && !notOnAntidiagonal_) {
+            } /* else if ((size_ & 1) == 0 && !notOnAntidiagonal_) {
                 fillAndClear(maxNumber_);
-            } else {
+            } */ else {
                 if ((size_ & 1) == 0) {
                     entropyData_.remove(0);
-                    entropyData_.remove(maxNumber_);
+                    // entropyData_.remove(maxNumber_);
                 }
 
                 entropyData_.remove(rawRow_);

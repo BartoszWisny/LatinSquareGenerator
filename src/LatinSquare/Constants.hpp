@@ -21,7 +21,7 @@ namespace LatinSquare {
     };
 
     static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
-    static constexpr uint_fast32_t SYMMETRIC_MAX_ITERATIONS = 2000000;
+    static constexpr uint_fast32_t SYMMETRIC_MAX_ITERATIONS = 1000000;
 
     static constexpr std::string_view TYPE_NORMAL = "N";
     static constexpr std::string_view TYPE_REDUCED = "R";
@@ -95,7 +95,7 @@ namespace LatinSquare {
         "using lower-triangular grid:\n"
         "-sttt <triangular_input>\n\n"
         "<size> should be number from 1 to 64\n"
-        "<type> should be one of characters: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal)"
+        "<type> should be one of characters: N (normal), R (reduced), C (reduced cyclic), D (reduced diagonal)\n"
         "File <template_input> should contain template of latin square with <size> rows, <size> columns "
         "and numbers from 1 to <size> or 0 for empty cells\n"
         "File <triangular_input> should contain template of lower-triangular table of symmetric latin square "
