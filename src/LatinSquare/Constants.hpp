@@ -21,7 +21,7 @@ namespace LatinSquare {
     };
 
     static constexpr uint_fast32_t MAX_ITERATIONS = 1000000;
-    static constexpr uint_fast32_t SYMMETRIC_MAX_ITERATIONS = 1000000;
+    static constexpr uint_fast32_t SYMMETRIC_MAX_ITERATIONS = 2000000;
 
     static constexpr std::string_view TYPE_NORMAL = "N";
     static constexpr std::string_view TYPE_REDUCED = "R";
