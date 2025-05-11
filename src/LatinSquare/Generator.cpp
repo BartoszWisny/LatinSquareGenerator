@@ -37,6 +37,10 @@ namespace LatinSquare {
                     backtrackingHistory_.emplace_back(cell.index(), entropyData);
                 }
             } else {
+                if (updateHistory_.empty()) {
+                    break;
+                }
+
                 if (++counter > 1) {
                     latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
@@ -95,6 +99,10 @@ namespace LatinSquare {
                     backtrackingHistory_.emplace_back(cell.index(), entropyData);
                 }
             } else {
+                if (updateHistory_.empty()) {
+                    break;
+                }
+
                 if (++counter > 1) {
                     latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
@@ -157,6 +165,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
@@ -223,6 +235,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         latinSquare.set(backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
 
@@ -289,6 +305,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(
                             backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
@@ -364,6 +384,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(
                             backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
@@ -441,6 +465,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(
                             backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());
@@ -510,6 +538,10 @@ namespace LatinSquare {
                         backtrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (updateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(
                             backtrackingHistory_.back().index(), backtrackingHistory_.back().entropyData());

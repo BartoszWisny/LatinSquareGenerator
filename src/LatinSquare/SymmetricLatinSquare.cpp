@@ -382,16 +382,16 @@ namespace LatinSquare {
         const auto& columnCellIndexes = triangularRegions_[cell.rawColumn()].updatedCellIndexes(number);
         updateIndexes_.insert(updateIndexes_.end(), columnCellIndexes.begin(), columnCellIndexes.end());
 
-        if (cell.type() == Type::ReducedDiagonal && !cell.notOnDiagonal()) {
-            for (uint_fast16_t index = 0; index < gridSize_; index += size_) {
-                if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
-                    grid_[index]->remove();
-                    updateIndexes_.emplace_back(index);
-                }
+        // if (cell.type() == Type::ReducedDiagonal && !cell.notOnDiagonal()) {
+        //     for (uint_fast16_t index = 0; index < gridSize_; index += size_) {
+        //         if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
+        //             grid_[index]->remove();
+        //             updateIndexes_.emplace_back(index);
+        //         }
 
-                ++index;
-            }
-        }
+        //         ++index;
+        //     }
+        // }
 
         return updateIndexes_;
     }

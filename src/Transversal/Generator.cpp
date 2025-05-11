@@ -223,6 +223,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         latinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                                         latinSquareBacktrackingHistory_.back().entropyData());
@@ -349,6 +353,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         latinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                                         latinSquareBacktrackingHistory_.back().entropyData());
@@ -624,6 +632,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                             latinSquareBacktrackingHistory_.back().entropyData());
@@ -747,6 +759,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                             latinSquareBacktrackingHistory_.back().entropyData());
@@ -1030,6 +1046,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                             latinSquareBacktrackingHistory_.back().entropyData());
@@ -1153,6 +1173,10 @@ namespace Transversal {
                         latinSquareBacktrackingHistory_.emplace_back(cell.index(), entropyData);
                     }
                 } else {
+                    if (latinSquareUpdateHistory_.empty()) {
+                        break;
+                    }
+
                     if (++counter > 1) {
                         symmetricLatinSquare.set(latinSquareBacktrackingHistory_.back().index(),
                             latinSquareBacktrackingHistory_.back().entropyData());
