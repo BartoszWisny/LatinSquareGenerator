@@ -182,6 +182,7 @@ namespace LatinSquare {
             void set(const std::vector<uint_fast8_t>& numbers) noexcept;
             void setRegions() noexcept;
             void setNumberRegions() noexcept;
+            void resetCellsAndRegions() noexcept;
 
             [[nodiscard]] Cell& minEntropyCell(const uint_fast16_t index) noexcept;
             [[nodiscard]] Cell& randomMinEntropyCell(const uint_fast16_t index) noexcept;

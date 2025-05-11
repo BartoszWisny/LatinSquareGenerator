@@ -51,7 +51,7 @@ namespace LatinSquare {
             if (size == 0) {
                 size = counter;
             } else if (counter != size) {
-                return {};
+                return {0, {}};
             }
 
             counter = 0;
@@ -59,7 +59,7 @@ namespace LatinSquare {
         }
 
         if (linesCounter != size) {
-            return {};
+            return {0, {}};
         }
 
         return {size, numbers};

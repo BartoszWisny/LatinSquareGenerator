@@ -188,6 +188,16 @@ namespace LatinSquare {
         }
     }
 
+    void LatinSquare::resetCellsAndRegions() noexcept {
+        for (auto& cell : grid_) {
+            cell->enable();
+        }
+
+        for (auto& region : regions_) {
+            region.reset();
+        }
+    }
+
     Cell& LatinSquare::minEntropyCell(const uint_fast16_t index) noexcept {
         if (index < DEFAULT_CELL_INDEX) {
             return *grid_[index];

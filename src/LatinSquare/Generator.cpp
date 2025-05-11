@@ -61,6 +61,9 @@ namespace LatinSquare {
 
             if (++iterations > MAX_ITERATIONS) {
                 latinSquare.set(type);
+
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }
@@ -123,6 +126,9 @@ namespace LatinSquare {
 
             if (++iterations > MAX_ITERATIONS) {
                 latinSquare.set(numbers);
+
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }
@@ -347,6 +353,9 @@ namespace LatinSquare {
 
             if (++iterations > SYMMETRIC_MAX_ITERATIONS) {
                 symmetricLatinSquare.set(type);
+
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }
@@ -426,6 +435,9 @@ namespace LatinSquare {
 
             if (++iterations > SYMMETRIC_MAX_ITERATIONS) {
                 symmetricLatinSquare.set(numbers);
+
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }

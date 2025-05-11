@@ -23,8 +23,6 @@ namespace Transversal {
         uint_fast32_t iterations = 0;
 
         while (transversal.size() < latinSquare.size()) {
-            ++iterations;
-
             auto& region = latinSquare.randomMinEntropyRegion(regionIndex);
 
             if (region.entropy()) {
@@ -67,9 +65,12 @@ namespace Transversal {
                 updateHistory_.pop_back();
             }
 
-            if (iterations > MAX_ITERATIONS) {
-                latinSquare.setRegions();
+            if (++iterations > MAX_ITERATIONS) {
+                latinSquare.resetCellsAndRegions();
+
                 transversal.clear();
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }
@@ -442,8 +443,6 @@ namespace Transversal {
         uint_fast32_t iterations = 0;
 
         while (transversal.size() < symmetricLatinSquare.size()) {
-            ++iterations;
-
             auto& region = symmetricLatinSquare.randomMinEntropyRegion(regionIndex);
 
             if (region.entropy()) {
@@ -487,9 +486,12 @@ namespace Transversal {
                 updateHistory_.pop_back();
             }
 
-            if (iterations > MAX_ITERATIONS) {
-                symmetricLatinSquare.setRegions();
+            if (++iterations > MAX_ITERATIONS) {
+                symmetricLatinSquare.resetCellsAndRegions();
+
                 transversal.clear();
+                updateHistory_.clear();
+                backtrackingHistory_.clear();
                 iterations = 0;
             }
         }
@@ -905,7 +907,10 @@ namespace Transversal {
 
     //         if (iterations > MAX_ITERATIONS) {
     //             symmetricLatinSquare.setNumberRegions();
+
     //             transversal.clear();
+    //             updateHistory_.clear();
+    //             backtrackingHistory_.clear();
     //             iterations = 0;
     //         }
     //     }

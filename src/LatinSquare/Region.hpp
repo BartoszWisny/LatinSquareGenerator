@@ -35,6 +35,11 @@ namespace LatinSquare {
                 return notEnabled_;
             }
 
+            inline constexpr void reset() noexcept {
+                entropy_ = size_;
+                notEnabled_ = false;
+            }
+
             inline constexpr void enable() noexcept {
                 notEnabled_ ^= true;
             }

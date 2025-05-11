@@ -276,6 +276,16 @@ namespace LatinSquare {
         }
     }
 
+    void SymmetricLatinSquare::resetCellsAndRegions() noexcept {
+        for (auto& cell : grid_) {
+            cell->enable();
+        }
+
+        for (auto& region : regions_) {
+            region.reset();
+        }
+    }
+
     void SymmetricLatinSquare::setNumberRegions() noexcept {
         if (numberRegions_.size()) {
             resetNumberRegions();
