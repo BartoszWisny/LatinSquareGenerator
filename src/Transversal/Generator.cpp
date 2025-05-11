@@ -583,6 +583,13 @@ namespace Transversal {
         boost::multiprecision::mpz_int transversalsCounter;
         symmetricLatinSquaresCounters_.reserve(2);
 
+        if (type == LatinSquare::Type::ReducedDiagonal) {
+            symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
+            symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
+
+            return symmetricLatinSquaresCounters_;
+        }
+
         if (!symmetricLatinSquare.notFilled()) {
             if (symmetricLatinSquare.checkDiagonal()) {
                 symmetricLatinSquare.fillGrid();
@@ -996,6 +1003,13 @@ namespace Transversal {
 
         boost::multiprecision::mpz_int transversalsCounter;
         symmetricLatinSquaresCounters_.reserve(2);
+
+        if (type == LatinSquare::Type::ReducedDiagonal) {
+            symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
+            symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
+
+            return symmetricLatinSquaresCounters_;
+        }
 
         if (!symmetricLatinSquare.notFilled()) {
             if (symmetricLatinSquare.checkDiagonal()) {

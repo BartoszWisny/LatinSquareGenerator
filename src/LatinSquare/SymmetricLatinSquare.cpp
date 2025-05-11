@@ -393,6 +393,17 @@ namespace LatinSquare {
         //     }
         // }
 
+        // if (cell.type() == Type::ReducedDiagonal && !cell.notOnAntidiagonal()) {
+        //     for (uint_fast16_t index = size_; index < gridSize_; index += size_) {
+        //         --index;
+
+        //         if (grid_[index]->notFilled() && grid_[index]->canBeRemoved(number)) {
+        //             grid_[index]->remove();
+        //             updateIndexes_.emplace_back(index);
+        //         }
+        //     }
+        // }
+
         return updateIndexes_;
     }
 

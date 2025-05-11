@@ -276,6 +276,10 @@ namespace LatinSquare {
         cpp::splitmix64 splitmix64;
         SymmetricLatinSquare symmetricLatinSquare(size, type, splitmix64);
 
+        if (type == Type::ReducedDiagonal) {
+            return symmetricLatinSquare;
+        }
+
         uint_fast16_t index = DEFAULT_CELL_INDEX;
         uint_fast8_t number;
         EntropyData entropyData;
@@ -431,6 +435,10 @@ namespace LatinSquare {
 
     const boost::multiprecision::mpz_int Generator::symmetricCount(const uint_fast8_t size, const Type type) noexcept {
         SymmetricLatinSquare symmetricLatinSquare(size, type);
+
+        if (type == Type::ReducedDiagonal) {
+            return 0;
+        }
 
         if (!symmetricLatinSquare.notFilled()) {
             return 1;
