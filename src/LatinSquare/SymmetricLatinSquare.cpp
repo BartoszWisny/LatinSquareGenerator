@@ -353,6 +353,16 @@ namespace LatinSquare {
         }
 
         return *minCell_;
+
+        // for (auto& cell : entropyTriangularGrid_) {
+        //     if (cell->filled()) {
+        //         continue;
+        //     }
+
+        //     return *cell;
+        // }
+
+        // return *entropyTriangularGrid_[0];
     }
 
     Cell& SymmetricLatinSquare::randomMinEntropyCell(const uint_fast16_t index) noexcept {
@@ -493,6 +503,16 @@ namespace LatinSquare {
         }
 
         return *minRegion_;
+
+        // for (auto& region : regions_) {
+        //     if (region.notEnabled()) {
+        //         continue;
+        //     }
+
+        //     return region;
+        // }
+
+        // return regions_[0];
     }
 
     Region& SymmetricLatinSquare::lastNotChosenRegion() noexcept {

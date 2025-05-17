@@ -231,7 +231,7 @@ namespace LatinSquare {
         //     return *cell;
         // }
 
-        // return *grid_[0];
+        // return *entropyGrid_[0];
     }
 
     Cell& LatinSquare::lastNotFilledCell() noexcept {

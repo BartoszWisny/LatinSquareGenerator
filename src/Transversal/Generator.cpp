@@ -522,6 +522,8 @@ namespace Transversal {
         --almostSize_;
 
         if (!almostSize_) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 1;
         }
 
@@ -532,8 +534,11 @@ namespace Transversal {
 
         transversalsCounter_ = 0;
         counter_ = 0;
+        // iterations_ = 0;
 
         while (true) {
+            // ++iterations_;
+
             if (transversalSize_ < almostSize_) {
                 auto& region = symmetricLatinSquare.minEntropyRegion(regionIndex_);
 
@@ -591,6 +596,8 @@ namespace Transversal {
             }
         }
 
+        // std::cout << "Iterations: " << iterations_ << std::endl;
+
         return transversalsCounter_;
     }
 
@@ -605,6 +612,8 @@ namespace Transversal {
             symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
             symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
 
+            // std::cout << "Iterations: 1" << std::endl;
+
             return symmetricLatinSquaresCounters_;
         }
 
@@ -617,11 +626,15 @@ namespace Transversal {
                 symmetricLatinSquaresCounters_.emplace_back(transversalsCounter, 1, symmetricLatinSquare);
                 symmetricLatinSquaresCounters_.emplace_back(transversalsCounter, 1, symmetricLatinSquare);
 
+                // std::cout << "Iterations: 1" << std::endl;
+
                 return symmetricLatinSquaresCounters_;
             }
 
             symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
             symmetricLatinSquaresCounters_.emplace_back(0, 0, symmetricLatinSquare);
+
+            // std::cout << "Iterations: 1" << std::endl;
 
             return symmetricLatinSquaresCounters_;
         }
@@ -636,8 +649,11 @@ namespace Transversal {
         symmetricLatinSquaresCounters_.emplace_back(factorial(size), 1, symmetricLatinSquare);
         symmetricLatinSquaresCounters_.emplace_back(-1, 1, symmetricLatinSquare);
         uint_fast16_t counter = 0;
+        // iterations_ = 0;
 
         while (true) {
+            // ++iterations_;
+
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell(index);
 
@@ -726,6 +742,8 @@ namespace Transversal {
             symmetricLatinSquaresCounters_[0].set(0);
             symmetricLatinSquaresCounters_[1].set(0);
         }
+
+        // std::cout << "Iterations: " << iterations_ << std::endl;
 
         return symmetricLatinSquaresCounters_;
     }

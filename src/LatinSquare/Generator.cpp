@@ -456,10 +456,14 @@ namespace LatinSquare {
         SymmetricLatinSquare symmetricLatinSquare(size, type);
 
         if (type == Type::ReducedDiagonal) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 0;
         }
 
         if (!symmetricLatinSquare.notFilled()) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 1;
         }
 
@@ -472,8 +476,11 @@ namespace LatinSquare {
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;
+        // boost::multiprecision::mpz_int iterations = 0;
 
         while (true) {
+            // ++iterations;
+
             if (symmetricLatinSquare.notFilled()) {
                 auto& cell = symmetricLatinSquare.minEntropyCell(index);
 
@@ -526,6 +533,8 @@ namespace LatinSquare {
                 updateHistory_.pop_back();
             }
         }
+
+        // std::cout << "Iterations: " << iterations << std::endl;
 
         return latinSquaresCounter;
     }
