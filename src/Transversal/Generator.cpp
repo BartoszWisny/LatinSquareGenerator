@@ -84,6 +84,8 @@ namespace Transversal {
         --almostSize_;
 
         if (!almostSize_) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 1;
         }
 
@@ -94,8 +96,11 @@ namespace Transversal {
 
         transversalsCounter_ = 0;
         counter_ = 0;
+        // iterations_ = 0;
 
         while (true) {
+            // ++iterations_;
+
             if (transversalSize_ < almostSize_) {
                 auto& region = latinSquare.minEntropyRegion(regionIndex_);
 
@@ -152,6 +157,8 @@ namespace Transversal {
             }
         }
 
+        // std::cout << "Iterations: " << iterations_ << std::endl;
+
         return transversalsCounter_;
     }
 
@@ -179,6 +186,8 @@ namespace Transversal {
                     latinSquaresCounters_.emplace_back(0, 0, latinSquare);
                     latinSquaresCounters_.emplace_back(0, 0, latinSquare);
 
+                    // std::cout << "Iterations: 1" << std::endl;
+
                     return latinSquaresCounters_;
                 }
 
@@ -189,6 +198,8 @@ namespace Transversal {
             transversalsCounter = count(latinSquare);
             latinSquaresCounters_.emplace_back(transversalsCounter, 1, latinSquare);
             latinSquaresCounters_.emplace_back(transversalsCounter, 1, latinSquare);
+
+            // std::cout << "Iterations: 1" << std::endl;
 
             return latinSquaresCounters_;
         }
@@ -203,8 +214,11 @@ namespace Transversal {
         latinSquaresCounters_.emplace_back(factorial(size), 1, latinSquare);
         latinSquaresCounters_.emplace_back(-1, 1, latinSquare);
         uint_fast16_t counter = 0;
+        // iterations_ = 0;
 
         while (true) {
+            // ++iterations_;
+
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell(index);
 
@@ -293,6 +307,8 @@ namespace Transversal {
             latinSquaresCounters_[0].set(0);
             latinSquaresCounters_[1].set(0);
         }
+
+        // std::cout << "Iterations: " << iterations_ << std::endl;
 
         return latinSquaresCounters_;
     }

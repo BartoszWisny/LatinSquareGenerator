@@ -65,5 +65,6 @@ namespace Transversal {
             std::vector<LatinSquare::BacktrackingData> latinSquareBacktrackingHistory_;
             std::vector<MinMaxData> latinSquaresCounters_;
             std::vector<SymmetricMinMaxData> symmetricLatinSquaresCounters_;
+            // boost::multiprecision::mpz_int iterations_;
     };
 }

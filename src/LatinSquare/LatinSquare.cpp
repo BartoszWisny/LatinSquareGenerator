@@ -222,6 +222,16 @@ namespace LatinSquare {
         }
 
         return *minCell_;
+
+        // for (auto& cell : entropyGrid_) {
+        //     if (cell->filled()) {
+        //         continue;
+        //     }
+
+        //     return *cell;
+        // }
+
+        // return *grid_[0];
     }
 
     Cell& LatinSquare::lastNotFilledCell() noexcept {
@@ -335,6 +345,16 @@ namespace LatinSquare {
         }
 
         return *minRegion_;
+
+        // for (auto& region : regions_) {
+        //     if (region.notEnabled()) {
+        //         continue;
+        //     }
+
+        //     return region;
+        // }
+
+        // return regions_[0];
     }
 
     Region& LatinSquare::lastNotChosenRegion() noexcept {

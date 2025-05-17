@@ -140,6 +140,8 @@ namespace LatinSquare {
         LatinSquare latinSquare(size, type);
 
         if (latinSquare.notFilled() < 2) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 1;
         }
 
@@ -152,8 +154,11 @@ namespace LatinSquare {
 
         boost::multiprecision::mpz_int latinSquaresCounter = 0;
         uint_fast16_t counter = 0;
+        // boost::multiprecision::mpz_int iterations = 0;
 
         while (true) {
+            // ++iterations;
+
             if (latinSquare.notFilled() > 1) {
                 auto& cell = latinSquare.minEntropyCell(index);
 
@@ -204,6 +209,8 @@ namespace LatinSquare {
                 updateHistory_.pop_back();
             }
         }
+
+        // std::cout << "Iterations: " << iterations << std::endl;
 
         return latinSquaresCounter;
     }
