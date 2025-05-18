@@ -24,10 +24,10 @@ namespace Transversal {
     static constexpr std::string_view TRANSVERSALS = "Number of transversals: ";
     static constexpr std::string_view MIN_TRANSVERSALS = "Minimum number of transversals: ";
     static constexpr std::string_view LATIN_SQUARES_MIN_TRANSVERSALS =
-        "Number of latin squares with minimum number of transversals: ";
+        "Number of Latin squares with minimum number of transversals: ";
     static constexpr std::string_view MAX_TRANSVERSALS = "Maximum number of transversals: ";
     static constexpr std::string_view LATIN_SQUARES_MAX_TRANSVERSALS =
-        "Number of latin squares with maximum number of transversals: ";
+        "Number of Latin squares with maximum number of transversals: ";
 
     static constexpr std::string_view TIME = "Time: ";
     static constexpr std::string_view SECONDS = " seconds\n";
