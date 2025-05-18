@@ -10,8 +10,8 @@ find_package(Boost REQUIRED)
 find_package(GMP REQUIRED)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-file(GLOB_RECURSE LatinSquareGenerator_SOURCES CONFIGURE_DEPENDS "src/*.cpp")
-file(GLOB_RECURSE LatinSquareGenerator_HEADERS CONFIGURE_DEPENDS "src/*.hpp")
+file(GLOB_RECURSE LatinSquareGenerator_SOURCES CONFIGURE_DEPENDS "../src/*.cpp")
+file(GLOB_RECURSE LatinSquareGenerator_HEADERS CONFIGURE_DEPENDS "../src/*.hpp")
 
 set(LatinSquareGenerator_INCLUDE_DIRS "")
 foreach(_headerFile ${LatinSquareGenerator_HEADERS})
