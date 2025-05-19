@@ -959,6 +959,8 @@ namespace Transversal {
         --almostSize_;
 
         if (!almostSize_) {
+            // std::cout << "Iterations: 1" << std::endl;
+
             return 1;
         }
 
@@ -969,8 +971,11 @@ namespace Transversal {
 
         transversalsCounter_ = 0;
         counter_ = 0;
+        // iterations_ = 0;
 
         while (true) {
+            // ++iterations_;
+
             if (transversalSize_ < almostSize_) {
                 auto& region = symmetricLatinSquare.minEntropyTriangularRegion(regionIndex_);
 
@@ -1032,6 +1037,8 @@ namespace Transversal {
                 symmetricUpdateHistory_.pop_back();
             }
         }
+
+        // std::cout << "Iterations: " << iterations_ << std::endl;
 
         return transversalsCounter_;
     }
